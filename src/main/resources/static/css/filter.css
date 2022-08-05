@@ -1,0 +1,47 @@
+@media screen and (max-width: 1264px) {
+    body {
+        
+    }
+}
+
+/* settings */
+
+body {
+    margin : 45px 5.95vw ;  /* 여기 확인 필요 */
+    font-family: 'NanumSquare';
+}
+
+h2,h3,h4 {
+    font-family: 'GmarketSans';
+}
+
+input[type=radio] , input[type=submit]{
+    opacity: 0;
+}
+
+button {
+    border: 0;
+    background-color: transparent;
+}
+
+.flex {
+    display: flex;
+}
+
+
+/* filter  */
+
+/* filter container 품목 타이틀 (ex : 테니스 ,,,) */
+h2 {
+    font-weight: 700;
+    margin-right: 4.9vw;
+}
+
+/* filter 내용들 */
+.filter-container_main {
+    border-top: 1px solid var(--deep-yellow);
+    border-bottom: 1px solid var(--deep-yellow);
+    margin-top: 18px;
+    padding: 48px 0 40px 12.9vw;
+}
+
