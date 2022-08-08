@@ -15,6 +15,14 @@
 <body>
     <!-- nav bar -->
 
+    <!-- previous page -->
+    <div id="previous-page">
+        <button class="previous-pageBtn flex">
+            <img src="../static/img/angles_right.png" alt="">
+            <h2>이전</h2>
+        </button>
+    </div>
+
     <!-- filter -->
     <section id="filter">
        <form action="#" id="filter-form" method="get">
@@ -22,19 +30,19 @@
                 <div class="filter-container_title">
                     <h2>테니스</h2>
                 </div>
-                <div class="filter-container_main">
+                <div class="filter-container_main flex styled-border">
                     <div class="filter-contents">
                         <div class="filter-categories flex">
                             <h4>품목</h4>
-                            <div class="filter-categories_select">
-                                <input type="radio" name="category" id="all"> <label for="all">전체</label>
-                                <input type="radio" name="category" id="top"> <label for="all">상의</label>
-                                <input type="radio" name="category" id="bottom"> <label for="all">하의</label>
-                                <input type="radio" name="category" id="outer"> <label for="all">아우터</label>
-                                <input type="radio" name="category" id="inner"> <label for="all">이너웨어</label>
-                                <input type="radio" name="category" id="shoes"> <label for="all">신발</label>
-                                <input type="radio" name="category" id="item"> <label for="all">스포츠 용품</label>
-                            </div>
+                            <ul class="filter-categories_select flex">
+                                <li> <label for="all">전체</label><input type="radio" name="category" id="all"></li>
+                                <li> <label for="all">상의</label><input type="radio" name="category" id="top"></li>
+                                <li> <label for="all">하의</label><input type="radio" name="category" id="bottom"></li>
+                                <li> <label for="all">아우터</label><input type="radio" name="category" id="outer"></li>
+                                <li> <label for="all">이너웨어</label><input type="radio" name="category" id="inner"></li>
+                                <li> <label for="all">신발</label><input type="radio" name="category" id="shoes"></li>
+                                <li> <label for="all">악세사리</label><input type="radio" name="category" id="item"></li>
+                            </ul>
                         </div>
                         <div class="filter-body flex">
                             <h4>체형</h4>
@@ -53,51 +61,72 @@
                         </div>
                         <div class="filter-level flex">
                             <h4>운동 수준</h4>
-                            <div class="filter-level_select">
-                                <input type="radio" name="level" id="low"> 
-                                <label for="low">
-                                    <span class="level-name">초</span>
-                                    <span class="level-des">이제 막 시작했어요 </span>
-                                </label>
+                            <ul class="filter-level_select flex">
+                                <li class="flex">
+                                    <input type="radio" name="level" id="low"> 
+                                    <label for="low">
+                                        <span class="level-name">초</span>
+                                        <span class="level-des">이제 막 시작했어요 </span>
+                                    </label>
+                                </li>
 
-                                <input type="radio" name="level" id="middle"> 
-                                <label for="middle">
-                                    <span class="level-name">중</span>
-                                    <span class="level-des">이제 조금 익숙해지고 있어요</span>
-                                </label>
+                                <li class="flex">
+                                    <input type="radio" name="level" id="middle"> 
+                                    <label for="middle">
+                                        <span class="level-name">중</span>
+                                        <span class="level-des">이제 조금 익숙해지고 있어요</span>
+                                    </label>
+                                </li>
 
-                                <input type="radio" name="level" id="hight"> 
-                                <label for="high">
-                                    <span class="level-name">고</span>
-                                    <span class="level-des">이제는 거의 고수에요 </span>
-                                </label>
-                            </div>
+                                <li class="flex">
+                                    <input type="radio" name="level" id="hight"> 
+                                    <label for="high">
+                                        <span class="level-name">고</span>
+                                        <span class="level-des">이제는 거의 고수에요 </span>
+                                    </label>
+                                </li>
+                            </ul>
                         </div>
                         <div class="filter-price flex">
                             <h4>가격 범위</h4>
                             <div class="filter-price_range flex">
                                 <div class="filter-price_min flex">
-                                    <p>최저</p>
-                                    <span id="min-price">000</span>
+                                    <p class="price-title">최저</p>
+                                    <span id="min-price">00000</span>
                                     <p>원</p>
                                 </div>
-                                ~
+                                <span>~</span>
                                 <div class="filter-price_max flex">
-                                    <p>최고</p>
-                                    <span id="min-price">0000</span>
+                                    <p class="price-title">최고</p>
+                                    <span id="min-price">00000</span>
                                     <p>원</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="filter-submit">
+                    <div class="filter-submit flex">
                         <input type="submit" id="filter-submit-btn" value="">
-                        <label for="filter-submit-btn">검색 <span class="iconify" data-icon="radix-icons:magnifying-glass"></span> </label>
+                        <label for="filter-submit-btn" class="flex">
+                            <span>검색 </span>
+                            <span class="iconify" data-icon="radix-icons:magnifying-glass"></span> 
+                        </label>
                     </div>
                 </div>
             </div>
        </form>
     </section>
+
+
+    <div id="gender-select">
+        <div class="gender-select_female gender-action">
+            <div class="gender-selected_icon"></div>
+            <span>여성</span>
+        </div>
+        <div class="gender-select_male">
+            <div class="gender-selected_icon"></div>
+            <span>남성</span>
+        </div>
+    </div>
 
 
     <!-- products  -->
@@ -119,6 +148,13 @@
         <div class="products-lists"></div>
     </section>
 
+
+    <!-- Up Arrow -->
+    <div id="pageUp-btn">
+        <button>
+            <img src="../static/img/page_up_icon.png" alt="">
+        </button>
+    </div>
 
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
 </body>
