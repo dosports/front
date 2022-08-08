@@ -1,19 +1,4 @@
-<<<<<<< HEAD
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-=======
-@import "./variables.css";
+@import "./variable.css";
 
 * {
 	box-sizing: border-box;
@@ -100,19 +85,12 @@ time,
 mark,
 audio,
 video {
->>>>>>> f29477e5f07f38abea129fa3bd473c5c597a0152
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-<<<<<<< HEAD
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-=======
 	font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }
 article,
@@ -126,23 +104,10 @@ hgroup,
 menu,
 nav,
 section {
->>>>>>> f29477e5f07f38abea129fa3bd473c5c597a0152
 	display: block;
 }
 body {
 	line-height: 1;
-<<<<<<< HEAD
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-=======
 	background: var(--bgPointColor);
 }
 ol,
@@ -158,15 +123,12 @@ blockquote:after,
 q:before,
 q:after {
 	content: "";
->>>>>>> f29477e5f07f38abea129fa3bd473c5c597a0152
 	content: none;
 }
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-<<<<<<< HEAD
-=======
 li {
 	list-style: none;
 }
@@ -235,4 +197,3 @@ html {
 	justify-content: center;
 	align-items: center;
 }
->>>>>>> f29477e5f07f38abea129fa3bd473c5c597a0152
