@@ -1,0 +1,91 @@
+@import url(../css/variable.css);
+@import url(../css/reset.css);
+
+/* 다른 css에서 body width는 설정해주시면 될 것 같아요! */
+/* body{
+    width: 1260px;
+    margin: 0 auto;
+} */
+
+.review_item{
+    margin: 0 1.94vw 46px 1.94vw;
+    display: flex;
+    width: 62.5vw;
+    height: 375px;
+    border: 1px solid var(--green);
+    border-radius: 20px;
+    padding: 32px 1.73vw 33px 1.73vw;
+}
+
+/* 왼쪽 container */
+.review_leftContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.review_img{
+    width: 13.97vw;
+    height: 14.39vw;
+    background-color: #d9d9d9;
+    border-radius: 20px;
+}
+.heart-icon{
+    font-size: 20px;
+    color : var(--black);
+}
+.heart_cnt{
+    font-family: 'GmarketSans';
+    font-weight: 500;
+    font-size: 16px;
+    margin-left: 0.37vw;
+}
+.heart_container{
+    display: flex;
+    align-items: center;
+    margin-top: 18px;
+}
+
+/* 오른쪽 container */
+.review_rightContainer{
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    font-family: 'NanumSquare';
+    font-size: 14px;
+    font-weight: 300;
+    color: var(--black);
+    margin-left: 3.2vw;
+}
+.review_rightContainer > *{
+    margin-bottom: 18px;
+}
+.my_review_content_container{
+    margin-bottom: 0;
+}
+.my_review_titleAndWriter{
+    display: flex;
+    justify-content: space-between;
+}
+.review_title{
+    font-weight: 400;
+}
+.review_writerAndTime{
+    font-size: 12px;
+}
+.my_review_content_title{
+    margin-bottom: 18px;
+}
+.my_review_content{
+    /* background-color: pink; */
+    padding-left: 0.95vw;
+    line-height: 1.7;
+    width: 41.7vw;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+@media (max-width:360px) {
+}
