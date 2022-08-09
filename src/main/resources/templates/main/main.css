@@ -1,7 +1,8 @@
 @import url("../../static/css/variable.css");
-body {
+#content {
+	position: relative;
 	width: 1264px;
-	margin: 0 auto;
+	margin: 0 auto 80px;
 	/* margin: 0 max(17.08vw); */
 }
 .flex_row {
@@ -10,9 +11,39 @@ body {
 	align-items: center;
 	overflow: hidden;
 }
+.flex_col {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+}
 .divider {
 	border-right: 1px solid black;
 }
+
+.styled-border {
+	position: relative;
+}
+
+.styled-border::before {
+	content: "▶︎";
+	position: absolute;
+	top: -5.5px;
+	left: -2px;
+	color: white;
+	font-size: 9px;
+}
+
+.styled-border::after {
+	content: "▶︎";
+	position: absolute;
+	top: -5.5px;
+	right: -2px;
+	transform: scaleX(-1);
+	color: white;
+	font-size: 9px;
+}
+
 /** header **/
 #header_title {
 	position: relative;
@@ -28,7 +59,7 @@ body {
 .header-right-item {
 	padding: 0 8px;
 	font-family: GmarketSans;
-	font-size: 12px;
+	font-size: 15px;
 	font-weight: 500;
 }
 #header-right {
@@ -63,12 +94,21 @@ nav {
 	border-radius: 26px;
 	overflow: hidden;
 }
+#search_box > form {
+	justify-content: center;
+}
 #search-input {
-	/*Todo*/
 	width: 80%;
 	height: 38px;
 }
-
+#search-button {
+	height: 100%;
+	padding: 0 10px;
+}
+#search-button > svg {
+	width: 19px;
+	height: 19px;
+}
 /**section**/
 #ad_banner {
 	width: 100%;
@@ -78,7 +118,7 @@ nav {
 }
 .article-title {
 	font-family: GmarketSans;
-	font-size: 16px;
+	font-size: 17px;
 	font-weight: 700;
 	padding: 28px 0;
 }
@@ -91,6 +131,8 @@ nav {
 	box-shadow: 2px 4px 12px rgb(0 0 0 / 20%);
 }
 .article-item-img {
+	/* width: 12vw;
+	height: 12vw; */
 	width: 251px;
 	height: 259px;
 	background: gray;
@@ -103,15 +145,21 @@ nav {
 .article-item-info_font {
 	/*Todo*/
 	font-family: NanumSquare;
-	font-size: 16px;
+	font-size: 15px;
 	font-weight: 400;
 }
 #recommend-container {
 	width: 100%;
 	padding: 20px;
 	margin-bottom: 72px;
-	/* height: 21vw; */
 	background: var(--green-bg);
+	overflow: hidden;
+	scroll-behavior: smooth;
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+#recommend-container > a {
+	transition: transform 2s ease-in-out;
 }
 /*베스트리뷰*/
 #article-nav {
@@ -121,7 +169,7 @@ nav {
 	/* padding: 0 25px; */
 	padding: 0 1.3vw;
 	font-family: NanumSquare;
-	font-size: 16px; /*Todo	디자이너님이 수정해주실 예정*/
+	font-size: 16px;
 	font-weight: 400;
 	line-height: 23px;
 }
@@ -146,8 +194,128 @@ nav {
 	row-gap: 15px;
 	padding: 20px;
 }
+#article-arrow-left,
+#article-arrow-right {
+	position: absolute;
+}
+#article-arrow-left {
+	left: -70px;
+}
+#article-arrow-right {
+	right: -70px;
+}
+.article-arrow-img {
+	width: 40px;
+}
+/**footer**/
+#footer {
+	width: 100%;
+	height: 193px;
+	background: var(--yellow);
+	padding: 1px;
+}
+#footer-content {
+	width: 1264px;
+	margin: 60px auto 18px;
+	border-top: 1.5px solid white;
+}
+#footer-nav {
+	justify-content: center;
+	padding: 20px;
+}
+.footer-nav-item {
+	padding: 5px;
+}
+#logo {
+	width: fit-content;
+	margin: 0 auto;
+}
+#logo > img {
+	width: 41px;
+}
+
+/**alarm**/
+#alarm-button > svg {
+	width: 18px;
+	height: 22px;
+	color: var(--black);
+}
+#alarm-modal1 {
+	display: none;
+	position: absolute;
+	top: 105px;
+	right: 20px;
+	width: 314px;
+	height: 420px;
+	padding: 23px 0px;
+	background: var(--alarm-bg-yellow);
+	border-radius: 28px;
+	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
+}
+#alarm-modal2 {
+	display: none;
+	position: absolute;
+	top: 76px;
+	right: 50px;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-top: 0;
+	border-bottom: 30px solid var(--alarm-bg-yellow);
+	z-index: 1;
+}
+#alarm-modal1 > div:first-child {
+	width: 100%;
+	padding: 0 40px;
+}
+#alarm-title {
+	font-family: "GmarketSans";
+	font-weight: 500;
+	font-size: 17px;
+}
+#alarm-container {
+	width: 100%;
+	height: 100%;
+	margin-top: 15px;
+	padding-top: 100px;
+	justify-content: center;
+	overflow: scroll;
+}
+#alarm-container {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+.alarm-item {
+	width: 265px;
+	/* height: 130; */
+	padding: 15px;
+	margin-bottom: 15px;
+	background: #f8f8f8;
+	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+	border-radius: 28px;
+}
+.alarm-item-title {
+	font-family: "NanumSquare";
+	font-weight: 400;
+	font-size: 14px;
+}
+.alarm-item-content {
+	padding: 12px 0;
+	font-family: "NanumSquare";
+	font-weight: 300;
+	font-size: 14px;
+	color: #676767;
+}
+.alarm-item-date {
+	font-family: "NanumSquare";
+	font-weight: 300;
+	font-size: 12px;
+	color: #676767;
+}
+.alarm-item-date {
+}
 @media (max-width: 1264px) {
-	body {
+	#content {
 		width: 100%;
 	}
 	section {
@@ -159,5 +327,24 @@ nav {
 	.article-item-img {
 		width: 19.9vw;
 		height: 20.5vw;
+	}
+	#footer-content {
+		width: 100%;
+	}
+}
+@media (max-width: 1424px) {
+	#article-arrow-left,
+	#article-arrow-right {
+		display: none;
+	}
+	#recommend-container {
+		overflow: scroll;
+		scroll-snap-type: x mandatory;
+	}
+	#recommend-container > a {
+		scroll-snap-align: start;
+	}
+	#recommend-container::-webkit-scrollbar {
+		display: none;
 	}
 }
