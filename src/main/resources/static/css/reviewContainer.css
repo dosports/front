@@ -8,8 +8,7 @@
 } */
 
 .review_item{
-    margin: 0 auto 1.94vw;
-    /* margin: 0 1.94vw 46px 1.94vw; */
+    margin: 0 1.94vw 46px 1.94vw;
     display: flex;
     height: 375px;
     border: 1px solid var(--green);

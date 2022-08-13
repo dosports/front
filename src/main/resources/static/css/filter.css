@@ -39,6 +39,11 @@ li {
     list-style: none;
 }
 
+html, body {
+    width: 100%;
+    /* height: 100%; */
+}
+
 
 #filter-page {
     margin : 0 auto 80px ;  /* 여기 확인 필요. 일단 전체 너비 1904로 계산함 */
@@ -69,14 +74,16 @@ button, label {
 .flex {
     display: flex;
 }
-.hide {
+.hidden {
     display: none;
 }
 
 /* 이전 페이지 버튼 */
 #previous-page {
-    margin: 2.3vw 0;
+    margin: 40px 0 50px;
+    /* margin: 2.3vw 0; */
     width: 100%;
+    cursor: pointer;
 }
 .previous-pageBtn {
     align-items: center;
@@ -84,8 +91,8 @@ button, label {
 }
 .previous-pageBtn img {
     transform: rotate(180deg);
-    width: 1.76vw;
-    height: 1.76vw;
+    width: 45px;
+    height: 28px;
 }
 
 /* filter  */
@@ -118,11 +125,11 @@ h2 {
     
     flex-direction: column;
     justify-content: space-around;
+    align-items: center;
 }
 .filter-categories , .filter-body , .filter-level , .filter-price {
     align-items: center;
 }
-
 
 
 .filter-contents h4 { /* 일단 품목 기준으로 오르쪽 마진 줌 */
@@ -136,11 +143,13 @@ h2 {
 
 .filter-contents>div {
     margin-bottom: 50px;
+    
 }
 
 /* 품목 필터 */
 .filter-categories {
-    height: 17px;
+    height: fit-content;
+    /* height: 17px; */
 }
 .filter-level_select {
     justify-content: space-between;
@@ -199,7 +208,7 @@ input[name="category"]:checked + label {
 /* 운동 수준 필터 */
 .filter-level {
     align-items: flex-start;
-    margin-top: 20px;
+    /* margin-top: 20px; */
 }
 .filter-level h4 {
     flex-shrink: 0;
@@ -234,7 +243,7 @@ input[name="level"]:checked+label .level-des {
 
 /* 가격 범위 */
 .filter-price {
-    margin-top:  30px;
+    /* margin-top:  30px; */
 }
 
 .filter-price h4 {
@@ -310,8 +319,10 @@ input[name="level"]:checked+label .level-des {
 .products-ordering {
     justify-content: space-between;
     align-items: center;
-    width: 62.5vw;
+    width: 100%;
+    /* width: 62.5vw; */
     margin: 0 auto;
+    
 }
 .products-ordering_order {
     align-items: center;
@@ -343,6 +354,9 @@ input[name="level"]:checked+label .level-des {
 .products-ordering_sort .order-action {
     background-color: var(--orange);
 }
+.products-ordering_sort li:hover {
+    background-color: var(--orange);
+}
 /* 사진 리뷰만 보기 */
 
 .onlyImg_box {
@@ -351,6 +365,7 @@ input[name="level"]:checked+label .level-des {
     border: 2px solid var(--green);
     border-radius: 2px;
     margin: 0 0.4vw;
+    
 }
 .products-ordering_onlyImg button {
     align-items: center;
@@ -358,14 +373,22 @@ input[name="level"]:checked+label .level-des {
 .products-ordering_onlyImg span {
     font-family: 'NanumSquare';
 }
-.onlyImg-checked {
+.onlyImg_box_checked {
+    width: 12px;
+    height: 12px;
+    margin: auto;
+    transform: translateY(15%);
+}
+.onlyImg-checked .onlyImg_box_checked {
     background-color: var(--green);
 }
 
 /* 페이지 끌올 버튼 */
 .pageUp-btn img{
-    width: 79px;
-    height: 79px;
+    width: 65px;
+    height: 65px;
+
+    border-radius: 50%;
 }
 .pageUp-btn {
     opacity: 0;
@@ -373,17 +396,72 @@ input[name="level"]:checked+label .level-des {
     transition: opacity 250ms ease-in-out;
 
     position: fixed;
-    left: 85vw;
-    top: 600px;
+    z-index: 1000;
+    /* left: 90vw;
+    top: 700px; */
+    bottom: 60px;
+    right: 50px;
+    
 }
 .pageUp-btn.pageUp-action {
     opacity: 1;
     pointer-events: auto;
 }
+.pageUp-btn img:hover {
+    box-shadow: 2px 4px 12px rgb(0 0 0 / 10%);
+    transition: all 250ms ease-out;
+}
+
+/* 리뷰 작성하기 버튼 */
+.writeReview-btn {
+    background-color: var(--green);
+    width: 170px;
+    height: 65px;
+    border-radius: 19px;
+
+    position: fixed;
+    bottom: 60px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    z-index: 1000;
+
+    opacity: 0;
+    pointer-events: none;
+}
+.writeReview-btn.writeBtn-action {
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 250ms ease-in-out;
+}
+.writeReview-text {
+    color: var(--white);
+    font-size: 19px;
+    font-family: 'GmarketSans';
+    font-weight: 500;
+}
+.writeReview-btn img {
+    width: 17px;
+    height: 17px;
+}
+.writeReview-btn:hover {
+    box-shadow: 2px 4px 12px rgb(0 0 0 / 20%);
+    transition: all 250ms ease-out;
+}
 
 /* 상품 목록들 */
 .products-lists {
     margin:  29px auto 0;
+    width: 100%;
+    
+}
+.review_item {
+    width: 100%;
+    margin: auto;
+    margin-bottom: 46px;
+}
+.my_review_star {  /*별표로 나타낼 시 - 임시 !!*/
+    color: var(--orange);
 }
 
 
@@ -391,9 +469,12 @@ input[name="level"]:checked+label .level-des {
 /* @media (max-width: 1264px) */
 @media (max-width: 1264px) {
     body {
-        width: fit-content;
+        /* width: fit-content; */
         margin: 0 auto;
         
+    }
+    html, body {
+        width: 100%;
     }
     #filter-page {
         margin : 45px auto ;
@@ -403,8 +484,6 @@ input[name="level"]:checked+label .level-des {
         
     }
     
-    #filter {
-    }
     .filter-container {
         width: 100%;
     }
@@ -443,17 +522,88 @@ input[name="level"]:checked+label .level-des {
     .filter-categories_select li {
         margin-right: 2.4vw;
     }
-    .pageUp-btn {
-        left: 100vw;
-    }
+    
 
 }
 
-@media (max-width: 1035px) {
+@media (max-width: 635px) {
     .filter-submit {
         margin: auto;
         bottom: 15px;
         left: 0 ;
     }
+    .level-des {
+        font-size: 10px;
+    }
+    .filter-level_select li:first-child {
+        margin-right: -25px;
+        /* margin-left: 40px; */
+    }
+
+    /* 정렬 이랑 사진 리뷰만 보기 수직 정렬 */
+    /* #products {
+        margin-top: 30px;
+    }
+    .products-lists {
+        margin-top: 0;
+    }
+    .products-ordering {
+        flex-direction: column;
+        align-items: baseline;
+    }
+    .products-ordering_order {
+        margin-bottom: 20px;
+    }
+    .filter-level_select li:first-child {
+        margin-right: -10px;
+    } */
+
 }
 
+@media (max-width : 360px) {
+    html,body {
+        width: fit-content;
+    }
+    .filter-categories_select li {
+        margin-right: 3.4vw;
+    }
+
+
+    /* #filter-page {
+        width: 100%;
+    } */
+
+    /* 필터 부분 수직 (임의로 설정해본거) */
+    /* .filter-container_main {
+        height: 470px;
+        padding: 20px 0 ;
+    }
+    .filter-categories, .filter-body, .filter-level, .filter-price {
+        flex-direction: column;
+        
+    }
+    .filter-contents>div {
+        margin-bottom: 30px;
+        
+    }
+    .filter-contents {
+        margin: 20px 0;
+        height: 100%;
+    }
+    .filter-contents h4 {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    .filter-level_select {
+        width: 100%;
+        text-align: center;
+    }
+    .filter-level_select li {
+        margin-right: 5px;
+        
+    }
+     */
+    /* === */
+    
+}
