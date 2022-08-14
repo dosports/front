@@ -70,7 +70,7 @@ onlyImg_btn.addEventListener("click" , (e) => {
 const filter_submit_btn = document.querySelector(".filter-submit") ;
 const filter_form = document.querySelector("#filter-form");
 
-let formSubmitSucces = false ;  // 필터 조회 여부 
+
 
 filter_form.addEventListener("submit" , (e) => {
     e.preventDefault() ;
@@ -208,12 +208,18 @@ const reviewtest = document.querySelectorAll('.review_item') ;
 
 function viewFilteredReview(cate, height, weight, level) { // category_submit, height_submit, weight_submit, level_submit
     listData.forEach(d => {
-        if (d.dataset.category==cate) { // 운동 수준 다른거 제외
-            d.classList.remove("hidden");
-            console.log("click");
-        } else {
-            d.classList.add("hidden");
+        if(cate=='all') { // 사용자가 품목 '전체' 를 선택했을 경우
+            if (level == d.dataset.level) {
+                d.classList.remove("hidden");
+            } else {
+                d.classList.add("hidden"); 
+            }
+        } else {    // 사용자가 품목에서 '전체' 가 아닌 특정 품목을 선택했을 경우
+            if (cate == d.dataset.category && level == d.dataset.level) {
+                d.classList.remove("hidden") ;
+            } else {
+                d.classList.add("hidden");
+            }
         }
-        
     })
 }
