@@ -54,16 +54,34 @@ const onlyImg_btn = document.querySelector(".products-ordering_onlyImg") ;
 const onlyImg_btn_box = onlyImg_btn.querySelector(".onlyImg_box") ;
 
 onlyImg_btn.addEventListener("click" , (e) => {
-
+    e.preventDefault();
+    console.log(filteredData);
     if(onlyImg_btn_box.classList.contains("onlyImg-checked")) {
         onlyImg_btn_box.classList.remove("onlyImg-checked") ;
         // 전체..
+        isOnlyImg(false , filteredData);
     } 
     else {
         onlyImg_btn_box.classList.add("onlyImg-checked") ;
         // 사진만 보기 ..
+        isOnlyImg(true , filteredData);
     }
 })
+
+// >> 사진 리뷰 혹은 전체 리뷰 필터 함수 
+function isOnlyImg(isOnlyImgChecked, data) { // isOnlyImgChecked(true,false) / data(listData)
+    if (isOnlyImgChecked) { // 사진 리뷰만 보기
+        data.forEach(d=> {
+            if (d.dataset.img == 'default') { // 이미지 없는 리뷰(기본 이미지) 안보이게끔
+                d.classList.add('hidden') ;
+            }
+        })
+    } else { // 전체 리뷰 보기 (전체라는 게 필터된 값들 중에 전체 !!)
+        data.forEach(d => {
+            d.classList.remove('hidden') ;
+        })
+    }
+}
 
 
 // 필터 - '검색' 클릭 시 입력한 값들 저장하고 값 넘기기
@@ -95,7 +113,7 @@ filter_form.addEventListener("submit" , (e) => {
 const products_lists = document.querySelector(".products-lists") ;
 
 
-const fetchReview = async() => {
+const fetchReview = async() => { // api url 받으면 url 부분만 수정 !
     const response = await axios.get("https://3f3f9929-efbf-491a-b481-e59c3996a804.mock.pstmn.io/list/%7Bgender%7D/%7Bsport%7D")
     .then(result => result.data.items.map(data => review_Template(data)))
     .then(r => saveDataSet(r))
@@ -157,7 +175,7 @@ function reviewDefualtImg (cate) {
 // 처음 접속할때는 다 보여주고 필터 검색 할때 걸러지게
 function review_Template(data) {
     const reviewItem = `
-        <div class="review_item" data-category="${data.category}" data-level="${data.level}">
+        <div class="review_item" data-category="${data.category}" data-level="${data.level}" data-img="${data.img_path ? 'has' : 'default'}">
             <div class="review_leftContainer">
                 <img src="${data.img_path ? data.img_path : reviewDefualtImg(data.sports) }" alt="내가 쓴 리뷰 사진" class="review_img">
                 <div class="heart_container">
@@ -171,15 +189,14 @@ function review_Template(data) {
                     <div class="review_writerAndTime">${data.userName} / 작성 시간</div>
                 </div>
                 <div class="my_review_star">${'★'.repeat(data.rate) + '☆'.repeat(5-data.rate)}</div>
-                <div class="my_review_likeAndComment">좋아요 ${data.likes}개 / 댓글 ${data.comments}개 </div>
+                <div class="my_review_likeAndComment"> 댓글 ${data.comments}개 </div>
                 <div class="my_review_writerDetail">${showGender(data.gender)} / ${data.height}cm ${data.weight}kg / ${showLevel(data.level)}</div>
                 <div class="my_review_buyInfo">${data.source} / ${data.price}원</div>
-                <div class="my_review_content_container">
-                    <div class="my_review_content_title">리뷰 내용</div>
-                    <div class="my_review_content">
-                        ${data.content}
-                    </div>
+                
+                <div class="my_review_content">
+                    ${data.content}
                 </div>
+                
             </div>
         </div>
     `
@@ -192,31 +209,34 @@ function review_Template(data) {
 fetchReview() ;  // <-- 기본 리뷰 목록 보여주기
 
 let listData = [] ; // 현재의 리뷰들 'review_item' 배열로 저장
+let filteredData = listData ; // 필터된 리뷰들 배열로 저장 (for 사진리뷰만 보기 , 정렬) / 초기화 - 필터 전 리뷰들
 
-// 조회된 리뷰의 데이터셋 모음 + 비교
+// >> 조회된 리뷰의 데이터셋 모음 + 비교
 function saveDataSet(r) {
    r.forEach(element => {
     listData.push(element);
    });
 }
 
-// 필터 - 입력한 값들 토대로 리뷰 목록 보여주기 
-
-const item_of_reviewList = products_lists.children ;
-const reviewtest = document.querySelectorAll('.review_item') ;
+// const item_of_reviewList = products_lists.children ;
+// const reviewtest = document.querySelectorAll('.review_item') ;
 
 
+// >> 필터 - 입력한 값들 토대로 리뷰 목록 보여주기 
 function viewFilteredReview(cate, height, weight, level) { // category_submit, height_submit, weight_submit, level_submit
+    filteredData = [] ; // 필터가 되는 순간 일단 모든 리뷰들 비우기 
     listData.forEach(d => {
         if(cate=='all') { // 사용자가 품목 '전체' 를 선택했을 경우
             if (level == d.dataset.level) {
                 d.classList.remove("hidden");
+                filteredData.push(d); // 빈 배열에 해당 리뷰들 집어넣기
             } else {
                 d.classList.add("hidden"); 
             }
         } else {    // 사용자가 품목에서 '전체' 가 아닌 특정 품목을 선택했을 경우
             if (cate == d.dataset.category && level == d.dataset.level) {
                 d.classList.remove("hidden") ;
+                filteredData.push(d);
             } else {
                 d.classList.add("hidden");
             }
