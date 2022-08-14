@@ -1,11 +1,5 @@
-@import url(../css/variable.css);
-@import url(../css/reset.css);
-
-/* 다른 css에서 body width는 설정해주시면 될 것 같아요! */
-/* body{
-    width: 1260px;
-    margin: 0 auto;
-} */
+@import "./variable.css";
+@import "./reset.css";
 
 .review_item{
     margin: 0 1.94vw 46px 1.94vw;
@@ -72,15 +66,11 @@
 .review_writerAndTime{
     font-size: 12px;
 }
-.my_review_content_title{
-    margin-bottom: 18px;
-}
 .my_review_content{
-    padding-left: 0.95vw;
     line-height: 1.7;
     width: 100%;
     display: -webkit-box;
-    -webkit-line-clamp: 4;
+    -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
