@@ -1,5 +1,9 @@
 'use strict';
 
+// api url 
+const VIEWREVIEW_API_URL = "https://3f3f9929-efbf-491a-b481-e59c3996a804.mock.pstmn.io/list/%7Bgender%7D/%7Bsport%7D";
+
+
 // 페이지 끌올 버튼 
 const pageUp_btn = document.querySelector(".pageUp-btn") ;
 
@@ -91,23 +95,24 @@ function isOnlyImg(isOnlyImgChecked, data) { // isOnlyImgChecked(true,false) / d
 const filter_submit_btn = document.querySelector(".filter-submit") ;
 const filter_form = document.querySelector("#filter-form");
 
-
-
 filter_form.addEventListener("submit" , (e) => {
     e.preventDefault() ;
 
     // 필터 입력하고 제출하면 일단 사진 리뷰 선택은 없어지는 걸로
     onlyImg_input.checked=false;
 
-    console.dir(onlyImg_input);
+    // console.dir(onlyImg_input);
     let category_submit = filter_form.querySelector("input[name='category']:checked").id ;
     let height_submit = filter_form.querySelector("input[name='height']").value ;
     let weight_submit = filter_form.querySelector("input[name='weight']").value ;
     let level_submit = filter_form.querySelector("input[name='level']:checked").id ;
 
-
         // 이 변수들로 필터 적용하는 함수 
     viewFilteredReview(category_submit, height_submit, weight_submit, level_submit) ;
+    
+    // 필터 된 리뷰들 가격 모아서 최저/최고가 값 불러오기
+    fetchPriceRange(filteredData) ;
+    
 })
 
 
@@ -120,9 +125,12 @@ filter_form.addEventListener("submit" , (e) => {
 // .then(data => console.log(data.data.items));
 const products_lists = document.querySelector(".products-lists") ;
 
+const min_price = document.querySelector("#min-price") ;
+const max_price = document.querySelector("#max-price") ;
+
 
 const fetchReview = async() => { // api url 받으면 url 부분만 수정 !
-    const response = await axios.get("https://3f3f9929-efbf-491a-b481-e59c3996a804.mock.pstmn.io/list/%7Bgender%7D/%7Bsport%7D")
+    const response = await axios.get(VIEWREVIEW_API_URL)
     .then(result => result.data.items.map(data => review_Template(data)))
     .then(r => saveDataSet(r))
     .catch(error => console.log(error)) ;
@@ -176,7 +184,7 @@ function reviewDefualtImg (cate) {
 // 처음 접속할때는 다 보여주고 필터 검색 할때 걸러지게
 function review_Template(data) {
     const reviewItem = `
-        <div class="review_item" data-category="${data.category}" data-level="${data.level}" data-img="${data.img_path ? 'has' : 'default'}">
+        <div class="review_item" data-price="${data.price}" data-category="${data.category}" data-level="${data.level}" data-img="${data.img_path ? 'has' : 'default'}">
             <div class="review_leftContainer">
                 <img src="${data.img_path ? data.img_path : reviewDefualtImg(data.sports) }" alt="내가 쓴 리뷰 사진" class="review_img">
                 <div class="heart_container">
@@ -212,16 +220,19 @@ fetchReview() ;  // <-- 기본 리뷰 목록 보여주기
 let listData = [] ; // 현재의 리뷰들 'review_item' 배열로 저장
 let filteredData = listData ; // 필터된 리뷰들 배열로 저장 (for 사진리뷰만 보기 , 정렬) / 초기화 - 필터 전 리뷰들
 
-// >> 조회된 리뷰의 데이터셋 모음 + 비교
+// >> 조회된 리뷰(전체) 따로 배열에 넣기
 function saveDataSet(r) {
    r.forEach(element => {
     listData.push(element);
    });
+   fetchPriceRange(r); // 조회된 리뷰의 가격들 불러와서 최저최고 입력
 }
 
 // >> 필터 - 입력한 값들 토대로 리뷰 목록 보여주기 
 function viewFilteredReview(cate, height, weight, level) { // category_submit, height_submit, weight_submit, level_submit
+    
     filteredData = [] ; // 필터가 되는 순간 일단 모든 리뷰들 비우기 
+
     listData.forEach(d => {
         if(cate=='all') { // 사용자가 품목 '전체' 를 선택했을 경우
             if (level == d.dataset.level) {
@@ -239,4 +250,20 @@ function viewFilteredReview(cate, height, weight, level) { // category_submit, h
             }
         }
     })
+}
+
+
+// 필터 설정 후 가격 범위 조회
+
+
+
+function fetchPriceRange(data) { // filteredData
+    const priceArr = [] ; // 필터된 리뷰들의 가격들만 모여있는 배열
+    data.forEach(elem => priceArr.push(elem.dataset.price))
+    
+    const max = String(Math.max.apply(null, priceArr)) ;
+    const min = String(Math.min.apply(null, priceArr)) ;
+
+    min_price.innerHTML = min ;
+    max_price.innerHTML = max ;
 }
