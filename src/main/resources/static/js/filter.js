@@ -52,21 +52,24 @@ ordering_list.addEventListener("click" , (e) => {
 // 상품 목록 - 사진 리뷰만 보기 클릭 
 const onlyImg_btn = document.querySelector(".products-ordering_onlyImg") ;
 const onlyImg_btn_box = onlyImg_btn.querySelector(".onlyImg_box") ;
+const onlyImg_input = document.querySelector("#onlyImg_box")
 
-onlyImg_btn.addEventListener("click" , (e) => {
-    e.preventDefault();
-    console.log(filteredData);
-    if(onlyImg_btn_box.classList.contains("onlyImg-checked")) {
-        onlyImg_btn_box.classList.remove("onlyImg-checked") ;
-        // 전체..
-        isOnlyImg(false , filteredData);
+// const checkbox = document.querySelector("#onlyImg_box") ;
+// checkbox.addEventListener("change", () => {
+//     console.log("check");
+// })
+
+onlyImg_btn.addEventListener("change" , (e) => {
+    if(e.target.checked) {
+        // 사진만 보기
+        isOnlyImg(true , filteredData);
     } 
     else {
-        onlyImg_btn_box.classList.add("onlyImg-checked") ;
-        // 사진만 보기 ..
-        isOnlyImg(true , filteredData);
+        // 전체 리뷰 보기
+        isOnlyImg(false , filteredData);
     }
-})
+});
+
 
 // >> 사진 리뷰 혹은 전체 리뷰 필터 함수 
 function isOnlyImg(isOnlyImgChecked, data) { // isOnlyImgChecked(true,false) / data(listData)
@@ -93,10 +96,15 @@ const filter_form = document.querySelector("#filter-form");
 filter_form.addEventListener("submit" , (e) => {
     e.preventDefault() ;
 
+    // 필터 입력하고 제출하면 일단 사진 리뷰 선택은 없어지는 걸로
+    onlyImg_input.checked=false;
+
+    console.dir(onlyImg_input);
     let category_submit = filter_form.querySelector("input[name='category']:checked").id ;
     let height_submit = filter_form.querySelector("input[name='height']").value ;
     let weight_submit = filter_form.querySelector("input[name='weight']").value ;
     let level_submit = filter_form.querySelector("input[name='level']:checked").id ;
+
 
         // 이 변수들로 필터 적용하는 함수 
     viewFilteredReview(category_submit, height_submit, weight_submit, level_submit) ;
@@ -120,13 +128,6 @@ const fetchReview = async() => { // api url 받으면 url 부분만 수정 !
     .catch(error => console.log(error)) ;
     return response;
 }
-
-// const fetchReviewAfterFilter = async() => {
-//     const response = await axios.get("https://3f3f9929-efbf-491a-b481-e59c3996a804.mock.pstmn.io/list/%7Bgender%7D/%7Bsport%7D")
-//     .then(result => result.data.items.map(data => filtered_review_Template(data)))
-//     .catch(error => console.log(error)) ;
-//     return response;
-// }
 
 function showGender(gender) { // 성별 표시 
     if (gender=="f") {
@@ -217,10 +218,6 @@ function saveDataSet(r) {
     listData.push(element);
    });
 }
-
-// const item_of_reviewList = products_lists.children ;
-// const reviewtest = document.querySelectorAll('.review_item') ;
-
 
 // >> 필터 - 입력한 값들 토대로 리뷰 목록 보여주기 
 function viewFilteredReview(cate, height, weight, level) { // category_submit, height_submit, weight_submit, level_submit

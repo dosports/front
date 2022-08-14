@@ -379,9 +379,16 @@ input[name="level"]:checked+label .level-des {
     margin: auto;
     transform: translateY(15%);
 }
-.onlyImg-checked .onlyImg_box_checked {
-    background-color: var(--green);
+#onlyImg_box {
+    z-index: 1000;
 }
+input[name="onlyImg_box"]:checked+label .onlyImg_box_checked{
+    background-color: var(--green);
+    transition: all 200ms ease-in-out; 
+}
+/* .onlyImg-checked .onlyImg_box_checked {
+    background-color: var(--green);
+} */
 
 /* 페이지 끌올 버튼 */
 .pageUp-btn img{
