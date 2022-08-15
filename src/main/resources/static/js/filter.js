@@ -46,11 +46,63 @@ previous_page.addEventListener("click" , () => {
 const ordering_list = document.querySelector(".products-ordering_sort") ;
 
 ordering_list.addEventListener("click" , (e) => {
-    
+    // 정렬 색 변하기
     const selected_ordering = ordering_list.querySelector(".order-action") ;
     selected_ordering.classList.remove("order-action") ;
     e.target.classList.add("order-action") ;
+
+    // 클릭한 정렬에 맞추어 리뷰 정렬
+    const order_name = e.target.id ;
+    
+    switch (order_name) {
+        case "latest_order":
+            // 
+            break;
+
+        case "likes_order":
+            orderedByLikes(filteredData) ;
+            break;
+
+        case "lowestPrice_order":
+            // filteredData.forEach(i => priceArr.push(i.dataset.price)) ;
+            orderedByPrice(filteredData) ;
+            break;
+    
+        default:
+            break;
+    }
+
 })
+
+// >> 좋아요 순 
+function orderedByLikes (arr) {
+    while(products_lists.hasChildNodes()) {
+        products_lists.removeChild(products_lists.firstChild);
+    }
+
+    arr.sort((a,b) => {
+        return b.dataset.likes - a.dataset.likes ; 
+    })
+
+    for (let i = 0; i < arr.length; i++) {
+        products_lists.appendChild(arr[i]);
+    }
+}
+
+// >> 최저가 순 
+function orderedByPrice (arr) {
+    while(products_lists.hasChildNodes()) {
+        products_lists.removeChild(products_lists.firstChild);
+    }
+
+    arr.sort((a,b) => {
+        return a.dataset.price - b.dataset.price ; 
+    })
+
+    for (let i = 0; i < arr.length; i++) {
+        products_lists.appendChild(arr[i]);
+    }
+}
 
 
 // 상품 목록 - 사진 리뷰만 보기 클릭 
@@ -110,7 +162,7 @@ filter_form.addEventListener("submit" , (e) => {
         // 이 변수들로 필터 적용하는 함수 
     viewFilteredReview(category_submit, height_submit, weight_submit, level_submit) ;
     
-    // 필터 된 리뷰들 가격 모아서 최저/최고가 값 불러오기
+    // 필터 된 리뷰들 가격 모아서 가격 범위 불러오기
     fetchPriceRange(filteredData) ;
     
 })
@@ -131,7 +183,7 @@ const max_price = document.querySelector("#max-price") ;
 
 const fetchReview = async() => { // api url 받으면 url 부분만 수정 !
     const response = await axios.get(VIEWREVIEW_API_URL)
-    .then(result => result.data.items.map(data => review_Template(data)))
+    .then(result => result.data.items.map(data => review_Template(data,'afterbegin')))
     .then(r => saveDataSet(r))
     .catch(error => console.log(error)) ;
     return response;
@@ -180,44 +232,50 @@ function reviewDefualtImg (cate) {
     }
 }
 
+
 //viewReveiwWithFilter(data.category, data.height, data.weight, data.level)
 // 처음 접속할때는 다 보여주고 필터 검색 할때 걸러지게
-function review_Template(data) {
+function review_Template(data, where) {
+    
+    // 링크 수정해야함!
     const reviewItem = `
-        <div class="review_item" data-price="${data.price}" data-category="${data.category}" data-level="${data.level}" data-img="${data.img_path ? 'has' : 'default'}">
-            <div class="review_leftContainer">
-                <img src="${data.img_path ? data.img_path : reviewDefualtImg(data.sports) }" alt="내가 쓴 리뷰 사진" class="review_img">
-                <div class="heart_container">
-                    <span class="iconify heart-icon" data-icon="akar-icons:heart"></span>
-                    <span class="heart_cnt">${data.likes}</span>
+        <a href = "/review/${data.reviewIdx}">
+            <div class="review_item" data-likes="${data.likes}" data-price="${data.price}" data-category="${data.category}" data-level="${data.level}" data-img="${data.img_path ? 'has' : 'default'}">
+                <div class="review_leftContainer">
+                    <img src="${data.img_path ? data.img_path : reviewDefualtImg(data.sports) }" alt="내가 쓴 리뷰 사진" class="review_img">
+                    <div class="heart_container">
+                        <span class="iconify heart-icon" data-icon="akar-icons:heart"></span>
+                        <span class="heart_cnt">${data.likes}</span>
+                    </div>
+                </div>
+                <div class="review_rightContainer">
+                    <div class="my_review_titleAndWriter">
+                        <div class="review_title">${data.brand}  ${data.title}</div>
+                        <div class="review_writerAndTime">${data.userName} / 작성 시간</div>
+                    </div>
+                    <div class="my_review_star">${'★'.repeat(data.rate) + '☆'.repeat(5-data.rate)}</div>
+                    <div class="my_review_likeAndComment"> 댓글 ${data.comments}개 </div>
+                    <div class="my_review_writerDetail">${showGender(data.gender)} / ${data.height}cm ${data.weight}kg / ${showLevel(data.level)}</div>
+                    <div class="my_review_buyInfo">${data.source} / ${data.price}원</div>
+                    
+                    <div class="my_review_content">
+                        ${data.content}
+                    </div>                
                 </div>
             </div>
-            <div class="review_rightContainer">
-                <div class="my_review_titleAndWriter">
-                    <div class="review_title">${data.brand}  ${data.title}</div>
-                    <div class="review_writerAndTime">${data.userName} / 작성 시간</div>
-                </div>
-                <div class="my_review_star">${'★'.repeat(data.rate) + '☆'.repeat(5-data.rate)}</div>
-                <div class="my_review_likeAndComment"> 댓글 ${data.comments}개 </div>
-                <div class="my_review_writerDetail">${showGender(data.gender)} / ${data.height}cm ${data.weight}kg / ${showLevel(data.level)}</div>
-                <div class="my_review_buyInfo">${data.source} / ${data.price}원</div>
-                
-                <div class="my_review_content">
-                    ${data.content}
-                </div>
-                
-            </div>
-        </div>
+        </a>
     `
-    products_lists.insertAdjacentHTML('afterbegin', reviewItem) ;
+    // const where = 'afterbegin' ;
+    products_lists.insertAdjacentHTML(where, reviewItem) ;
     const review_item = document.querySelector(".review_item");
     return review_item ;
 }
 
+
 // const dataResult = fetchReview() ;  
 fetchReview() ;  // <-- 기본 리뷰 목록 보여주기
 
-let listData = [] ; // 현재의 리뷰들 'review_item' 배열로 저장
+let listData = [] ; // 현재의 리뷰 템플릿 데이터를 'review_item' 배열로 저장
 let filteredData = listData ; // 필터된 리뷰들 배열로 저장 (for 사진리뷰만 보기 , 정렬) / 초기화 - 필터 전 리뷰들
 
 // >> 조회된 리뷰(전체) 따로 배열에 넣기
@@ -225,7 +283,7 @@ function saveDataSet(r) {
    r.forEach(element => {
     listData.push(element);
    });
-   fetchPriceRange(r); // 조회된 리뷰의 가격들 불러와서 최저최고 입력
+   fetchPriceRange(r); // 초기 - 조회된 리뷰의 가격들 불러와서 최저최고 입력
 }
 
 // >> 필터 - 입력한 값들 토대로 리뷰 목록 보여주기 
@@ -253,10 +311,7 @@ function viewFilteredReview(cate, height, weight, level) { // category_submit, h
 }
 
 
-// 필터 설정 후 가격 범위 조회
-
-
-
+// 가격 범위 조회
 function fetchPriceRange(data) { // filteredData
     const priceArr = [] ; // 필터된 리뷰들의 가격들만 모여있는 배열
     data.forEach(elem => priceArr.push(elem.dataset.price))
