@@ -1,8 +1,12 @@
 'use strict';
 
 // api url 
-const VIEWREVIEW_API_URL = "https://3f3f9929-efbf-491a-b481-e59c3996a804.mock.pstmn.io/list/%7Bgender%7D/%7Bsport%7D";
+// https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/reviews/female/tennis?category&height&weight&level&minPrice&maxPrice
+const BASE_API_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" ;
 
+function filteredApiUrl(cate, height, weight, level, minPrice , maxPrice) {
+    return `${BASE_API_URL}/reviews/female/tennis?category=${cate=='all'?"":cate}&height=${height?height:""}&weight=${weight?weight:""}&level=${level?level:null}&minPrice=${minPrice?minPrice:null}&maxPrice=${maxPrice?maxPrice:null}`;
+}
 
 // 페이지 끌올 버튼 
 const pageUp_btn = document.querySelector(".pageUp-btn") ;
@@ -74,6 +78,8 @@ ordering_list.addEventListener("click" , (e) => {
 
 })
 
+// >> 최신 순 (default)
+
 // >> 좋아요 순 
 function orderedByLikes (arr) {
     while(products_lists.hasChildNodes()) {
@@ -115,25 +121,29 @@ const onlyImg_input = document.querySelector("#onlyImg_box")
 //     console.log("check");
 // })
 
-onlyImg_btn.addEventListener("change" , (e) => {
+onlyImg_btn.addEventListener("change" , async (e) => {
+    let reviewData = await fetchAllReview() ;
     if(e.target.checked) {
         // 사진만 보기
-        isOnlyImg(true , filteredData);
+        isOnlyImg(true , reviewData);
     } 
     else {
         // 전체 리뷰 보기
-        isOnlyImg(false , filteredData);
+        isOnlyImg(false , reviewData);
     }
 });
-
+// fetchAllReview() 는 Promise 형태이며 .products-lists 의 배열들이다.
 
 // >> 사진 리뷰 혹은 전체 리뷰 필터 함수 
-function isOnlyImg(isOnlyImgChecked, data) { // isOnlyImgChecked(true,false) / data(listData)
+function isOnlyImg(isOnlyImgChecked, data) { // isOnlyImgChecked(true,false) / data(listData) 
+    // const reviewData = await data ; 
     if (isOnlyImgChecked) { // 사진 리뷰만 보기
         data.forEach(d=> {
             if (d.dataset.img == 'default') { // 이미지 없는 리뷰(기본 이미지) 안보이게끔
                 d.classList.add('hidden') ;
             }
+            console.log(d);
+            console.dir(d);
         })
     } else { // 전체 리뷰 보기 (전체라는 게 필터된 값들 중에 전체 !!)
         data.forEach(d => {
@@ -160,39 +170,54 @@ filter_form.addEventListener("submit" , (e) => {
     let level_submit = filter_form.querySelector("input[name='level']:checked").id ;
 
         // 이 변수들로 필터 적용하는 함수 
-    viewFilteredReview(category_submit, height_submit, weight_submit, level_submit) ;
+    fetchAllReview(category_submit, height_submit, weight_submit, level_submit ,null, null) ;
     
     // 필터 된 리뷰들 가격 모아서 가격 범위 불러오기
-    fetchPriceRange(filteredData) ;
-    
+    // fetchPriceRange(filteredData) ;
+    // console.log(filteredData);
 })
 
 
 
 // *** 상품 목록들 데이터 통신 작업 ***
 
-// 기본 (default) 상품 목록
+const fetchAllReview = async(cate, height, weight, level, minPrice, maxPrice) => {
+    try {
+        const response = await axios.get(filteredApiUrl(cate, height, weight, level, minPrice, maxPrice))
+        .then(result => result.data.map(data => review_Template(data,'afterbegin')))
+        .then(r => fetchPriceRange(r)) // 가격 범위 나타내기
+        .then(r => saveDataSet(r))
+        .catch(error => console.log(error)) ;
+        return response ;
+    } catch (error) {
+        console.log(error) ;
+        alert("데이터를 불러오는데 실패하였습니다. 다시 시도해주세요.")
+    }
+}
 
-// axios.get("https://3f3f9929-efbf-491a-b481-e59c3996a804.mock.pstmn.io/list/%7Bgender%7D/%7Bsport%7D")
-// .then(data => console.log(data.data.items));
+
+fetchAllReview(null,null,null,null,null,null) ;  // <-- 기본 리뷰 목록 보여주기
+// console.dir(fetchAllReview())
+
+
 const products_lists = document.querySelector(".products-lists") ;
 
 const min_price = document.querySelector("#min-price") ;
 const max_price = document.querySelector("#max-price") ;
 
 
-const fetchReview = async() => { // api url 받으면 url 부분만 수정 !
-    const response = await axios.get(VIEWREVIEW_API_URL)
-    .then(result => result.data.items.map(data => review_Template(data,'afterbegin')))
-    .then(r => saveDataSet(r))
-    .catch(error => console.log(error)) ;
-    return response;
-}
+// const fetchReview = async() => { // api url 받으면 url 부분만 수정 !
+//     const response = await axios.get(VIEWREVIEW_API_URL)
+//     .then(result => result.data.items.map(data => review_Template(data,'afterbegin')))
+//     .then(r => saveDataSet(r))
+//     .catch(error => console.log(error)) ;
+//     return response;
+// }
 
 function showGender(gender) { // 성별 표시 
-    if (gender=="f") {
+    if (gender=="female") {
         return '여성';
-    } else if (gender == 'm') {
+    } else if (gender == 'male') {
         return '남성';
     }
 }
@@ -235,14 +260,16 @@ function reviewDefualtImg (cate) {
 
 //viewReveiwWithFilter(data.category, data.height, data.weight, data.level)
 // 처음 접속할때는 다 보여주고 필터 검색 할때 걸러지게
-function review_Template(data, where) {
+function review_Template(data) {
     
     // 링크 수정해야함!
     const reviewItem = `
         <a href = "/review/${data.reviewIdx}">
             <div class="review_item" data-likes="${data.likes}" data-price="${data.price}" data-category="${data.category}" data-level="${data.level}" data-img="${data.img_path ? 'has' : 'default'}">
                 <div class="review_leftContainer">
-                    <img src="${data.img_path ? data.img_path : reviewDefualtImg(data.sports) }" alt="내가 쓴 리뷰 사진" class="review_img">
+                    <div class="review_img_container">
+                        <img src="${data.img_path ? data.img_path : reviewDefualtImg(data.sports) }" alt="내가 쓴 리뷰 사진" class="review_img">
+                    </div>
                     <div class="heart_container">
                         <span class="iconify heart-icon" data-icon="akar-icons:heart"></span>
                         <span class="heart_cnt">${data.likes}</span>
@@ -266,14 +293,13 @@ function review_Template(data, where) {
         </a>
     `
     // const where = 'afterbegin' ;
-    products_lists.insertAdjacentHTML(where, reviewItem) ;
+    products_lists.insertAdjacentHTML("afterbegin", reviewItem) ;
     const review_item = document.querySelector(".review_item");
     return review_item ;
 }
 
 
 // const dataResult = fetchReview() ;  
-fetchReview() ;  // <-- 기본 리뷰 목록 보여주기
 
 let listData = [] ; // 현재의 리뷰 템플릿 데이터를 'review_item' 배열로 저장
 let filteredData = listData ; // 필터된 리뷰들 배열로 저장 (for 사진리뷰만 보기 , 정렬) / 초기화 - 필터 전 리뷰들
@@ -283,7 +309,9 @@ function saveDataSet(r) {
    r.forEach(element => {
     listData.push(element);
    });
-   fetchPriceRange(r); // 초기 - 조회된 리뷰의 가격들 불러와서 최저최고 입력
+
+   return listData ; // 배열 형태로 리턴
+//    fetchPriceRange(r); // 초기 - 조회된 리뷰의 가격들 불러와서 최저최고 입력
 }
 
 // >> 필터 - 입력한 값들 토대로 리뷰 목록 보여주기 
@@ -321,4 +349,6 @@ function fetchPriceRange(data) { // filteredData
 
     min_price.innerHTML = min ;
     max_price.innerHTML = max ;
+
+    return data ;
 }
