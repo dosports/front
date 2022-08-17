@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="../../static/css/myPage_main.css">
+    <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer type="module" src="../../static/js/myPage_main.js"></script>
+</head>
+<body>
+    <main>
+        <header class="myPage_main_header">
+            <img src="https://mblogthumb-phinf.pstatic.net/20130823_250/a1stfine_1377269938326U6irT_JPEG/4515_1280_2.jpg?type=w2" alt="사용자 프로필 사진" class="profile_img">
+            <div class="user_name">아무개님</div>
+            <a href="./myPage_setting.html">
+                <span class="iconify setting_icon" data-icon="uiw:setting-o"></span>
+            </a>
+
+        </header>
+        
+        <section class="like_review_container">
+            <header class="like_review_header">
+                <div class="like_review_title">좋아요 한 리뷰</div>
+                <a href="../reviews/likeReview_detailPage.html" class="more_like_review">
+                    <span>상세보기</span>
+                    <img src="../../static/img/angles_right.png" alt="상세보기 아이콘" class="more_icon">
+                </a>
+            </header>
+            <div class="like_review_preview_container">
+                <div class="like_review_preview_item">
+                    <div class="like_review_img_container">
+                        <img src="../../static/img/golf_icon.png" alt="좋아요한 리뷰 사진" class="like_review_img">
+                    </div>
+                    <div class="like_review_preview_title">나이키 치마</div>
+                </div>
+
+                
+                <div class="like_review_preview_item">
+                    <div class="like_review_img_container">
+                        <img src="../../static/img/golf_icon.png" alt="좋아요한 리뷰 사진" class="like_review_img">
+                    </div>
+                    <div class="like_review_preview_title">나이키 치마</div>
+                </div>
+
+                
+
+                
+            </div>
+        </section>
+
+        <section class="my_review_container">
+            <div class="my_review_title">내가 쓴 리뷰</div>
+            <div class="review_container">
+            </div>
+            <a href="../reviews/myReview_detailPage.html" class="more_my_review_container">
+                <div class="more_my_review_title">상세보기</div>
+                <img src="../../static/img/angles_right.png" alt="상세보기 아이콘" class="more_icon">
+            </a>
+        </section>
+    </main>
+</body>
+</html>

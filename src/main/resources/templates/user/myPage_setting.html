@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지-설정</title>
+    <link rel="stylesheet" href="../../static/css/myPage_setting.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script defer type="module" src="../../static/js/myPage_setting.js"></script>
+</head>
+<body>
+    <main>
+        <header class="myPage_setting_header">
+            <button class="before_btn_container hidden" type="button">
+                <img src="../../static/img/angles_right.png" alt="" class="before_btn">
+                <div id="myPage_setting_header_title">이전</div>
+            </button>
+            <div class="myPage_setting_header_title styled-border">설정</div>
+        </header>
+
+        <section class="user_setting_container">
+            <div class="user_setting_title">사용자 설정</div>
+            <form action="" class="user_setting_form">
+                <div class="user_profile_container">
+                    <img src="../../static/img/logo_white.png" alt="사용자 프로필 사진" class="profile_img">
+                    <label for="change_profileImg">프로필 사진바꾸기</label>
+                    <input type="file" id="change_profileImg" name = "profile_img">
+                    <div class="profileImg_err">올바르지 않은 파일 형식 입니다.</div>
+                </div>
+                <div class="user_nameAndPW">
+                    <div class="user_name_container">
+                        <label for="user_name">사용자명</label>
+                        <input id="user_name" type="text" name="username">
+                        <div class="username_err">사용불가능한 사용자명입니다.</div>
+                    </div>
+                    <div class="user_password_container">
+                        <label for="current_password">비밀번호 변경</label>
+                        <input id="current_password" type="password" name="current_password" placeholder="현재 비밀번호">
+                        <div class="password_err">비밀번호가 올바르지 않습니다.</div>
+                
+                        <input type="password" name="new_password" placeholder="새 비밀번호">
+                        <input type="password" name="new_check_password" placeholder="새 비밀번호 확인">
+                        <div class="newPassword_err">비밀번호가 일치하지 않습니다.</div>
+                    </div>
+                </div>
+                
+                <input type="submit" value="사용자 설정 저장" id="user_setting_save_btn">
+            </form>
+        </section>
+    
+    
+        <section class="filter_setting_container">
+            <span class="filter_setting_title">필터 설정</span>
+            <form action="" class="filter_setting_form">
+                <div class="user_height_container">
+                    <label for="user_height">키</label>
+                    <input type="text" id="user_height" name="user_height">
+                    <span>cm</span>
+                </div>
+                <div class="user_weight_container">
+                    <label for="user_weight">몸무게</label>
+                    <input type="text" id="user_weight" name="user_weight">
+                    <span>kg</span>
+                </div>
+                <input type="submit" value="필터 저장" id="filter_setting_save_btn">
+            </form>
+            <div class="filter_err">키와 몸무게를 입력해주세요.</sp>
+        </section>
+
+        <footer>
+            <div class="footer_nav">
+                <a href="" class="footer_nav_item">이용약관</a>
+                <a href="" class="footer_nav_item">개인정보처리방침</a>
+                <a href="" class="footer_nav_item">커뮤니티이용규칙</a>
+                <a href="" class="footer_nav_item">공지사항</a>
+                <a href="" class="footer_nav_item">문의하기</a>
+            </div>
+            <img id="footer_logo" src="../../static/img/logo.png" alt="">
+        </footer>
+    </main>
+    
+    
+</body>
+</html>
