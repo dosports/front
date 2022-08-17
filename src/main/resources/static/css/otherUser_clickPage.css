@@ -1,0 +1,96 @@
+@import "../css/variable.css";
+@import "../css/component/header_before.css";
+@import "../css/reviewContainer.css";
+@import "../css/component/page_up_btn.css";
+@import "./component/full_heart.css";
+body{
+    width: 1264px;
+    margin: 0 auto;
+}
+
+/* main header */
+.otherUserPage_main_header{
+    display: flex;
+    align-items: center;
+    margin: 0 1.94vw;
+    padding: 35.16px 0 20px 0;
+}
+.profile_img{
+    width: 4.36vw;
+    height: 4.36vw;
+    border-radius: 50%;
+}
+
+.user_name{
+    font-family: 'GmarketSans';
+    font-weight: 500;
+    font-size: 17px;
+    color: #001707;
+    margin-left: 1.21vw;
+    flex: 1;
+}
+.setting_icon{
+    font-size: 26px;
+    color:#001707;
+    margin-right: 0.95vw;
+}
+.hidden{
+    display: none;
+}
+/* main 안에 있는 header */
+.section_header{
+    margin: 50px 0 27px 59px;
+    /* margin: 0 37px 42px 37px;
+    padding: 45.55px 0 18px 31px; */
+}
+
+.section_header_title{
+    font-family: 'GmarketSans';
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--black);
+}
+
+/* 하단 상세보기 */
+.more_my_review_container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 112.55px;
+    margin-top: 51px;
+}
+.more_icon{
+    width: 1.76vw;
+    height: 1.76vw;
+    margin-right: 18px;
+}
+.more_my_review_title{
+    font-family: 'GmarketSans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--black);
+    margin-right: 7px;
+    padding-top: 4px;
+}
+/* 리뷰 컨테이너 관련 */
+.review_item:last-child{
+    margin-bottom: 51px;
+}
+
+@media (max-width: 1264px) {
+    body{
+        width: 100%;
+    }
+
+    main{
+        margin: 0 20px;
+    }
+}
+
+@media (max-width: 1150px) {
+    .user_profile_container{
+        width: 50px;
+        height: 50px;
+    }
+}

@@ -1,0 +1,174 @@
+@import "./variable.css";
+@import "./reset.css";
+@import "./reviewContainer.css";
+@import "./component/full_heart.css";
+
+body{
+    width: 1264px;
+    margin: 0 auto;
+}
+
+/* main header */
+.myPage_main_header{
+    display: flex;
+    align-items: center;
+    margin: 0 1.94vw;
+    padding: 35.16px 0 20px 0;
+    border-bottom: 1px solid var(--yellow);
+}
+.profile_img{
+    width: 4.36vw;
+    height: 4.36vw;
+    border-radius: 50%;
+}
+.user_name{
+    font-family: 'GmarketSans';
+    font-weight: 500;
+    font-size: 17px;
+    color: #001707;
+    margin-left: 1.21vw;
+    flex: 1;
+}
+.setting_icon{
+    font-size: 26px;
+    color:#001707;
+    margin-right: 0.95vw;
+}
+
+
+/* like review */
+.like_review_header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 50px 0 20px 0;
+}
+.more_like_review{
+    display: flex;
+    align-items: center;
+}
+.like_review_title, .more_like_review > span, .my_review_title, .more_my_review_title{
+    font-family: 'GmarketSans';
+    font-weight: 700;
+    color: #001707;
+}
+.like_review_title{
+    font-size: 17px;
+    margin-left: 3.57vw;
+}
+.more_like_review > span, .more_my_review_title{
+    font-size: 14px;
+    margin-right: 7px;
+    padding-top: 4px;
+}
+.more_icon{
+    width: 1.76vw;
+    height: 1.76vw;
+    margin-right: 18px;
+
+}
+/* .more_icon:hover{
+    animation: more_icon_hover 1s ease-in-out alternate infinite ;
+}
+@keyframes more_icon_hover {
+    from{
+        transform: translateX(0);
+    }
+    to{
+        transform: translateX(5px);
+    }
+} */
+
+/* 좋아요한 리뷰 */
+.like_review_preview_container{
+    padding: 41px 0 42px 0;
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    background-color: var(--green-bg);
+    justify-content: space-evenly;
+}
+.like_review_preview_item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.like_review_preview_item:hover{
+    cursor: pointer;
+}
+/* display : flex */
+/* .like_review_preview_container{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: var(--green-bg);
+    padding: 41px 0 42px 0;
+}
+.like_review_preview_item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} */
+.like_review_img_container{
+    width: 13.97vw;
+    height: 14.39vw;
+    background: #D9D9D9;
+    border-radius: 20px;
+    position: relative;
+}
+.like_review_img{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    top: 0;
+    left: 0;
+    transform: translate(50, 50);
+    object-fit: cover;
+}
+.like_review_preview_title{
+    font-family: 'NanumSquare';
+    font-weight: 400;
+    font-size: 15px;
+    color: #001707;
+    margin-top: 19px;
+}
+.hidden{
+    display: none;
+}
+
+.hide{
+    visibility: hidden;
+}
+
+/* my_review */
+.my_review_title{
+    font-size: 17px;
+    margin: 95px 0 32px 3.57vw;
+}
+.more_my_review_container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 112.55px;
+    margin-top: 51px;
+}
+.review_item:last-child{
+    margin-bottom: 0;
+}
+
+@media (max-width: 1264px) {
+    body{
+        width: 100%;
+    }
+
+    main{
+        margin: 0 20px;
+    }
+}
+
+/* 너무 심하게 크기가 줄어드는 것 같아서 -> 혹시 어느정도 이하는 고정은 어떤지*/
+/* @media (max-width: 1100px) {
+    .review_img{
+        width: 150px;
+        height: 150px;
+    }
+} */
