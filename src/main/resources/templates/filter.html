@@ -3,36 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+    <!-- <meta name="viewport" content="width=device-width, initial-scale=1.0"> -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
+    <!-- <meta name="viewport" content="user-scalable=0;"/> -->
+
+
     <!-- CSS -->
     <link rel="stylesheet" href="../static/css/filter.css">
 
     <title>운동 종목 상세 페이지</title>
 </head>
 <body>
+    <div class="blur"></div>
     <div id="filter-page">
         <!-- nav bar -->
 
         <!-- previous page -->
-        <div id="previous-page">
-            <a class="previous-pageBtn flex"> <!--JS : 이전의 페이지로 이동하도록 설정했습니다. window.history.back()-->
+        <div id="previous-page" class="flex">
+            <a class="previous-pageBtn flex"> <!--JS : 이전의 페이지로 이동하도록 설정-->
                 <img src="../static/img/angles_right.png" alt="">
                 <h2>이전</h2>
             </a>
+            <button class="filter-icon">
+                <iconify-icon icon="akar-icons:settings-horizontal" width="25"></iconify-icon>
+            </button>
         </div>
-
         <!-- filter -->
         <section id="filter">
-        <form action="#" id="filter-form" method="get">
+            <form action="#" id="filter-form" method="get">
                 <div class="filter-container">
                     <div class="filter-container_title">
                         <h2>테니스</h2>
                     </div>
                     <div class="filter-container_main flex styled-border">
+                    <!-- 모바일 때만 볼 수 있도록 -->
+                    <button type="button" class="filter-icon_cancel">
+                        <iconify-icon icon="akar-icons:settings-horizontal" width="25"></iconify-icon>
+                    </button>
+                    
                         <div class="filter-contents">
                             <div class="filter-categories flex">
-                                <h4>품목</h4>
+                                <h4><span class="triangle">▼</span>품목</h4>
                                 <ul class="filter-categories_select flex">
                                     <li> <input type="radio" name="category" id="all" checked="checked"><label for="all">전체</label></li>
                                     <li> <input type="radio" name="category" id="top"><label for="top">상의</label></li>
@@ -45,25 +56,29 @@
                                 </ul>
                             </div>
                             <div class="filter-body flex">
-                                <h4>체형</h4>
+                                <h4><span class="triangle">▼</span>체형</h4>
                                 <div class="filter-body_container flex">
                                     <div class="filter-body_height flex">
                                         <h5>키</h5>
-                                        <input type="number" name="height" id="height" value="160">
-                                        <span>cm</span>
+                                        <div class="body-input">
+                                            <input type="number" name="height" id="height" value="">
+                                            <span>cm</span>
+                                        </div>
                                     </div>
                                     <div class="filter-body_weight flex">
                                         <h5>몸무게</h5>
-                                        <input type="number" name="weight" id="weight" value="50">
+                                        <div class="body-input">
+                                            <input type="number" name="weight" id="weight" value="">
                                         <span>kg</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="filter-level flex">
-                                <h4>운동 수준</h4>
+                                <h4><span class="triangle">▼</span>운동 수준</h4>
                                 <ul class="filter-level_select flex">
                                     <li class="flex level-checked">
-                                        <input type="radio" name="level" id="1" checked="checked"> 
+                                        <input type="radio" name="level" id="1"> 
                                         <label for="1">
                                             <span class="level-name">초</span>
                                             <span class="level-des">이제 막 시작했어요 </span>
@@ -88,17 +103,23 @@
                                 </ul>
                             </div>
                             <div class="filter-price flex">
-                                <h4>가격 범위</h4>
+                                <h4><span class="triangle">▼</span>가격 범위</h4>
                                 <div class="filter-price_range flex">
                                     <div class="filter-price_min flex">
-                                        <p class="price-title">최저</p>
+                                        <!-- <p class="price-title">최저</p>
                                         <span id="min-price">00000</span>
+                                        <p>원</p> -->
+                                        <label class="price-title" for="min-price">최저</label>
+                                        <input type="number" name="min-price" id="min-price">
                                         <p>원</p>
                                     </div>
                                     <span>~</span>
                                     <div class="filter-price_max flex">
-                                        <p class="price-title">최고</p>
+                                        <!-- <p class="price-title">최고</p>
                                         <span id="max-price">00000</span>
+                                        <p>원</p> -->
+                                        <label class="price-title" for="max-price">최고</label>
+                                        <input type="number" name="max-price" id="max-price">
                                         <p>원</p>
                                     </div>
                                 </div>
@@ -119,11 +140,16 @@
                         </button>
                     </div>
                 </div>
-        </form>
+            </form>
         </section>
 
         <!-- products  -->
         <section id="products">
+            <ul class="filtered-result flex styled-border">
+                <!-- <li class="filter-result_box">품목</li>
+                <li class="filter-result_box">키</li>
+                <li class="filter-result_box">키</li> -->
+            </ul>
             <div class="products-ordering flex">
                 <div class="products-ordering_order flex">
                     <h3>정렬</h3>
@@ -133,7 +159,7 @@
                         <li id="lowestPrice_order">최저가순</li>
                     </ul>
                 </div>
-                <div class="products-ordering_onlyImg">
+                <div class="products-ordering_onlyImg flex">
                     <!-- <button class="flex">
                         <div class="onlyImg_box">
                             <div class="onlyImg_box_checked"></div>
@@ -229,8 +255,6 @@
             </div>
         </section>
 
-        
-
     </div>
 
     <!-- Up Arrow -->
@@ -250,6 +274,7 @@
 
     <!-- JavaScript -->
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/1.0.0-beta.3/iconify-icon.min.js"></script>
     <script src="https://code.iconify.design/2/2.2.1/iconify.min.js"></script>
     <script src="../static/js/filter.js"></script>
 </body>

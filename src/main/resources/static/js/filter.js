@@ -1,11 +1,23 @@
 'use strict';
-
-// api url 
+ 
 // https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/reviews/female/tennis?category&height&weight&level&minPrice&maxPrice
-const BASE_API_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" ;
 
-function filteredApiUrl(cate, height, weight, level, minPrice , maxPrice) {
-    return `${BASE_API_URL}/reviews/female/tennis?category=${cate=='all'?"":cate}&height=${height?height:""}&weight=${weight?weight:""}&level=${level?level:null}&minPrice=${minPrice?minPrice:null}&maxPrice=${maxPrice?maxPrice:null}`;
+// api 테스트 할때는 밑에 줄 반드시 주석 해제 !!!
+// const BASE_API_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" ;
+
+// function filteredApiUrl(cate, height, weight, level, minPrice , maxPrice, sortParam, pageNum) {
+//     return `${BASE_API_URL}/reviews/female/tennis?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}&sort_param=${sortParam}&page_num=${pageNum}`;
+// }
+
+function frontUrl(cate, height, weight, level, minPrice, maxPrice) { // 필터링 값 반영 
+    return `${BASE_API_URL}/reviews/female/tennis?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}`;
+}
+let current_frontUrl ; 
+function sortUrl(sortParam, pageNum) { // 정렬 반영
+    return `&sort_param=${sortParam}&page_num=${pageNum}`;
+}
+function pageUrl(pageNum) {
+
 }
 
 // 페이지 끌올 버튼 
@@ -46,10 +58,73 @@ previous_page.addEventListener("click" , () => {
     window.history.back() ;
 })
 
+// 모바일 화면일 시 filter 아이콘 
+const filter_icon = document.querySelector('.filter-icon') ;
+
+filter_icon.addEventListener('click', () => {
+    filter_container.classList.add('open') ;
+})
+
+const filter_cancel_icon = document.querySelector(".filter-icon_cancel") ;
+filter_cancel_icon.addEventListener('click', () => {
+    filter_container.classList.remove('open') ;
+})
+
+// 모바일 : 필터 값들 나열 
+function filterValue(cate, height, weight, level, min, max) {
+    const filtered_result = document.querySelector(".filtered-result") ;
+    while(filtered_result.hasChildNodes()) {
+        filtered_result.removeChild(filtered_result.firstChild);
+    }
+    const cate_result = () => {
+        switch (cate) {
+            case "all":
+                return "전체";
+                break;
+            case "top":
+                return "상의";
+                break;
+            case "bottom":
+                return "하의";
+                break;
+            case "outer":
+                return "아우터";
+                break;
+            case "inner":
+                return "이너웨어";
+                break;
+            case "shoes":
+                return "신발";
+                break;
+            case "item":
+                return "악세사리";
+                break;        
+            default:
+                return "" ;
+                break;
+        }
+    }
+    const height_result = height ? height+"cm" : "" ;
+    const weight_result = weight ? weight+"kg" : "" ;
+    const level_result = level ? showLevel(level) : "" ;
+    const min_result = min ? min+"원 이상" : "" ;
+    const max_result = max ? max+"원 이하" : "" ;
+
+    const result_arr = [cate_result(), height_result, weight_result, level_result, min_result, max_result];
+    for(let i = 0 ; result_arr.length ; i++) {
+        if (!result_arr[i]) {
+            const filter_value_template = `
+        <li class="filter-result_box">${i}</li>
+        `
+        filtered_result.insertAdjacentHTML("afterbegin", filter_value_template) ;
+        }
+    }
+}
+
 // 상품 목록 - 정렬 : 클릭
 const ordering_list = document.querySelector(".products-ordering_sort") ;
 
-ordering_list.addEventListener("click" , (e) => {
+ordering_list.addEventListener("click" , async (e) => {
     // 정렬 색 변하기
     const selected_ordering = ordering_list.querySelector(".order-action") ;
     selected_ordering.classList.remove("order-action") ;
@@ -57,59 +132,23 @@ ordering_list.addEventListener("click" , (e) => {
 
     // 클릭한 정렬에 맞추어 리뷰 정렬
     const order_name = e.target.id ;
-    
     switch (order_name) {
         case "latest_order":
-            // 
+            fetchAllReview()
             break;
 
         case "likes_order":
-            orderedByLikes(filteredData) ;
+            orderedByLikes(reviewData) ;
             break;
 
         case "lowestPrice_order":
-            // filteredData.forEach(i => priceArr.push(i.dataset.price)) ;
-            orderedByPrice(filteredData) ;
+            orderedByPrice(reviewData) ;
             break;
     
         default:
             break;
     }
-
 })
-
-// >> 최신 순 (default)
-
-// >> 좋아요 순 
-function orderedByLikes (arr) {
-    while(products_lists.hasChildNodes()) {
-        products_lists.removeChild(products_lists.firstChild);
-    }
-
-    arr.sort((a,b) => {
-        return b.dataset.likes - a.dataset.likes ; 
-    })
-
-    for (let i = 0; i < arr.length; i++) {
-        products_lists.appendChild(arr[i]);
-    }
-}
-
-// >> 최저가 순 
-function orderedByPrice (arr) {
-    while(products_lists.hasChildNodes()) {
-        products_lists.removeChild(products_lists.firstChild);
-    }
-
-    arr.sort((a,b) => {
-        return a.dataset.price - b.dataset.price ; 
-    })
-
-    for (let i = 0; i < arr.length; i++) {
-        products_lists.appendChild(arr[i]);
-    }
-}
-
 
 // 상품 목록 - 사진 리뷰만 보기 클릭 
 const onlyImg_btn = document.querySelector(".products-ordering_onlyImg") ;
@@ -142,8 +181,6 @@ function isOnlyImg(isOnlyImgChecked, data) { // isOnlyImgChecked(true,false) / d
             if (d.dataset.img == 'default') { // 이미지 없는 리뷰(기본 이미지) 안보이게끔
                 d.classList.add('hidden') ;
             }
-            console.log(d);
-            console.dir(d);
         })
     } else { // 전체 리뷰 보기 (전체라는 게 필터된 값들 중에 전체 !!)
         data.forEach(d => {
@@ -164,55 +201,52 @@ filter_form.addEventListener("submit" , (e) => {
     onlyImg_input.checked=false;
 
     // console.dir(onlyImg_input);
-    let category_submit = filter_form.querySelector("input[name='category']:checked").id ;
-    let height_submit = filter_form.querySelector("input[name='height']").value ;
-    let weight_submit = filter_form.querySelector("input[name='weight']").value ;
-    let level_submit = filter_form.querySelector("input[name='level']:checked").id ;
-
-        // 이 변수들로 필터 적용하는 함수 
-    fetchAllReview(category_submit, height_submit, weight_submit, level_submit ,null, null) ;
+    let category_submit = filter_form.querySelector("input[name='category']:checked").id=="all" ? '' : filter_form.querySelector("input[name='category']:checked").id ;
+    let height_submit = filter_form.querySelector("input[name='height']") ? filter_form.querySelector("input[name='height']").value : '' ;
+    let weight_submit = filter_form.querySelector("input[name='weight']") ? filter_form.querySelector("input[name='weight']").value : '' ;
+    let level_submit = filter_form.querySelector("input[name='level']:checked")? filter_form.querySelector("input[name='level']:checked").id : '' ;
+    let minPrice_submit = filter_form.querySelector("input[name='min-price']") ? filter_form.querySelector("input[name='min-price']").value : '' ;
+    let maxPrice_submit = filter_form.querySelector("input[name='max-price']") ? filter_form.querySelector("input[name='max-price']").value : '' ;
     
-    // 필터 된 리뷰들 가격 모아서 가격 범위 불러오기
-    // fetchPriceRange(filteredData) ;
-    // console.log(filteredData);
+    // 모바일 화면 시 필터 값들 보여주도록
+    filterValue(category_submit, height_submit, weight_submit, level_submit, minPrice_submit, maxPrice_submit);
+    
+    // 이 변수들로 필터 적용하는 함수 
+    current_frontUrl = frontUrl(category_submit,height_submit, weight_submit, level_submit, minPrice_submit, maxPrice_submit) ;
+    console.log(current_frontUrl+backUrl(1,null));
+    fetchAllReview(current_frontUrl+backUrl(1,null)) ;
+    
 })
 
 
 
 // *** 상품 목록들 데이터 통신 작업 ***
+const products_lists = document.querySelector(".products-lists") ;
 
-const fetchAllReview = async(cate, height, weight, level, minPrice, maxPrice) => {
+const fetchAllReview = async(url) => {
     try {
-        const response = await axios.get(filteredApiUrl(cate, height, weight, level, minPrice, maxPrice))
+        while(products_lists.hasChildNodes()) {
+            products_lists.removeChild(products_lists.firstChild);
+        }
+
+        const response = await axios.get(url)
         .then(result => result.data.map(data => review_Template(data,'afterbegin')))
-        .then(r => fetchPriceRange(r)) // 가격 범위 나타내기
-        .then(r => saveDataSet(r))
+        // .then(r => fetchPriceRange(r)) // 가격 범위 나타내기
+        .then(r => saveDataSet(r)) // product 배열에 담기 for 정렬, 사진
         .catch(error => console.log(error)) ;
         return response ;
     } catch (error) {
         console.log(error) ;
-        alert("데이터를 불러오는데 실패하였습니다. 다시 시도해주세요.")
+        // alert("데이터를 불러오는데 실패하였습니다. 다시 시도해주세요.")
     }
 }
 
 
-fetchAllReview(null,null,null,null,null,null) ;  // <-- 기본 리뷰 목록 보여주기
-// console.dir(fetchAllReview())
+// fetchAllReview(null,null,null,null,null,null) ;  // <-- 기본 리뷰 목록 보여주기
 
-
-const products_lists = document.querySelector(".products-lists") ;
 
 const min_price = document.querySelector("#min-price") ;
 const max_price = document.querySelector("#max-price") ;
-
-
-// const fetchReview = async() => { // api url 받으면 url 부분만 수정 !
-//     const response = await axios.get(VIEWREVIEW_API_URL)
-//     .then(result => result.data.items.map(data => review_Template(data,'afterbegin')))
-//     .then(r => saveDataSet(r))
-//     .catch(error => console.log(error)) ;
-//     return response;
-// }
 
 function showGender(gender) { // 성별 표시 
     if (gender=="female") {
@@ -352,3 +386,4 @@ function fetchPriceRange(data) { // filteredData
 
     return data ;
 }
+
