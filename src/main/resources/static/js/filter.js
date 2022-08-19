@@ -3,21 +3,21 @@
 // https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/reviews/female/tennis?category&height&weight&level&minPrice&maxPrice
 
 // api 테스트 할때는 밑에 줄 반드시 주석 해제 !!!
-// const BASE_API_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" ;
+const BASE_API_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" ;
 
-// function filteredApiUrl(cate, height, weight, level, minPrice , maxPrice, sortParam, pageNum) {
-//     return `${BASE_API_URL}/reviews/female/tennis?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}&sort_param=${sortParam}&page_num=${pageNum}`;
-// }
+function filteredApiUrl(cate, height, weight, level, minPrice , maxPrice, sortParam, pageNum) {
+    return `${BASE_API_URL}/reviews/female/tennis?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}&sort_param=${sortParam}&page_num=${pageNum}`;
+}
 
 function frontUrl(cate, height, weight, level, minPrice, maxPrice) { // 필터링 값 반영 
     return `${BASE_API_URL}/reviews/female/tennis?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}`;
 }
-let current_frontUrl ; 
-function sortUrl(sortParam, pageNum) { // 정렬 반영
-    return `&sort_param=${sortParam}&page_num=${pageNum}`;
+let current_frontUrl ; // 필터링 값 
+function sortUrl(sortParam) { // 정렬 반영
+    return `&sort_param=${sortParam}`;
 }
 function pageUrl(pageNum) {
-
+    return `&page_num=${pageNum}`;
 }
 
 // 페이지 끌올 버튼 
@@ -25,15 +25,25 @@ const pageUp_btn = document.querySelector(".pageUp-btn") ;
 
 pageUp_btn.addEventListener("click" , ()=> {
     window.scrollTo({top : 0 , behavior : 'smooth'});
+    console.log("click") ;
 })
 
 document.addEventListener("scroll", () => {
-    if(window.scrollY > 10) {
+    if(window.scrollY > upper_part_height) {
         pageUp_btn.classList.add('pageUp-action') ;
+        control_scroll()  ;
     } else {
         pageUp_btn.classList.remove('pageUp-action') ;
     }
 })
+// 스크롤하면 끌올 버튼 따라가게끔
+function control_scroll(){
+    let timer = null;
+    timer = setTimeout(() =>{
+        const pageY = window.pageYOffset;
+        pageUp_btn.style.top = `${pageY + window.innerHeight/2}px`;
+    }, 200)
+}
 
 // 리뷰 작성하기 버튼 : 상품 목록 쪽으로 스크롤 할 때 생기기
 const write_review_btn = document.querySelector(".writeReview-btn") ;
@@ -78,7 +88,7 @@ function filterValue(cate, height, weight, level, min, max) {
     }
     const cate_result = () => {
         switch (cate) {
-            case "all":
+            case "":
                 return "전체";
                 break;
             case "top":
@@ -110,15 +120,13 @@ function filterValue(cate, height, weight, level, min, max) {
     const min_result = min ? min+"원 이상" : "" ;
     const max_result = max ? max+"원 이하" : "" ;
 
-    const result_arr = [cate_result(), height_result, weight_result, level_result, min_result, max_result];
-    for(let i = 0 ; result_arr.length ; i++) {
-        if (!result_arr[i]) {
-            const filter_value_template = `
-        <li class="filter-result_box">${i}</li>
-        `
-        filtered_result.insertAdjacentHTML("afterbegin", filter_value_template) ;
+    let arr = [cate_result(), height_result, weight_result, level_result, min_result, max_result];
+    arr.reverse() ;
+    arr.forEach(x =>  {
+        if(x!="") {
+            filtered_result.insertAdjacentHTML("afterbegin",`<div class="filter-result_box">${x}</div>`) ;
         }
-    }
+    });
 }
 
 // 상품 목록 - 정렬 : 클릭
@@ -211,10 +219,11 @@ filter_form.addEventListener("submit" , (e) => {
     // 모바일 화면 시 필터 값들 보여주도록
     filterValue(category_submit, height_submit, weight_submit, level_submit, minPrice_submit, maxPrice_submit);
     
+    
     // 이 변수들로 필터 적용하는 함수 
     current_frontUrl = frontUrl(category_submit,height_submit, weight_submit, level_submit, minPrice_submit, maxPrice_submit) ;
-    console.log(current_frontUrl+backUrl(1,null));
-    fetchAllReview(current_frontUrl+backUrl(1,null)) ;
+    // console.log(current_frontUrl+backUrl(1,null));
+    fetchAllReview(current_frontUrl+sortUrl(null)+pageUrl(null)) ;
     
 })
 
@@ -231,7 +240,6 @@ const fetchAllReview = async(url) => {
 
         const response = await axios.get(url)
         .then(result => result.data.map(data => review_Template(data,'afterbegin')))
-        // .then(r => fetchPriceRange(r)) // 가격 범위 나타내기
         .then(r => saveDataSet(r)) // product 배열에 담기 for 정렬, 사진
         .catch(error => console.log(error)) ;
         return response ;
@@ -241,59 +249,6 @@ const fetchAllReview = async(url) => {
     }
 }
 
-
-// fetchAllReview(null,null,null,null,null,null) ;  // <-- 기본 리뷰 목록 보여주기
-
-
-const min_price = document.querySelector("#min-price") ;
-const max_price = document.querySelector("#max-price") ;
-
-function showGender(gender) { // 성별 표시 
-    if (gender=="female") {
-        return '여성';
-    } else if (gender == 'male') {
-        return '남성';
-    }
-}
-
-function showLevel(level) {
-    if(level==1) {
-        return '초';
-    } else if(level==2) {
-        return '중';
-    } else if(level==3) {
-        return '고';
-    }
-}
-
-function reviewDefualtImg (cate) {
-    switch (cate) {
-        case 'tennis':
-            return '../static/img/tennis_icon.png' ;
-            break;
-        case 'hike':
-            return '../static/img/hiking_icon.png' ;
-            break;
-        case 'swim':
-            return '../static/img/swim_icon.png' ;
-            break;
-        case 'gym':
-            return '../static/img/gym_icon.png' ;
-            break;
-        case 'golf':
-            return '../static/img/golf_icon.png' ;
-            break;
-        case 'balls':
-            return '../static/img/balls_icon.png' ;
-            break;
-        default:
-            break;
-    }
-}
-
-
-//viewReveiwWithFilter(data.category, data.height, data.weight, data.level)
-// 처음 접속할때는 다 보여주고 필터 검색 할때 걸러지게
 function review_Template(data) {
     
     // 링크 수정해야함!
@@ -332,7 +287,50 @@ function review_Template(data) {
     return review_item ;
 }
 
+const min_price = document.querySelector("#min-price") ;
+const max_price = document.querySelector("#max-price") ;
 
+function showGender(gender) { // 성별 표시 
+    if (gender=="female") {
+        return '여성';
+    } else if (gender == 'male') {
+        return '남성';
+    }
+}
+
+function showLevel(level) {
+    if(level==1) {
+        return '초';
+    } else if(level==2) {
+        return '중';
+    } else if(level==3) {
+        return '고';
+    }
+}
+function reviewDefualtImg (cate) {
+    switch (cate) {
+        case 'tennis':
+            return '../static/img/tennis_icon.png' ;
+            break;
+        case 'hike':
+            return '../static/img/hiking_icon.png' ;
+            break;
+        case 'swim':
+            return '../static/img/swim_icon.png' ;
+            break;
+        case 'gym':
+            return '../static/img/gym_icon.png' ;
+            break;
+        case 'golf':
+            return '../static/img/golf_icon.png' ;
+            break;
+        case 'balls':
+            return '../static/img/balls_icon.png' ;
+            break;
+        default:
+            break;
+    }
+}
 // const dataResult = fetchReview() ;  
 
 let listData = [] ; // 현재의 리뷰 템플릿 데이터를 'review_item' 배열로 저장
@@ -370,20 +368,5 @@ function viewFilteredReview(cate, height, weight, level) { // category_submit, h
             }
         }
     })
-}
-
-
-// 가격 범위 조회
-function fetchPriceRange(data) { // filteredData
-    const priceArr = [] ; // 필터된 리뷰들의 가격들만 모여있는 배열
-    data.forEach(elem => priceArr.push(elem.dataset.price))
-    
-    const max = String(Math.max.apply(null, priceArr)) ;
-    const min = String(Math.min.apply(null, priceArr)) ;
-
-    min_price.innerHTML = min ;
-    max_price.innerHTML = max ;
-
-    return data ;
 }
 
