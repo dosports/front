@@ -517,6 +517,22 @@ input[name="onlyImg_box"]:checked+label .onlyImg_box_checked{
 }
 
 
+/* review_item 관련 css */ 
+.heart_container {
+    z-index: 500;
+    cursor: pointer;
+}
+.heart_container:hover {
+    background-color: pink;
+}
+.colored img {
+    width: 17px;
+    height: 15px;
+}
+.review_item .like-hidden  {
+    display: none;
+}
+
 /* 1264px 너비 반응형 */
 /* @media (max-width: 1264px) */
 @media (max-width: 1264px) {
@@ -814,6 +830,9 @@ input[name="onlyImg_box"]:checked+label .onlyImg_box_checked{
         margin: 5px 10px 5px 0 ;
     }
 
+    .pageUp-btn {
+        top: 80%;
+    }
 
     /* 정렬 이랑 사진 리뷰만 보기 수직 정렬 */
     /* #products {
