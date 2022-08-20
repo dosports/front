@@ -1,9 +1,9 @@
 @import "./variable.css";
-@import "./component/header_before.css";
+@import "./myPage_component/header_before.css";
 @import "./reviewContainer.css";
-@import "./component/page_up_btn.css";
-@import "./component/full_heart.css";
-
+@import "./myPage_component/page_up_btn.css";
+@import "./myPage_component/reviewContainer_plus.css";
+@import "./myPage_component/review_skeleton.css";
 body{
     width: 1264px;
     margin: 0 auto;

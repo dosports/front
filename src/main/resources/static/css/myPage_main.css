@@ -1,7 +1,8 @@
 @import "./variable.css";
 @import "./reset.css";
 @import "./reviewContainer.css";
-@import "./component/full_heart.css";
+@import "./myPage_component/reviewContainer_plus.css";
+@import "./myPage_component/review_skeleton.css";
 
 body{
     width: 1264px;
@@ -16,11 +17,23 @@ body{
     padding: 35.16px 0 20px 0;
     border-bottom: 1px solid var(--yellow);
 }
-.profile_img{
+.profile_img_container{
     width: 4.36vw;
     height: 4.36vw;
     border-radius: 50%;
+    position: relative;
 }
+.profile_img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(50, 50);
+    object-fit: cover;
+    border-radius: 50%;
+}
+
 .user_name{
     font-family: 'GmarketSans';
     font-weight: 500;

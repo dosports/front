@@ -1,4 +1,4 @@
-export {getUserInfo, getReviewDetail, getMyReviewIdx, getLikeReviewIdx, pageUpEventHandler, beforePageBtnHandler, sports_img, sports_level};
+export {getUserInfo, getReviewDetail, getMyReviewIdx, getLikeReviewIdx, createMiniReviewItem, createFullReviewItem, pageUpEventHandler, beforePageBtnHandler, sports_img, sports_level};
 
 const url = 'https://a29eef45-92f7-443d-bde4-be612c4502bf.mock.pstmn.io';
 const userIdx = 1;
@@ -17,15 +17,15 @@ function getReviewDetail(reviewIdx){
     .then(response => response.data);
 }
 
-// 내가 쓴 리뷰 reviewIdx 배열 가져오기
-function getMyReviewIdx(){
-    return axios.get(`${url}/review/user/${userIdx}`)
+// 내가 쓴 리뷰 reviewIdx 배열 가져오기 FIXME: ?page_num부분....
+function getMyReviewIdx(userIdx){
+    return axios.get(`${url}/review/user/${userIdx}?page_num=${pageNum}`)
     .then(response => response.data.reviewIdx);
 }
 
 // 내가 좋아요한 리뷰 reviewIdx 배열 가져오기
-function getLikeReviewIdx(){
-    return axios.get(`${url}/like/${userIdx}`)
+function getLikeReviewIdx(pageNum){
+    return axios.get(`${url}/like/${userIdx}?page_num=${pageNum}`)
     .then(response => response.data.reviewIdx);
 }
 
@@ -81,62 +81,86 @@ const sports_level = {
     3 : "고"
 }
 
-export function createMiniReviewItem(num){
-    const $like_review_preview_container = document.querySelector('.like_review_preview_container');
-    $like_review_preview_container.innerHTML = ""; // 처음에 모두 삭제
-
-    
-    let pre_like_img = sports_img["tennis"]; // 각 종목 이미지로
-    for(let i = 0; i < num; i++){
-        const new_like_review_preview_item = document.createElement('div');
-        new_like_review_preview_item.classList.add('like_review_preview_item');
-        new_like_review_preview_item.innerHTML = `
-                            <div class="like_review_img_container">
-                                <img src=${pre_like_img} alt="좋아요한 리뷰 사진" class="like_review_img">
-                            </div>
-                            <div class="like_review_preview_title">나이키 바지</div>
-        `;
-    
-        $like_review_preview_container.appendChild(new_like_review_preview_item);
+function createMiniReviewItem(reviewInfo){
+    let pre_like_img = reviewInfo.img_path;
+    if(pre_like_img == ''){
+        pre_like_img = sports_img[reviewInfo.sport]; // 각 종목 이미지로
     }
+
+    const new_like_review_preview_item = document.createElement('div');
+    new_like_review_preview_item.classList.add('like_review_preview_item');
+    new_like_review_preview_item.innerHTML = `
+                        <div class="like_review_img_container">
+                            <img src=${pre_like_img} alt="좋아요한 리뷰 사진" class="like_review_img">
+                        </div>
+                        <div class="like_review_preview_title">${reviewInfo.brand} ${reviewInfo.title}</div>
+    `;
+
+    return new_like_review_preview_item;
 }
 
-export function createFullReviewItem(num){
-    const $review_container = document.querySelector('.review_container');
-    $review_container.innerHTML = ""; // 처음에 모두 삭제
+function createFullReviewItem(reviewInfo){
+    let pre_my_img =  reviewInfo.img_path;
+    if(pre_my_img == ''){
+        pre_my_img = sports_img[reviewInfo.sport]; // 각 종목 이미지로
+    }
 
-    for(let i=0; i<num ;i++){
-// 이미지 처리
-let pre_like_img = sports_img["tennis"]; // 각 종목 이미지로
-
-const new_review_item = document.createElement('div');
-
+    const new_review_item = document.createElement('div');
     new_review_item.classList.add('review_item');
     // TODO: 작성 시간 변경, img full_heart 내가 임의로 파일명 넣어서 가져온거라서 변경 필요함
     new_review_item.innerHTML = `
         <div class="review_leftContainer">
             <div class="review_img_container">
-                <img src=${pre_like_img} alt="내가 쓴 리뷰 사진" class="review_img">
+                <img src=${pre_my_img} alt="내가 쓴 리뷰 사진" class="review_img">
             </div>
             <div class="heart_container">
-                <img class="full_heart" src="../../static/img/full_heart.png" alt="채워진 하트"> 
-                <span class="iconify heart-icon hidden" data-icon="akar-icons:heart"></span>
-                <span class="heart_cnt">3개</span>
+                <img class="full_heart ${reviewInfo.likes > 0 ? '' : 'hidden'}" src="../../static/img/full_heart.png" alt="채워진 하트">
+                <span class="iconify heart-icon ${reviewInfo.likes > 0 ? 'hidden' : ''}" data-icon="akar-icons:heart"></span>
+                <span class="heart_cnt">${reviewInfo.likes}개</span>
             </div>
         </div>
         <div class="review_rightContainer">
             <div class="my_review_titleAndWriter">
-                <div class="review_title">젝시믹스 5부레깅스</div>
-                <div class="review_writerAndTime">아무개 / 12:00</div> 
+                <div class="review_title">${reviewInfo.brand} ${reviewInfo.title}</div>
+                <div class="review_writerAndTime">${reviewInfo.userName} / 12:00</div>
             </div>
-            <div class="my_review_star">${'★'.repeat(3) + '☆'.repeat(5-3)}</div>
-            <div class="my_review_likeAndComment">댓글 10개</div>
-            <div class="my_review_writerDetail">여 / 160cm 50kg / 중</div>
-            <div class="my_review_buyInfo">공식홈페이지 / 15000</div>
-            <div class="my_review_content">운동할 때 편해요!</div>
+            <div class="my_review_star">${'★'.repeat(reviewInfo.rate) + '☆'.repeat(5-reviewInfo.rate)}</div>
+            <div class="my_review_likeAndComment">댓글 ${reviewInfo.comments}개</div>
+            <div class="my_review_writerDetail">${reviewInfo.gender == "female" ? "여" : "남"} / ${reviewInfo.height}cm ${reviewInfo.weight}kg / ${sports_level[reviewInfo.level]}</div>
+            <div class="my_review_buyInfo">${reviewInfo.source == null ? "모름" : reviewInfo.source} / ${reviewInfo.price}</div>
+            <div class="my_review_content">${reviewInfo.content}</div>
         </div>
     `;
-    $review_container.appendChild(new_review_item);
-    }
-    
+    return new_review_item;
 }
+
+
+// TODO:
+// 1. 좋아요 클릭, 취소
+
+export function like_toggle(event){
+    const likeBtn = event.target;
+    const likeBtn_className = ['full_heart', 'heart-icon'];
+    const likeBtn_check = likeBtn_className.some(className => likeBtn.classList.contains(className));
+    if(likeBtn_check){
+        const $full_heart = likeBtn.parentNode.querySelector('.full_heart');
+        const $empty_heart = likeBtn.parentNode.querySelector('.heart-icon');
+
+        if(likeBtn.classList.contains('full_heart')){// 꽉찬 하트 -> 빈 하트
+            if(!$full_heart.classList.contains('hidden')){
+                $full_heart.classList.add('hidden');
+            }
+            if($empty_heart.classList.contains('hidden')){
+                $empty_heart.classList.remove('hidden');
+            }
+        }else{// 빈 하트 -> 꽉찬 하트
+            if($full_heart.classList.contains('hidden')){
+                $full_heart.classList.remove('hidden');
+            }
+            if(!$empty_heart.classList.contains('hidden')){
+                $empty_heart.classList.add('hidden');
+            }
+        }
+    }
+}
+
