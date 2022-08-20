@@ -84,12 +84,15 @@ label[for="change_profileImg"]{
     width: 366.09px; /*  px단위 */
     height: 40px;
     background-color: #f1f1f1;
-    color: #9f9f9f;
+    color: var(--black);
     font-weight: 300;
     font-size: 16px;
     border-radius: 20px;
     border: none;
     padding-left: 1.05vw;
+}
+.user_name_container input::placeholder, .user_password_container input::placeholder{
+    color: #9f9f9f;
 }
 label[for="user_name"], label[for="current_password"]{
     font-family: 'NanumSquare';
@@ -247,19 +250,20 @@ footer{
 }
 
 /* 원래는 360px이긴 함*/
-@media (max-width: 800px) {
+@media (max-width: 800px) { /*js도 px header변경함수에 바꾸기*/
     body{
         width: 100%;
     }
 
     main{
-        margin: 0 6.94vw;
+        /* margin: 0 6.94vw; */
+        margin: 0 20px;
     }
     /* header */
     .myPage_setting_header_title{
         font-family: 'GmarketSans';
         font-weight: 700;
-        font-size: 26px;
+        font-size: 22px;
         color: var(--black);
         margin-left: 8px;
         padding-bottom: 18.25px;
@@ -288,55 +292,62 @@ footer{
     
     /* user setting */
     .user_setting_container{
-        height: 699.75px;
+        height: 750px;
     }
     .user_setting_title, .filter_setting_title{
         font-weight: 500;
-        font-size: 26px;
-        margin-left: 32px;
+        font-size: 20px;
+        margin-left: 20px;
     }
     .user_setting_title{
         margin-top: 26.75px;
         margin-bottom: 37px;
     }
     .user_setting_form{
-        /* background-color: plum; */
-        margin: 0 auto; /*이걸 통해서 중앙 정렬 되는지 확인*/
+        display: flex;
+        flex-direction: column;
+        margin-left: 0;
     }
     .user_profile_container{
-        /* background-color: pink; */
-        margin-right: 113px;
+        margin-right: 0;
+        margin-bottom: 30px;
     }
     .profile_img{
-        width: 23.15vw;
-        height: 23.15vw;
+        width: 130px;
+        height: 130px;
     }
     label[for="change_profileImg"]{
-        color: rgba(0, 23, 7, 0.5); /*360 버전 - 혹시 데스크탑 버전 색상 맞는지 확인*/
-        font-size: 20px;
+        color: rgba(0, 23, 7, 0.5);
+        font-size: 16px;
     }
     .user_nameAndPW{
         flex-direction: column;
+        /* padding-left: 30px; */
+        align-items: center;
     }
-    /* .user_name_container{
-        background-color: palegreen;
+    .user_name_container{
+        /* background-color: palegreen; */
+        margin-right: 0;
     }
-    .user_password_container{
+    /* .user_password_container{
         background-color: paleturquoise;
     } */
     .user_name_container input, .user_password_container input{
-        width: 30.09vw; /*  px단위 */
-        height: 41px;
+        width: 240px;
+        height: 36px;
         background-color: rgba(217, 217, 217, 0.3);
-        color: rgba(0, 23, 7, 0.5);
+        color: var(--black);
         font-weight: 300;
-        font-size: 20px;
+        font-size: 16px;
         padding-left: 17px;
+    }
+    .user_name_container input::placeholder, .user_password_container input::placeholder{
+        color: rgba(0, 23, 7, 0.5);
     }
     label[for="user_name"], label[for="current_password"]{
         font-family: 'NanumSquare';
         font-weight: 400;
-        font-size: 24px;
+        font-size: 16px;
         margin-bottom: 20px;
     }
     input[name="new_password"], input[name="current_password"]{
@@ -346,15 +357,14 @@ footer{
     
     /* 저장 버튼 */
     #user_setting_save_btn, #filter_setting_save_btn{
-        font-size: 21px;
+        font-size: 16px;
     }
     #user_setting_save_btn{
-        width: 244px;
-        height: 53.57px;
+        padding: 5px 15px;
     }
     #filter_setting_save_btn{
-        width: 169.29px;
-        height: 53.57px;
+        position: relative;
+        padding: 5px 15px;
     }
     #user_setting_save_btn{
         position: absolute;
@@ -362,13 +372,19 @@ footer{
         right: 50%;
         transform: translateX(50%);
     }
-    
+    #filter_setting_save_btn{
+        position: absolute;
+        top: 345px;
+        right: 50%;
+        transform: translateX(50%);
+    }
     
     /* 경고 메세지 */
-    .profileImg_err, .username_err, .password_err, .filter_err, .newPassword_err{
+    .profileImg_err, .filter_err, .newPassword_err{
         font-family: 'NanumSquare';
         font-weight: 800;
-        font-size: 19px;
+        font-size: 12px;
+        line-height: 1.5;
         color: var(--orange);
     }
     .profileImg_err{
@@ -400,28 +416,30 @@ footer{
         font-family: 'NanumSquare';
         font-style: normal;
         font-weight: 400;
-        font-size: 24px;
+        font-size: 16px;
         display: flex;
-        justify-content: center;
-        margin: 61px 0 55px 0; 
+        flex-direction: column;
+        align-items: center;
+        margin: 61px 30px 40px 3px; 
     }
     .user_height_container{
-        margin-right: 102px;
+        margin-right: 0;
+        margin-bottom: 30px;
     }
-    .user_height_container label, .user_weight_container label{
-        margin-right: 15px;
+    .user_height_container label{
+        margin: 0 17.5px;
+    }
+    .user_weight_container label{
+        margin-right: 5px;
     }
     #user_height, #user_weight{
-        font-size: 22px;
-        width: 131px;
-        height: 48px;
-        margin-right: 15px;
+        font-size: 16px;
+        margin-right: 10px;
         text-align: center;
+        width: 120px;
     }
-    #filter_setting_save_btn{
-        position: absolute;
-        top: 345px;
-        right: 50%;
-        transform: translateX(50%);
+    #user_weight{
+        margin-right: 13px;
     }
+    
 }
