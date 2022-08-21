@@ -1,16 +1,17 @@
 'use strict';
  
-const u = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/reviews/female/tennis?category&height&weight&level&minPrice&maxPrice;"
+// const u = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/reviews/female/tennis?category&height&weight&level&minPrice&maxPrice;"
 
-// api 테스트 할때는 밑에 줄 반드시 주석 해제 !!!
-const BASE_API_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" ;
+// api 테스트 할때는 밑에 줄 반드시 주석 해제 !!! ************************ 밑에 window~~ 주석 지우기 !!!!
+const BASE_API_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" // + window.location.pathname    
+
 
 function filteredApiUrl(cate, height, weight, level, minPrice , maxPrice, sortParam, pageNum) {
-    return `${BASE_API_URL}/reviews/female/tennis?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}&sort_param=${sortParam}&page_num=${pageNum}`;
+    return `${BASE_API_URL}?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}&sort_param=${sortParam}&page_num=${pageNum}`;
 }
 
 function frontUrl(cate, height, weight, level, minPrice, maxPrice) { // 필터링 값 반영 
-    return `${BASE_API_URL}/reviews/female/tennis?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}`;
+    return `${BASE_API_URL}?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}`;
 }
 function backUrl(photo, sort, page) {
     return `&isPhoto=${photo}&sort_param=${sort}&page_num=${page}` ;
@@ -19,6 +20,14 @@ let current_frontUrl ; // 필터링 했던 url
 let is_photo = false ; // true false
 let sort_num = 1 ; // 1 , 2 , 3
 let page_num = 1 ; // 
+
+// 테스트를 위함 !!  나중에는 remove 하고 지우기 !!! ************************
+localStorage.setItem("token", "has token") ;
+// localStorage.removeItem("token");
+//                                          ************************
+
+// 토큰 저장 여부
+const hasToken = localStorage.getItem("token") ? true :  false ;
 
 // 페이지 끌올 버튼 
 const pageUp_btn = document.querySelector(".pageUp-btn") ;
@@ -45,16 +54,6 @@ function control_scroll(){
     }, 200)
 }
 
-// review_item 이벤트 요소
-// 리뷰 게시물 좋아요 버튼
-// let like_btn;
-// let colored_like_btn ;
-
-// like_btn.addEventListener("click", () => {
-//     like_btn.classList.toggle("like-hidden");
-//     colored_like_btn.classList.toggle("like-hidden");
-// })
-
 // 리뷰 작성하기 버튼 : 상품 목록 쪽으로 스크롤 할 때 생기기
 const write_review_btn = document.querySelector(".writeReview-btn") ;
 const previous_page = document.querySelector("#previous-page") ;
@@ -64,14 +63,22 @@ const previous_page_height = previous_page.getBoundingClientRect().height;
 const filter_container_height = filter_container.getBoundingClientRect().height;
 const upper_part_height = previous_page_height + filter_container_height ;
 
-
-document.addEventListener("scroll", () => {
-    if (window.scrollY > upper_part_height) {
-        write_review_btn.classList.add("writeBtn-action") ;
-    } else {
-        write_review_btn.classList.remove("writeBtn-action");
+if (hasToken) { // 로그인할 때만 리뷰 작성하기 버튼 보여주기
+    if(write_review_btn.classList.contains("writeBtn-hidden")) {
+        write_review_btn.classList.remove("writeBtn-hidden") ;
     }
-})
+
+    document.addEventListener("scroll", () => {
+        if (window.scrollY > upper_part_height) {
+            write_review_btn.classList.add("writeBtn-action") ;
+        } else {
+            write_review_btn.classList.remove("writeBtn-action");
+        }
+    })
+
+} else {
+    write_review_btn.classList.add("writeBtn-hidden");
+}
 
 // 이전 페이지 버튼 
 previous_page.addEventListener("click" , () => {
@@ -194,18 +201,56 @@ onlyImg_btn.addEventListener("change" , (e) => {
     console.log(sort_num) ;
 });
 
-function likeBtn () {
-    let like_container = document.querySelector(".heart_container") ;
-    let like_icon = document.querySelector(".heart_container .iconify");
-    let colored_like_icon = document.querySelector(".heart_container .colored") ;
+function likeBtn (reviewItem) {
+    const like_container = reviewItem.querySelector(".heart_container") ;
+    const like_icon = reviewItem.querySelector(".heart_container .iconify");
+    const colored_like_icon = reviewItem.querySelector(".heart_container .colored") ;
+    const liked_reviewIdx = like_container.dataset.reviewidx ;
 
-    like_container.addEventListener("click", (e) => {
-        e.stopImmediatePropagation() ;
-        e.preventDefault();
-        like_icon.classList.toggle("like-hidden");
-        colored_like_icon.classList.toggle("like-hidden");
-    })
+    if(hasToken) {
+        if (like_container.classList.contains("heart_limit")) {
+            like_container.classList.remove("heart_limit");
+        }
+        like_container.addEventListener("click", (e) => {
+            e.stopImmediatePropagation() ;
+            e.preventDefault();
+    
+            if (like_icon.classList.contains("like-hidden")) { // 좋아요 취소
+                like_icon.classList.remove("like-hidden");
+                colored_like_icon.classList.add("like-hidden");
+    
+                axios.delete("/like", {
+                    userIdx : 1 ,
+                    reviewIdx : liked_reviewIdx
+                })
+            }
+            else { // 좋아요 표시
+                like_icon.classList.add("like-hidden");
+                colored_like_icon.classList.remove("like-hidden");
+    
+                axios.post("/like", {
+                    userIdx : 1 ,
+                    reviewIdx : liked_reviewIdx
+                })
+            }
+        })
+    } else { // 로그인 안했을 경우에는 아예 하트 클릭 안되게 
+        like_container.classList.add("heart_limit");
+    }
 }
+
+function viewLimit(reviewItem) {
+    const review_buyInfo = reviewItem.querySelector(".my_review_buyInfo");
+    const review_limit = reviewItem.querySelector(".review-view_limit") ; 
+    if (hasToken) { // 로그인되어있을 때 
+        review_buyInfo.classList.remove("review-hidden");
+        review_limit.classList.add("review-hidden");
+    } else {
+        review_buyInfo.classList.add("review-hidden");
+        review_limit.classList.remove("review-hidden");
+    }
+}
+
 
 // 필터 - '검색' 클릭 시 입력한 값들 저장하고 값 넘기기
 const filter_submit_btn = document.querySelector(".filter-submit") ;
@@ -261,12 +306,15 @@ const fetchAllReview = async(url) => {
         setTimeout(() => {
             let targets = document.querySelectorAll(".review_item");
 
-            // 좋아요 버튼
-            likeBtn() ;
+
+            targets.forEach((t) => {
+                likeBtn(t) ;
+                viewLimit(t) ;
+            })
 
             let last = targets[targets.length-1] ;
             io.observe(last);
-        },3000);
+        });
         has_data = response ;
         return response ;
     } catch (error) {
@@ -276,18 +324,18 @@ const fetchAllReview = async(url) => {
     
 }
 
-
+// <a href = "/review/${data.reviewIdx}">
 function review_Template(data) {
     
-    // 링크 수정해야함!
+    // 링크 수정해야함!                 ************************************
     const reviewItem = `
-        <a href = "/review/${data.reviewIdx}">
-            <div class="review_item" data-likes="${data.likes}" data-price="${data.price}" data-category="${data.category}" data-level="${data.level}" data-img="${data.img_path ? 'has' : 'default'}">
+        <a href = "#">
+            <div class="review_item">
                 <div class="review_leftContainer">
                     <div class="review_img_container">
                         <img src="${data.img_path ? data.img_path : reviewDefualtImg(data.sports) }" alt="내가 쓴 리뷰 사진" class="review_img">
                     </div>
-                    <div class="heart_container">
+                    <div class="heart_container" data-reviewIdx="${data.reviewIdx}">
                         
                             <span class="iconify heart-icon" data-icon="akar-icons:heart"></span>
                             <span class="colored like-hidden"><img src="../static/img/colored_heart_icon.png" alt=""></span>
@@ -304,6 +352,7 @@ function review_Template(data) {
                     <div class="my_review_likeAndComment"> 댓글 ${data.comments}개 </div>
                     <div class="my_review_writerDetail">${showGender(data.gender)} / ${data.height}cm ${data.weight}kg / ${showLevel(data.level)}</div>
                     <div class="my_review_buyInfo">${data.source} / ${data.price}원</div>
+                    <div class="review-view_limit review-hidden">리뷰 작성하면 구매출처와 구매가격을 볼 수 있어요!</div>
                     
                     <div class="my_review_content">
                         ${data.content}
@@ -312,14 +361,11 @@ function review_Template(data) {
             </div>
         </a>
     `
-
-    // const where = 'afterbegin' ;
     products_lists.insertAdjacentHTML("beforeend", reviewItem) ;
     let review_item = document.querySelector(".review_item");
-    listData.push(reviewItem);
+    // listData.push(reviewItem);
     return review_item ;
 }
-
 
 const io = new IntersectionObserver((entries, observer) => {
     entries.forEach(e => {
@@ -333,22 +379,10 @@ const io = new IntersectionObserver((entries, observer) => {
     })
 }, {threhold : 1}) ;
 
-let listData = [] ; // 현재의 리뷰 템플릿 데이터를 'review_item' 배열로 저장
-
-// >> 조회된 리뷰(전체) 따로 배열에 넣기
-function saveDataSet(r) {
-    r.forEach(element => {
-     listData.push(element);
-    });
- //    scrollItem();
-    return r ; // 배열 형태로 리턴
- //    fetchPriceRange(r); // 초기 - 조회된 리뷰의 가격들 불러와서 최저최고 입력
- }
-
 function showGender(gender) { // 성별 표시 
-    if (gender=="female") {
+    if (gender=="f") {
         return '여성';
-    } else if (gender == 'male') {
+    } else if (gender == 'm') {
         return '남성';
     }
 }
@@ -386,25 +420,4 @@ function reviewDefualtImg (cate) {
             break;
     }
 }
-// const dataResult = fetchReview() ;  
 
-
-let filteredData = listData ; // 필터된 리뷰들 배열로 저장 (for 사진리뷰만 보기 , 정렬) / 초기화 - 필터 전 리뷰들
-
-console.log(window.location.pathname);
-
-function scrollItem() {
-    const io = new IntersectionObserver((entries) => {
-        const lastItem = entries[0] ;
-        if (!lastItem.isIntersecting) {
-            return
-          }
-        else {
-        fetchAllReview
-        // 3. 기존 마지막 요소의 인터섹션 감지를 해제하고, 새롭게 생성된 마지막 요소에의 인터섹션 여부를 감지합니다. 
-        io.unobserve(lastItem.target)
-        io.observe(document.querySelector('.review_item:last-child'))
-        }
-    })
-    io.observe(document.querySelector('.review_item:last-child'))
-}

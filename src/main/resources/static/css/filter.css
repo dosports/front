@@ -486,6 +486,9 @@ input[name="onlyImg_box"]:checked+label .onlyImg_box_checked{
     pointer-events: auto;
     transition: all 250ms ease-in-out;
 }
+.writeBtn-hidden {
+    display: none;
+}
 .writeReview-text {
     color: var(--white);
     font-size: 19px;
@@ -522,14 +525,28 @@ input[name="onlyImg_box"]:checked+label .onlyImg_box_checked{
     z-index: 500;
     cursor: pointer;
 }
+.heart_limit {
+    cursor: default;
+}
 .heart_container:hover {
-    background-color: pink;
+    
 }
 .colored img {
-    width: 17px;
-    height: 15px;
+    width: 19px;
+    height: 17px;
+    padding-top: 2px;
 }
 .review_item .like-hidden  {
+    display: none;
+}
+
+.review-view_limit {
+    background-color: #F4F4F4;
+    color: var(--orange);
+    padding: 7px 0;
+    width: 80%;
+}
+.review-hidden {
     display: none;
 }
 
