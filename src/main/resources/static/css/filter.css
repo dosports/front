@@ -528,9 +528,6 @@ input[name="onlyImg_box"]:checked+label .onlyImg_box_checked{
 .heart_limit {
     cursor: default;
 }
-.heart_container:hover {
-    
-}
 .colored img {
     width: 19px;
     height: 17px;

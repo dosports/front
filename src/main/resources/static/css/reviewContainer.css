@@ -70,6 +70,7 @@
 .my_review_titleAndWriter{
     display: flex;
     justify-content: space-between;
+    align-items: center; /*이 부분 수정 !!*/
 }
 .review_title{
     font-weight: 400;
@@ -88,4 +89,35 @@
 }
 
 @media (max-width:360px) {
+    .review_item {
+        height: 180px;
+        padding-top: 18px;
+        padding-bottom: 18px;
+    }
+    .review_rightContainer * {
+        font-size: 12px;
+    }
+    .review_title {
+        font-size: 13px;
+    }
+    .review_writerAndTime {
+        font-size: 5px; 
+    }
+    .review_rightContainer > * {
+        margin-bottom: 6px;
+    }
+    .review_leftContainer {
+        flex : 0.4 ;
+        justify-content: space-between;
+        padding-bottom: 10px;
+    }
+    .review_img_container {
+        width: 100%;
+        padding-top: 100%;
+    }
+    .review-view_limit {
+        font-size: 11px;
+        width: 100%;
+    }
+    
 }

@@ -219,8 +219,7 @@ function likeBtn (reviewItem) {
                 like_icon.classList.remove("like-hidden");
                 colored_like_icon.classList.add("like-hidden");
     
-                axios.delete("/like", {
-                    userIdx : 1 ,
+                axios.delete("/like", {                
                     reviewIdx : liked_reviewIdx
                 })
             }
@@ -229,7 +228,6 @@ function likeBtn (reviewItem) {
                 colored_like_icon.classList.remove("like-hidden");
     
                 axios.post("/like", {
-                    userIdx : 1 ,
                     reviewIdx : liked_reviewIdx
                 })
             }
