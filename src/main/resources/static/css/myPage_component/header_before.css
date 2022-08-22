@@ -1,7 +1,6 @@
 /* header */
 .myPage_setting_header{
     padding-top: 32.16px;
-
 }
 .before_btn_container{
     display: flex;
@@ -43,3 +42,10 @@
     font-size: 8px;
 }
 
+@media (max-width : 800px) {
+    .before_btn{
+        width: 45px;
+        height: 28px;
+        transform: scaleX(-1);
+    }
+}

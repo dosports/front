@@ -4,10 +4,8 @@
     right: 5vw;
     top: 50%;
     transform: translate(0, -50%);
-    /* width: 50px;
-    height: 50px; */
-    width: 3.26vw;
-    height: 3.26vw;
+    width: 65px;
+    height: 65px;
     transition: top 1s ease-in-out;
 }
 .page_up_icon:hover{

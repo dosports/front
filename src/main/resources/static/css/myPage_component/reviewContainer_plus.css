@@ -16,3 +16,12 @@
 .my_review_star{
     color: var(--orange);
 }
+
+.review_img:hover, .review_title:hover{
+    cursor: pointer;
+}
+
+.like_review_preview_title{
+    line-height: 1.3;
+    text-align: center;
+}

@@ -108,18 +108,6 @@ body{
 .like_review_preview_item:hover{
     cursor: pointer;
 }
-/* display : flex */
-/* .like_review_preview_container{
-    display: flex;
-    justify-content: space-evenly;
-    background-color: var(--green-bg);
-    padding: 41px 0 42px 0;
-}
-.like_review_preview_item{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-} */
 .like_review_img_container{
     width: 13.97vw;
     height: 14.39vw;
@@ -185,3 +173,34 @@ body{
         height: 150px;
     }
 } */
+
+@media (max-width: 800px) {
+    .like_review_preview_container{
+        padding: 20px 0 25px 0;
+    }
+    .profile_img_container{
+        width: 40px;
+        height: 40px;
+    }
+    .user_name{
+        margin-left: 13px;
+    }
+
+    .like_review_title{
+        font-size: 16px;
+    }
+    .like_review_header span, .more_my_review_title{
+        font-size: 12px;
+    }
+    .like_review_preview_title{
+        font-size: 10px;
+    }
+    .like_review_img_container{
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+    }
+    .like_review_img{
+        border-radius: 10px;
+    }
+}

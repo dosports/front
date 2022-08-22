@@ -1,9 +1,11 @@
 @import "./variable.css";
+@import "./reset.css";
 @import "./myPage_component/header_before.css";
 @import "./reviewContainer.css";
 @import "./myPage_component/page_up_btn.css";
 @import "./myPage_component/reviewContainer_plus.css";
 @import "./myPage_component/review_skeleton.css";
+
 body{
     width: 1264px;
     margin: 0 auto;
@@ -26,6 +28,26 @@ body{
     margin-bottom: 102px;
 }
 
-/* .heart-icon{
-    background-color: red;
-} */
+@media (max-width: 1264px) {
+    body{
+        width: 100%;
+    }
+
+    main{
+        margin: 0 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .section_header{
+        margin: 0 0 42px 0;
+        padding: 30px 0 18px 15px;
+    }
+    
+    .section_header_title{
+        font-family: 'GmarketSans';
+        font-weight: 700;
+        font-size: 14px;
+        color: var(--black);
+    }
+}
