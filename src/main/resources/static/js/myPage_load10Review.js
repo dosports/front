@@ -1,5 +1,5 @@
 import {reviewIdx_noPostman, reviewInfoArr_noPostman} from "./myPage_data.js";
-import {createFullReviewItem, getLikeReviewIdx, getMyReviewIdx, getReviewDetail, getOtherUserIdx} from "./myPage_modules.js";
+import {createFullReviewItem, getLikeReviewIdx, getMyReviewIdx, getReviewDetail, getOtherUserIdx, getUserIdx} from "./myPage_modules.js";
 import {check_clickedLike, getElementIndex} from "./myPage_likeBtn_modules.js";
 
 const $review_container = document.querySelector('.review_container');
@@ -56,7 +56,7 @@ export async function addNewLikeContent(){
         const reviewInfo = reviewInfoArr_noPostman[reviewIdx[i]];
 
         const like_clicked = true; // 내가 좋아요한 리뷰라서 무조건 true
-        const new_like_review_preview_item = createFullReviewItem(reviewInfo, like_clicked); // 생성
+        const new_like_review_preview_item = createFullReviewItem(reviewInfo, like_clicked, true); // 생성, 무조건 로그인 했음
         $review_container.appendChild(new_like_review_preview_item);
     }
 }
@@ -73,7 +73,7 @@ export async function addNewMyContent(){
         
         // const like_clicked =  await check_clickedLike(reviewIdx[i]);
         const like_clicked = false;
-        const new_like_review_preview_item = createFullReviewItem(reviewInfo, like_clicked); // 생성
+        const new_like_review_preview_item = createFullReviewItem(reviewInfo, like_clicked, true); // 생성, 무조건 로그인 했음
         $review_container.appendChild(new_like_review_preview_item);
     }
 }
@@ -92,7 +92,9 @@ export async function addNewOtherReviewContent(){
 
         // const like_clicked =  await check_clickedLike(reviewIdx[i]);
         const like_clicked = true;
-        const new_like_review_preview_item = createFullReviewItem(reviewInfo, like_clicked); // 생성
+        const login = getUserIdx() == null ? false : true;
+        console.log(login);
+        const new_like_review_preview_item = createFullReviewItem(reviewInfo, like_clicked, login); // 생성
         $review_container.appendChild(new_like_review_preview_item);
     }
 }
@@ -182,6 +184,6 @@ export function reviewClickedEventHandler(event){
         const select_review_Idx = getElementIndex(reviewItem)// reviewItem
         const reviewIdx = reviewIdxs[select_review_Idx];
         console.log(reviewIdx);
-        // location.href = ``;
+        location.href = ``;
     }
 }

@@ -7,8 +7,10 @@ const userIdx = getUserIdx(); // TODO: 로컬에서 getItem으로 토큰 가져�
 
 // 마이페이지 - 메인
 // 사용자 사진, 이름 정보 가져오기
+//TODO:
 export function getUserIdx(){
-
+    const userIdx = localStorage.getItem('token');
+    return userIdx;
 }
 
 function getUserInfo(){
@@ -61,18 +63,18 @@ function createMiniReviewItem(reviewInfo){
     const new_like_review_preview_item = document.createElement('div');
     new_like_review_preview_item.classList.add('like_review_preview_item');
     new_like_review_preview_item.innerHTML = `
-                        <div class="like_review_img_container">
-                            <img src=${pre_like_img} alt="좋아요한 리뷰 사진" class="like_review_img">
-                        </div>
-                        <div class="like_review_preview_title">${reviewInfo.brand} ${reviewInfo.title}</div>`;
-
+                            <div class="like_review_img_container">
+                                <img src=${pre_like_img} alt="좋아요한 리뷰 사진" class="like_review_img">
+                            </div>
+                            <div class="like_review_preview_title">${reviewInfo.brand} ${reviewInfo.title}</div>
+                        `;
     if(window.innerWidth <= 800){
         new_like_review_preview_item.querySelector('.like_review_preview_title').innerText = reviewInfo.brand + '\n' + reviewInfo.title;
     }
     return new_like_review_preview_item;
 }
 
-function createFullReviewItem(reviewInfo, like_clicked){
+function createFullReviewItem(reviewInfo, like_clicked, login){
     let pre_my_img =  reviewInfo.img_path;
     if(pre_my_img == ''){
         pre_my_img = sports_img[reviewInfo.sport]; // 각 종목 이미지로
@@ -80,32 +82,32 @@ function createFullReviewItem(reviewInfo, like_clicked){
 
     const new_review_item = document.createElement('div');
     new_review_item.classList.add('review_item');
-    // TODO: 작성 시간 변경, img full_heart 내가 임의로 파일명 넣어서 가져온거라서 변경 필요함
-    // TODO: likes 개수가 아니라 유저가 하트 눌렀는지 여부 파악해야함
     
+    const time = reviewInfo.regDate.split(' ')[1].split(':');
 
     new_review_item.innerHTML = `
-        <div class="review_leftContainer">
-            <div class="review_img_container">
-                <img src=${pre_my_img} alt="내가 쓴 리뷰 사진" class="review_img">
+            <div class="review_leftContainer">
+                <div class="review_img_container">
+                    <img src=${pre_my_img} alt="내가 쓴 리뷰 사진" class="review_img">
+                </div>
+                <div class="heart_container">
+                    <img class="full_heart ${like_clicked ? '' : 'hidden'} ${login ? '' : 'heart_limit'}" src="../../static/img/${full_heart_imgName}.png" alt="채워진 하트">
+                    <span class="iconify heart-icon ${like_clicked ? 'hidden' : ''}" data-icon="akar-icons:heart"></span>
+                    <span class="heart_cnt">${reviewInfo.likes}개</span>
+                </div>
             </div>
-            <div class="heart_container">
-                <img class="full_heart ${like_clicked ? '' : 'hidden'}" src="../../static/img/${full_heart_imgName}.png" alt="채워진 하트">
-                <span class="iconify heart-icon ${like_clicked ? 'hidden' : ''}" data-icon="akar-icons:heart"></span>
-                <span class="heart_cnt">${reviewInfo.likes}개</span>
+            <div class="review_rightContainer">
+                <div class="my_review_titleAndWriter">
+                    <div class="review_title">${reviewInfo.brand} ${reviewInfo.title}</div>
+                    <div class="review_writerAndTime">${reviewInfo.userName} / ${time[0]}:${time[1]}</div>
+                </div>
+                <div class="my_review_star">${'★'.repeat(reviewInfo.rate) + '☆'.repeat(5-reviewInfo.rate)}</div>
+                <div class="my_review_likeAndComment">댓글 ${reviewInfo.comments}개</div>
+                <div class="my_review_writerDetail">${reviewInfo.gender == "f" ? "여" : "남"} / ${reviewInfo.height}cm ${reviewInfo.weight}kg / ${sports_level[reviewInfo.level]}</div>
+                <div class="my_review_buyInfo ${login ? '' : 'hidden'}">${reviewInfo.source == null ? "모름" : reviewInfo.source} / ${reviewInfo.price}</div>
+                <div class="review-view_limit ${login ? 'hidden' : ''}">리뷰 작성하면 구매출처와 구매가격을 볼 수 있어요!</div>
+                <div class="my_review_content">${reviewInfo.content}</div>
             </div>
-        </div>
-        <div class="review_rightContainer">
-            <div class="my_review_titleAndWriter">
-                <div class="review_title">${reviewInfo.brand} ${reviewInfo.title}</div>
-                <div class="review_writerAndTime">${reviewInfo.userName} / 12:00</div>
-            </div>
-            <div class="my_review_star">${'★'.repeat(reviewInfo.rate) + '☆'.repeat(5-reviewInfo.rate)}</div>
-            <div class="my_review_likeAndComment">댓글 ${reviewInfo.comments}개</div>
-            <div class="my_review_writerDetail">${reviewInfo.gender == "female" ? "여" : "남"} / ${reviewInfo.height}cm ${reviewInfo.weight}kg / ${sports_level[reviewInfo.level]}</div>
-            <div class="my_review_buyInfo">${reviewInfo.source == null ? "모름" : reviewInfo.source} / ${reviewInfo.price}</div>
-            <div class="my_review_content">${reviewInfo.content}</div>
-        </div>
     `;
     return new_review_item;
 }

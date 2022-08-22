@@ -53,7 +53,6 @@ export function like_toggle(event){
     if(likeBtn_check){
         const $full_heart = likeBtn.parentNode.querySelector('.full_heart');
         const $empty_heart = likeBtn.parentNode.querySelector('.heart-icon');
-
         if(likeBtn.classList.contains('full_heart')){// 꽉찬 하트 -> 빈 하트 - delete
             // deleteLikeToServer(event, reviewIdxs);
             if(!$full_heart.classList.contains('hidden')){

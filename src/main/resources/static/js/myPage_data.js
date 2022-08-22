@@ -80,7 +80,8 @@ export const reviewInfoArr_noPostman = [
         "source": "쿠팡",
         "price": 15000,
         "sport" : "tennis",
-        "content": "pass testcase1"
+        "content": "pass testcase1",
+        "regDate": "2022-08-22 12:04:59"
     },
     {
         "reviewIdx": 2,
@@ -100,7 +101,8 @@ export const reviewInfoArr_noPostman = [
         "source": "공식홈페이지",
         "price": 35000,
         "sport" : "hike",
-        "content": "pass testcase 아무개"
+        "content": "pass testcase 아무개",
+        "regDate": "2022-08-22 21:45:59"
     },
     {
         "reviewIdx": 3,
@@ -120,7 +122,8 @@ export const reviewInfoArr_noPostman = [
         "source": "공식홈페이지",
         "price": 35000,
         "sport" : "golf",
-        "content": "pass testcase 아무개"
+        "content": "pass testcase 아무개",
+        "regDate": "2022-08-22 10:45:59"
     },
     {
         "reviewIdx": 4,
@@ -140,7 +143,8 @@ export const reviewInfoArr_noPostman = [
         "source": "공식홈페이지",
         "price": 35000,
         "sport" : "balls",
-        "content": "pass testcase 아무개"
+        "content": "pass testcase 아무개",
+        "regDate": "2022-08-22 15:29:59"
     },
     {
         "reviewIdx": 5,
@@ -160,7 +164,8 @@ export const reviewInfoArr_noPostman = [
         "source": "공식홈페이지",
         "price": 35000,
         "sport" : "swim",
-        "content": "pass testcase1"
+        "content": "pass testcase1",
+        "regDate": "2022-08-22 18:32:59"
     }
 ];
 

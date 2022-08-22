@@ -1,11 +1,11 @@
 import {getUserInfo, getReviewDetail, getMyReviewIdx, getLikeReviewIdx, createMiniReviewItem, createFullReviewItem, sports_img} from "./myPage_modules.js";
 import {reviewIdx_noPostman, reviewInfoArr_noPostman, userInfo_noPostman} from "./myPage_data.js"; // FIXME: postman 대신
 import {makeMiniReviewSkeleton, makeFullReviewSkeleton, reviewClickedEventHandler} from "./myPage_load10Review.js";
-import {like_toggle, getElementIndex} from "./myPage_likeBtn_modules.js";
+import {like_toggle, getElementIndex, check_clickedLike} from "./myPage_likeBtn_modules.js";
 const logo_white_imgName = 'logo_white';
 let myReviewIdxs, likeReviewIdxs;
 
-// 1. 사용자 사진, 이름 - get, {{url}}/user/info/{useridx}
+// 1. 사용자 사진, 이름
 const $myPage_main_header = document.querySelector('.myPage_main_header');
 async function showUserInfo(){
     $myPage_main_header.innerHTML = `
@@ -21,8 +21,8 @@ async function showUserInfo(){
         // const userInfo = await getUserInfo(userIdx);
         const userInfo = userInfo_noPostman;
         let pre_img_src = userInfo.profileImg;
-        pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : `${url}/user/profileImg/${userInfo.profileImg}`;
-        // pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : `${url}/user/profileImg/${userInfo.profileImg}`;// FIXME: 정확하지 않음
+        pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;
+        // pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;//
         $myPage_main_header.innerHTML = `
         <div class="profile_img_container">
             <img src="${pre_img_src}" alt="사용자 프로필 사진" class="profile_img">
@@ -77,8 +77,12 @@ async function addMyReview(){
 
     for(let i = 0; i < lastIdx; i++){
         // const reviewInfo = await getReviewDetail(reviewIdx[i]); // FIXME:
+
+        // const like_clicked =  await check_clickedLike(reviewIdx[i]);
+        const like_clicked = true;
+
         const reviewInfo = reviewInfoArr_noPostman[reviewIdx[i]];
-        const new_review_item = createFullReviewItem(reviewInfo);
+        const new_review_item = createFullReviewItem(reviewInfo, like_clicked, true);
         $review_container.appendChild(new_review_item);
     }
 }
@@ -149,6 +153,7 @@ function likeReviewClickedEventHandler(event){
     }
 }
 
+// 리뷰 이미지, 제목 클릭시 리뷰 상세보기 페이지로 이동
 function myReviewClickedEventHandler(event){
     const eventTarget = event.target;
     if(eventTarget.classList.contains('review_title') || eventTarget.classList.contains('review_img')){

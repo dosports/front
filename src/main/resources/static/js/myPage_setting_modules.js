@@ -24,8 +24,8 @@ function show_all_userData(){
         $profile_img.classList.remove('hidden');
     }, 2000);
     $profile_img.src = userInfo.profileImg;
-    $profile_img.src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : `${url}/user/profileImg/${userInfo.profileImg}`;
-    // $profile_img.src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : `${url}/user/profileImg/${userInfo.profileImg}`;// FIXME: 정확하지 않음
+    $profile_img.src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;
+    // $profile_img.src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;// FIXME: 정확하지 않음
     // $user_name.placeholder = userInfo.name;
     $user_name.placeholder = "pizza";
     // 키 몸무게 보여주기 - FIXME: api 없음

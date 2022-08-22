@@ -14,8 +14,8 @@ async function showOtherUserInfo(){
     // const userInfo = await getOtherUserInfo();
     const userInfo = userInfo_noPostman;
     let pre_img_src = userInfo.profileImg;
-        pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : `${url}/user/profileImg/${userInfo.profileImg}`;
-        // pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : `${url}/user/profileImg/${userInfo.profileImg}`;// FIXME: 정확하지 않음
+        pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;
+        // pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;// FIXME: 정확하지 않음
     $otherUserPage_main_header.innerHTML = `
         <div class="profile_img_container skeleton">
             <img src="" alt="사용자 프로필 사진" class="profile_img hidden">
