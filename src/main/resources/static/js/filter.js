@@ -29,6 +29,12 @@ localStorage.setItem("token", "has token") ;
 // 토큰 저장 여부
 const hasToken = localStorage.getItem("token") ? true :  false ;
 
+// 위에 운동 종목 이름 
+const location_pth = window.location.pathname ;
+const cur_sport = location_pth.split("/")[3];
+const filter_page_title = document.querySelector(".filter-container_title h2") ;
+filter_page_title.innerHTML = currSport(cur_sport);
+
 // 페이지 끌올 버튼 
 const pageUp_btn = document.querySelector(".pageUp-btn") ;
 
@@ -186,19 +192,11 @@ const onlyImg_btn_box = onlyImg_btn.querySelector(".onlyImg_box") ;
 const onlyImg_input = document.querySelector("#onlyImg_box")
 
 onlyImg_btn.addEventListener("change" , (e) => {
-    if(e.target.checked) {
-        // 사진만 보기
-        is_photo = true ;
-    } 
-    else {
-        // 전체 리뷰 보기
-        is_photo = false ;
-    }
+
+    is_photo = e.target.checked ? true : false ;
 
     reset() ;
     fetchAllReview(current_frontUrl+backUrl(is_photo,sort_num, page_num)) ; 
-    console.log(is_photo);
-    console.log(sort_num) ;
 });
 
 function likeBtn (reviewItem) {
@@ -344,7 +342,7 @@ function review_Template(data) {
                 <div class="review_rightContainer">
                     <div class="my_review_titleAndWriter">
                         <div class="review_title">${data.brand}  ${data.title}</div>
-                        <div class="review_writerAndTime">${data.userName} / 작성 시간</div>
+                        <div class="review_writerAndTime">${data.userName} / ${data.regDate}</div>
                     </div>
                     <div class="my_review_star">${'★'.repeat(data.rate) + '☆'.repeat(5-data.rate)}</div>
                     <div class="my_review_likeAndComment"> 댓글 ${data.comments}개 </div>
@@ -418,4 +416,27 @@ function reviewDefualtImg (cate) {
             break;
     }
 }
-
+function currSport (sport) {
+    switch (sport) {
+        case "tennis":
+            return "테니스" ;
+            break;
+        case "hike":
+            return "등산" ;
+            break;
+        case "swim":
+            return "수영" ;
+            break;
+        case "gym":
+            return "헬스/요가/필라테스" ;
+            break;
+        case "golf":
+            return "골프" ;
+            break;
+        case "balls":
+            return "농구/축구/야구" ;
+            break;
+        default:
+            return "운동종목";
+    }
+}

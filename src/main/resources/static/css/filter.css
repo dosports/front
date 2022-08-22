@@ -407,13 +407,12 @@ input[name="level"]:checked+label .level-des {
     margin: 0 0.4vw;
     
 }
-
-
 .products-ordering_onlyImg button {
     align-items: center;
 }
 .products-ordering_onlyImg span {
     font-family: 'NanumSquare';
+    line-height: 20px;
 }
 .onlyImg_box_checked {
     width: 12px;
@@ -878,5 +877,31 @@ input[name="onlyImg_box"]:checked+label .onlyImg_box_checked{
     #onlyImg_box {
         margin: 0;
         width: 0;
+    }
+}
+
+@media (max-width : 360px) {
+    #previous-page {
+        margin: 10px 0;
+    }
+    .previous-pageBtn h2 {
+        font-size: 15px;
+    }
+    .previous-pageBtn img {
+        width: 35px;
+        height: 20px;
+    }
+    .products-ordering_order * {
+        font-size: 15px;
+    }
+    .products-ordering_order h3 {
+        font-size: 16px;
+        margin-right: 0;
+    }
+    .products-ordering_onlyImg span {
+        font-size: 14.5px;
+    }
+    .products-ordering_sort li {
+        height: 32px;
     }
 }
