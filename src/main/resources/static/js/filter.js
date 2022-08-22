@@ -3,7 +3,8 @@
 // const u = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/reviews/female/tennis?category&height&weight&level&minPrice&maxPrice;"
 
 // api 테스트 할때는 밑에 줄 반드시 주석 해제 !!! ************************ 밑에 window~~ 주석 지우기 !!!!
-const BASE_API_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" // + window.location.pathname    
+// const BASE_API_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" // + window.location.pathname    
+const BASE_API_URL = ""+ window.location.pathname   ;
 
 
 function filteredApiUrl(cate, height, weight, level, minPrice , maxPrice, sortParam, pageNum) {
@@ -22,7 +23,7 @@ let sort_num = 1 ; // 1 , 2 , 3
 let page_num = 1 ; // 
 
 // 테스트를 위함 !!  나중에는 remove 하고 지우기 !!! ************************
-localStorage.setItem("token", "has token") ;
+// localStorage.setItem("token", "has token") ;
 // localStorage.removeItem("token");
 //                                          ************************
 
@@ -205,7 +206,10 @@ function likeBtn (reviewItem) {
     const colored_like_icon = reviewItem.querySelector(".heart_container .colored") ;
     const liked_reviewIdx = like_container.dataset.reviewidx ;
 
-    if(hasToken) {
+    if(hasToken) { // 로그인할 때
+
+        // 좋아요 눌렀는지 안눌렀는지 
+        
         if (like_container.classList.contains("heart_limit")) {
             like_container.classList.remove("heart_limit");
         }
@@ -320,6 +324,23 @@ const fetchAllReview = async(url) => {
     
 }
 
+let checking ;
+
+const checkLiked  = async(url) => {
+    try {
+        const response = await axios.get(url) 
+        .then(result => isLiked(result.data.checking)) ;
+        return response ;
+    } catch (error) {
+        console.log(error) ;
+    }
+}
+
+function isLiked(data) {
+    checking = data ? true : false  ;
+    return data ;
+}
+
 // <a href = "/review/${data.reviewIdx}">
 function review_Template(data) {
     
@@ -342,7 +363,7 @@ function review_Template(data) {
                 <div class="review_rightContainer">
                     <div class="my_review_titleAndWriter">
                         <div class="review_title">${data.brand}  ${data.title}</div>
-                        <div class="review_writerAndTime">${data.userName} / ${data.regDate}</div>
+                        <div class="review_writerAndTime">${data.userName} / ${regDateForm(data.regDate)}</div>
                     </div>
                     <div class="my_review_star">${'★'.repeat(data.rate) + '☆'.repeat(5-data.rate)}</div>
                     <div class="my_review_likeAndComment"> 댓글 ${data.comments}개 </div>
@@ -439,4 +460,11 @@ function currSport (sport) {
         default:
             return "운동종목";
     }
+}
+function regDateForm(date) {
+    if(!date) {
+        return;
+    }
+    const ymd = date.split(" ")[0] ;
+    return ymd ;
 }
