@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>privacyPage</title>
+    <link rel="stylesheet" href="./login.css">
+
+</head>
+<body>
+    <img id="logo" src="./images/logo.png">
+    <div>
+        <form>
+            <input type="checkbox" name="checker"  id="personality_check"><label id="personality" for="personality_check">스포츠한다의 이용약관 및 개인정보 수집에 모두 동의합니다.(필수)</label>
+            <p id="box">
+               ○ < 스포츠한다 >는 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다. <br>
+               ○ 동의하신 위 개인정보처리방침은 2022년 9월 1일부터 적용됩니다.</p>
+        </form>
+    </div>
+    <button onclick="alert_btn()" id="fail_btn" value="fail" >취소</button>
+    <button onclick="location.href='/src/main/resources/templates/register/register.html'"id="access_btn" value="access">확인</button> 
+
+    <script> 
+        function alert_btn(){  
+           alert('미동의시 해당 서비스를 이용하실 수 없습니다.'); 
+        } 
+    </script> 
+</body>
+</html>
