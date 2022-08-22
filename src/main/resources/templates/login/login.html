@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loginPage</title>
+    <link rel="stylesheet" href="/src/main/resources/static/css/login.css">
+</head>
+<body>
+<img id="logo" src="/src/main/resources/static/img/logo_2.png">
+<form >
+         <p>
+             <input id="id" type ="text"name="id" v-model="userID" placeholder= "아이디"required>
+        </p>
+        <p>
+            <input id="pwd" type="password" v-model="userPW" placeholder="비밀번호" required>
+        </p>
+        <button id="login_btn" value="로그인">로그인</button>
+        <label id="login_check"><input type="checkbox" name="login" value="로그인 상태 유지">로그인 상태 유지</label>
+</form>        
+        <button id="find_pwd" value="로그인">비밀번호를 잊으셨나요?</button>
+        <p id="border">|</p>
+        <button id="register" value="로그인" onclick="location.href='register.html'">회원가입</button>
+        <button id="ad">광고</button>
+        <div>
+            <button id="rules_btn" value="이용약관">이용약관</button>
+            <button id="persoalinfo_btn" value="개인정보처리방침">개인정보처리방침</button>
+            <button id="communityrules_btn" value="커뮤니티이용규칙">커뮤니티이용규칙</button>
+            <button id="notice_btn" value="공지사항">공지사항</button>
+            <button id="ask_btn" value="문의사항">문의사항</button>
+        </div>
+        <img id="black_logo" src="/src/main/resources/static/img/logo_black.png"width=41.91vw height=41.91vh>
+</body>
+</html>
