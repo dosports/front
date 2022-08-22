@@ -2,6 +2,7 @@ export {check_newPW, change_user_setting, header_windowSize, change_filter_setti
 // import {getUserInfo} from "./myPage_modules";
 import {userInfo_noPostman} from "./myPage_data.js";
 // postman 변수
+const logo_white_imgName = 'logo_white';
 const userIdx = 1;
 // const url = 'https://008b09e7-31c8-41cb-adab-3683ec84e87e.mock.pstmn.io';
 
@@ -23,7 +24,8 @@ function show_all_userData(){
         $profile_img.classList.remove('hidden');
     }, 2000);
     $profile_img.src = userInfo.profileImg;
-    // $profile_img.src = userInfo.profileImg == "" ? "../img/logo_white.png" : `${url}/user/profileImg/${userInfo.profileImg}`;// FIXME: 정확하지 않음
+    $profile_img.src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : `${url}/user/profileImg/${userInfo.profileImg}`;
+    // $profile_img.src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : `${url}/user/profileImg/${userInfo.profileImg}`;// FIXME: 정확하지 않음
     // $user_name.placeholder = userInfo.name;
     $user_name.placeholder = "pizza";
     // 키 몸무게 보여주기 - FIXME: api 없음
@@ -182,10 +184,15 @@ async function change_user_setting(event){
     if(check_newPW()){
         const result = await change_password_name_data();
         if(result){
-            alert('사용자 정보가 성공적으로 수정되었습니다.');
-            
+            // alert('사용자 정보가 성공적으로 수정되었습니다.');
+            await swal("Success!", "사용자 정보가 성공적으로 수정되었습니다.", "success");
         }else{
-            alert('잘못된 비밀번호 입력으로 비밀번호가 변경되지 않았습니다.');
+            // alert('잘못된 비밀번호 입력으로 비밀번호가 변경되지 않았습니다.');
+            await swal({
+                icon: 'error',
+                title: 'Oops...',
+                text: '잘못된 비밀번호 입력으로 비밀번호가 변경되지 않았습니다.',
+            });
         }
 
         // 프로필 사진 변경
@@ -193,7 +200,12 @@ async function change_user_setting(event){
             await change_ProfileImg_data();
         }
     }else{
-        alert('사용자 정보 수정에 실패하였습니다.');
+        // alert('사용자 정보 수정에 실패하였습니다.');
+        await swal({
+            icon: 'error',
+            title: 'Oops...',
+            text: '사용자 정보 수정에 실패하였습니다.',
+        });
     }
 
     location.reload();
@@ -234,12 +246,23 @@ async function change_filter_setting(event){
         .then(response => response.data.data.isChanged);
 
         if(result){
-            alert('사용자 정보가 성공적으로 수정되었습니다.');
+            // alert('사용자 정보가 성공적으로 수정되었습니다.');
+            await swal("Success!", "사용자 정보가 성공적으로 수정되었습니다.", "success");
         }else{
-            alert('사용자 정보 수정에 실패하였습니다.');
+            // alert('사용자 정보 수정에 실패하였습니다.');
+            await swal({
+                icon: 'error',
+                title: 'Oops...',
+                text: '사용자 정보 수정에 실패하였습니다.',
+            });
         }
     }else{
-        alert('사용자 정보 수정에 실패하였습니다.');
+        // alert('사용자 정보 수정에 실패하였습니다.');
+        await swal({
+            icon: 'error',
+            title: 'Oops...',
+            text: '사용자 정보 수정에 실패하였습니다.',
+        });
     }
     
     location.reload();

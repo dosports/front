@@ -38,8 +38,3 @@ $user_weight.addEventListener('keyup', check_weight_height);
 
 // 필터 버튼 클릭 submit
 document.querySelector('.filter_setting_form').addEventListener('submit', change_filter_setting);
-
-
-
-
-

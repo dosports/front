@@ -1,6 +1,9 @@
-import {getUserInfo, getReviewDetail, getMyReviewIdx, getLikeReviewIdx, createMiniReviewItem, createFullReviewItem, sports_img, sports_level, like_toggle} from "./myPage_modules.js";
+import {getUserInfo, getReviewDetail, getMyReviewIdx, getLikeReviewIdx, createMiniReviewItem, createFullReviewItem, sports_img} from "./myPage_modules.js";
 import {reviewIdx_noPostman, reviewInfoArr_noPostman, userInfo_noPostman} from "./myPage_data.js"; // FIXME: postman 대신
-import {makeMiniReviewSkeleton, makeFullReviewSkeleton} from "./myPage_load10Review.js";
+import {makeMiniReviewSkeleton, makeFullReviewSkeleton, reviewClickedEventHandler} from "./myPage_load10Review.js";
+import {like_toggle, getElementIndex} from "./myPage_likeBtn_modules.js";
+const logo_white_imgName = 'logo_white';
+let myReviewIdxs, likeReviewIdxs;
 
 // 1. 사용자 사진, 이름 - get, {{url}}/user/info/{useridx}
 const $myPage_main_header = document.querySelector('.myPage_main_header');
@@ -17,8 +20,9 @@ async function showUserInfo(){
     setTimeout(() => {
         // const userInfo = await getUserInfo(userIdx);
         const userInfo = userInfo_noPostman;
-        // const pre_img_src = userInfo.profileImg == "" ? "../img/logo_white.png" : `${url}/user/profileImg/${userInfo.profileImg}`;// FIXME: 정확하지 않음
-        const pre_img_src = userInfo.profileImg;
+        let pre_img_src = userInfo.profileImg;
+        pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : `${url}/user/profileImg/${userInfo.profileImg}`;
+        // pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : `${url}/user/profileImg/${userInfo.profileImg}`;// FIXME: 정확하지 않음
         $myPage_main_header.innerHTML = `
         <div class="profile_img_container">
             <img src="${pre_img_src}" alt="사용자 프로필 사진" class="profile_img">
@@ -30,7 +34,6 @@ async function showUserInfo(){
         `;
     }, 2000);
     
-    console.log('프로필 완성');
 }
 showUserInfo();
 
@@ -38,6 +41,7 @@ showUserInfo();
 async function addLikeReview(){
     // const reviewIdx = await getLikeReviewIdx();// FIXME:
     const reviewIdx = reviewIdx_noPostman;
+    likeReviewIdxs = reviewIdx;
     const lastIdx = reviewIdx.length > 4 ? 4 : reviewIdx.length;
 
     // 데이터 가져와서 보여주기
@@ -62,13 +66,13 @@ async function addLikeReview(){
 
         $like_review_preview_container.appendChild(new_like_review_preview_item);
     }
-    console.log('내가 좋아요한 리뷰 완성'); // FIXME:
 }
 
 // 3. 내가 쓴 리뷰 데이터 가져와서 보여주기 - 최대 4개
 async function addMyReview(){
     // const reviewIdx = await getMyReviewIdx(); // FIXME:
     const reviewIdx = reviewIdx_noPostman;
+    myReviewIdxs = reviewIdx;
     const lastIdx = reviewIdx.length > 4 ? 4 : reviewIdx.length;
 
     for(let i = 0; i < lastIdx; i++){
@@ -77,7 +81,6 @@ async function addMyReview(){
         const new_review_item = createFullReviewItem(reviewInfo);
         $review_container.appendChild(new_review_item);
     }
-    console.log('내가 쓴 리뷰 완성'); // FIXME:
 }
 
 
@@ -102,27 +105,64 @@ function loadFirstItems_myPage_main(){
         skeletonMyPageMainItems.forEach((item) => $review_container.removeChild(item));
     }, 2000);
 }
-
 loadFirstItems_myPage_main();
 
-
-// TODO:
-// 1. 모두 다 생성되면 페이지 열리게
-// 2. 하트 아이콘 누르면 좋아요한 리뷰에 저장
-// FIXME: 
-// 1. 내가 쓴 리뷰를 내가 하트를 누르면 저장되게해? 아님 에러를 보여줘?
-
-
-// *** 질문 ***
-// 1. 설정 버튼, 상세보기 버튼 클릭시 페이지 이동 -> 서버에서? 아님 그냥 href에 html 파일 연결?
-// 2. 해당 사진 누르면 해당 리뷰 자세히 보기로 이동하는지 - YES
-
-
-// TODO: 아래는 postman 사용불가시 작성한 코드
-// import {createMiniReviewItem_noPostman, createFullReviewItem_noPostman} from "./myPage_modules.js";
-// createMiniReviewItem_noPostman(4);
-
-// createFullReviewItem_noPostman(4);
-
+// 하트 토글
 const $main = document.querySelector('main');
 $main.addEventListener('click', like_toggle);
+
+//화면 사이즈 작아지면 좋아요한 리뷰 제목 2줄로 나타나게
+function resize_likeReview(){
+    const reviewItem = document.querySelectorAll('.like_review_preview_title');
+
+    for(let i = 0; i<reviewItem.length; i++){
+        const reviewInfo_str = reviewItem[i].innerText;
+        if(reviewInfo_str.indexOf('\n') == -1 && window.innerWidth<=800){
+            const reviewInfo = reviewInfo_str.split(" ");
+            const brand = reviewInfo[0];
+            const title = reviewInfo[1];
+            reviewItem[i].innerText = brand + '\n' + title;
+        }else if(reviewInfo_str.indexOf('\n') != -1 && window.innerWidth>800){
+            const reviewInfo = reviewInfo_str.split("\n");
+            const brand = reviewInfo[0];
+            const title = reviewInfo[1];
+            reviewItem[i].innerText = brand + ' ' + title;
+        }
+        
+    }
+}
+window.addEventListener('resize', resize_likeReview);
+
+// 리뷰 제목, 사진 클릭시 리뷰 상세보기 페이지로 이동
+function likeReviewClickedEventHandler(event){
+    const eventTarget = event.target;
+    if(eventTarget.classList.contains('like_review_img') || eventTarget.classList.contains('like_review_preview_title')){
+        let reviewItem;
+        if(eventTarget.classList.contains('like_review_img')){
+            reviewItem = eventTarget.parentNode.parentNode;
+        }else{
+            reviewItem = eventTarget.parentNode;
+        }
+        const select_review_Idx = getElementIndex(reviewItem)// reviewItem
+        const reviewIdx = likeReviewIdxs[select_review_Idx];
+        // location.href = ``;
+    }
+}
+
+function myReviewClickedEventHandler(event){
+    const eventTarget = event.target;
+    if(eventTarget.classList.contains('review_title') || eventTarget.classList.contains('review_img')){
+        const reviewItem = eventTarget.parentNode.parentNode.parentNode;
+        const select_review_Idx = getElementIndex(reviewItem)// reviewItem
+        const reviewIdx = myReviewIdxs[select_review_Idx];
+        // location.href = ``;
+    }
+}
+
+document.querySelector('.my_review_container').addEventListener('click', (event) => {
+    myReviewClickedEventHandler(event);
+});
+
+document.querySelector('.like_review_preview_container').addEventListener('click', (event) => {
+    likeReviewClickedEventHandler(event);
+})

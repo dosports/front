@@ -1,6 +1,7 @@
-import {getReviewDetail, getMyReviewIdx, pageUpEventHandler, beforePageBtnHandler, sports_img, sports_level, createFullReviewItem, like_toggle}  from "./myPage_modules.js";
+import {getReviewDetail, getMyReviewIdx, pageUpEventHandler, beforePageBtnHandler, sports_img, sports_level, createFullReviewItem}  from "./myPage_modules.js";
 import {reviewIdx_noPostman, reviewInfoArr_noPostman, userInfo_noPostman} from "./myPage_data.js"; // FIXME: postman 대신
-import {ioCallback_my, addNewMyContent, loadFirstItems} from "./myPage_load10Review.js";
+import {ioCallback_my, addNewMyContent, loadFirstItems, reviewClickedEventHandler} from "./myPage_load10Review.js";
+import {like_toggle} from "./myPage_likeBtn_modules.js";
 
 pageUpEventHandler(); // 페이지 맨 위로
 beforePageBtnHandler(); // 이전 페이지로
@@ -21,3 +22,8 @@ window.addEventListener('load', () => {
     $review_container.innerHTML = ""; // 처음에 모두 삭제
     loadFirstItems(io, addNewMyContent);
 })
+
+// 리뷰 제목, 사진 클릭시 리뷰 상세보기 페이지로 이동
+$main.addEventListener('click', (event) => {
+    reviewClickedEventHandler(event);
+});

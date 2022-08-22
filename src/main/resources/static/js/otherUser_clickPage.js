@@ -1,18 +1,21 @@
-import {getUserInfo, getReviewDetail, createFullReviewItem, like_toggle, beforePageBtnHandler} from "./myPage_modules.js";
+import {getUserInfo, getReviewDetail, createFullReviewItem, beforePageBtnHandler} from "./myPage_modules.js";
 import {reviewIdx_noPostman, reviewInfoArr_noPostman, userInfo_noPostman} from "./myPage_data.js"; // FIXME: postman 대신
-import {ioCallback_otherUser, addNewOtherReviewContent, loadFirstItems} from "./myPage_load10Review.js";
+import {ioCallback_otherUser, addNewOtherReviewContent, loadFirstItems, reviewClickedEventHandler} from "./myPage_load10Review.js";
+import {like_toggle} from "./myPage_likeBtn_modules.js";
+const logo_white_imgName = 'logo_white';
 
 // 이전 페이지로
 beforePageBtnHandler();
 
-// 1. 프로필 이미지, 이름
+// 프로필 이미지, 이름
 const $otherUserPage_main_header = document.querySelector('.otherUserPage_main_header');
 const $section_header = document.querySelector('.section_header');
 async function showOtherUserInfo(){
-    // const userInfo = await getUserInfo(userIdx);
+    // const userInfo = await getOtherUserInfo();
     const userInfo = userInfo_noPostman;
-    // const pre_img_src = userInfo.profileImg == "" ? "../img/logo_white.png" : `${url}/user/profileImg/${userInfo.profileImg}`;// FIXME: 정확하지 않음
-    const pre_img_src = userInfo.profileImg;
+    let pre_img_src = userInfo.profileImg;
+        pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : `${url}/user/profileImg/${userInfo.profileImg}`;
+        // pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : `${url}/user/profileImg/${userInfo.profileImg}`;// FIXME: 정확하지 않음
     $otherUserPage_main_header.innerHTML = `
         <div class="profile_img_container skeleton">
             <img src="" alt="사용자 프로필 사진" class="profile_img hidden">
@@ -33,7 +36,7 @@ async function showOtherUserInfo(){
 }
 showOtherUserInfo();
 
-// 2. 아무개님이 작성한 리뷰를 가져와서 촤르륵 보여주기
+// 다른 사람이 작성한 리뷰를 가져와서 보여주기
 const $review_container = document.querySelector('.review_container');
 const io = new IntersectionObserver(ioCallback_otherUser, {threshold : 0.7});
 window.addEventListener('load', () => {
@@ -41,7 +44,11 @@ window.addEventListener('load', () => {
     loadFirstItems(io, addNewOtherReviewContent);
 })
 
-
 // 하트 toggle
 const $main = document.querySelector('main');
 $main.addEventListener('click', like_toggle);
+
+// 리뷰 제목, 사진 클릭시 리뷰 상세보기 페이지로 이동
+$main.addEventListener('click', (event) => {
+    reviewClickedEventHandler(event);
+});

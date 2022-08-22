@@ -59,7 +59,7 @@ const new_review_item = document.createElement('div');
     
 }
 
-export const reviewIdx_noPostman = [1, 2, 3, 4, 5];
+export const reviewIdx_noPostman = [1, 2];
 export const reviewInfoArr_noPostman = [
     {},
     {
@@ -68,7 +68,7 @@ export const reviewInfoArr_noPostman = [
         "userName": "김현경",
         "img_path": "https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554__340.jpg",
         "brand": "나이키",
-        "title": "나이키 츄리닝",
+        "title": "7부 레깅스",
         "category": "bottom",
         "rate": 3,
         "likes": 3,
@@ -84,11 +84,11 @@ export const reviewInfoArr_noPostman = [
     },
     {
         "reviewIdx": 2,
-        "userIdx": 1,
+        "userIdx": 100,
         "userName": "아무개",
         "img_path": "https://cdn.pixabay.com/photo/2013/11/01/11/13/dolphin-203875__340.jpg",
         "brand": "아디다스",
-        "title": "아디다스 스포츠브라",
+        "title": "츄리닝 반바지",
         "category": "bottom",
         "rate": 1,
         "likes": 5,
@@ -104,11 +104,11 @@ export const reviewInfoArr_noPostman = [
     },
     {
         "reviewIdx": 3,
-        "userIdx": 1,
+        "userIdx": 105,
         "userName": "아무개",
         "img_path": "https://cdn.pixabay.com/photo/2020/09/04/20/09/cartoon-5544856__340.jpg",
         "brand": "아디다스",
-        "title": "아디다스 스포츠브라",
+        "title": "7부 레깅스",
         "category": "bottom",
         "rate": 1,
         "likes": 0,
@@ -124,11 +124,11 @@ export const reviewInfoArr_noPostman = [
     },
     {
         "reviewIdx": 4,
-        "userIdx": 1,
+        "userIdx": 21,
         "userName": "아무개",
         "img_path": "https://cdn.pixabay.com/photo/2017/11/26/15/16/smiley-2979107__340.jpg",
         "brand": "아디다스",
-        "title": "아디다스 스포츠브라",
+        "title": "테니스치마",
         "category": "bottom",
         "rate": 4,
         "likes": 5,
@@ -144,11 +144,11 @@ export const reviewInfoArr_noPostman = [
     },
     {
         "reviewIdx": 5,
-        "userIdx": 1,
+        "userIdx": 511,
         "userName": "가나다",
         "img_path": "",
         "brand": "아디다스",
-        "title": "아디다스 스포츠브라",
+        "title": "스포츠브라",
         "category": "bottom",
         "rate": 2,
         "likes": 5,
@@ -166,7 +166,8 @@ export const reviewInfoArr_noPostman = [
 
 export const userInfo_noPostman = {
     "name" : "무지개",
-    "profileImg" : "https://cdn.pixabay.com/photo/2017/01/14/12/59/iceland-1979445__340.jpg",
+    // "profileImg" : "https://cdn.pixabay.com/photo/2017/01/14/12/59/iceland-1979445__340.jpg",
+    "profileImg" : "",
     "height" : "170",
     "weight" : "50",
 }
