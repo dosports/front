@@ -25,3 +25,15 @@
     line-height: 1.3;
     text-align: center;
 }
+
+.heart_limit{
+    pointer-events: none;
+}
+
+.review-view_limit {
+    background-color: #F4F4F4;
+    color: var(--orange);
+    padding: 10px 0 10px 10px;
+    width: 80%;
+}
+
