@@ -6,94 +6,181 @@
 		<!-- <meta name="viewport" content="width=device-width, initial-scale=1.0" /> -->
 		<title>스포츠하다</title>
 		<link rel="stylesheet" href="../../static/css/reset.css" />
-		<link rel="stylesheet" href="./main.css" />
-		<script src="./main.js"></script>
+		<link rel="stylesheet" href="../../static/css/main.css" />
+		<script src="../../static/js/main.js"></script>
 	</head>
 	<body>
 		<div id="content">
 			<header>
-			<div id="header_title">
-				<div id="header-center"><img id="center-logo" src="../../static/img/logo_1.png" /></div>
-				<div id="header-right" class="flex_row">
-					<div class="header-right-item divider">유저님 안녕하세요</div>
-					<div class="header-right-item divider">
-						<a href="#">마이페이지</a>
+				<div id="header-desktop">
+					<div id="header_title">
+						<div id="header-center"><img id="center-logo" src="../../static/img/logo_1.png" /></div>
+						<div id="header-right" class="flex_row">
+							<div class="header-right-item divider">유저님 안녕하세요</div>
+							<div class="header-right-item divider">
+								<a href="#">마이페이지</a>
+							</div>
+							<div class="header-right-item">
+								<a href="/home">로그아웃</a>
+							</div>
+							<button id="alarm-button">
+								<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><path fill="currentColor" d="M13.377 10.573a7.63 7.63 0 0 1-.383-2.38V6.195a5.115 5.115 0 0 0-1.268-3.446a5.138 5.138 0 0 0-3.242-1.722c-.694-.072-1.4 0-2.07.227c-.67.215-1.28.574-1.794 1.053a4.923 4.923 0 0 0-1.208 1.675a5.067 5.067 0 0 0-.431 2.022v2.2a7.61 7.61 0 0 1-.383 2.37L2 12.343l.479.658h3.505c0 .526.215 1.04.586 1.412c.37.37.885.586 1.412.586c.526 0 1.04-.215 1.411-.586s.587-.886.587-1.412h3.505l.478-.658l-.586-1.77zm-4.69 3.147a.997.997 0 0 1-.705.299a.997.997 0 0 1-.706-.3a.997.997 0 0 1-.3-.705h1.999a.939.939 0 0 1-.287.706zm-5.515-1.71l.371-1.114a8.633 8.633 0 0 0 .443-2.691V6.004c0-.563.12-1.113.347-1.616c.227-.514.55-.969.969-1.34c.419-.382.91-.67 1.436-.837c.538-.18 1.1-.24 1.65-.18a4.147 4.147 0 0 1 2.597 1.4a4.133 4.133 0 0 1 1.004 2.776v2.01c0 .909.144 1.818.443 2.691l.371 1.113h-9.63v-.012z"/></svg>
+							</button>
+						</div>
 					</div>
-					<div class="header-right-item">
-						<a href="/home">로그아웃</a>
+					<div id="alarm-modal2" class="alarm"></div>
+					<div id="alarm-modal1" class="alarm flex_col" aria-hidden="true">
+						<div>
+							<div id="alarm-title">
+								알람
+							</div>
+						</div>
+						<div id="alarm-container" class="flex_col">
+							<div class="alarm-item">
+								<div class="alarm-item-title">
+									새로운 댓글이 달렸습니다.
+								</div>
+								<div class="alarm-item-content">
+									.......................
+								</div>
+								<div class="alarm-item-date">
+									xxxx.xx.xx xx.xx
+								</div>
+							</div>
+							<div class="alarm-item">
+								<div class="alarm-item-title">
+									새로운 댓글이 달렸습니다.
+								</div>
+								<div class="alarm-item-content">
+									.......................
+								</div>
+								<div class="alarm-item-date">
+									xxxx.xx.xx xx.xx
+								</div>
+							</div>
+							<div class="alarm-item">
+								<div class="alarm-item-title">
+									새로운 댓글이 달렸습니다.
+								</div>
+								<div class="alarm-item-content">
+									.......................
+								</div>
+								<div class="alarm-item-date">
+									xxxx.xx.xx xx.xx
+								</div>
+							</div>
+							<div class="alarm-item">
+								<div class="alarm-item-title">
+									새로운 댓글이 달렸습니다.
+								</div>
+								<div class="alarm-item-content">
+									.......................
+								</div>
+								<div class="alarm-item-date">
+									xxxx.xx.xx xx.xx
+								</div>
+							</div>
+						</div>
 					</div>
-					<button id="alarm-button">
-						<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><path fill="currentColor" d="M13.377 10.573a7.63 7.63 0 0 1-.383-2.38V6.195a5.115 5.115 0 0 0-1.268-3.446a5.138 5.138 0 0 0-3.242-1.722c-.694-.072-1.4 0-2.07.227c-.67.215-1.28.574-1.794 1.053a4.923 4.923 0 0 0-1.208 1.675a5.067 5.067 0 0 0-.431 2.022v2.2a7.61 7.61 0 0 1-.383 2.37L2 12.343l.479.658h3.505c0 .526.215 1.04.586 1.412c.37.37.885.586 1.412.586c.526 0 1.04-.215 1.411-.586s.587-.886.587-1.412h3.505l.478-.658l-.586-1.77zm-4.69 3.147a.997.997 0 0 1-.705.299a.997.997 0 0 1-.706-.3a.997.997 0 0 1-.3-.705h1.999a.939.939 0 0 1-.287.706zm-5.515-1.71l.371-1.114a8.633 8.633 0 0 0 .443-2.691V6.004c0-.563.12-1.113.347-1.616c.227-.514.55-.969.969-1.34c.419-.382.91-.67 1.436-.837c.538-.18 1.1-.24 1.65-.18a4.147 4.147 0 0 1 2.597 1.4a4.133 4.133 0 0 1 1.004 2.776v2.01c0 .909.144 1.818.443 2.691l.371 1.113h-9.63v-.012z"/></svg>
-					</button>
-					<div class="header-right-item"></div>
 				</div>
-			</div>
-			<div id="alarm-modal2" class="alarm"></div>
-			<div id="alarm-modal1" class="alarm flex_col" aria-hidden="true">
-				<div>
-					<div id="alarm-title">
-						알람
+				<div id="header-mobile">
+					<div id="header-mobile_title" class="flex_row">
+						<div id="header-mobile-left">
+							<div id="hamberger">
+								<input type="checkbox" id="trigger">
+								<label for="trigger">
+									<span></span>
+									<span></span>
+									<span></span>
+								</label>
+								<div id="dimd-off" class="dimd"></div>
+								<div id="nav-mobile">
+									<div id="nav-mobile-container">
+										<div class="nav-mobile-item">
+											<div class="nav-mobile-title">검색</div>
+											<form id="mobile-search-form" class="flex_row">
+												<input type="text" placeholder="검색어를 입력하세요" id="mobile-search-input">
+												<button type="submit" id="mobile-search-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 15 15"><path fill="currentColor" fill-rule="evenodd" d="M10 6.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0Zm-.691 3.516a4.5 4.5 0 1 1 .707-.707l2.838 2.837a.5.5 0 0 1-.708.708L9.31 10.016Z" clip-rule="evenodd"/></svg></button>
+											</form>
+										</div>
+										<ul>
+											<li class="nav-mobile-item"><a href="#" class="nav-mobile-title">베스트</a></li>
+											<li class="nav-mobile-item">
+												<button class="nav-mobile-title">남성</button>
+												<ul class="nav-mobile-inner_nav">
+													<li class="nav-mobile-inner_nav-item"><a href="#">테니스</a></li>
+													<li class="nav-mobile-inner_nav-item"><a href="#">하이킹</a></li>
+													<li class="nav-mobile-inner_nav-item"><a href="#">수영</a></li>
+													<li class="nav-mobile-inner_nav-item"><a href="#">헬스 / 필라테스 요가</a></li>
+													<li class="nav-mobile-inner_nav-item"><a href="#">골프</a></li>
+													<li class="nav-mobile-inner_nav-item"><a href="#">축구 / 야구 / 농구</a></li>
+												</ul>
+											</li>
+											<li class="nav-mobile-item">
+												<button class="nav-mobile-title">여성</button>
+												<ul class="nav-mobile-inner_nav">
+													<li class="nav-mobile-inner_nav-item"><a href="#">테니스</a></li>
+													<li class="nav-mobile-inner_nav-item"><a href="#">하이킹</a></li>
+													<li class="nav-mobile-inner_nav-item"><a href="#">수영</a></li>
+													<li class="nav-mobile-inner_nav-item"><a href="#">헬스 / 필라테스 요가</a></li>
+													<li class="nav-mobile-inner_nav-item"><a href="#">골프</a></li>
+													<li class="nav-mobile-inner_nav-item"><a href="#">축구 / 야구 / 농구</a></li>
+												</ul>
+											</li>
+											<li class="nav-mobile-item"><a href="#" class="nav-mobile-title">홈트도구</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div id="header-mobile-center"><img id="center-logo" src="../../static/img/logo_1.png" /></div>
+						<div id="header-mobile-right" class="flex_row">
+							<div class="header-right-item">
+								<a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a5 5 0 1 0 5 5a5 5 0 0 0-5-5zm0 8a3 3 0 1 1 3-3a3 3 0 0 1-3 3zm9 11v-1a7 7 0 0 0-7-7h-4a7 7 0 0 0-7 7v1h2v-1a5 5 0 0 1 5-5h4a5 5 0 0 1 5 5v1z"/></svg></a>
+							</div>
+							<div class="header-right-item">
+								<button id="mobile-alarm-button">
+									<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 16 16"><path fill="currentColor" d="M13.377 10.573a7.63 7.63 0 0 1-.383-2.38V6.195a5.115 5.115 0 0 0-1.268-3.446a5.138 5.138 0 0 0-3.242-1.722c-.694-.072-1.4 0-2.07.227c-.67.215-1.28.574-1.794 1.053a4.923 4.923 0 0 0-1.208 1.675a5.067 5.067 0 0 0-.431 2.022v2.2a7.61 7.61 0 0 1-.383 2.37L2 12.343l.479.658h3.505c0 .526.215 1.04.586 1.412c.37.37.885.586 1.412.586c.526 0 1.04-.215 1.411-.586s.587-.886.587-1.412h3.505l.478-.658l-.586-1.77zm-4.69 3.147a.997.997 0 0 1-.705.299a.997.997 0 0 1-.706-.3a.997.997 0 0 1-.3-.705h1.999a.939.939 0 0 1-.287.706zm-5.515-1.71l.371-1.114a8.633 8.633 0 0 0 .443-2.691V6.004c0-.563.12-1.113.347-1.616c.227-.514.55-.969.969-1.34c.419-.382.91-.67 1.436-.837c.538-.18 1.1-.24 1.65-.18a4.147 4.147 0 0 1 2.597 1.4a4.133 4.133 0 0 1 1.004 2.776v2.01c0 .909.144 1.818.443 2.691l.371 1.113h-9.63v-.012z"/></svg>
+								</button>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div id="alarm-container" class="flex_col">
-					<div class="alarm-item">
-						<div class="alarm-item-title">
-							새로운 댓글이 달렸습니다.
-						</div>
-						<div class="alarm-item-content">
-							.......................
-						</div>
-						<div class="alarm-item-date">
-							xxxx.xx.xx xx.xx
+				<div id="mobile-alarm-modal2" class="alarm"></div>
+				<div id="mobile-alarm-modal1" class="alarm flex_col" aria-hidden="true">
+					<div>
+						<div id="alarm-title">
+							알람
 						</div>
 					</div>
-					<div class="alarm-item">
-						<div class="alarm-item-title">
-							새로운 댓글이 달렸습니다.
-						</div>
-						<div class="alarm-item-content">
-							.......................
-						</div>
-						<div class="alarm-item-date">
-							xxxx.xx.xx xx.xx
-						</div>
-					</div>
-					<div class="alarm-item">
-						<div class="alarm-item-title">
-							새로운 댓글이 달렸습니다.
-						</div>
-						<div class="alarm-item-content">
-							.......................
-						</div>
-						<div class="alarm-item-date">
-							xxxx.xx.xx xx.xx
-						</div>
-					</div>
-					<div class="alarm-item">
-						<div class="alarm-item-title">
-							새로운 댓글이 달렸습니다.
-						</div>
-						<div class="alarm-item-content">
-							.......................
-						</div>
-						<div class="alarm-item-date">
-							xxxx.xx.xx xx.xx
+					<div id="alarm-container" class="flex_col">
+						<div class="alarm-item">
+							<div class="alarm-item-title">
+								새로운 댓글이 달렸습니다.
+							</div>
+							<div class="alarm-item-content">
+								.......................
+							</div>
+							<div class="alarm-item-date">
+								xxxx.xx.xx xx.xx
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<nav class="flex_row">
-				<ur id="nav-category" class="flex_row">
-					<li class="nav-item nav-left"><a href="#">베스트</a></li>
-					<li class="nav-item"><a href="#">남성</a></li>
-					<li class="nav-item"><a href="#">여성</a></li>
-					<li class="nav-item"><a href="#">홈트도구</a></li>
-				</ur>
-				<div id="search_box">
-					<form class="flex_row">
-						<input type="text" id="search-input" />
-						<button type="submit" id="search-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 15 15"><path fill="currentColor" fill-rule="evenodd" d="M10 6.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0Zm-.691 3.516a4.5 4.5 0 1 1 .707-.707l2.838 2.837a.5.5 0 0 1-.708.708L9.31 10.016Z" clip-rule="evenodd"/></svg></button>
-					</form>
+				<nav>
+				<div id="nav-desktop" class="flex_row">
+					<ur id="nav-category" class="flex_row">
+						<li class="nav-item nav-left"><a href="#">베스트</a></li>
+						<li class="nav-item"><a href="#">남성</a></li>
+						<li class="nav-item"><a href="#">여성</a></li>
+						<li class="nav-item"><a href="#">홈트도구</a></li>
+					</ur>
+					<div id="search_box">
+						<form class="flex_row">
+							<input type="text" id="search-input" />
+							<button type="submit" id="search-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 15 15"><path fill="currentColor" fill-rule="evenodd" d="M10 6.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0Zm-.691 3.516a4.5 4.5 0 1 1 .707-.707l2.838 2.837a.5.5 0 0 1-.708.708L9.31 10.016Z" clip-rule="evenodd"/></svg></button>
+						</form>
+					</div>
 				</div>
 			</nav>
 		</header>
@@ -111,161 +198,161 @@
 					<a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명확인????</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명확인????</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명1</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명1</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명2</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명2</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명3</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명3</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명4</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명4</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명5</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명5</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명6</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명6</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명7</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명7</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명8</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명8</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명9</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명9</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명10</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명10</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명11</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명11</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명12</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명12</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명13</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명13</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명14</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명14</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명15</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명15</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명16</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명16</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명17</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명17</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명18</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명18</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div> </a
 					><a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명19</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명19</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div>
 					</a>
@@ -292,70 +379,70 @@
 					<a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div>
 					</a>
 					<div class="article-item">
 						<img class="article-item-img" />
-						<div class="article-item-info article-item-info_font flex_row">
-							<span class="item_brand">브랜드명</span>
-							<span class="item_name">상품명</span>
+						<div class="article-item-info flex_row">
+							<span class="item_brand article-item-info_font">브랜드명</span>
+							<span class="item_name article-item-info_font">상품명</span>
 						</div>
 					</div>
 					<a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div>
 					</a>
 					<a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div>
 					</a>
 					<a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div>
 					</a>
 					<a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div>
 					</a>
 					<a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명</span>
+								<span class="item_name article-item-info_font">상품명</span>
 							</div>
 						</div>
 					</a>
 					<a href="#">
 						<div class="article-item">
 							<img class="article-item-img" />
-							<div class="article-item-info article-item-info_font flex_row">
-								<span class="item_brand">브랜드명</span>
-								<span class="item_name">상품명</span>
+							<div class="article-item-info flex_row">
+								<span class="item_brand article-item-info_font">브랜드명</span>
+								<span class="item_name ">상품명</span>
 							</div>
 						</div>
 					</a>

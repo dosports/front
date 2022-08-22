@@ -1,0 +1,553 @@
+* {
+    margin: 0;
+    padding: 0;
+    background-color: #ffffff;
+}
+
+#logo{
+    position: absolute;
+    width: 15vw;
+    height: 11.5vh;
+    left:43vw;
+    top: 5vh;
+}
+#id{
+    position: relative;
+    width: 29vw;
+    height: 7vh;
+    left: 36vw;
+    top: 10vw;
+    right:100vw;
+    border: 0.1789vw solid #F4A416;
+    padding-left:1vw;
+    border-radius: 10px;
+    font-family: NanumSquare;
+    color:#D9D9D9;
+    font-weight: bold;
+    font-size: 17px;
+    Line-height:100%;
+    cursor: pointer;
+}
+
+#pwd{
+    position: absolute;
+    width: 29vw;
+    height: 7vh;
+    left: 36vw;
+    right:100vw;
+    top: 15vw;
+    padding-left:1vw;
+    border: 2px solid #D9D9D9;
+    border-radius: 10px;
+    font-family: NanumSquare;
+    color:#D9D9D9;
+    font-weight: bold;
+    font-size: 17px;
+    Line-height:100%;
+    cursor: pointer;
+}
+#login_btn{
+    position: absolute;
+    width: 30.2vw;
+    height: 7vh;
+    left: 36vw;
+    right:100vw;
+    top: 20vw;
+    color:white;
+    background-color: #F9C929;
+    border: 2px solid #F9C929;
+    border-radius: 10px;
+    font-family: Gmarket Sans TTF;
+    font-weight: 700;
+    font-size: 17px;
+    Line-height:19.55px;
+    cursor: pointer;
+}
+
+#login_check{
+    position: absolute;
+    left: 36vw;
+    top: 51vh;
+    color:#001717;
+    padding-left: 0.2vw;
+    font-family: 'NanumSquare';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 19px;
+    cursor: pointer;
+}
+#find_pwd{
+    position: absolute;
+    left:51vw;
+    top: 51vh;
+    border: none;
+    color:#001717;
+    font-family: 'NanumSquare';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 19px;
+    text-align: left;
+    cursor: pointer;
+
+}
+#border{
+    position: absolute;
+    width: 3vw;
+    left:61vw;
+    top: 51vh;
+    color:#D9D9D9
+}
+#register{
+    position: absolute;
+    left:62vw;
+    top: 51vh;
+    border: none;
+    font-family: 'NanumSquare';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 17px;
+    line-height: 19px;
+    color: #01A48F;
+    cursor:pointer;
+}
+#ad{
+    position: absolute;
+    width: 30.2vw;
+    height:20vh;
+    left:36vw;
+    top: 60vh;
+    background: #D9D9D9;
+    cursor: pointer;
+}
+#rules_btn{
+    position: absolute;
+    left: 38vw;
+    top: 88vh;
+    border:none;
+    font-family: 'NanumSquare';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 17px;
+
+
+color: #001707;
+}
+#persoalinfo_btn{
+    position: absolute;
+    left: 42.5vw;
+    top: 88vh;
+    border:none;
+    font-family: 'NanumSquare';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 17px;
+    color: #000000;
+    cursor: pointer;
+}
+#communityrules_btn{
+    position: absolute;
+    left: 49.5vw;
+    top: 88vh;
+    border:none;
+    font-family: 'NanumSquare';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 17px;
+    cursor: pointer;
+}
+#notice_btn{
+    position: absolute;
+    left: 56.7vw;
+    top: 88vh;
+    border:none;
+    font-family: 'NanumSquare';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 17px;
+    cursor: pointer;
+}
+#ask_btn{
+    position: absolute;
+    left: 61vw;
+    top: 88vh;
+    border:none;
+    font-family: 'NanumSquare';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 17px;
+    cursor: pointer;
+}
+#black_logo{
+    position: absolute;
+    width: 3.2vw;
+    height: 3.2vh;
+    left: 48vw;
+    bottom: 5vh;
+}
+
+#logo_big{
+    position: absolute;
+    width: 15vw;
+    height: 10vw;
+    left: 43vw;
+    top: 6vh;
+
+
+}
+
+#personality_check{
+    display: inline-block;
+    width: 3vw;
+    height: 3vh;
+    left: 20vw;
+    right:13vw;
+    top: 26.9vh;
+    border:3px solid #707070;
+    position: relative;
+    cursor: pointer;
+}
+#personality{
+    position: absolute;
+    left: 23vw;
+    right:16vw;
+    top: 25vh;
+    color:#000000;
+    font-family: 'NanumSquare';
+    font-weight: 900;
+    font-size: 30px;
+    text-decoration: underline;
+    cursor: pointer;
+}
+#personality_check_main{
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    left: 660px;
+    top: 630px;
+    border:3px solid #707070;
+    position: relative;
+}
+#personality_main{
+    position: absolute;
+    padding-left: 20px;
+    left: 692px;
+    top: 670px;
+    color:#000000;
+    font-family: 'NanumSquare';
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 19px;
+    text-decoration: underline;
+}
+#box{
+    position: absolute;
+    width: 65vw;
+    height: 25vh;
+    left: 23vw;
+    top: 33vh;
+    right:16vw;
+    background: #F5F5F5;
+    font-size:25px;
+    font-weight: 500;
+}
+
+#fail_btn{
+    position: absolute;
+    width: 18vw;
+    height: 5vh;
+    left: 33vw;
+    right: 80vw;
+    top: 63vh;
+    color:white;
+    background-color: #F9C929;
+    border: 2px solid #F9C929;
+    border-radius: 10px;
+    font-family: Gmarket Sans TTF;
+    font-weight: 700;
+    font-size: 20px;
+    Line-height:19.55px;
+    cursor: pointer;
+}
+#access_btn{
+    position: absolute;
+    width: 18vw;
+    height: 5vh;
+    left: 53vw;
+    right: 60vw;
+    top: 63vh;
+    color:white;
+    background-color: #01A48F80;
+    border: 2px solid #01A48F80;
+    border-radius: 10px;
+    font-family: Gmarket Sans TTF;
+    font-weight: 700;
+    font-size: 20px;
+    Line-height:19.55px;
+    cursor: pointer;
+}
+.register_font{
+    font-family: 'Gmarket Sans TTF';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 30px;
+}
+#id_text{
+    position: absolute;
+    top:25vh;
+    left: 36vw;
+
+}
+#id_box{
+    position: absolute;
+    width: 30vw;
+    height: 6.5vh;
+    left: 35vw;
+    top: 30vh;
+    border: 2px solid #F4A416;
+    padding-left:1vw;
+    border-radius: 10px;
+    font-family: NanumSquare;
+    color:#D9D9D9;
+    font-weight: bold;
+    font-size: 26px;
+    Line-height:100%;
+}
+#id_ps{
+    position: absolute;
+    left:36vw;
+    top:37.5vh;
+    font-family: 'NanumSquare';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 19px;
+    line-height: 22px;
+    color: #F1722D;
+}
+#email_btn{
+    position: absolute;
+    width: 15vw;
+    height: 6.5vh;
+    left: 68vw;
+    top: 30vh;
+    border-color: #01A48F;
+    background: #01A48F;
+    border-radius: 10px;
+    font-family: 'NanumSquare';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 26px;
+    line-height: 30px;
+    color:#ffffff;
+}
+#password_text{
+    position: absolute;
+    top: 42vh;
+    left: 36vw;
+}
+#password_box{
+    position: absolute;
+    width: 30vw;
+    height: 6.5vh;
+    left: 35vw;
+    top: 47vh;
+    border: 2px solid #F4A416;
+    padding-left:1vw;
+    border-radius: 10px;
+    font-family: NanumSquare;
+    color:#D9D9D9;
+    font-weight: bold;
+    font-size: 26px;
+    Line-height:100%;
+}
+#password_ps{
+    position: absolute;
+    left:36vw;
+    top:54.5vh;
+    font-family: 'NanumSquare';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 19px;
+    line-height: 22px;
+    color: #F1722D;
+}
+#pwdcheck_text{
+    position: absolute;
+    top: 59vh;
+    left: 36vw;
+}
+#confirm_password{
+        position: absolute;
+        width: 30vw;
+        height: 6.5vh;
+        left: 35vw;
+        top: 64vh;
+        border: 2px solid #F4A416;
+        padding-left:1vw;
+        border-radius: 10px;
+        font-family: NanumSquare;
+        color:#D9D9D9;
+        font-weight: bold;
+        font-size: 26px;
+        Line-height:100%;
+}
+#confirmpwd_ps{
+    position: absolute;
+    left:36vw;
+    top:71.5vh;
+    font-family: 'NanumSquare';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 19px;
+    line-height: 22px;
+    color: #F1722D;
+}
+#username_text{
+    position: absolute;
+    top: 76vh;
+    left: 36vw;
+}
+#username_box{
+    position: absolute;
+    width: 30vw;
+    height: 6.5vh;
+    left: 35vw;
+    top: 81vh;
+    border: 2px solid #F4A416;
+    padding-left:1vw;
+    border-radius: 10px;
+    font-family: NanumSquare;
+    color:#D9D9D9;
+    font-weight: bold;
+    font-size: 26px;
+    Line-height:100%;
+}
+#birth_text{
+    position: absolute;
+    top: 90vh;
+    left: 36vw;
+}
+#year_box{
+    position: absolute;
+    width: 8vw;
+    height: 6.5vh;
+    left: 35vw;
+    top: 95vh;
+    border: 2px solid #F4A416;
+    padding-left:1vw;
+    border-radius: 10px;
+    font-family: NanumSquare;
+    color:#D9D9D9;
+    font-weight: bold;
+    font-size: 26px;
+    Line-height:100%;
+}
+#month_box{
+    position: absolute;
+    width: 9vw;
+    height: 6.8vh;
+    left: 46vw;
+    top: 95vh;
+    border: 2px solid #F4A416;
+    padding-left:1vw;
+    border-radius: 10px;
+    font-family: NanumSquare;
+    color:#0017078;
+    font-weight: bold;
+    font-size: 26px;
+    Line-height:100%;
+}
+#day_box{
+    position: absolute;
+    width: 8vw;
+    height: 6.5vh;
+    left: 57vw;
+    top: 95vh;
+    border: 2px solid #F4A416;
+    padding-left:1vw;
+    border-radius: 10px;
+    font-family: NanumSquare;
+    color:#0017078;
+    font-weight: bold;
+    font-size: 26px;
+    Line-height:100%;
+}
+#birth_ps{
+    position: absolute;
+    left:36vw;
+    top:103vh;
+    font-family: 'NanumSquare';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 19px;
+    line-height: 22px;
+    color: #F1722D;
+}
+#register_btn{
+    position: absolute;
+    width: 31vw;
+    height: 5vh;
+    left:35vw;
+    top: 125vh;
+    color:white;
+    background-color: #F9C929;
+    border: 2px solid #F9C929;
+    border-radius: 10px;
+    font-family: Gmarket Sans TTF;
+    font-weight: 700;
+    font-size: 20px;
+    Line-height:19.55px;
+    cursor: pointer;
+}
+#gender_text{
+    position: absolute;
+    top: 109vh;
+    left: 36vw;
+}
+#gender_box{
+    position: absolute;
+    width: 31vw;
+    height: 6.8vh;
+    left: 35vw;
+    top: 114vh;
+    border: 2px solid #F4A416;
+    padding-left:1vw;
+    border-radius: 10px;
+    font-family: NanumSquare;
+    color:#0017078;
+    font-weight: bold;
+    font-size: 26px;
+    Line-height:100%;
+}
+#welcome{
+    position:absolute;
+    top:30vh;
+    left:43vw;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    font-weight: bold;
+    font-size: 23px;
+}
+#accesslogin_btn{
+    position: absolute;
+    width: 13.5vw;
+    height: 8vh;
+    left: 44vw;
+    right: 60vw;
+    top: 43vh;
+    color:white;
+    background-color: #01A48F80;
+    border: 2px solid #01A48F80;
+    border-radius: 10px;
+    font-family: Gmarket Sans TTF;
+    font-weight: 700;
+    font-size: 20px;
+    Line-height:19.55px;
+    cursor: pointer;
+}
