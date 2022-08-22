@@ -1,83 +1,83 @@
-:root{
-    --yellow : #F9C929;
-    --deep-yellow : #F4A416;
-    --alarm-bg-yellow : rgba(249, 225, 148, 0.9);
-    --orange : #F1722D;
-    --green : #01A48F;
-    --green-bg : hsla(172, 99%, 32%, 0.5);;
-    --black : #001707;
-    --sportIcon-hover : rgba(72, 72, 72, 0.7);
+:root {
+	--yellow: #f9c929;
+	--deep-yellow: #f4a416;
+	--alarm-bg-yellow: rgba(249, 225, 148, 0.9);
+	--orange: #f1722d;
+	--green: #01a48f;
+	--green-bg: hsla(172, 99%, 32%, 0.5);
+	--black: #001707;
+	--sportIcon-hover: rgba(72, 72, 72, 0.7);
 }
 
 /* GmarketSans */
 @font-face {
-    font-family: 'GmarketSans';
-    src: url('../font/GmarketSansTTFBold.ttf') format('truetype');
-    font-weight: 700;
+	font-family: "GmarketSans";
+	src: url("../font/GmarketSansTTFBold.ttf") format("truetype");
+	font-weight: 700;
 }
 
 @font-face {
-    font-family: 'GmarketSans';
-    src: url('../font/GmarketSansTTFMedium.ttf') format('truetype');
-    font-weight: 500;
+	font-family: "GmarketSans";
+	src: url("../font/GmarketSansTTFMedium.ttf") format("truetype");
+	font-weight: 500;
 }
 
 @font-face {
-    font-family: 'GmarketSans';
-    src: url('../font/GmarketSansTTFLight.ttf') format('truetype');
-    font-weight: 300;
+	font-family: "GmarketSans";
+	src: url("../font/GmarketSansTTFLight.ttf") format("truetype");
+	font-weight: 300;
 }
 
 /* NanumSquare */
 @font-face {
-    font-family: 'NanumSquare';
-    src: url('../font/NanumSquareEB.otf') format('truetype');
-    font-weight: 600;
+	font-family: "NanumSquare";
+	src: url("../font/NanumSquareEB.otf") format("truetype");
+	font-weight: 600;
 }
 
 @font-face {
-    font-family: 'NanumSquare';
-    src: url('../font/NanumSquareB.otf') format('truetype');
-    font-weight: 500;
+	font-family: "NanumSquare";
+	src: url("../font/NanumSquareB.otf") format("truetype");
+	font-weight: 500;
 }
 
 @font-face {
-    font-family: 'NanumSquare';
-    src: url('../font/NanumSquareR.otf') format('truetype');
-    font-weight: 400;
+	font-family: "NanumSquare";
+	src: url("../font/NanumSquareR.otf") format("truetype");
+	font-weight: 400;
 }
 
 @font-face {
-    font-family: 'NanumSquare';
-    src: url('../font/NanumSquareL.otf') format('truetype');
-    font-weight: 300;
+	font-family: "NanumSquare";
+	src: url("../font/NanumSquareL.otf") format("truetype");
+	font-weight: 300;
 }
 
 /* Abandoned */
 @font-face {
-    font-family: 'Abandoned';
-    src: url('../font/Abandoned-Bold.ttf') format('truetype');
-    font-style: normal;
-    font-weight: 500;
+	font-family: "Abandoned";
+	src: url("../font/Abandoned-Bold.ttf") format("truetype");
+	font-style: normal;
+	font-weight: 500;
 }
 
 @font-face {
-    font-family: 'Abandoned';
-    src: url('../font/Abandoned-BoldItalic.ttf') format('truetype');
-    font-style: italic;
-    font-weight: 500;
+	font-family: "Abandoned";
+	src: url("../font/Abandoned-BoldItalic.ttf") format("truetype");
+	font-style: italic;
+	font-weight: 500;
 }
 
 @font-face {
-    font-family: 'Abandoned';
-    src: url('../font/Abandoned.ttf') format('truetype');
-    font-style: normal;
-    font-weight: 300;
+	font-family: "Abandoned";
+	src: url("../font/Abandoned.ttf") format("truetype");
+	font-style: normal;
+	font-weight: 300;
 }
 
 @font-face {
-    font-family: 'Abandoned';
-    src: url('../font/Abandoned-Italic.ttf') format('truetype');
-    font-style: italic;
-    font-weight: 300;
+	font-family: "Abandoned";
+	src: url("../font/Abandoned-Italic.ttf") format("truetype");
+	font-style: italic;
+	font-weight: 300;
 }

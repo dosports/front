@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>registerPage</title>
+    <link rel="stylesheet" href="/src/main/resources/static/css/login.css">
+</head>
+<body>
+    <img id="logo" src="/src/main/resources/static/img/logo_2.pn">
+    <form>
+        <div class="register_font">
+            <p id="id_text">아이디</p>
+            <p>
+                <input id="id_box" type ="text"name="id" placeholder="example@gmail.com" value="">
+           </p>
+        </div>
+        <div class="register_font">
+           <p id="password_text">비밀번호</p>
+           <p>
+               <input id="password_box" type="password" placeholder="비밀번호" required value="">
+           </p>
+
+            <!--<p id="password_ps">유효하지 않은 비밀번호형식입니다</p>-->
+        </div>
+        <div class="register_font">
+            <p id="pwdcheck_text">비밀번호 재확인</p>
+            <p>
+                <input id="confirm_password" type="password" placeholder="비밀번호 확인" required value="">
+            </p>
+            <!--<p id="confirmpwd_ps">유효하지 않은 비밀번호형식입니다</p>-->
+         </div>
+         <div class="register_font">
+            <p id="username_text">이름</p>
+            <p>
+                <input id="username_box" type="text"value="">
+            </p>
+         </div>
+         <div class="register_font">
+            <p id="birth_text">생년월일</p>
+            <p>
+                <input id="year_box" type="text"placeholder="년(4자)">
+                <select name="month" id="month_box">
+                    <option value="none">월</option>
+                    <option >1월</option><option >2월</option><option >3월</option><option >4월</option><option >5월</option><option >6월</option><option >7월</option><option >8월</option><option >9월</option><option >10월</option><option >11월</option><option >12월</option>
+                </select>
+                <input id="day_box" type="text"placeholder="일">
+            </p>
+            <p id="birth_ps">생년월일을 입력해주세요</p>
+         </div>
+         <div class="register_font">
+            <p id="gender_text">*성별 (선택사항)</p>
+            <p>
+                <select name="month" id="gender_box">
+                    <option value="none">성별</option>
+                    <option >남성</option><option >여성</option>
+                    </select>
+            </p>
+         </div>
+         <button id="register_btn" type="submit" onclick="location.href='../main/main.html'" >회원가입</button>
+    </form>
+</body>
+</html>
