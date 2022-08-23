@@ -9,7 +9,7 @@
     <script type="module" src="../../static/js/main.js"></script>
     <link rel="stylesheet" href="../../static/css/main_header2.css" />
     <link rel="stylesheet" href="../../static/css/main.css" />
-    <script src="../../static/js/reviewForm.js"></script>
+    
 
     <title>스포츠한다</title>
 
@@ -337,21 +337,6 @@
                     </div>
                     <div class="center-box">
                         <textarea class='textarea' name="contents" rows="5"></textarea>
-                        <script>
-                            var textarea = document.querySelector('.textarea');
-                            var placeholder = document.querySelector('.placeholder');
-
-                            textarea.addEventListener('focus', () => {
-                                placeholder.classList.add('hidden');
-                            });
-
-                            textarea.addEventListener('blur', () => {
-                                if (textarea.value === '') {
-                                    placeholder.classList.remove('hidden');
-                                }
-                            });
-
-                        </script>
                     </div>
                 </div>
 
@@ -394,5 +379,5 @@
 
 
 </body>
-
+<script src="../../static/js/reviewForm.js"></script>
 </html>
