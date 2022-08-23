@@ -42,124 +42,130 @@
 					</div>
 				</a>
 			</div>
+			<div id="logOut_alarm" class="flex_col">
+				로그인 후 사용 가능합니다.
+				<a id="alarm-login" href="login"><div>로그인 하기</div></a>
+				<div>아직 회원이 아니신가요?</div>
+				<a href="#" id="alarm-join">회원 가입</a>
+				</div>
+			</div>
 		</div>
-	</div>
-	<div id="header-mobile">
-		<div id="header-mobile-title" class="flex_row">
-			<div id="header-mobile-left">
-				<div id="hamberger">
-					<input type="checkbox" id="trigger" />
-					<label for="trigger">
-						<span></span>
-						<span></span>
-						<span></span>
-					</label>
-					<div id="dimd-off" class="dimd"></div>
-					<div id="nav-mobile">
-						<div id="nav-mobile-container">
-							<div class="nav-mobile-item">
-								<div class="nav-mobile-title">검색</div>
-								<form id="mobile-search-form" class="flex_row">
-									<input type="text" placeholder="검색어를 입력하세요" id="mobile-search-input" />
-									<button type="submit" id="mobile-search-button">
-										<img src="../../static/img/magnifying-glass .svg" />
-									</button>
-								</form>
+		<div id="header-mobile">
+			<div id="header-mobile-title" class="flex_row">
+				<div id="header-mobile-left">
+					<div id="hamberger">
+						<input type="checkbox" id="trigger" />
+						<label for="trigger">	
+							<span></span>
+							<span></span>
+							<span></span>
+						</label>
+						<div id="dimd-off" class="dimd"></div>
+						<div id="nav-mobile">
+							<div id="nav-mobile-container">
+								<div class="nav-mobile-item">
+									<div class="nav-mobile-title">검색</div>
+									<form id="mobile-search-form" class="flex_row" method="post" name="search">
+										<input type="text" placeholder="검색어를 입력하세요" id="mobile-search-input" name="keyword"/>
+										<button id="mobile-search-button">
+											<img src="../../static/img/magnifying-glass .svg" />
+										</button>
+									</form>
+								</div>
+								<ul>
+									<li class="nav-mobile-item"><a href="#" class="nav-mobile-title">베스트</a></li>
+									<li class="nav-mobile-item">
+										<button class="nav-mobile-title">남성</button>
+										<ul class="nav-mobile-inner_nav">
+											<li class="nav-mobile-inner_nav-item"><a href="review/m/">테니스</a></li>
+											<li class="nav-mobile-inner_nav-item"><a href="review/m/">하이킹</a></li>
+											<li class="nav-mobile-inner_nav-item"><a href="review/m/">수영</a></li>
+											<li class="nav-mobile-inner_nav-item"><a href="review/m/">헬스 / 필라테스 요가</a></li>
+											<li class="nav-mobile-inner_nav-item"><a href="review/m/">골프</a></li>
+											<li class="nav-mobile-inner_nav-item"><a href="review/m/">축구 / 야구 / 농구</a></li>
+										</ul>
+									</li>
+									<li class="nav-mobile-item">
+										<button class="nav-mobile-title">여성</button>
+										<ul class="nav-mobile-inner_nav">
+											<li class="nav-mobile-inner_nav-item"><a href="review/f/">테니스</a></li>
+											<li class="nav-mobile-inner_nav-item"><a href="review/f/">하이킹</a></li>
+											<li class="nav-mobile-inner_nav-item"><a href="review/f/">수영</a></li>
+											<li class="nav-mobile-inner_nav-item"><a href="review/f/">헬스 / 필라테스 요가</a></li>
+											<li class="nav-mobile-inner_nav-item"><a href="review/f/">골프</a></li>
+											<li class="nav-mobile-inner_nav-item"><a href="review/f/">축구 / 야구 / 농구</a></li>
+										</ul>
+									</li>
+									<li class="nav-mobile-item"><a href="#" class="nav-mobile-title">홈트도구</a></li>
+								</ul>
 							</div>
-							<ul>
-								<li class="nav-mobile-item"><a href="#" class="nav-mobile-title">베스트</a></li>
-								<li class="nav-mobile-item">
-									<button class="nav-mobile-title">남성</button>
-									<ul class="nav-mobile-inner_nav">
-										<li class="nav-mobile-inner_nav-item"><a href="review/m/">테니스</a></li>
-										<li class="nav-mobile-inner_nav-item"><a href="review/m/">하이킹</a></li>
-										<li class="nav-mobile-inner_nav-item"><a href="review/m/">수영</a></li>
-										<li class="nav-mobile-inner_nav-item"><a href="review/m/">헬스 / 필라테스 요가</a></li>
-										<li class="nav-mobile-inner_nav-item"><a href="review/m/">골프</a></li>
-										<li class="nav-mobile-inner_nav-item"><a href="review/m/">축구 / 야구 / 농구</a></li>
-									</ul>
-								</li>
-								<li class="nav-mobile-item">
-									<button class="nav-mobile-title">여성</button>
-									<ul class="nav-mobile-inner_nav">
-										<li class="nav-mobile-inner_nav-item"><a href="review/f/">테니스</a></li>
-										<li class="nav-mobile-inner_nav-item"><a href="review/f/">하이킹</a></li>
-										<li class="nav-mobile-inner_nav-item"><a href="review/f/">수영</a></li>
-										<li class="nav-mobile-inner_nav-item"><a href="review/f/">헬스 / 필라테스 요가</a></li>
-										<li class="nav-mobile-inner_nav-item"><a href="review/f/">골프</a></li>
-										<li class="nav-mobile-inner_nav-item"><a href="review/f/">축구 / 야구 / 농구</a></li>
-									</ul>
-								</li>
-								<li class="nav-mobile-item"><a href="#" class="nav-mobile-title">홈트도구</a></li>
-							</ul>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div id="header-mobile-center">
-				<img id="center-logo" src="../../static/img/logo_1.png" />
-			</div>
-			<div id="header-mobile-right" class="flex_row">
-				<div class="header-right-item">
-					<a href="#">
-						<img src="../../static/img/user.svg" />
-					</a>
+				<div id="header-mobile-center">
+					<img id="center-logo" src="../../static/img/logo_1.png" />
 				</div>
-				<div class="header-right-item">
-					<button id="mobile-alarm-button">
-						<img src="../../static/img/bell.svg" />
-					</button>
+				<div id="header-mobile-right" class="flex_row">
+					<div class="header-right-item">
+						<a href="#">
+							<img src="../../static/img/user.svg" />
+						</a>
+					</div>
+					<div class="header-right-item">
+						<button id="mobile-alarm-button">
+							<img src="../../static/img/bell.svg" />
+						</button>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<div id="mobile-alarm-modal2" class="alarm"></div>
-	<div id="mobile-alarm-modal1" class="alarm flex_col" aria-hidden="true">
-		<div>
-			<div id="alarm-title">알람</div>
-		</div>
-		<div id="alarm-container" class="flex_col">
-			<div class="alarm-item">
-				<a href="#">
-					<div class="alarm-item-title">새로운 댓글이 달렸습니다.</div>
-					<div class="alarm-item-content">.......................</div>
-					<div class="alarm-item-date">xxxx.xx.xx xx.xx</div>
-				</a>
+		<div id="mobile-alarm-modal2" class="alarm"></div>
+		<div id="mobile-alarm-modal1" class="alarm flex_col" aria-hidden="true">
+			<div>
+				<div id="alarm-title">알람</div>
+			</div>
+			<div id="alarm-container" class="flex_col">
+			</div>
+			<div id="logOut_alarm" class="flex_col">
+				로그인 후 사용 가능합니다.
+				<a id="alarm-login" href="login"><div>로그인 하기</div></a>
+				<div>아직 회원이 아니신가요?</div>
+				<a href="#" id="alarm-join">회원 가입</a>
 			</div>
 		</div>
-	</div>
 
-	<nav>
-		<div id="nav-desktop" class="flex_row">
-			<ur id="nav-category" class="flex_row">
-				<li class="nav-item nav-left"><a href="#">베스트</a></li>
-				<li class="nav-item"><a href="/review/m">남성</a></li>
-				<li class="nav-item"><a href="/review/f">여성</a></li>
-				<li class="nav-item"><a href="#">홈트도구</a></li>
-			</ur>
-			<div id="search_box">
-				<form class="flex_row">
-					<input type="text" id="search-input" />
-					<button type="submit" id="search-button">
-						<svg
-							xmlns="http://www.w3.org/2000/svg"
-							aria-hidden="true"
-							role="img"
-							width="1em"
-							height="1em"
-							preserveAspectRatio="xMidYMid meet"
-							viewBox="0 0 15 15"
-						>
-							<path
-								fill="currentColor"
-								fill-rule="evenodd"
-								d="M10 6.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0Zm-.691 3.516a4.5 4.5 0 1 1 .707-.707l2.838 2.837a.5.5 0 0 1-.708.708L9.31 10.016Z"
-								clip-rule="evenodd"
-							/>
-						</svg>
-					</button>
-				</form>
+		<nav>
+			<div id="nav-desktop" class="flex_row">
+				<ur id="nav-category" class="flex_row">
+					<li class="nav-item nav-left"><a href="#">베스트</a></li>
+					<li class="nav-item"><a href="/review/m">남성</a></li>
+					<li class="nav-item"><a href="/review/f">여성</a></li>
+					<li class="nav-item"><a href="#">홈트도구</a></li>
+				</ur>
+				<div id="search_box">
+					<form class="flex_row">
+						<input type="text" id="search-input" />
+						<button id="search-button" name="keyword">
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								aria-hidden="true"
+								role="img"
+								width="1em"
+								height="1em"
+								preserveAspectRatio="xMidYMid meet"
+								viewBox="0 0 15 15"
+							>
+								<path
+									fill="currentColor"
+									fill-rule="evenodd"
+									d="M10 6.5a3.5 3.5 0 1 1-7 0a3.5 3.5 0 0 1 7 0Zm-.691 3.516a4.5 4.5 0 1 1 .707-.707l2.838 2.837a.5.5 0 0 1-.708.708L9.31 10.016Z"
+									clip-rule="evenodd"
+								/>
+							</svg>
+						</button>
+					</form>
+				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>
+	</div>
 </div>
