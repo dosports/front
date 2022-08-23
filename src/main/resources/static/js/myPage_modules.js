@@ -1,10 +1,24 @@
 export {getUserInfo, getReviewDetail, getMyReviewIdx, getLikeReviewIdx, createMiniReviewItem, createFullReviewItem, pageUpEventHandler, beforePageBtnHandler, sports_img, sports_level};
 import {check_clickedLike} from "./myPage_likeBtn_modules.js";
 const full_heart_imgName = 'full_heart';
-
-// const url = 'https://008b09e7-31c8-41cb-adab-3683ec84e87e.mock.pstmn.io';// TODO:
+axios.defaults.baseURL = 'https://008b09e7-31c8-41cb-adab-3683ec84e87e.mock.pstmn.io';// TODO:
 const userIdx = getUserIdx(); // TODO: 로컬에서 getItem으로 토큰 가져오기
 
+function setToken(){
+    axios.defaults.headers.common['Authorization'] = `Bearer localStorage.getItem('accessToken')`;
+
+    let expiredTime = localStorage.getItem('expiredTime');
+    let diffTime = '' ;
+    if(diffTime < 10000){
+        axios.defaults.headers.common['x-refresh-token'] = localStorage.getItem('refreshToken');
+        axios.get('${url}/user/updateAccessToken')
+        .then(response => {
+            localStorage.setItem('accessToken', res.data.data.accessToken);
+            localStorage.setItem('expiredTime', res.data.data.cur_time);
+            axios.defaults.headers.common['x-access-token'] = localStorage.getItem('accessToken');
+        })
+    }
+}
 // 마이페이지 - 메인
 // 사용자 사진, 이름 정보 가져오기
 //TODO:
@@ -12,9 +26,8 @@ export function getUserIdx(){
     const userIdx = localStorage.getItem('token');
     return userIdx;
 }
-
 function getUserInfo(){
-    return axios.get(`${url}/user/info/${userIdx}`)
+    return axios.get(`/user/info/${userIdx}`)
     .then(response => response.data.data)
 }
 
@@ -28,31 +41,31 @@ export function getOtherUserIdx(){
 
 export function getOtherUserInfo(){
     const otherUserIdx = getOtherUserIdx();
-    return axios.get(`${url}/user/info/${otherUserIdx}`)
+    return axios.get(`/user/info/${otherUserIdx}`)
     .then(response => response.data.data)
 }
 
 // 자세한 리뷰 정보 가져오기
 function getReviewDetail(reviewIdx){
-    return axios.get(`${url}/review/${reviewIdx}`)
+    return axios.get(`/review/${reviewIdx}`)
     .then(response => response.data);
 }
 
 // 내가 쓴 리뷰 reviewIdx 배열 가져오기
 function getMyReviewIdx(pageNum){
-    return axios.get(`${url}/review/user/${userIdx}?page_num=${pageNum}`)
+    return axios.get(`/review/user/${userIdx}?page_num=${pageNum}`)
     .then(response => response.data.reviewIdx);
 }
 
 // 내가 좋아요한 리뷰 reviewIdx 배열 가져오기
 function getLikeReviewIdx(pageNum){
-    return axios.get(`${url}/like/${userIdx}?page_num=${pageNum}`)
+    return axios.get(`/like?page_num=${pageNum}`)
     .then(response => response.data.reviewIdx);
 }
 
 // 다른 사람 리뷰 reviewIdx 가져오기
 export function getOtherUserReviewIdx(userIdx, pageNum){
-    return axios.get(`${url}/review/user/${userIdx}?page_num=${pageNum}`)
+    return axios.get(`/review/user/${userIdx}?page_num=${pageNum}`)
     .then(response => response.data.reviewIdx);
 }
 

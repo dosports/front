@@ -4,7 +4,7 @@ import {userInfo_noPostman} from "./myPage_data.js";
 // postman 변수
 const logo_white_imgName = 'logo_white';
 const userIdx = 1;
-// const url = 'https://008b09e7-31c8-41cb-adab-3683ec84e87e.mock.pstmn.io';
+axios.defaults.baseURL = 'https://008b09e7-31c8-41cb-adab-3683ec84e87e.mock.pstmn.io';// TODO:
 
 // DOM
 const $change_profileImg = document.querySelector('#change_profileImg');
@@ -57,12 +57,11 @@ export function check_profileImg(){
 async function change_ProfileImg_data(){
     let formData = new FormData();
     formData.append("file", $change_profileImg.files[0]);
-    console.log($change_profileImg.files[0]);
-    return axios.post(`${url}/user/profileImg/1`, formData, {
+    return axios.post(`/user/profileImg/1`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
-    }).then(response => console.log(response.data.success));
+    }).then(response => response.data.success);
 }
 
 
@@ -128,7 +127,7 @@ function check_newPW(){
     const newPasswd = $new_password.value;
     const checkNewPasswd = $new_check_password.value;
     if($current_password.value == "" && newPasswd == "" && checkNewPasswd == ""){
-        return true;
+        return false;
     }
 
     const $newPassword_err = document.querySelector('.newPassword_err');
@@ -163,7 +162,7 @@ function check_newPW(){
 function change_password_name_data(){
     // 비밀번호 모두 올바른 경우에만 axios 실행될 수 있도록
     const username = $user_name.value == '' ? $user_name.placeholder : $user_name.value;
-    return axios.patch(`${url}/user/mypage/${userIdx}`, {
+    return axios.patch(`/user/mypage/${userIdx}`, {
         "name" : username, 
         "passwd": $current_password.value,
         "checkNewPasswd": $new_password.value,
@@ -175,15 +174,13 @@ function change_password_name_data(){
 // ******** 사용자 설정 버튼 클릭시 eventHandler 함수
 async function change_user_setting(event){
     event.preventDefault(); // submit 이벤트 중지
-    
+    console.log(check_newPW());
     // 사용자명, 비번 변경
     if(check_newPW()){
         const result = await change_password_name_data();
         if(result){
-            // alert('사용자 정보가 성공적으로 수정되었습니다.');
             await swal("Success!", "사용자 정보가 성공적으로 수정되었습니다.", "success");
         }else{
-            // alert('잘못된 비밀번호 입력으로 비밀번호가 변경되지 않았습니다.');
             await swal({
                 icon: 'error',
                 title: 'Oops...',
@@ -204,12 +201,24 @@ async function change_user_setting(event){
                 });
             }
         }
+        
+    }else if($change_profileImg.files.length != 0){
+        // const result = await change_ProfileImg_data();
+        const result = true;
+        if(result){
+            await swal("Success!", "사용자 정보가 성공적으로 수정되었습니다.", "success");
+        }else{
+            await swal({
+                icon: 'error',
+                title: 'Oops...',
+                text: '사용자 정보 수정에 실패하였습니다.',
+            });
+        }
     }else{
-        // alert('사용자 정보 수정에 실패하였습니다.');
         await swal({
             icon: 'error',
             title: 'Oops...',
-            text: '사용자 정보 수정에 실패하였습니다.',
+            text: '수정하려는 정보를 입력해주세요.',
         });
     }
 
@@ -242,19 +251,16 @@ async function change_filter_setting(event){
     if(check_weight_height()){// 제대로된 데이터 입력시에만 작동
         const user_height = event.target.user_height.value;
         const user_weight = event.target.user_weight.value;
-        console.log(user_height, user_weight);
         
-        const result = await axios.patch(`${url}/user/info/${userIdx}`, {
+        const result = await axios.patch(`/user/info/${userIdx}`, {
             "height": user_height,
             "weight": user_weight,
         })
         .then(response => response.data.data.isChanged);
 
         if(result){
-            // alert('사용자 정보가 성공적으로 수정되었습니다.');
             await swal("Success!", "사용자 정보가 성공적으로 수정되었습니다.", "success");
         }else{
-            // alert('사용자 정보 수정에 실패하였습니다.');
             await swal({
                 icon: 'error',
                 title: 'Oops...',
@@ -262,7 +268,6 @@ async function change_filter_setting(event){
             });
         }
     }else{
-        // alert('사용자 정보 수정에 실패하였습니다.');
         await swal({
             icon: 'error',
             title: 'Oops...',

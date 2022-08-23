@@ -1,18 +1,17 @@
 import {getUserIdx} from "./myPage_modules.js";
 import {reviewIdxs} from "./myPage_load10Review.js";
-
-// const url = 'https://008b09e7-31c8-41cb-adab-3683ec84e87e.mock.pstmn.io';// TODO:
+axios.defaults.baseURL = 'https://008b09e7-31c8-41cb-adab-3683ec84e87e.mock.pstmn.io';// TODO:
 // const userIdx = getUserIdx();
 const userIdx = 1;
 
 function addLike(reviewIdx){
-    axios.post(`${url}/like`,{
+    axios.post(`/like`,{
         reviewIdx : reviewIdx,
     })
 }
 
 function deleteLike(reviewIdx){
-    axios.delete(`${url}/like`, {
+    axios.delete(`/like`, {
         reviewIdx : reviewIdx,
     })
 }
@@ -39,7 +38,7 @@ export function deleteLikeToServer(event, reviewIdxs){
 
 // FIXME: postman 검증 필요... 그리고 data.success T/F여부로 좋아요 눌렀는지 확인하는게 맞는지?
 export function check_clickedLike(reviewIdx){
-    return axios.get(`${url}/like/check/${reviewIdx}`)
+    return axios.get(`/like/check/${reviewIdx}`)
     .then(response => response.data.success);
 }
 

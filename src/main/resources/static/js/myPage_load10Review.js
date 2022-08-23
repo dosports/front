@@ -47,55 +47,75 @@ function removeSkeleton(){
 // 내가 좋아요한 리뷰 데이터 가져와서 보여주기
 // [GET] {{url}}/review/user/{userIdx}
 export async function addNewLikeContent(){
-    // const reviewIdx = await getLikeReviewIdx(pageNum);// FIXME:
+    // const reviewIdx = await getLikeReviewIdx(pageNum)
+    //                         .catch(err => console.log(err));// FIXME:
     const reviewIdx = reviewIdx_noPostman;
-    reviewIdxs = reviewIdxs.concat(reviewIdx);
+    if(reviewIdx == []){
+        return null;
+    }else{
+        // const reviewIdx = reviewIdx_noPostman;
+        reviewIdxs = reviewIdxs.concat(reviewIdx);
 
-    for(let i = 0; i < reviewIdx.length; i++){
-        // const reviewInfo = await getReviewDetail(reviewIdx[i]);// FIXME:
-        const reviewInfo = reviewInfoArr_noPostman[reviewIdx[i]];
+        for(let i = 0; i < reviewIdx.length; i++){
+            // const reviewInfo = await getReviewDetail(reviewIdx[i]);
+            const reviewInfo = reviewInfoArr_noPostman[reviewIdx[i]];
 
-        const like_clicked = true; // 내가 좋아요한 리뷰라서 무조건 true
-        const new_like_review_preview_item = createFullReviewItem(reviewInfo, like_clicked, true); // 생성, 무조건 로그인 했음
-        $review_container.appendChild(new_like_review_preview_item);
+            const like_clicked = true; // 내가 좋아요한 리뷰라서 무조건 true
+            const new_like_review_preview_item = createFullReviewItem(reviewInfo, like_clicked, true); // 생성, 무조건 로그인 했음
+            $review_container.appendChild(new_like_review_preview_item);
+        }
+        return true;
     }
+    
 }
 
 // 내가 쓴 리뷰 데이터 가져와서 보여주기 
 export async function addNewMyContent(){
-    // const reviewIdx = await getMyReviewIdx(pageNum);// FIXME:
+    // const reviewIdx = await getMyReviewIdx(pageNum)
+    //                         .catch(err => null);// FIXME:
     const reviewIdx = reviewIdx_noPostman;
-    reviewIdxs = reviewIdxs.concat(reviewIdx);
+    if(reviewIdx == null){
+        return null;
+    }else{
+        reviewIdxs = reviewIdxs.concat(reviewIdx);
 
-    for(let i = 0; i < reviewIdx.length; i++){
-        // const reviewInfo = await getReviewDetail(reviewIdx[i]);// FIXME:
-        const reviewInfo = reviewInfoArr_noPostman[reviewIdx[i]];
-        
-        // const like_clicked =  await check_clickedLike(reviewIdx[i]);
-        const like_clicked = false;
-        const new_like_review_preview_item = createFullReviewItem(reviewInfo, like_clicked, true); // 생성, 무조건 로그인 했음
-        $review_container.appendChild(new_like_review_preview_item);
+        for(let i = 0; i < reviewIdx.length; i++){
+            // const reviewInfo = await getReviewDetail(reviewIdx[i]);// FIXME:
+            const reviewInfo = reviewInfoArr_noPostman[reviewIdx[i]];
+            
+            // const like_clicked =  await check_clickedLike(reviewIdx[i]);
+            const like_clicked = false;
+            const new_like_review_preview_item = createFullReviewItem(reviewInfo, like_clicked, true); // 생성, 무조건 로그인 했음
+            $review_container.appendChild(new_like_review_preview_item);
+        }
+        return true;
     }
+    
 }
 
 // 다른 사람이 쓴 리뷰 데이터 가져와서 보여주기
 
 export async function addNewOtherReviewContent(){
     // const otherUserIdx = getOtherUserIdx();
-    // const reviewIdx = await getOtherUserReviewIdx(otherUserIdx, pageNum);// FIXME: 다른 사람 유저 userIdx를 가져와서, 그사람이 쓴 reviewIdx를 가져오기
+    // const reviewIdx = await getOtherUserReviewIdx(otherUserIdx, pageNum)
+                                // .catch(err => console.log(err));// FIXME: 다른 사람 유저 userIdx를 가져와서, 그사람이 쓴 reviewIdx를 가져오기
     const reviewIdx = reviewIdx_noPostman;
-    reviewIdxs.concat(reviewIdx);
+    if(reviewIdx == []){
+        return null;
+    }else{
+        reviewIdxs.concat(reviewIdx);
 
-    for(let i = 0; i < reviewIdx.length; i++){
-        // const reviewInfo = await getReviewDetail(reviewIdx[i]);// FIXME:
-        const reviewInfo = reviewInfoArr_noPostman[reviewIdx[i]];
-
-        // const like_clicked =  await check_clickedLike(reviewIdx[i]);
-        const like_clicked = true;
-        const login = getUserIdx() == null ? false : true;
-        console.log(login);
-        const new_like_review_preview_item = createFullReviewItem(reviewInfo, like_clicked, login); // 생성
-        $review_container.appendChild(new_like_review_preview_item);
+        for(let i = 0; i < reviewIdx.length; i++){
+            // const reviewInfo = await getReviewDetail(reviewIdx[i]);// FIXME:
+            const reviewInfo = reviewInfoArr_noPostman[reviewIdx[i]];
+    
+            // const like_clicked =  await check_clickedLike(reviewIdx[i]);
+            const like_clicked = true;
+            const login = getUserIdx() == null ? false : true;
+            const new_like_review_preview_item = createFullReviewItem(reviewInfo, like_clicked, login); // 생성
+            $review_container.appendChild(new_like_review_preview_item);
+        }
+    return true;
     }
 }
 
@@ -107,15 +127,15 @@ export function observeLastItem(io, items){
 export function ioCallback_like(entries, io){
     entries.forEach((entry) => {
         if(entry.isIntersecting){
-            console.log('hi');
             io.unobserve(entry.target);
-            console.log(entries);
             addSkeleton();
             setTimeout(async() => {
-                await addNewLikeContent();
-                pageNum+=1;
+                const moreReviewExist = await addNewLikeContent();
+                if(moreReviewExist != null){
+                    pageNum+=1;
+                    observeLastItem(io, document.querySelectorAll('.review_item'));
+                }
                 removeSkeleton();
-                observeLastItem(io, document.querySelectorAll('.review_item'));
             }, 2000);
         }
     })
@@ -127,10 +147,12 @@ export function ioCallback_my(entries, io){
             io.unobserve(entry.target);
             addSkeleton();
             setTimeout(async() => {
-                await addNewMyContent();
-                pageNum+=1;
+                const moreReviewExist = await addNewMyContent();
+                if(moreReviewExist != null){
+                    pageNum+=1;
+                    observeLastItem(io, document.querySelectorAll('.review_item'));
+                }
                 removeSkeleton();
-                observeLastItem(io, document.querySelectorAll('.review_item'));
             }, 2000);
         }
     })
@@ -142,10 +164,12 @@ export function ioCallback_otherUser(entries, io){
             io.unobserve(entry.target);
             addSkeleton();
             setTimeout(async() => {
-                await addNewOtherReviewContent();
-                pageNum+=1;
+                const moreReviewExist = await addNewOtherReviewContent();
+                if(moreReviewExist != null){
+                    pageNum+=1;
+                    observeLastItem(io, document.querySelectorAll('.review_item'));
+                }
                 removeSkeleton();
-                observeLastItem(io, document.querySelectorAll('.review_item'));
             }, 2000);
         }
     })
@@ -184,6 +208,6 @@ export function reviewClickedEventHandler(event){
         const select_review_Idx = getElementIndex(reviewItem)// reviewItem
         const reviewIdx = reviewIdxs[select_review_Idx];
         console.log(reviewIdx);
-        location.href = "";// TODO: 여기 변경
+        location.href = `/src/main/resources/static/?${reviewIdx}`;// TODO: 여기 변경
     }
 }
