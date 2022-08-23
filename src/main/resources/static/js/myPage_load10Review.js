@@ -59,8 +59,8 @@ export async function addNewLikeContent(){
         reviewIdxs = reviewIdxs.concat(reviewIdx);
 
         for(let i = 0; i < reviewIdx.length; i++){
-            // const reviewInfo = await getReviewDetail(reviewIdx[i]);
-            const reviewInfo = reviewInfoArr_noPostman[reviewIdx[i]];
+            const reviewInfo = await getReviewDetail(reviewIdx[i]);
+            // const reviewInfo = reviewInfoArr_noPostman[reviewIdx[i]];
 
             const like_clicked = true; // 내가 좋아요한 리뷰라서 무조건 true
             const new_like_review_preview_item = createFullReviewItem(reviewInfo, like_clicked, true); // 생성, 무조건 로그인 했음

@@ -5,14 +5,6 @@ import {like_toggle} from "./myPage_likeBtn_modules.js";
 import {header_onload, header_onscroll, alarm_reset} from "./header.js";
 const logo_white_imgName = 'logo_white';
 
-fetch("../../templates/main/main_header.html")
-	.then((res) => res.text())
-	.then((text) => {
-		document.querySelector(".default_header").innerHTML = text;
-        header_onload();
-        window.onscroll = header_onscroll;
-        window.addEventListener("resize", alarm_reset);
-});
 // 이전 페이지로
 beforePageBtnHandler();
 
@@ -65,3 +57,13 @@ $main.addEventListener('click', (event) => {
 window.addEventListener('unload', () => {
     localStorage.removeItem('otherUser');
 })
+
+await fetch("../../templates/main/main_header.html")
+	.then((res) => res.text())
+	.then((text) => {
+		document.querySelector(".default_header").innerHTML = text;
+    console.log('유나님 header');
+});
+header_onload();
+window.onscroll = header_onscroll;
+window.addEventListener("resize", alarm_reset);

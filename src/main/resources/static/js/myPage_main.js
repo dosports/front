@@ -4,14 +4,6 @@ import {makeMiniReviewSkeleton, makeFullReviewSkeleton, reviewClickedEventHandle
 import {like_toggle, getElementIndex, check_clickedLike} from "./myPage_likeBtn_modules.js";
 import {header_onload, header_onscroll, alarm_reset} from "./header.js";
 
-await fetch("../../templates/main/main_header.html")
-	.then((res) => res.text())
-	.then((text) => {
-		document.querySelector(".default_header").innerHTML = text;
-        header_onload();
-        window.onscroll = header_onscroll;
-        window.addEventListener("resize", alarm_reset);
-});
 
 const logo_white_imgName = 'logo_white';    
 let myReviewIdxs, likeReviewIdxs;
@@ -182,3 +174,12 @@ document.querySelector('.like_review_preview_container').addEventListener('click
     likeReviewClickedEventHandler(event);
 })
 
+await fetch("../../templates/main/main_header.html")
+	.then((res) => res.text())
+	.then((text) => {
+		document.querySelector(".default_header").innerHTML = text;
+    console.log('유나님 header');
+});
+header_onload();
+window.onscroll = header_onscroll;
+window.addEventListener("resize", alarm_reset);

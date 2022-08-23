@@ -4,14 +4,6 @@ import {ioCallback_my, addNewMyContent, loadFirstItems, reviewClickedEventHandle
 import {like_toggle} from "./myPage_likeBtn_modules.js";
 import {header_onload, header_onscroll, alarm_reset} from "./header.js";
 
-fetch("../../templates/main/main_header.html")
-	.then((res) => res.text())
-	.then((text) => {
-		document.querySelector(".default_header").innerHTML = text;
-        header_onload();
-        window.onscroll = header_onscroll;
-        window.addEventListener("resize", alarm_reset);
-});
 
 const $review_container = document.querySelector('.review_container');
 const io = new IntersectionObserver(ioCallback_my, {threshold : 0.7});
@@ -36,3 +28,13 @@ window.addEventListener('load', () => {
 $main.addEventListener('click', (event) => {
     reviewClickedEventHandler(event);
 });
+
+await fetch("../../templates/main/main_header.html")
+	.then((res) => res.text())
+	.then((text) => {
+		document.querySelector(".default_header").innerHTML = text;
+    console.log('유나님 header');
+});
+header_onload();
+window.onscroll = header_onscroll;
+window.addEventListener("resize", alarm_reset);
