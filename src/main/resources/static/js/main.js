@@ -11,24 +11,25 @@ await fetch("../../templates/main/main_header.html")
 	.then((res) => res.text())
 	.then((text) => {
 		document.querySelector("header").innerHTML = text;
+		console.log(2);
 	});
-// window.onload = () => {
-// 	main_onload();
-// 	header_onload();
-// };
 main_onload();
 header_onload();
-window.onscroll = header_onscroll;
+window.addEventListener("scroll", header_onscroll);
+window.addEventListener("resize", scrollX_reset);
+window.addEventListener("resize", alarm_reset);
+// window.addEventListener("resize", set_review_count);
+// window.addEventListener("resize", () => {
+// 	scrollX_reset();
+// 	alarm_reset();
+// 	set_review_count();
+// });
+console.log(window);
 function main_onload() {
 	document.querySelector("#article-arrow-left").addEventListener("click", scroll_left);
 	document.querySelector("#article-arrow-right").addEventListener("click", scroll_right);
 	// header_onload();
 }
-window.addEventListener("resize", () => {
-	scrollX_reset();
-	alarm_reset();
-	set_review_count();
-});
 /**
  * 토큰확인
  */
