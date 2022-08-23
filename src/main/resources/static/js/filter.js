@@ -3,7 +3,7 @@
 // const u = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/reviews/female/tennis?category&height&weight&level&minPrice&maxPrice;"
 
 // api 테스트 할때는 밑에 줄 반드시 주석 해제 !!! ************************ 밑에 window~~ 주석 지우기 !!!!
-const API = "" ; // api url
+const API = "" ; // api url 적기 !!
 const CUR_URL = API + window.location.pathname   ;  
 // const CUR_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" ;// + window.location.pathname    
 
@@ -89,6 +89,11 @@ if (hasToken) { // 로그인할 때만 리뷰 작성하기 버튼 보여주기
 
 } else {
     write_review_btn.classList.add("writeBtn-hidden");
+}
+
+// 리뷰 작성하기 버튼 클릭 시 리뷰 작성 페이지로 이동
+function moveWritePage() {
+    location.href = `${API}/review/post` ;
 }
 
 // 이전 페이지 버튼 
