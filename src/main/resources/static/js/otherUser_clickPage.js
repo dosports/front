@@ -1,5 +1,5 @@
 import {getUserInfo, getReviewDetail, createFullReviewItem, beforePageBtnHandler, getOtherUserInfo, getOtherUserIdx} from "./myPage_modules.js";
-import {reviewIdx_noPostman, reviewInfoArr_noPostman, userInfo_noPostman} from "./myPage_data.js"; // FIXME: postman 대신
+// import {reviewIdx_noPostman, reviewInfoArr_noPostman, userInfo_noPostman} from "./myPage_data.js"; // FIXME: postman 대신
 import {ioCallback_otherUser, addNewOtherReviewContent, loadFirstItems, reviewClickedEventHandler} from "./myPage_load10Review.js";
 import {like_toggle} from "./myPage_likeBtn_modules.js";
 import {header_onload, header_onscroll, alarm_reset} from "./header.js";
@@ -20,12 +20,11 @@ beforePageBtnHandler();
 const $otherUserPage_main_header = document.querySelector('.otherUserPage_main_header');
 const $section_header = document.querySelector('.section_header');
 async function showOtherUserInfo(){
-    // const userInfo = getOtherUserInfo();
-    getOtherUserIdx();// FIXME: 나중에 지우기
-    const userInfo = userInfo_noPostman;
+    const userInfo = getOtherUserInfo();
+    // getOtherUserIdx();// FIXME: 
+    // const userInfo = userInfo_noPostman;
     let pre_img_src = userInfo.profileImg;
         pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;
-        // pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;// FIXME: 정확하지 않음
     $otherUserPage_main_header.innerHTML = `
         <div class="profile_img_container skeleton">
             <img src="" alt="사용자 프로필 사진" class="profile_img hidden">

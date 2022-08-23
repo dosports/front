@@ -1,5 +1,5 @@
 import {getReviewDetail, getMyReviewIdx, pageUpEventHandler, beforePageBtnHandler, sports_img, sports_level, createFullReviewItem}  from "./myPage_modules.js";
-import {reviewIdx_noPostman, reviewInfoArr_noPostman, userInfo_noPostman} from "./myPage_data.js"; // FIXME: postman 대신
+// import {reviewIdx_noPostman, reviewInfoArr_noPostman, userInfo_noPostman} from "./myPage_data.js"; // FIXME: postman 대신
 import {ioCallback_my, addNewMyContent, loadFirstItems, reviewClickedEventHandler} from "./myPage_load10Review.js";
 import {like_toggle} from "./myPage_likeBtn_modules.js";
 import {header_onload, header_onscroll, alarm_reset} from "./header.js";

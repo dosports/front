@@ -1,8 +1,8 @@
 import {getUserIdx} from "./myPage_modules.js";
 import {reviewIdxs} from "./myPage_load10Review.js";
-axios.defaults.baseURL = 'https://008b09e7-31c8-41cb-adab-3683ec84e87e.mock.pstmn.io';// TODO:
-// const userIdx = getUserIdx();
-const userIdx = 1;
+axios.defaults.baseURL = '';// TODO: axios 기본 url
+axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+const userIdx = ""; // FIXME: userIdx 얻는법...
 
 function addLike(reviewIdx){
     axios.post(`/like`,{
@@ -36,7 +36,6 @@ export function deleteLikeToServer(event, reviewIdxs){
     deleteLike(reviewIdx);
 }
 
-// FIXME: postman 검증 필요... 그리고 data.success T/F여부로 좋아요 눌렀는지 확인하는게 맞는지?
 export function check_clickedLike(reviewIdx){
     return axios.get(`/like/check/${reviewIdx}`)
     .then(response => response.data.success);
@@ -53,7 +52,7 @@ export function like_toggle(event){
         const $full_heart = likeBtn.parentNode.querySelector('.full_heart');
         const $empty_heart = likeBtn.parentNode.querySelector('.heart-icon');
         if(likeBtn.classList.contains('full_heart')){// 꽉찬 하트 -> 빈 하트 - delete
-            // deleteLikeToServer(event, reviewIdxs);
+            deleteLikeToServer(event, reviewIdxs);
             if(!$full_heart.classList.contains('hidden')){
                 $full_heart.classList.add('hidden');
             }
@@ -61,7 +60,7 @@ export function like_toggle(event){
                 $empty_heart.classList.remove('hidden');
             }
         }else{// 빈 하트 -> 꽉찬 하트 - add
-            // addLikeToServer(event, reviewIdxs);
+            addLikeToServer(event, reviewIdxs);
             if($full_heart.classList.contains('hidden')){
                 $full_heart.classList.remove('hidden');
             }

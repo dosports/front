@@ -1,11 +1,10 @@
 export {check_newPW, change_user_setting, header_windowSize, change_filter_setting, show_all_userData };
-// import {getUserInfo} from "./myPage_modules";
-import {userInfo_noPostman} from "./myPage_data.js";
-// postman 변수
+import {getUserInfo} from "./myPage_modules";
+// import {userInfo_noPostman} from "./myPage_data.js";
 const logo_white_imgName = 'logo_white';
-const userIdx = 1;
-axios.defaults.baseURL = 'https://008b09e7-31c8-41cb-adab-3683ec84e87e.mock.pstmn.io';// TODO:
-
+const userIdx = getUserInfo();
+axios.defaults.baseURL = '';// TODO: axios 기본 url
+axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 // DOM
 const $change_profileImg = document.querySelector('#change_profileImg');
 const $user_name = document.querySelector('#user_name');
@@ -16,8 +15,8 @@ const $profile_img = document.querySelector('.profile_img');
 
 // 모든 사용자 데이터 받아와서 보여주기 
 function show_all_userData(){
-    // const userInfo = getUserInfo();
-    const userInfo = userInfo_noPostman;
+    const userInfo = getUserInfo();
+    // const userInfo = userInfo_noPostman;
     $profile_img_container.classList.add('skeleton');
     $profile_img.classList.add('hidden');
     setTimeout(() => {
@@ -26,7 +25,6 @@ function show_all_userData(){
     }, 2000);
     $profile_img.src = userInfo.profileImg;
     $profile_img.src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;
-    // $profile_img.src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;// FIXME: 정확하지 않음
     $user_name.placeholder = userInfo.name;
     $user_height.placeholder = parseInt(userInfo.height);
     $user_weight.placeholder = userInfo.weight;
@@ -53,11 +51,10 @@ export function check_profileImg(){
 }
 
 // 사용자 이미지 변경
-// [POST] /user/profileImg/{userIdx}
 async function change_ProfileImg_data(){
     let formData = new FormData();
     formData.append("file", $change_profileImg.files[0]);
-    return axios.post(`/user/profileImg/1`, formData, {
+    return axios.post(`/user/profileImg`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
@@ -162,7 +159,7 @@ function check_newPW(){
 function change_password_name_data(){
     // 비밀번호 모두 올바른 경우에만 axios 실행될 수 있도록
     const username = $user_name.value == '' ? $user_name.placeholder : $user_name.value;
-    return axios.patch(`/user/mypage/${userIdx}`, {
+    return axios.patch(`/user/mypage`, {
         "name" : username, 
         "passwd": $current_password.value,
         "checkNewPasswd": $new_password.value,
@@ -203,8 +200,7 @@ async function change_user_setting(event){
         }
         
     }else if($change_profileImg.files.length != 0){
-        // const result = await change_ProfileImg_data();// FIXME:
-        const result = true;
+        const result = await change_ProfileImg_data();
         if(result){
             await swal("Success!", "사용자 정보가 성공적으로 수정되었습니다.", "success");
         }else{
@@ -263,7 +259,7 @@ async function change_filter_setting(event){
         const user_height = event.target.user_height.value;
         const user_weight = event.target.user_weight.value;
         
-        const result = await axios.patch(`/user/info/${userIdx}`, {
+        const result = await axios.patch(`/user/info`, {
             "height": user_height,
             "weight": user_weight,
         })
