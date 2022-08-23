@@ -1,11 +1,24 @@
 'use strict';
+import { header_onload, header_onscroll, alarm_reset } from "./header.js";
 
-// api 테스트 할때는 밑에 줄 반드시 주석 해제 !!! ************************ 밑에 window~~ 주석 지우기 !!!!
+// api 
 const API = "" ; // api url 적기 !!
 const CUR_URL = API + window.location.pathname   ;  
 
+await fetch("../../templates/main/main_header.html")
+	.then((res) => res.text())
+	.then((text) => {
+		document.querySelector("header").innerHTML = text;
+	});
 
-// const CUR_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" ;// + window.location.pathname    
+header_onload();
+window.onscroll = header_onscroll;
+window.addEventListener("resize", () => {
+	// scrollX_reset();
+	alarm_reset();
+});
+
+// const CUR_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" ;// api 테스트 용입니다    
 
 
 function frontUrl(cate, height, weight, level, minPrice, maxPrice) { // 필터링 값 반영 

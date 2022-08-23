@@ -235,7 +235,7 @@ input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
 #mobile-alarm-modal1 {
 	display: none;
 	position: absolute;
-	top: 140px;
+	top: 110px;
 	right: 10px;
 	width: 314px;
 	height: 420px;
@@ -243,12 +243,13 @@ input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
 	background: var(--alarm-bg-yellow);
 	border-radius: 28px;
 	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
+	z-index: 200;
 }
 #alarm-modal2,
 #mobile-alarm-modal2 {
 	display: none;
 	position: absolute;
-	top: 111px;
+	top: 81px;
 	right: 28px;
 	width: 0;
 	height: 0;
@@ -289,6 +290,7 @@ input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
 	background: #f8f8f8;
 	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 	border-radius: 28px;
+	margin:auto;
 }
 .alarm-item-title {
 	font-family: "NanumSquare";
@@ -310,12 +312,12 @@ input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
 }
 /*모바일*/
 #mobile-alarm-modal1 {
-	top: 124px;
-	right: 20px;
+	top: 94px;
+	right: 40px;
 }
 #mobile-alarm-modal2 {
-	top: 95px;
-	right: 50px;
+	top: 65px;
+	right: 70px;
 }
 @media (max-width: 1080px) {
 	#header-desktop {
