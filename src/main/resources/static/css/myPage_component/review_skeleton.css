@@ -1,0 +1,18 @@
+.skeleton{
+    color: transparent;
+    animation: skeleton-gradient 3s linear infinite;
+}
+
+.skeleton_review_content{
+    height: 300px;
+    width: 100%;
+}
+
+@keyframes skeleton-gradient {
+    0% {
+        background: rgb(184, 182, 182);
+    }
+    100% {
+        background: rgb(228, 226, 226);
+    }
+}

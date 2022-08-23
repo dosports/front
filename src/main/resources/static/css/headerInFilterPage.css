@@ -42,7 +42,7 @@
 /*모바일*/
 #header-mobile {
 	display: none;
-	padding: 20px 50px;
+	padding: 0 50px;
 }
 #header-mobile-right {
 	justify-content: end;
@@ -62,13 +62,12 @@
 input[id="trigger"] {
 	display: none;
 }
-label {
+label[for="trigger"] {
 	position: relative;
 	display: inline-block;
 	width: 24px;
 	height: 20px;
 }
-
 label[for="trigger"] span {
 	position: absolute;
 	left: 0;
@@ -226,9 +225,6 @@ input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
 
 /**
 *alarm*/
-#alarm-container {
-	display: none;
-}
 #alarm-button > svg,
 #mobile-alarm-button > img {
 	width: 24px;
@@ -239,7 +235,7 @@ input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
 #mobile-alarm-modal1 {
 	display: none;
 	position: absolute;
-	top: 140px;
+	top: 110px;
 	right: 10px;
 	width: 314px;
 	height: 420px;
@@ -247,12 +243,13 @@ input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
 	background: var(--alarm-bg-yellow);
 	border-radius: 28px;
 	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.15);
+	z-index: 200;
 }
 #alarm-modal2,
 #mobile-alarm-modal2 {
 	display: none;
 	position: absolute;
-	top: 111px;
+	top: 81px;
 	right: 28px;
 	width: 0;
 	height: 0;
@@ -266,46 +263,10 @@ input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
 	width: 100%;
 	padding: 0 40px;
 }
-#logOut_alarm {
-	height: 100%;
-	justify-content: center;
-	font-family: "NanumSquare";
-	font-size: 14px;
-}
-#logOut_alarm > div,
-#alarm-join {
-	font-family: "NanumSquare";
-	font-size: 13px;
-	color: rgba(0, 23, 7, 0.5);
-}
-#alarm-join {
-	border-bottom: 1px solid rgba(0, 23, 7, 0.5);
-	margin: 5px 0;
-}
-#alarm-login {
-	margin: 15px;
-	background: #f8f8f8;
-	border-radius: 28px;
-}
-#alarm-login > div {
-	width: 154px;
-	height: 43px;
-	font-family: "NanumSquare";
-	font-weight: 500;
-	font-size: 14px;
-	text-align: center;
-	line-height: 43px;
-}
-#alarm-login:hover {
-	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
-	transition: 300ms;
-}
-
 #alarm-title {
 	font-family: "GmarketSans";
 	font-weight: 500;
 	font-size: 17px;
-	color: var(--black);
 }
 #alarm-container {
 	width: 100%;
@@ -329,6 +290,7 @@ input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
 	background: #f8f8f8;
 	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
 	border-radius: 28px;
+	margin:auto;
 }
 .alarm-item-title {
 	font-family: "NanumSquare";
@@ -350,12 +312,12 @@ input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
 }
 /*모바일*/
 #mobile-alarm-modal1 {
-	top: 124px;
-	right: 20px;
+	top: 94px;
+	right: 40px;
 }
 #mobile-alarm-modal2 {
-	top: 95px;
-	right: 50px;
+	top: 65px;
+	right: 70px;
 }
 @media (max-width: 1080px) {
 	#header-desktop {
