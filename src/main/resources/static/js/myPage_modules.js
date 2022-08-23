@@ -3,7 +3,7 @@ import {check_clickedLike} from "./myPage_likeBtn_modules.js";
 const full_heart_imgName = 'colored_heart_icon';
 axios.defaults.baseURL = '';// TODO: axios 기본 url
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-const userIdx = ''; // TODO: userIdx...?
+const userIdx = getUserIdx();
 
 // function setToken(){
 //     axios.defaults.headers.common['Authorization'] = `Bearer localStorage.getItem('accessToken')`;

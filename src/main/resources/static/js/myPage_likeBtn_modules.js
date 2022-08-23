@@ -2,7 +2,7 @@ import {getUserIdx} from "./myPage_modules.js";
 import {reviewIdxs} from "./myPage_load10Review.js";
 axios.defaults.baseURL = '';// TODO: axios 기본 url
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
-const userIdx = ""; // FIXME: userIdx 얻는법...
+const userIdx = getUserIdx();
 
 function addLike(reviewIdx){
     axios.post(`/like`,{
