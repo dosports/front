@@ -1,4 +1,6 @@
 @import url("../../static/css/variable.css");
+/*
+**공통*/
 #content {
 	position: relative;
 	width: 1264px;
@@ -46,8 +48,13 @@
 	color: white;
 	font-size: 9px;
 }
-
-/** header **/
+/*
+**헤더*/
+/*공통*/
+#center-logo {
+	width: 311px;
+}
+/*데스크탑*/
 #header-desktop {
 	display: block;
 }
@@ -58,9 +65,6 @@
 #header-center {
 	width: fit-content;
 	margin: 0 auto;
-}
-#center-logo {
-	width: 311px;
 }
 .header-right-item {
 	padding: 0 8px;
@@ -107,7 +111,6 @@ label {
 	display: inline-block;
 	width: 24px;
 	height: 20px;
-	/* border: 1px solid coral; */
 }
 label[for="trigger"] span {
 	position: absolute;
@@ -137,7 +140,8 @@ input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
 	top: 50%;
 	transform: rotate(-45deg);
 }
-/**navigation**/
+/*
+**네비게이션바*/
 /*데스크탑*/
 #nav-desktop {
 	height: 54.23px;
@@ -259,7 +263,9 @@ input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
 #trigger:checked ~ #nav-mobile {
 	left: 0;
 }
-/**section**/
+/*
+**컨텐트*/
+/*공통*/
 #ad_banner {
 	width: 100%;
 	height: 14.75vw;
