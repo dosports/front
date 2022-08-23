@@ -33,16 +33,13 @@ function getUserInfo(){
 
 // TODO: location.href...?
 export function getOtherUserIdx(){
-    //otherUserPage.html?otherUserIdx:2 이런식으로 온다고 했을때
-    const OtherUserIdx = location.href.split("?")[1].split(':')[1];
-    console.log(OtherUserIdx);
+    const OtherUserIdx = JSON.parse(localStorage.getItem('otherUser')).userIdx;
     return OtherUserIdx;
 }
 
 export function getOtherUserInfo(){
-    const otherUserIdx = getOtherUserIdx();
-    return axios.get(`/user/info/${otherUserIdx}`)
-    .then(response => response.data.data)
+    const otherUserInfo = JSON.parse(localStorage.getItem('otherUser'));
+    return otherUserInfo;
 }
 
 // 자세한 리뷰 정보 가져오기

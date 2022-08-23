@@ -49,7 +49,9 @@ showUserInfo();
 
 // 2. 좋아요한 리뷰 가져와서 보여주기 - 최대 4개
 async function addLikeReview(){
-    // const reviewIdx = await getLikeReviewIdx();// FIXME:
+    // const reviewData = await getLikeReviewIdx(1)
+    //                         .catch(err => console.log(err));// FIXME:
+    // const reviewIdx = reviewData['reviewIdx'];
     const reviewIdx = reviewIdx_noPostman;
     likeReviewIdxs = reviewIdx;
     const lastIdx = reviewIdx.length > 4 ? 4 : reviewIdx.length;
@@ -80,7 +82,7 @@ async function addLikeReview(){
 
 // 3. 내가 쓴 리뷰 데이터 가져와서 보여주기 - 최대 4개
 async function addMyReview(){
-    // const reviewIdx = await getMyReviewIdx(); // FIXME:
+    // const reviewIdx = await getMyReviewIdx(1); // FIXME:
     const reviewIdx = reviewIdx_noPostman;
     myReviewIdxs = reviewIdx;
     const lastIdx = reviewIdx.length > 4 ? 4 : reviewIdx.length;

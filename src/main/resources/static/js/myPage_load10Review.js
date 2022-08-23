@@ -47,10 +47,12 @@ function removeSkeleton(){
 // 내가 좋아요한 리뷰 데이터 가져와서 보여주기
 // [GET] {{url}}/review/user/{userIdx}
 export async function addNewLikeContent(){
-    // const reviewIdx = await getLikeReviewIdx(pageNum)
+    // const reviewData = await getLikeReviewIdx(pageNum)
     //                         .catch(err => console.log(err));// FIXME:
+    // const reviewIdx = reviewData['reviewIdx'];
+    // const endPage = reviewData['endPage'];
     const reviewIdx = reviewIdx_noPostman;
-    if(reviewIdx == []){
+    if(pageNum == endPage){
         return null;
     }else{
         // const reviewIdx = reviewIdx_noPostman;

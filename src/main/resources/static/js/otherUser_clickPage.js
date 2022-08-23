@@ -20,7 +20,7 @@ beforePageBtnHandler();
 const $otherUserPage_main_header = document.querySelector('.otherUserPage_main_header');
 const $section_header = document.querySelector('.section_header');
 async function showOtherUserInfo(){
-    // const userInfo = await getOtherUserInfo();
+    // const userInfo = getOtherUserInfo();
     getOtherUserIdx();// FIXME: 나중에 지우기
     const userInfo = userInfo_noPostman;
     let pre_img_src = userInfo.profileImg;
@@ -62,3 +62,7 @@ $main.addEventListener('click', like_toggle);
 $main.addEventListener('click', (event) => {
     reviewClickedEventHandler(event);
 });
+
+window.addEventListener('unload', () => {
+    localStorage.removeItem('otherUser');
+})

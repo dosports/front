@@ -14,7 +14,7 @@ const $user_weight = document.querySelector('#user_weight');
 const $profile_img_container = document.querySelector('.profile_img_container');
 const $profile_img = document.querySelector('.profile_img');
 
-// 모든 사용자 데이터 받아와서 보여주기 // FIXME: 확인 안함
+// 모든 사용자 데이터 받아와서 보여주기 
 function show_all_userData(){
     // const userInfo = getUserInfo();
     const userInfo = userInfo_noPostman;
@@ -203,8 +203,19 @@ async function change_user_setting(event){
         }
         
     }else if($change_profileImg.files.length != 0){
-        // const result = await change_ProfileImg_data();
+        // const result = await change_ProfileImg_data();// FIXME:
         const result = true;
+        if(result){
+            await swal("Success!", "사용자 정보가 성공적으로 수정되었습니다.", "success");
+        }else{
+            await swal({
+                icon: 'error',
+                title: 'Oops...',
+                text: '사용자 정보 수정에 실패하였습니다.',
+            });
+        }
+    }else if($user_name.value!=""){
+        const result = await change_password_name_data();
         if(result){
             await swal("Success!", "사용자 정보가 성공적으로 수정되었습니다.", "success");
         }else{
