@@ -1,0 +1,51 @@
+/* header */
+.myPage_setting_header{
+    padding-top: 32.16px;
+}
+.before_btn_container{
+    display: flex;
+    align-items: center;
+}
+.before_btn{
+    width: 33.45px;
+    height: 33.45px;
+    transform: scaleX(-1);
+}
+#myPage_setting_header_title{
+    font-family: 'GmarketSans';
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--black);
+}
+.before_btn_container:hover{
+    cursor: pointer;
+}
+.styled-border {
+    position: relative;
+    border-bottom: 1px solid var(--deep-yellow);
+}
+.styled-border::before {
+    content: "▶︎";
+    position: absolute;
+    top: calc(100% - 4px);
+    left: -2px;
+    color: var(--yellow);
+    font-size: 8px;
+}
+.styled-border::after {
+    content: "▶︎";
+    position: absolute;
+    top: calc(100% - 4px);
+    right: -2px;
+    transform: scaleX(-1);
+    color: var(--yellow);
+    font-size: 8px;
+}
+
+@media (max-width : 800px) {
+    .before_btn{
+        width: 45px;
+        height: 28px;
+        transform: scaleX(-1);
+    }
+}
