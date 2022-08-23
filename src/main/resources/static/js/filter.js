@@ -3,8 +3,8 @@
 // const u = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/reviews/female/tennis?category&height&weight&level&minPrice&maxPrice;"
 
 // api 테스트 할때는 밑에 줄 반드시 주석 해제 !!! ************************ 밑에 window~~ 주석 지우기 !!!!
-const BASE_API_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" ;// + window.location.pathname    
-// const BASE_API_URL = ""+ window.location.pathname   ;
+// const BASE_API_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" ;// + window.location.pathname    
+const BASE_API_URL = ""+ window.location.pathname   ;  // api url
 
 
 function filteredApiUrl(cate, height, weight, level, minPrice , maxPrice, sortParam, pageNum) {
