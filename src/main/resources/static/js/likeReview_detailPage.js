@@ -26,7 +26,6 @@ $main.addEventListener('click', like_toggle);
 const $review_container = document.querySelector('.review_container');
 const io = new IntersectionObserver(ioCallback_like, {threshold : 0.7});
 window.addEventListener('load', () => {
-    console.log('hello loaded');
     $review_container.innerHTML = ""; // 처음에 모두 삭제
     loadFirstItems(io, addNewLikeContent);
 })

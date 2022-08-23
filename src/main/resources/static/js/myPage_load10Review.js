@@ -52,6 +52,7 @@ export async function addNewLikeContent(){
     // const reviewIdx = reviewData['reviewIdx'];
     // const endPage = reviewData['endPage'];
     const reviewIdx = reviewIdx_noPostman;
+    const endPage = 4;
     if(pageNum == endPage){
         return null;
     }else{

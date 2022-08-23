@@ -1,6 +1,6 @@
 export {getUserInfo, getReviewDetail, getMyReviewIdx, getLikeReviewIdx, createMiniReviewItem, createFullReviewItem, pageUpEventHandler, beforePageBtnHandler, sports_img, sports_level};
 import {check_clickedLike} from "./myPage_likeBtn_modules.js";
-const full_heart_imgName = 'full_heart';
+const full_heart_imgName = 'colored_heart_icon';
 axios.defaults.baseURL = 'https://008b09e7-31c8-41cb-adab-3683ec84e87e.mock.pstmn.io';// TODO:
 const userIdx = getUserIdx(); // TODO: 로컬에서 getItem으로 토큰 가져오기
 
