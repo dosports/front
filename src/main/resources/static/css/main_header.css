@@ -62,7 +62,41 @@
 input[id="trigger"] {
 	display: none;
 }
+label {
+	position: relative;
+	display: inline-block;
+	width: 24px;
+	height: 20px;
+}
 
+label[for="trigger"] span {
+	position: absolute;
+	left: 0;
+	height: 2px;
+	width: 100%;
+	background-color: #000;
+	transition: 300ms;
+}
+label[for="trigger"] span:nth-child(1) {
+	top: 0;
+}
+label[for="trigger"] span:nth-child(2) {
+	top: 50%;
+}
+label[for="trigger"] span:nth-child(3) {
+	top: 100%;
+}
+input[id="trigger"]:checked + label[for="trigger"] span:nth-child(1) {
+	top: 50%;
+	transform: rotate(45deg);
+}
+input[id="trigger"]:checked + label[for="trigger"] span:nth-child(2) {
+	opacity: 0;
+}
+input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
+	top: 50%;
+	transform: rotate(-45deg);
+}
 /*
 **네비게이션바*/
 /*데스크탑*/
