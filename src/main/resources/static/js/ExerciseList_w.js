@@ -5,15 +5,6 @@ const $swim = document.getElementById("swim-count");
 const $tennis = document.getElementById("tennis-count");
 const $gym = document.getElementById("gym-count");
 
-import { header_onload, header_onscroll, alarm_reset } from "./header.js";
-fetch('../../templates/main/main_header.html')
-    .then((res) => res.text())
-    .then((text) => {
-        document.querySelector("header").innerHTML = text;
-        header_onload();
-        window.onscroll = header_onscroll;
-        window.addEventListener("resize", alarm_reset);
-    })
 
 /*공 */
 function ballsFetch() {
