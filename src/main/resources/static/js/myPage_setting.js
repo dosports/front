@@ -1,5 +1,5 @@
 import {beforePageBtnHandler}  from "./myPage_modules.js";
-import {check_newPW, change_user_setting, header_windowSize, change_filter_setting, check_weight_height, show_all_userData } from "./myPage_setting_modules.js";
+import {check_newPW, change_user_setting, header_windowSize, change_filter_setting, check_weight_height, show_all_userData, check_profileImg } from "./myPage_setting_modules.js";
 import {userInfo_noPostman} from "./myPage_data.js";
 
 // 화면 크기별 헤더 불러오기
@@ -12,13 +12,12 @@ beforePageBtnHandler();
 // -------------------  user setting 변경
 // DOM
 const $change_profileImg = document.querySelector('#change_profileImg');
-
 const $current_password = document.querySelector('#current_password');
 const $new_password = document.querySelector('#new_password');
 const $new_check_password = document.querySelector('#new_check_password');
 
 // 로드 되면 모든 데이터 불러오기
-window.addEventListener('load', show_all_userData); //FIXME: 아직 미완성(키, 몸무게 받아오는거)
+window.addEventListener('load', show_all_userData);
 
 // 비번 ERR MSG
 $new_password.addEventListener('keyup', check_newPW);
@@ -26,6 +25,9 @@ $new_check_password.addEventListener('keyup', check_newPW);
 
 // 사용자 버튼 클릭 submit
 document.querySelector('.user_setting_form').addEventListener('submit', change_user_setting);
+
+// 사용자 프로필 변경 서버로 데이터 보내기 전에 확인 
+$change_profileImg.addEventListener('change', check_profileImg);
 
 // -------------------  user filter setting 변경
 // DOM

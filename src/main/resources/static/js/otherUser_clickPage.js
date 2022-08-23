@@ -1,4 +1,4 @@
-import {getUserInfo, getReviewDetail, createFullReviewItem, beforePageBtnHandler} from "./myPage_modules.js";
+import {getUserInfo, getReviewDetail, createFullReviewItem, beforePageBtnHandler, getOtherUserInfo, getOtherUserIdx} from "./myPage_modules.js";
 import {reviewIdx_noPostman, reviewInfoArr_noPostman, userInfo_noPostman} from "./myPage_data.js"; // FIXME: postman 대신
 import {ioCallback_otherUser, addNewOtherReviewContent, loadFirstItems, reviewClickedEventHandler} from "./myPage_load10Review.js";
 import {like_toggle} from "./myPage_likeBtn_modules.js";
@@ -12,6 +12,7 @@ const $otherUserPage_main_header = document.querySelector('.otherUserPage_main_h
 const $section_header = document.querySelector('.section_header');
 async function showOtherUserInfo(){
     // const userInfo = await getOtherUserInfo();
+    getOtherUserIdx();// FIXME: 나중에 지우기
     const userInfo = userInfo_noPostman;
     let pre_img_src = userInfo.profileImg;
         pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;

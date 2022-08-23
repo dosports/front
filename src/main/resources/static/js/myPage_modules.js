@@ -20,11 +20,12 @@ function getUserInfo(){
 
 // TODO: location.href...?
 export function getOtherUserIdx(){
-    return ;
+    //otherUserPage.html?otherUserIdx:2 이런식으로 온다고 했을때
+    const OtherUserIdx = location.href.split("?")[1].split(':')[1];
+    console.log(OtherUserIdx);
+    return OtherUserIdx;
 }
 
-// FIXME: 현경님께 여쭤보기
-// 다른 유저의 사진, 이름 정보 가져오기
 export function getOtherUserInfo(){
     const otherUserIdx = getOtherUserIdx();
     return axios.get(`${url}/user/info/${otherUserIdx}`)

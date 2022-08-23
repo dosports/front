@@ -1,9 +1,9 @@
 import {reviewIdx_noPostman, reviewInfoArr_noPostman} from "./myPage_data.js";
-import {createFullReviewItem, getLikeReviewIdx, getMyReviewIdx, getReviewDetail, getOtherUserIdx, getUserIdx} from "./myPage_modules.js";
+import {createFullReviewItem, getLikeReviewIdx, getMyReviewIdx, getReviewDetail, getOtherUserIdx, getUserIdx, getOtherUserReviewIdx} from "./myPage_modules.js";
 import {check_clickedLike, getElementIndex} from "./myPage_likeBtn_modules.js";
 
 const $review_container = document.querySelector('.review_container');
-let pageNum = 1; // 이게 각 js마다 pageNum이라는 변수가 생기는거나 다름 없나?
+let pageNum = 1;
 const skeletonItems = Array.from({length : 10}, () => makeFullReviewSkeleton());
 export let reviewIdxs = [];
 
@@ -79,7 +79,7 @@ export async function addNewMyContent(){
 }
 
 // 다른 사람이 쓴 리뷰 데이터 가져와서 보여주기
-// TODO: 작성
+
 export async function addNewOtherReviewContent(){
     // const otherUserIdx = getOtherUserIdx();
     // const reviewIdx = await getOtherUserReviewIdx(otherUserIdx, pageNum);// FIXME: 다른 사람 유저 userIdx를 가져와서, 그사람이 쓴 reviewIdx를 가져오기
@@ -175,7 +175,7 @@ export function makeMiniReviewSkeleton(){
     return newSkeletonItem;
 }
 
-// TODO:
+
 // 리뷰이미지, title 클릭시 해당 리뷰 상세보기 페이지로 이동 - reviewIdx만 보내드리면 되나?
 export function reviewClickedEventHandler(event){
     const eventTarget = event.target;
@@ -184,6 +184,6 @@ export function reviewClickedEventHandler(event){
         const select_review_Idx = getElementIndex(reviewItem)// reviewItem
         const reviewIdx = reviewIdxs[select_review_Idx];
         console.log(reviewIdx);
-        location.href = ``;
+        location.href = "";// TODO: 여기 변경
     }
 }

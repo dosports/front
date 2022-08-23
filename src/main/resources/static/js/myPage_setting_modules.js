@@ -13,6 +13,7 @@ const $user_height = document.querySelector('#user_height');
 const $user_weight = document.querySelector('#user_weight');
 const $profile_img_container = document.querySelector('.profile_img_container');
 const $profile_img = document.querySelector('.profile_img');
+
 // 모든 사용자 데이터 받아와서 보여주기 // FIXME: 확인 안함
 function show_all_userData(){
     // const userInfo = getUserInfo();
@@ -26,19 +27,14 @@ function show_all_userData(){
     $profile_img.src = userInfo.profileImg;
     $profile_img.src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;
     // $profile_img.src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;// FIXME: 정확하지 않음
-    // $user_name.placeholder = userInfo.name;
-    $user_name.placeholder = "pizza";
-    // 키 몸무게 보여주기 - FIXME: api 없음
-    // $user_height.placeholder = userInfo.height;
-    // $user_weight.placeholder = userInfo.weight;
-    $user_height.placeholder = 170;
-    $user_weight.placeholder = 50;
+    $user_name.placeholder = userInfo.name;
+    $user_height.placeholder = parseInt(userInfo.height);
+    $user_weight.placeholder = userInfo.weight;
 }
 
 // ******** 사용자 이미지
 // 사용자 이미지 파일 선택 err msg, 제대로 선택된 경우 true 반환
 export function check_profileImg(){
-
     // 파일 확장자 .jpg, .jpeg, .png인 경우에만 axios 실행
     const fileVal = $change_profileImg.files[0].name;
     const fileType = fileVal.slice(fileVal.indexOf('.')+1).toLowerCase();
@@ -47,12 +43,11 @@ export function check_profileImg(){
         fileReader.readAsDataURL($change_profileImg.files[0]);
         
         fileReader.onload = function() {
-            console.log(fileReader.result);
             document.querySelector('.profile_img').src = fileReader.result;
         }
         return true;
     }else{
-        document.querySelector('.profileImg_err').innerText = '이미지 파일은 jpg, jpeg, png 형식만 등록 가능합니다.';
+        document.querySelector('.profileImg_err').innerText = '이미지 파일은 jpg, jpeg, png 형식만' +'\n' + '등록 가능합니다.';
         return false;
     }
 }
@@ -62,11 +57,12 @@ export function check_profileImg(){
 async function change_ProfileImg_data(){
     let formData = new FormData();
     formData.append("file", $change_profileImg.files[0]);
+    console.log($change_profileImg.files[0]);
     return axios.post(`${url}/user/profileImg/1`, formData, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }
-    }).then(response => console.log(response.data.data));
+    }).then(response => console.log(response.data.success));
 }
 
 
@@ -197,7 +193,16 @@ async function change_user_setting(event){
 
         // 프로필 사진 변경
         if($change_profileImg.files.length != 0){
-            await change_ProfileImg_data();
+            const result = await change_ProfileImg_data();
+            if(result){
+                await swal("Success!", "사용자 정보가 성공적으로 수정되었습니다.", "success");
+            }else{
+                await swal({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '사용자 정보 수정에 실패하였습니다.',
+                });
+            }
         }
     }else{
         // alert('사용자 정보 수정에 실패하였습니다.');
