@@ -1,6 +1,6 @@
 import {beforePageBtnHandler}  from "./myPage_modules.js";
 import {check_newPW, change_user_setting, header_windowSize, change_filter_setting, check_weight_height, show_all_userData, check_profileImg } from "./myPage_setting_modules.js";
-import {userInfo_noPostman} from "./myPage_data.js";
+// import {userInfo_noPostman} from "./myPage_data.js";
 import {header_onload, header_onscroll, alarm_reset} from "./header.js";
 
 fetch("../../templates/main/main_header.html")
@@ -13,7 +13,6 @@ fetch("../../templates/main/main_header.html")
 });
 
 window.addEventListener('load', () => {
-    console.log('hihello');
     header_windowSize();
 })
 // 화면 크기별 헤더 불러오기
@@ -31,7 +30,6 @@ const $new_check_password = document.querySelector('#new_check_password');
 
 // 로드 되면 모든 데이터 불러오기
 window.addEventListener('load', () => {
-    console.log('hdididi');
     show_all_userData();
 });
 
