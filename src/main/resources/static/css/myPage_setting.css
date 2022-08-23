@@ -1,0 +1,499 @@
+@import "./variable.css";
+@import "./reset.css";
+@import "./myPage_component/header_before.css";
+@import "./myPage_component/review_skeleton.css";
+@import "./main_header.css";
+
+body{
+    width: 1260px;
+    margin: 0 auto;
+}
+
+label{
+    width: auto;
+    height: auto;
+}
+
+/* user setting */
+.user_setting_container, .filter_setting_container{
+    position: relative;
+}
+.user_setting_container{
+    height: 716px;
+}
+.user_setting_title, .filter_setting_title{
+    font-family: 'GmarketSans';
+    font-weight: 700;
+    font-size: 17px;
+    margin-left: 30px;
+}
+.user_setting_title{
+    margin-top: 45.55px;
+    margin-bottom: 36px;
+}
+.user_setting_form{
+    display: flex;
+    font-family: 'NanumSquare';
+    margin-left: 28px;
+}
+.user_profile_container{
+    margin-right: 117px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.profile_img_container{
+    width: 9.93vw;
+    height: 9.93vw;
+    border-radius: 50%;
+    position: relative;
+}
+.profile_img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(50, 50);
+    object-fit: cover;
+    border-radius: 50%;
+}
+.hidden{
+    display: none;
+}
+label[for="change_profileImg"]{
+    font-family: 'NanumSquare';
+    margin-top: 38px;
+    color: #A7A7A7;
+    font-weight: 400;
+    font-size: 16px;
+}
+#change_profileImg{
+    display: none;
+}
+
+.user_nameAndPW{
+    display: flex;
+    flex-direction: row;
+}
+.user_name_container{
+    margin-right: 96px;
+    display: flex;
+    flex-direction: column;
+}
+.user_password_container{
+    display: flex;
+    flex-direction: column;
+}
+.user_name_container input, .user_password_container input{
+    width: 366.09px; /*  px단위 */
+    height: 40px;
+    background-color: #f1f1f1;
+    color: var(--black);
+    font-weight: 300;
+    font-size: 16px;
+    border-radius: 20px;
+    border: none;
+    padding-left: 1.05vw;
+}
+.user_name_container input::placeholder, .user_password_container input::placeholder{
+    color: #9f9f9f;
+}
+label[for="user_name"], label[for="current_password"]{
+    font-family: 'NanumSquare';
+    font-weight: 400;
+    font-size: 17px;
+    margin-bottom: 18px;
+}
+input[name="new_password"], input[name="current_password"]{
+    margin-bottom: 7.5px;
+}
+
+
+/* 저장 버튼 */
+#user_setting_save_btn, #filter_setting_save_btn{
+    background-color: var(--green);
+    border-radius: 19px;
+    font-family: 'GmarketSans';
+    font-weight: 500;
+    font-size: 17px;
+    border: none;
+    color: white;
+}
+#user_setting_save_btn{
+    width: 182px;
+    height: 50px;
+}
+#filter_setting_save_btn{
+    width: 165px;
+    height: 46px;
+}
+#user_setting_save_btn:hover, #filter_setting_save_btn:hover, label[for="change_profileImg"]:hover{
+    cursor: pointer;
+}
+#user_setting_save_btn{
+    position: absolute;
+    bottom: 112px;
+    right: 0;
+}
+
+
+/* 경고 메세지 */
+.profileImg_err, .username_err, .password_err, .filter_err, .newPassword_err{
+    font-family: 'NanumSquare';
+    font-weight: 800;
+    font-size: 15px;
+    color: var(--orange);
+}
+.profileImg_err{
+    margin-top: 16px;
+    line-height: 1.3;
+}
+.username_err, .password_err, .newPassword_err, label[for="user_name"], label[for="current_password"]{
+    margin-left: 21px;
+    line-height: 1.3;
+}
+.newPassword_err, .username_err{
+    margin-top: 17px;
+}
+.password_err{
+    margin-bottom: 16.5px;
+}
+.filter_err{
+    text-align: center;
+    line-height: 1.3;
+}
+
+
+/* filter setting */
+.filter_setting_container{
+    height: 542px;
+    border-top: 1px solid var(--deep-yellow);
+    padding-top: 65px;
+}
+.filter_setting_form{
+    font-family: 'NanumSquare';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    margin: 63px 0 40px 0;
+}
+.user_height_container{
+    margin-right: 9.56vw;
+}
+.user_height_container label, .user_weight_container label{
+    margin-right: 30px;
+}
+#user_height, #user_weight{
+    font-family: 'NanumSquare';
+    font-weight: 400;
+    font-size: 16px;
+    width: 114px;
+    height: 31px;
+    border: 2px solid var(--green);
+    border-radius: 26.5px;
+    margin-right: 1.3vw;
+    text-align: center;
+}
+#filter_setting_save_btn{
+    position: absolute;
+    top: 251px;
+    right: 0;
+}
+
+
+/* footer */
+footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.footer_nav{
+    width: 451px;
+    display: flex;
+    justify-content: space-between;
+}
+.footer_nav_item{
+    font-family: 'NanumSquare';
+    font-weight: 400;
+    font-size: 15px;
+}
+#footer_logo{
+    margin-top: 12px;
+    margin-bottom: 68px;
+    width: 41.91px;
+    height: 41.91px;
+    filter: grayscale(100%);
+}
+
+
+
+@media (max-width: 1264px) {
+    body{
+        width: 100%;
+    }
+
+    main{
+        margin: 0 20px;
+    }
+}
+
+@media (max-width: 1230px){
+    .user_name_container input, .user_password_container input{
+        width: 300px; 
+    }
+    .profile_img_container{
+        width: 130px;
+        height: 130px;
+    }
+
+    .user_profile_container{
+        margin-right: 80px;
+    }
+    .user_name_container{
+        margin-right: 60px;
+    }
+}
+
+/* 원래는 360px이긴 함*/
+@media (max-width: 800px) { /*js도 px header변경함수에 바꾸기*/
+    body{
+        width: 100%;
+    }
+
+    main{
+        /* margin: 0 6.94vw; */
+        margin: 0 20px;
+    }
+    /* header */
+    .myPage_setting_header_title{
+        font-family: 'GmarketSans';
+        font-weight: 700;
+        font-size: 22px;
+        color: var(--black);
+        margin-left: 8px;
+        padding-bottom: 18.25px;
+    }
+    .styled-border {
+        position: relative;
+        border-bottom: 1px solid var(--deep-yellow);
+    }
+    .styled-border::before {
+        content: "▶︎";
+        position: absolute;
+        top: calc(100% - 4px);
+        left: -2px;
+        color: var(--yellow);
+        font-size: 8px;
+    }
+    .styled-border::after {
+        content: "▶︎";
+        position: absolute;
+        top: calc(100% - 4px);
+        right: -2px;
+        transform: scaleX(-1);
+        color: var(--yellow);
+        font-size: 8px;
+    }
+    
+    /* user setting */
+    .user_setting_container{
+        height: 750px;
+    }
+    .user_setting_title, .filter_setting_title{
+        font-weight: 500;
+        font-size: 20px;
+        margin-left: 20px;
+    }
+    .user_setting_title{
+        margin-top: 26.75px;
+        margin-bottom: 37px;
+    }
+    .user_setting_form{
+        display: flex;
+        flex-direction: column;
+        margin-left: 0;
+    }
+    .user_profile_container{
+        margin-right: 0;
+        margin-bottom: 30px;
+    }
+    .profile_img{
+        width: 130px;
+        height: 130px;
+    }
+    label[for="change_profileImg"]{
+        color: rgba(0, 23, 7, 0.5);
+        font-size: 16px;
+    }
+    .user_nameAndPW{
+        flex-direction: column;
+        /* padding-left: 30px; */
+        align-items: center;
+    }
+    .user_name_container{
+        /* background-color: palegreen; */
+        margin-right: 0;
+    }
+    /* .user_password_container{
+        background-color: paleturquoise;
+    } */
+    .user_name_container input, .user_password_container input{
+        width: 240px;
+        height: 36px;
+        background-color: rgba(217, 217, 217, 0.3);
+        color: var(--black);
+        font-weight: 300;
+        font-size: 16px;
+        padding-left: 17px;
+    }
+    .user_name_container input::placeholder, .user_password_container input::placeholder{
+        color: rgba(0, 23, 7, 0.5);
+    }
+    label[for="user_name"], label[for="current_password"]{
+        font-family: 'NanumSquare';
+        font-weight: 400;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+    input[name="new_password"], input[name="current_password"]{
+        margin-bottom: 10px;
+    }
+    
+    
+    /* 저장 버튼 */
+    #user_setting_save_btn, #filter_setting_save_btn{
+        font-size: 16px;
+    }
+    #user_setting_save_btn{
+        padding: 5px 15px;
+    }
+    #filter_setting_save_btn{
+        position: relative;
+        padding: 5px 15px;
+    }
+    #user_setting_save_btn{
+        position: absolute;
+        bottom: 56.43px;
+        right: 50%;
+        transform: translateX(50%);
+    }
+    #filter_setting_save_btn{
+        position: absolute;
+        top: 345px;
+        right: 50%;
+        transform: translateX(50%);
+    }
+    
+    /* 경고 메세지 */
+    .profileImg_err, .filter_err, .newPassword_err{
+        font-family: 'NanumSquare';
+        font-weight: 800;
+        font-size: 12px;
+        line-height: 1.5;
+        color: var(--orange);
+    }
+    .profileImg_err{
+        margin-top: 10px;
+    }
+    label[for="user_name"], label[for="current_password"]{
+        margin-left: 0;
+    }
+    label[for="current_password"]{
+        margin-top: 34px;
+    }
+    .username_err, .password_err, .newPassword_err {
+        margin-left: 17px;
+    }
+    .newPassword_err, .username_err{
+        margin-top: 10px;
+    }
+    .password_err{
+        margin-bottom: 10px;
+    }
+    
+    
+    
+    /* filter setting */
+    .filter_setting_container{
+        height: 802px;
+        padding-top: 54px;
+    }
+    .filter_setting_form{
+        font-family: 'NanumSquare';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 16px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 61px 30px 40px 3px; 
+    }
+    .user_height_container{
+        margin-right: 0;
+        margin-bottom: 30px;
+    }
+    .user_height_container label{
+        margin: 0 17.5px;
+    }
+    .user_weight_container label{
+        margin-right: 5px;
+    }
+    #user_height, #user_weight{
+        font-size: 16px;
+        margin-right: 10px;
+        text-align: center;
+        width: 120px;
+    }
+    #user_weight{
+        margin-right: 13px;
+    }
+
+    /* footer */
+    .footer_nav{
+        display: flex;
+        justify-content: space-between;
+    }
+    .footer_nav_item{
+        font-family: 'NanumSquare';
+        font-weight: 400;
+        font-size: 13px;
+    }
+    #footer_logo{
+        margin-top: 12px;
+        margin-bottom: 68px;
+        width: 40px;
+        height: 40px;
+        filter: grayscale(100%);
+    }
+    
+    
+}
+
+@media (max-width: 400px) {
+    .footer_nav{
+        width: 100%;
+    }
+    .footer_nav_item{
+        font-size: 10px;
+    }
+    #footer_logo{
+        width: 30px;
+        height: 30px;
+    }
+}
+.swal-button {
+    padding: 7px 19px;
+    border-radius: 2px;
+    background-color: var(--green);
+    font-size: 15px;
+    /* border: 1px solid #3e549a;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.3); */
+}
+
+.swal-text {
+    font-family: 'NanumSquare';
+    color: var(--black);
+}

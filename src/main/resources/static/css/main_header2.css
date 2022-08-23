@@ -62,13 +62,12 @@
 input[id="trigger"] {
 	display: none;
 }
-label {
+label[for="trigger"] {
 	position: relative;
 	display: inline-block;
 	width: 24px;
 	height: 20px;
 }
-
 label[for="trigger"] span {
 	position: absolute;
 	left: 0;

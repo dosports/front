@@ -1,0 +1,151 @@
+@import "../css/variable.css";
+@import "../css/myPage_component/header_before.css";
+@import "../css/reviewContainer.css";
+@import "../css/myPage_component/page_up_btn.css";
+@import "./myPage_component/reviewContainer_plus.css";
+@import "./myPage_component/review_skeleton.css";
+@import "./main_header.css";
+
+body{
+    width: 1264px;
+    margin: 0 auto;
+}
+
+/* main header */
+.otherUserPage_main_header{
+    display: flex;
+    align-items: center;
+    margin: 0 1.94vw;
+    padding: 35.16px 0 20px 0;
+}
+.profile_img_container{
+    width: 4.36vw;
+    height: 4.36vw;
+    border-radius: 50%;
+    position: relative;
+}
+.profile_img{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(50, 50);
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.user_name{
+    font-family: 'GmarketSans';
+    font-weight: 500;
+    font-size: 17px;
+    color: #001707;
+    margin-left: 1.21vw;
+    flex: 1;
+}
+.setting_icon{
+    font-size: 26px;
+    color:#001707;
+    margin-right: 0.95vw;
+}
+.hidden{
+    display: none;
+}
+/* main 안에 있는 header */
+.section_header{
+    margin: 50px 0 27px 59px;
+    /* margin: 0 37px 42px 37px;
+    padding: 45.55px 0 18px 31px; */
+}
+
+.section_header_title{
+    font-family: 'GmarketSans';
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--black);
+}
+
+/* 하단 상세보기 */
+.more_my_review_container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 112.55px;
+    margin-top: 51px;
+}
+.more_icon{
+    width: 1.76vw;
+    height: 1.76vw;
+    margin-right: 18px;
+}
+.more_my_review_title{
+    font-family: 'GmarketSans';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    color: var(--black);
+    margin-right: 7px;
+    padding-top: 4px;
+}
+/* 리뷰 컨테이너 관련 */
+.review_item:last-child{
+    margin-bottom: 51px;
+}
+
+@media (max-width: 1264px) {
+    body{
+        width: 100%;
+    }
+
+    main{
+        margin: 0 20px;
+    }
+}
+
+@media (max-width: 1150px) {
+    .user_profile_container{
+        width: 50px;
+        height: 50px;
+    }
+}
+
+@media (max-width: 800px) {
+    .profile_img_container{
+        width: 40px;
+        height: 40px;
+    }
+    .user_name{
+        margin-left: 13px;
+    }
+
+    .like_review_title{
+        font-size: 16px;
+    }
+    .more_my_review_title{
+        font-size: 12px;
+    }
+    .like_review_preview_title{
+        font-size: 12px;
+    }
+    .like_review_img_container{
+        width: 60px;
+        height: 60px;
+        border-radius: 10px;
+    }
+    .like_review_img{
+        border-radius: 10px;
+    }
+    .section_header{
+        margin: 0;
+        padding: 30px 0 20px 15px;
+    }
+    .section_header_title{
+        font-family: 'GmarketSans';
+        font-weight: 700;
+        font-size: 14px;
+        color: var(--black);
+    }
+    .otherUserPage_main_header{
+        padding: 25px 0 15px 0;
+    }
+}
