@@ -48,8 +48,8 @@ function removeSkeleton(){
 export async function addNewLikeContent(){
     const reviewData = await getLikeReviewIdx(pageNum)
                             .catch(err => console.log(err));// FIXME:
-    const reviewIdx = reviewData['reviewIdx'];
-    const endPage = reviewData['endPage'];
+    const reviewIdx = reviewData.reviewIdx;
+    const endPage = reviewData.endPage;
     // const reviewIdx = reviewIdx_noPostman;
     // const endPage = 4;
     if(pageNum == endPage){
