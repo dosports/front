@@ -4,6 +4,7 @@
 @import "../css/myPage_component/page_up_btn.css";
 @import "./myPage_component/reviewContainer_plus.css";
 @import "./myPage_component/review_skeleton.css";
+@import "./main_header.css";
 
 body{
     width: 1264px;

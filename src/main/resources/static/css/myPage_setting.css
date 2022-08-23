@@ -2,12 +2,17 @@
 @import "./reset.css";
 @import "./myPage_component/header_before.css";
 @import "./myPage_component/review_skeleton.css";
+@import "./main_header.css";
 
 body{
     width: 1260px;
     margin: 0 auto;
 }
 
+label{
+    width: auto;
+    height: auto;
+}
 
 /* user setting */
 .user_setting_container, .filter_setting_container{

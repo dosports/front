@@ -131,7 +131,7 @@ const sports_img = {
     "tennis" : "../../static/img/tennis_icon.png",
     "hike" : "../../static/img/hiking_icon.png",
     "swim": "../../static/img/swim_icon.png",
-    "gym": "../../static/img/swim_icon.png", // TODO: src 변경 필요
+    "gym": "../../static/img/gym.png",
     "golf": "../../static/img/golf_icon.png",
     "balls": "../../static/img/balls_icon.png",
 };

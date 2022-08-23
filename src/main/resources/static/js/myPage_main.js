@@ -2,9 +2,19 @@ import {getUserInfo, getReviewDetail, getMyReviewIdx, getLikeReviewIdx, createMi
 import {reviewIdx_noPostman, reviewInfoArr_noPostman, userInfo_noPostman} from "./myPage_data.js"; // FIXME: postman 대신
 import {makeMiniReviewSkeleton, makeFullReviewSkeleton, reviewClickedEventHandler} from "./myPage_load10Review.js";
 import {like_toggle, getElementIndex, check_clickedLike} from "./myPage_likeBtn_modules.js";
+import {header_onload, header_onscroll, alarm_reset} from "./header.js";
+
+fetch("../../templates/main/main_header.html")
+	.then((res) => res.text())
+	.then((text) => {
+		document.querySelector(".default_header").innerHTML = text;
+        header_onload();
+        window.onscroll = header_onscroll;
+        window.addEventListener("resize", alarm_reset);
+});
+
 const logo_white_imgName = 'logo_white';
 let myReviewIdxs, likeReviewIdxs;
-
 // 1. 사용자 사진, 이름
 const $myPage_main_header = document.querySelector('.myPage_main_header');
 async function showUserInfo(){
@@ -171,3 +181,5 @@ document.querySelector('.my_review_container').addEventListener('click', (event)
 document.querySelector('.like_review_preview_container').addEventListener('click', (event) => {
     likeReviewClickedEventHandler(event);
 })
+
+const $default_header = document.querySelector('.default_header');

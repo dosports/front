@@ -282,6 +282,7 @@ async function change_filter_setting(event){
 
 // 화면 작은 사이즈 일때 title 나오고 커지면 안나오게 설정 필요함
 function header_windowSize(){
+    console.log('hi');
     const $before_btn_container = document.querySelector('.before_btn_container');
     const $myPage_setting_header_title = document.querySelector('.myPage_setting_header_title');
     
