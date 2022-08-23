@@ -178,7 +178,6 @@ await fetch("../../templates/main/main_header.html")
 	.then((res) => res.text())
 	.then((text) => {
 		document.querySelector(".default_header").innerHTML = text;
-    console.log('유나님 header');
 });
 header_onload();
 window.onscroll = header_onscroll;
