@@ -3,8 +3,8 @@
 // const u = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/reviews/female/tennis?category&height&weight&level&minPrice&maxPrice;"
 
 // api 테스트 할때는 밑에 줄 반드시 주석 해제 !!! ************************ 밑에 window~~ 주석 지우기 !!!!
-// const BASE_API_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" // + window.location.pathname    
-const BASE_API_URL = ""+ window.location.pathname   ;
+const BASE_API_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" ;// + window.location.pathname    
+// const BASE_API_URL = ""+ window.location.pathname   ;
 
 
 function filteredApiUrl(cate, height, weight, level, minPrice , maxPrice, sortParam, pageNum) {
@@ -65,10 +65,13 @@ function control_scroll(){
 const write_review_btn = document.querySelector(".writeReview-btn") ;
 const previous_page = document.querySelector("#previous-page") ;
 const filter_container = document.querySelector("#filter") ;
+const header = document.querySelector("header");
 
+const header_height = header.getBoundingClientRect().height;
 const previous_page_height = previous_page.getBoundingClientRect().height;
 const filter_container_height = filter_container.getBoundingClientRect().height;
 const upper_part_height = previous_page_height + filter_container_height ;
+
 
 if (hasToken) { // 로그인할 때만 리뷰 작성하기 버튼 보여주기
     if(write_review_btn.classList.contains("writeBtn-hidden")) {
@@ -221,7 +224,7 @@ function likeBtn (reviewItem) {
                 like_icon.classList.remove("like-hidden");
                 colored_like_icon.classList.add("like-hidden");
     
-                axios.delete("/like", {                
+                axios.delete(`${BASE_API_URL}}/like`, {                
                     reviewIdx : liked_reviewIdx
                 })
             }
@@ -229,7 +232,7 @@ function likeBtn (reviewItem) {
                 like_icon.classList.add("like-hidden");
                 colored_like_icon.classList.remove("like-hidden");
     
-                axios.post("/like", {
+                axios.post(`${BASE_API_URL}/like`, {
                     reviewIdx : liked_reviewIdx
                 })
             }
@@ -278,7 +281,6 @@ filter_form.addEventListener("submit" , (e) => {
     // console.log(current_frontUrl+backUrl(1,null));
     reset() ; 
     fetchAllReview(current_frontUrl+backUrl(is_photo,sort_num, page_num)) ;
-    
 
 })
 
@@ -298,14 +300,10 @@ const products_lists = document.querySelector(".products-lists") ;
 const fetchAllReview = async(url) => {
     try {
         const response = await axios.get(url)
-        // .then(result => result.data.reverse())
-        // .then(r => saveDataSet(r))
         .then(result => result.data.map(data => review_Template(data))) // reverse 없애면 .data
-        // .then(r => saveDataSet(r)) // product 배열에 담기 for 정렬, 사진
         .catch(error => console.log(error)) ;
         setTimeout(() => {
             let targets = document.querySelectorAll(".review_item");
-
 
             targets.forEach((t) => {
                 likeBtn(t) ;
@@ -316,6 +314,7 @@ const fetchAllReview = async(url) => {
             io.observe(last);
         });
         has_data = response ;
+
         return response ;
     } catch (error) {
         console.log(error) ;
@@ -346,7 +345,7 @@ function review_Template(data) {
     
     // 링크 수정해야함!                 ************************************
     const reviewItem = `
-        <a href = "#">
+        <a href = "/review/${data.reviewIdx}">
             <div class="review_item">
                 <div class="review_leftContainer">
                     <div class="review_img_container">
@@ -355,7 +354,7 @@ function review_Template(data) {
                     <div class="heart_container" data-reviewIdx="${data.reviewIdx}">
                         
                             <span class="iconify heart-icon" data-icon="akar-icons:heart"></span>
-                            <span class="colored like-hidden"><img src="../static/img/colored_heart_icon.png" alt=""></span>
+                            <span class="colored like-hidden"><img src="../../static/img/colored_heart_icon.png" alt=""></span>
                         
                         <span class="heart_cnt">${data.likes}</span>
                     </div>
@@ -416,22 +415,22 @@ function showLevel(level) {
 function reviewDefualtImg (cate) {
     switch (cate) {
         case 'tennis':
-            return '../static/img/tennis_icon.png' ;
+            return '../../static/img/tennis_icon.png' ;
             break;
         case 'hike':
-            return '../static/img/hiking_icon.png' ;
+            return '../../static/img/hiking_icon.png' ;
             break;
         case 'swim':
-            return '../static/img/swim_icon.png' ;
+            return '../../static/img/swim_icon.png' ;
             break;
         case 'gym':
-            return '../static/img/gym_icon.png' ;
+            return '../../static/img/gym_icon.png' ;
             break;
         case 'golf':
-            return '../static/img/golf_icon.png' ;
+            return '../../static/img/golf_icon.png' ;
             break;
         case 'balls':
-            return '../static/img/balls_icon.png' ;
+            return '../../static/img/balls_icon.png' ;
             break;
         default:
             break;
