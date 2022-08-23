@@ -10,6 +10,9 @@
 	align-items: center;
 	overflow: hidden;
 }
+.not_scroll {
+	overflow: hidden;
+}
 /*
 **헤더*/
 /*공통*/
@@ -49,7 +52,8 @@
 /*모바일*/
 #header-mobile {
 	display: none;
-	padding: 20px 50px;
+	padding: 20px 0;
+	margin: 0 50px;
 }
 #header-mobile-right {
 	justify-content: end;
