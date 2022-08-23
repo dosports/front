@@ -4,6 +4,15 @@
 	align-items: center;
 	overflow: hidden;
 }
+.flex_col {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+}
+.not_scroll {
+	overflow: hidden;
+}
 /*
 **헤더*/
 /*공통*/
@@ -13,6 +22,7 @@
 /*데스크탑*/
 #header-desktop {
 	display: block;
+	position: relative;
 }
 #header_title {
 	position: relative;
@@ -42,7 +52,8 @@
 /*모바일*/
 #header-mobile {
 	display: none;
-	padding: 20px 50px;
+	padding: 20px 0;
+	margin: 0 50px;
 }
 #header-mobile-right {
 	justify-content: end;
@@ -239,7 +250,7 @@ input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
 #mobile-alarm-modal1 {
 	display: none;
 	position: absolute;
-	top: 140px;
+	top: 98px;
 	right: 10px;
 	width: 314px;
 	height: 420px;
@@ -252,7 +263,7 @@ input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
 #mobile-alarm-modal2 {
 	display: none;
 	position: absolute;
-	top: 111px;
+	top: 70px;
 	right: 28px;
 	width: 0;
 	height: 0;
@@ -350,11 +361,11 @@ input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
 }
 /*모바일*/
 #mobile-alarm-modal1 {
-	top: 124px;
+	top: 103px;
 	right: 20px;
 }
 #mobile-alarm-modal2 {
-	top: 95px;
+	top: 75px;
 	right: 50px;
 }
 @media (max-width: 1080px) {

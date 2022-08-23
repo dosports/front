@@ -1,0 +1,67 @@
+/*
+**공통*/
+#content {
+	position: relative;
+	width: 1264px;
+	margin: 0 auto 80px;
+	padding: 0.1px 0 0 0;
+}
+.flex_row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	overflow: hidden;
+}
+.flex_col {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+}
+.divider {
+	border-right: 1px solid black;
+}
+
+.styled-border {
+	position: relative;
+}
+
+.styled-border::before {
+	content: "▶︎";
+	position: absolute;
+	top: -5.5px;
+	left: -2px;
+	color: white;
+	font-size: 9px;
+}
+
+.styled-border::after {
+	content: "▶︎";
+	position: absolute;
+	top: -5.5px;
+	right: -2px;
+	transform: scaleX(-1);
+	color: white;
+	font-size: 9px;
+}
+.loading {
+	animation: loading_animation 3s linear infinite alternate;
+}
+@keyframes loading_animation {
+	0% {
+		background-color: rgb(184, 182, 182);
+	}
+	100% {
+		background-color: rgb(228, 226, 226);
+	}
+}
+@media (max-width: 1080px) {
+	section {
+		margin: 0;
+	}
+}
+@media (max-width: 1264px) {
+	#content {
+		width: 100%;
+	}
+}

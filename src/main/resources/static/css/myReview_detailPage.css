@@ -6,91 +6,90 @@
 @import "./myPage_component/review_skeleton.css";
 @import "./main_header.css";
 
-body{
-    width: 1264px;
-    margin: 0 auto;
+body {
+	width: 1264px;
+	margin: 0 auto;
+	position: relative;
 }
 
-.section_header{
-    margin: 0 37px 42px 37px;
-    padding: 45.55px 0 18px 31px;
+.section_header {
+	margin: 0 37px 42px 37px;
+	padding: 45.55px 0 18px 31px;
 }
 
-.section_header_title{
-    font-family: 'GmarketSans';
-    font-weight: 700;
-    font-size: 17px;
-    color: var(--black);
+.section_header_title {
+	font-family: "GmarketSans";
+	font-weight: 700;
+	font-size: 17px;
+	color: var(--black);
 }
-
 
 /* 리뷰 작성하기 버튼 */
-main{
-    padding-bottom: 201px;
+main {
+	padding-bottom: 201px;
 }
-.writeReview_btn_container{
-    position: fixed;
-    width: 170px;
-    height: 65px;
-    bottom: 115px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    background: var(--green);
-    border-radius: 19px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn_text{
-    font-family: 'GmarketSans';
-    font-weight: 500;
-    font-size: 19px;
-    color: white;
+.writeReview_btn_container {
+	position: fixed;
+	width: 170px;
+	height: 65px;
+	bottom: 115px;
+	left: 50%;
+	transform: translate(-50%, 0);
+	background: var(--green);
+	border-radius: 19px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
-#pencil_icon{
-    width: 17px;
-    height: 18.86px;
-    margin-left: 5px;
+.btn_text {
+	font-family: "GmarketSans";
+	font-weight: 500;
+	font-size: 19px;
+	color: white;
 }
 
+#pencil_icon {
+	width: 17px;
+	height: 18.86px;
+	margin-left: 5px;
+}
 
 /* 리뷰 컨테이너 관련 */
-.review_item:last-child{
-    margin-bottom: 0;
+.review_item:last-child {
+	margin-bottom: 0;
 }
 
 @media (max-width: 1264px) {
-    body{
-        width: 100%;
-    }
+	body {
+		width: 100%;
+	}
 
-    main{
-        margin: 0 20px;
-    }
+	main {
+		margin: 0 20px;
+	}
 }
 
 @media (max-width: 1150px) {
-    .writeReview_btn_container{
-        width: 130px;
-        height: 50px;
-    }
-    .btn_text{
-        font-size: 15px;
-    }
+	.writeReview_btn_container {
+		width: 130px;
+		height: 50px;
+	}
+	.btn_text {
+		font-size: 15px;
+	}
 }
 
 @media (max-width: 400px) {
-    .section_header{
-        margin: 0 0 42px 0;
-        padding: 30px 0 18px 15px;
-    }
-    
-    .section_header_title{
-        font-family: 'GmarketSans';
-        font-weight: 700;
-        font-size: 14px;
-        color: var(--black);
-    }
+	.section_header {
+		margin: 0 0 42px 0;
+		padding: 30px 0 18px 15px;
+	}
+
+	.section_header_title {
+		font-family: "GmarketSans";
+		font-weight: 700;
+		font-size: 14px;
+		color: var(--black);
+	}
 }
