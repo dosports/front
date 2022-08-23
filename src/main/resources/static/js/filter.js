@@ -3,16 +3,17 @@
 // const u = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/reviews/female/tennis?category&height&weight&level&minPrice&maxPrice;"
 
 // api 테스트 할때는 밑에 줄 반드시 주석 해제 !!! ************************ 밑에 window~~ 주석 지우기 !!!!
-// const BASE_API_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" ;// + window.location.pathname    
-const BASE_API_URL = ""+ window.location.pathname   ;  // api url
+const API = "" ; // api url
+const CUR_URL = API + window.location.pathname   ;  
+// const CUR_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" ;// + window.location.pathname    
 
 
 function filteredApiUrl(cate, height, weight, level, minPrice , maxPrice, sortParam, pageNum) {
-    return `${BASE_API_URL}?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}&sort_param=${sortParam}&page_num=${pageNum}`;
+    return `${CUR_URL}?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}&sort_param=${sortParam}&page_num=${pageNum}`;
 }
 
 function frontUrl(cate, height, weight, level, minPrice, maxPrice) { // 필터링 값 반영 
-    return `${BASE_API_URL}?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}`;
+    return `${CUR_URL}?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}`;
 }
 function backUrl(photo, sort, page) {
     return `&isPhoto=${photo}&sort_param=${sort}&page_num=${page}` ;
@@ -186,8 +187,6 @@ ordering_list.addEventListener("click" , async (e) => {
             break;
     }
     fetchAllReview(current_frontUrl+backUrl(is_photo,sort_num, page_num)) ; 
-    console.log(sort_num) ;
-    console.log(is_photo);
 })
 
 // 상품 목록 - 사진 리뷰만 보기 클릭 
@@ -203,6 +202,7 @@ onlyImg_btn.addEventListener("change" , (e) => {
     fetchAllReview(current_frontUrl+backUrl(is_photo,sort_num, page_num)) ; 
 });
 
+
 function likeBtn (reviewItem) {
     const like_container = reviewItem.querySelector(".heart_container") ;
     const like_icon = reviewItem.querySelector(".heart_container .iconify");
@@ -212,6 +212,10 @@ function likeBtn (reviewItem) {
     if(hasToken) { // 로그인할 때
 
         // 좋아요 눌렀는지 안눌렀는지 
+        if (checkLiked(`/like/check/${liked_reviewIdx}`)) { // 좋아요 눌렀었다면 
+            like_icon.classList.add("like-hidden");
+            colored_like_icon.classList.remove("like-hidden");
+        }
         
         if (like_container.classList.contains("heart_limit")) {
             like_container.classList.remove("heart_limit");
@@ -224,7 +228,7 @@ function likeBtn (reviewItem) {
                 like_icon.classList.remove("like-hidden");
                 colored_like_icon.classList.add("like-hidden");
     
-                axios.delete(`${BASE_API_URL}}/like`, {                
+                axios.delete(`${CUR_URL}}/like`, {                
                     reviewIdx : liked_reviewIdx
                 })
             }
@@ -232,7 +236,7 @@ function likeBtn (reviewItem) {
                 like_icon.classList.add("like-hidden");
                 colored_like_icon.classList.remove("like-hidden");
     
-                axios.post(`${BASE_API_URL}/like`, {
+                axios.post(`${CUR_URL}/like`, {
                     reviewIdx : liked_reviewIdx
                 })
             }
@@ -314,7 +318,6 @@ const fetchAllReview = async(url) => {
             io.observe(last);
         });
         has_data = response ;
-
         return response ;
     } catch (error) {
         console.log(error) ;
@@ -337,7 +340,7 @@ const checkLiked  = async(url) => {
 
 function isLiked(data) {
     checking = data ? true : false  ;
-    return data ;
+    return checking ;
 }
 
 // <a href = "/review/${data.reviewIdx}">
@@ -345,7 +348,7 @@ function review_Template(data) {
     
     // 링크 수정해야함!                 ************************************
     const reviewItem = `
-        <a href = "/review/${data.reviewIdx}">
+        <a href = "${API}/review/${data.reviewIdx}">
             <div class="review_item">
                 <div class="review_leftContainer">
                     <div class="review_img_container">
@@ -380,7 +383,7 @@ function review_Template(data) {
     products_lists.insertAdjacentHTML("beforeend", reviewItem) ;
     let review_item = document.querySelector(".review_item");
     // listData.push(reviewItem);
-    return review_item ;
+    return review_item ;  // review_item 으로 바꾸기
 }
 
 const io = new IntersectionObserver((entries, observer) => {
@@ -467,3 +470,7 @@ function regDateForm(date) {
     const ymd = date.split(" ")[0] ;
     return ymd ;
 }
+
+// 처음 접속했을때 모든 리뷰 다 보여주기
+current_frontUrl = frontUrl("", "", "", "", "", "") ;
+fetchAllReview(current_frontUrl+backUrl(is_photo,sort_num, page_num)) ;

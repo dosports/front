@@ -151,7 +151,9 @@ h2 {
 .filter-categories , .filter-body , .filter-level , .filter-price {
     align-items: center;
 }
-
+#filter input[type="number"] {
+    font-size: 14px;
+}
 
 .filter-contents h4 { /* 일단 품목 기준으로 오르쪽 마진 줌 */
     margin-right: 3.1vw;
