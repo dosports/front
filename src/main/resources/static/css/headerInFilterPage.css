@@ -42,7 +42,7 @@
 /*모바일*/
 #header-mobile {
 	display: none;
-	padding: 20px 50px;
+	padding: 0 50px;
 }
 #header-mobile-right {
 	justify-content: end;
@@ -62,7 +62,7 @@
 input[id="trigger"] {
 	display: none;
 }
-label {
+label[for="trigger"] {
 	position: relative;
 	display: inline-block;
 	width: 24px;
@@ -225,9 +225,6 @@ input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
 
 /**
 *alarm*/
-#alarm-container {
-	display: none;
-}
 #alarm-button > svg,
 #mobile-alarm-button > img {
 	width: 24px;
@@ -265,46 +262,10 @@ input[id="trigger"]:checked + label[for="trigger"] span:nth-child(3) {
 	width: 100%;
 	padding: 0 40px;
 }
-#logOut_alarm {
-	height: 100%;
-	justify-content: center;
-	font-family: "NanumSquare";
-	font-size: 14px;
-}
-#logOut_alarm > div,
-#alarm-join {
-	font-family: "NanumSquare";
-	font-size: 13px;
-	color: rgba(0, 23, 7, 0.5);
-}
-#alarm-join {
-	border-bottom: 1px solid rgba(0, 23, 7, 0.5);
-	margin: 5px 0;
-}
-#alarm-login {
-	margin: 15px;
-	background: #f8f8f8;
-	border-radius: 28px;
-}
-#alarm-login > div {
-	width: 154px;
-	height: 43px;
-	font-family: "NanumSquare";
-	font-weight: 500;
-	font-size: 14px;
-	text-align: center;
-	line-height: 43px;
-}
-#alarm-login:hover {
-	box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
-	transition: 300ms;
-}
-
 #alarm-title {
 	font-family: "GmarketSans";
 	font-weight: 500;
 	font-size: 17px;
-	color: var(--black);
 }
 #alarm-container {
 	width: 100%;
