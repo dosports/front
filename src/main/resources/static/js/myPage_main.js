@@ -19,7 +19,7 @@ async function showUserInfo(){
                 <span class="iconify setting_icon" data-icon="uiw:setting-o"></span>
             </a>
     `;
-    setTimeout(() => {
+    setTimeout(async() => {
         const userInfo = await getUserInfo();
         // const userInfo = userInfo_noPostman;
         let pre_img_src = userInfo.profileImg;

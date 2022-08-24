@@ -180,10 +180,12 @@ export function ioCallback_otherUser(entries, io){
 export function loadFirstItems(io, addNewContent){
     addSkeleton();
     setTimeout(async() => {
-        await addNewContent();
-        pageNum+=1;
+        const moreReviewExist = await addNewContent();
+        if(moreReviewExist != null){
+            pageNum+=1;
+            observeLastItem(io, document.querySelectorAll('.review_item'));
+        }
         removeSkeleton();
-        observeLastItem(io, document.querySelectorAll('.review_item'));
     }, 2000);
 }
 

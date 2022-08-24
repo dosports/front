@@ -18,7 +18,6 @@ $main.addEventListener('click', like_toggle);
 
 
 window.addEventListener('load', () => {
-    console.log('hi');
     $review_container.innerHTML = ""; // 처음에 모두 삭제
     loadFirstItems(io, addNewMyContent);
 })
