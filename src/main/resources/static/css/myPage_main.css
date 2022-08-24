@@ -5,11 +5,18 @@
 @import "./myPage_component/review_skeleton.css";
 @import "./main_header.css";
 @import "./footer.css";
-main, .default_header{
+main{
     width: 1264px;
     margin: 0 auto;
+    position: relative;
 }
-
+/* 알람 */
+#alarm-modal1{
+    top: 99px;
+}
+#alarm-modal2{
+    top: 70px;
+}
 /* main header */
 .myPage_main_header{
     display: flex;
@@ -163,7 +170,8 @@ main, .default_header{
     }
 
     main{
-        margin: 0 20px;
+        width: 100%;
+        margin  : 0;
     }
 }
 

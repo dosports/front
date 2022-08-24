@@ -7,13 +7,20 @@
 body{
     width: 1260px;
     margin: 0 auto;
+    position: relative;
 }
 
 label{
     width: auto;
     height: auto;
 }
-
+/* 알람 */
+#alarm-modal1{
+    top: 99px;
+}
+#alarm-modal2{
+    top: 70px;
+}
 /* user setting */
 .user_setting_container, .filter_setting_container{
     position: relative;

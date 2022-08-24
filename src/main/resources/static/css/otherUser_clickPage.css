@@ -9,8 +9,15 @@
 body{
     width: 1264px;
     margin: 0 auto;
+    position: relative;
 }
-
+/* 알람 */
+#alarm-modal1{
+    top: 99px;
+}
+#alarm-modal2{
+    top: 70px;
+}
 /* main header */
 .otherUserPage_main_header{
     display: flex;

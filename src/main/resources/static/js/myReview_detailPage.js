@@ -18,7 +18,6 @@ $main.addEventListener('click', like_toggle);
 
 
 window.addEventListener('load', () => {
-    console.log('hi');
     $review_container.innerHTML = ""; // 처음에 모두 삭제
     loadFirstItems(io, addNewMyContent);
 })
@@ -33,7 +32,6 @@ await fetch("../../templates/main/main_header.html")
 	.then((res) => res.text())
 	.then((text) => {
 		document.querySelector(".default_header").innerHTML = text;
-    console.log('유나님 header');
 });
 header_onload();
 window.onscroll = header_onscroll;
