@@ -1,48 +1,46 @@
 export {getUserInfo, getReviewDetail, getMyReviewIdx, getLikeReviewIdx, createMiniReviewItem, createFullReviewItem, pageUpEventHandler, beforePageBtnHandler, sports_img, sports_level};
 import {check_clickedLike} from "./myPage_likeBtn_modules.js";
-const full_heart_imgName = 'full_heart';
-axios.defaults.baseURL = 'https://008b09e7-31c8-41cb-adab-3683ec84e87e.mock.pstmn.io';// TODO:
-const userIdx = getUserIdx(); // TODO: 로컬에서 getItem으로 토큰 가져오기
+const full_heart_imgName = 'colored_heart_icon';
+axios.defaults.baseURL = '';// TODO: axios 기본 url
+axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
+const userIdx = getUserIdx();
 
-function setToken(){
-    axios.defaults.headers.common['Authorization'] = `Bearer localStorage.getItem('accessToken')`;
+// function setToken(){
+//     axios.defaults.headers.common['Authorization'] = `Bearer localStorage.getItem('accessToken')`;
 
-    let expiredTime = localStorage.getItem('expiredTime');
-    let diffTime = '' ;
-    if(diffTime < 10000){
-        axios.defaults.headers.common['x-refresh-token'] = localStorage.getItem('refreshToken');
-        axios.get('${url}/user/updateAccessToken')
-        .then(response => {
-            localStorage.setItem('accessToken', res.data.data.accessToken);
-            localStorage.setItem('expiredTime', res.data.data.cur_time);
-            axios.defaults.headers.common['x-access-token'] = localStorage.getItem('accessToken');
-        })
-    }
-}
+//     let expiredTime = localStorage.getItem('expiredTime');
+//     let diffTime = '' ;
+//     if(diffTime < 10000){
+//         axios.defaults.headers.common['x-refresh-token'] = localStorage.getItem('refreshToken');
+//         axios.get('${url}/user/updateAccessToken')
+//         .then(response => {
+//             localStorage.setItem('accessToken', res.data.data.accessToken);
+//             localStorage.setItem('expiredTime', res.data.data.cur_time);
+//             axios.defaults.headers.common['x-access-token'] = localStorage.getItem('accessToken');
+//         })
+//     }
+// }
 // 마이페이지 - 메인
 // 사용자 사진, 이름 정보 가져오기
 //TODO:
 export function getUserIdx(){
-    const userIdx = localStorage.getItem('token');
-    return userIdx;
+    return axios.get(`/user/userIdx`)
+    .then(response => response.data.userIdx) // FIXME:
 }
 function getUserInfo(){
-    return axios.get(`/user/info/${userIdx}`)
+    return axios.get(`/user/mypage`)
     .then(response => response.data.data)
 }
 
-// TODO: location.href...?
+
 export function getOtherUserIdx(){
-    //otherUserPage.html?otherUserIdx:2 이런식으로 온다고 했을때
-    const OtherUserIdx = location.href.split("?")[1].split(':')[1];
-    console.log(OtherUserIdx);
+    const OtherUserIdx = JSON.parse(localStorage.getItem('otherUser')).userIdx;
     return OtherUserIdx;
 }
 
 export function getOtherUserInfo(){
-    const otherUserIdx = getOtherUserIdx();
-    return axios.get(`/user/info/${otherUserIdx}`)
-    .then(response => response.data.data)
+    const otherUserInfo = JSON.parse(localStorage.getItem('otherUser'));
+    return otherUserInfo;
 }
 
 // 자세한 리뷰 정보 가져오기
@@ -72,7 +70,7 @@ export function getOtherUserReviewIdx(userIdx, pageNum){
 function createMiniReviewItem(reviewInfo){
     let pre_like_img = reviewInfo.img_path;
     if(pre_like_img == ''){
-        pre_like_img = sports_img[reviewInfo.sport]; // 각 종목 이미지로
+        pre_like_img = sports_img[reviewInfo.sports]; // 각 종목 이미지로
     }
     const new_like_review_preview_item = document.createElement('div');
     new_like_review_preview_item.classList.add('like_review_preview_item');
@@ -91,7 +89,7 @@ function createMiniReviewItem(reviewInfo){
 function createFullReviewItem(reviewInfo, like_clicked, login){
     let pre_my_img =  reviewInfo.img_path;
     if(pre_my_img == ''){
-        pre_my_img = sports_img[reviewInfo.sport]; // 각 종목 이미지로
+        pre_my_img = sports_img[reviewInfo.sports]; // 각 종목 이미지로
     }
 
     const new_review_item = document.createElement('div');
@@ -118,7 +116,7 @@ function createFullReviewItem(reviewInfo, like_clicked, login){
                 <div class="my_review_star">${'★'.repeat(reviewInfo.rate) + '☆'.repeat(5-reviewInfo.rate)}</div>
                 <div class="my_review_likeAndComment">댓글 ${reviewInfo.comments}개</div>
                 <div class="my_review_writerDetail">${reviewInfo.gender == "f" ? "여" : "남"} / ${reviewInfo.height}cm ${reviewInfo.weight}kg / ${sports_level[reviewInfo.level]}</div>
-                <div class="my_review_buyInfo ${login ? '' : 'hidden'}">${reviewInfo.source == null ? "모름" : reviewInfo.source} / ${reviewInfo.price}</div>
+                <div class="my_review_buyInfo ${login ? '' : 'hidden'}">${reviewInfo.source == null ? "" : reviewInfo.source} / ${reviewInfo.price}</div>
                 <div class="review-view_limit ${login ? 'hidden' : ''}">리뷰 작성하면 구매출처와 구매가격을 볼 수 있어요!</div>
                 <div class="my_review_content">${reviewInfo.content}</div>
             </div>

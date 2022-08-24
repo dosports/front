@@ -1,19 +1,11 @@
 import {getUserInfo, getReviewDetail, getMyReviewIdx, getLikeReviewIdx, createMiniReviewItem, createFullReviewItem, sports_img} from "./myPage_modules.js";
-import {reviewIdx_noPostman, reviewInfoArr_noPostman, userInfo_noPostman} from "./myPage_data.js"; // FIXME: postman 대신
+// import {reviewIdx_noPostman, reviewInfoArr_noPostman, userInfo_noPostman} from "./myPage_data.js"; // FIXME: postman 대신
 import {makeMiniReviewSkeleton, makeFullReviewSkeleton, reviewClickedEventHandler} from "./myPage_load10Review.js";
 import {like_toggle, getElementIndex, check_clickedLike} from "./myPage_likeBtn_modules.js";
 import {header_onload, header_onscroll, alarm_reset} from "./header.js";
 
-fetch("../../templates/main/main_header.html")
-	.then((res) => res.text())
-	.then((text) => {
-		document.querySelector(".default_header").innerHTML = text;
-        header_onload();
-        window.onscroll = header_onscroll;
-        window.addEventListener("resize", alarm_reset);
-});
 
-const logo_white_imgName = 'logo_white';
+const logo_white_imgName = 'logo_white';    
 let myReviewIdxs, likeReviewIdxs;
 // 1. 사용자 사진, 이름
 const $myPage_main_header = document.querySelector('.myPage_main_header');
@@ -28,11 +20,10 @@ async function showUserInfo(){
             </a>
     `;
     setTimeout(() => {
-        // const userInfo = await getUserInfo(userIdx);
-        const userInfo = userInfo_noPostman;
+        const userInfo = await getUserInfo();
+        // const userInfo = userInfo_noPostman;
         let pre_img_src = userInfo.profileImg;
         pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;
-        // pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;//
         $myPage_main_header.innerHTML = `
         <div class="profile_img_container">
             <img src="${pre_img_src}" alt="사용자 프로필 사진" class="profile_img">
@@ -49,15 +40,17 @@ showUserInfo();
 
 // 2. 좋아요한 리뷰 가져와서 보여주기 - 최대 4개
 async function addLikeReview(){
-    // const reviewIdx = await getLikeReviewIdx();// FIXME:
-    const reviewIdx = reviewIdx_noPostman;
+    const reviewData = await getLikeReviewIdx(1)
+                            .catch(err => console.log(err));// FIXME:
+    const reviewIdx = reviewData['reviewIdx'];
+    // const reviewIdx = reviewIdx_noPostman;
     likeReviewIdxs = reviewIdx;
     const lastIdx = reviewIdx.length > 4 ? 4 : reviewIdx.length;
 
     // 데이터 가져와서 보여주기
     for(let i = 0; i < lastIdx; i++){
-        // const reviewInfo = await getReviewDetail(reviewIdx[i]);// FIXME:
-        const reviewInfo = reviewInfoArr_noPostman[reviewIdx[i]];
+        const reviewInfo = await getReviewDetail(reviewIdx[i]);// FIXME:
+        // const reviewInfo = reviewInfoArr_noPostman[reviewIdx[i]];
         const new_like_review_preview_item = createMiniReviewItem(reviewInfo);
         $like_review_preview_container.appendChild(new_like_review_preview_item);
     }
@@ -80,18 +73,17 @@ async function addLikeReview(){
 
 // 3. 내가 쓴 리뷰 데이터 가져와서 보여주기 - 최대 4개
 async function addMyReview(){
-    // const reviewIdx = await getMyReviewIdx(); // FIXME:
-    const reviewIdx = reviewIdx_noPostman;
+    const reviewIdx = await getMyReviewIdx(1); // FIXME:
+    // const reviewIdx = reviewIdx_noPostman;
     myReviewIdxs = reviewIdx;
     const lastIdx = reviewIdx.length > 4 ? 4 : reviewIdx.length;
 
     for(let i = 0; i < lastIdx; i++){
-        // const reviewInfo = await getReviewDetail(reviewIdx[i]); // FIXME:
+        const reviewInfo = await getReviewDetail(reviewIdx[i]); // FIXME:
+        // const reviewInfo = reviewInfoArr_noPostman[reviewIdx[i]];
+        const like_clicked =  await check_clickedLike(reviewIdx[i]);
+        // const like_clicked = true;
 
-        // const like_clicked =  await check_clickedLike(reviewIdx[i]);
-        const like_clicked = true;
-
-        const reviewInfo = reviewInfoArr_noPostman[reviewIdx[i]];
         const new_review_item = createFullReviewItem(reviewInfo, like_clicked, true);
         $review_container.appendChild(new_review_item);
     }
@@ -182,4 +174,11 @@ document.querySelector('.like_review_preview_container').addEventListener('click
     likeReviewClickedEventHandler(event);
 })
 
-const $default_header = document.querySelector('.default_header');
+await fetch("../../templates/main/main_header.html")
+	.then((res) => res.text())
+	.then((text) => {
+		document.querySelector(".default_header").innerHTML = text;
+});
+header_onload();
+window.onscroll = header_onscroll;
+window.addEventListener("resize", alarm_reset);

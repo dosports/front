@@ -1,19 +1,10 @@
 import {beforePageBtnHandler}  from "./myPage_modules.js";
 import {check_newPW, change_user_setting, header_windowSize, change_filter_setting, check_weight_height, show_all_userData, check_profileImg } from "./myPage_setting_modules.js";
-import {userInfo_noPostman} from "./myPage_data.js";
+// import {userInfo_noPostman} from "./myPage_data.js";
 import {header_onload, header_onscroll, alarm_reset} from "./header.js";
 
-fetch("../../templates/main/main_header.html")
-	.then((res) => res.text())
-	.then((text) => {
-		document.querySelector(".default_header").innerHTML = text;
-        header_onload();
-        window.onscroll = header_onscroll;
-        window.addEventListener("resize", alarm_reset);
-});
 
 window.addEventListener('load', () => {
-    console.log('hihello');
     header_windowSize();
 })
 // 화면 크기별 헤더 불러오기
@@ -31,7 +22,6 @@ const $new_check_password = document.querySelector('#new_check_password');
 
 // 로드 되면 모든 데이터 불러오기
 window.addEventListener('load', () => {
-    console.log('hdididi');
     show_all_userData();
 });
 
@@ -56,3 +46,13 @@ $user_weight.addEventListener('keyup', check_weight_height);
 
 // 필터 버튼 클릭 submit
 document.querySelector('.filter_setting_form').addEventListener('submit', change_filter_setting);
+
+await fetch("../../templates/main/main_header.html")
+	.then((res) => res.text())
+	.then((text) => {
+		document.querySelector(".default_header").innerHTML = text;
+    console.log('유나님 header');
+});
+header_onload();
+window.onscroll = header_onscroll;
+window.addEventListener("resize", alarm_reset);

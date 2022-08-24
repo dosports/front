@@ -4,7 +4,8 @@
 @import "./myPage_component/reviewContainer_plus.css";
 @import "./myPage_component/review_skeleton.css";
 @import "./main_header.css";
-body{
+@import "./footer.css";
+main, .default_header{
     width: 1264px;
     margin: 0 auto;
 }
