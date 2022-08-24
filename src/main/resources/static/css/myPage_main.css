@@ -1,10 +1,10 @@
-@import "./variable.css";
-@import "./reset.css";
-@import "./reviewContainer.css";
-@import "./myPage_component/reviewContainer_plus.css";
-@import "./myPage_component/review_skeleton.css";
-@import "./main_header.css";
-@import "./footer.css";
+@import "/css/variable.css";
+@import "/css/reset.css";
+@import "/css/reviewContainer.css";
+@import "/css/myPage_component/reviewContainer_plus.css";
+@import "/css/myPage_component/review_skeleton.css";
+@import "/css/main_header.css";
+@import "/css/footer.css";
 main{
     width: 1264px;
     margin: 0 auto;

@@ -1,5 +1,5 @@
 export {check_newPW, change_user_setting, header_windowSize, change_filter_setting, show_all_userData };
-import {getUserInfo} from "./myPage_modules.js";
+import {getUserInfo} from "/js/myPage_modules.js";
 // import {userInfo_noPostman} from "./myPage_data.js";
 
 const logo_white_imgName = "logo_white";
@@ -25,7 +25,7 @@ function show_all_userData() {
 		$profile_img.classList.remove("hidden");
 	}, 2000);
 	$profile_img.src = userInfo.profileImg;
-	$profile_img.src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;
+	$profile_img.src = userInfo.profileImg == "" ? `/img/${logo_white_imgName}.png` : userInfo.profileImg;
 	$user_name.placeholder = userInfo.name;
 	$user_height.placeholder = parseInt(userInfo.height);
 	$user_weight.placeholder = userInfo.weight;

@@ -1,6 +1,6 @@
 // import {reviewIdx_noPostman, reviewInfoArr_noPostman} from "./myPage_data.js";
-import {createFullReviewItem, getLikeReviewIdx, getMyReviewIdx, getReviewDetail, getOtherUserIdx, getUserIdx, getOtherUserReviewIdx} from "./myPage_modules.js";
-import {check_clickedLike, getElementIndex} from "./myPage_likeBtn_modules.js";
+import {createFullReviewItem, getLikeReviewIdx, getMyReviewIdx, getReviewDetail, getOtherUserIdx, getUserIdx, getOtherUserReviewIdx} from "/js/myPage_modules.js";
+import {check_clickedLike, getElementIndex} from "/js/myPage_likeBtn_modules.js";
 
 const $review_container = document.querySelector('.review_container');
 let pageNum = 1;
@@ -13,7 +13,7 @@ export function makeFullReviewSkeleton(){
     newSkeletonItem.innerHTML = `
                     <div class="review_leftContainer">
                         <div class="review_img_container skeleton">
-                            <img src="../../static/img/balls_icon.png" alt="내가 쓴 리뷰 사진" class="review_img hidden">
+                            <img src="/img/balls_icon.png" alt="내가 쓴 리뷰 사진" class="review_img hidden">
                         </div>
                         <div class="heart_container">
                             <span class="iconify heart-icon skeleton" data-icon="akar-icons:heart"></span>
@@ -196,7 +196,7 @@ export function makeMiniReviewSkeleton(){
     newSkeletonItem.classList.add('like_review_preview_item');
     newSkeletonItem.innerHTML = `
     <div class="like_review_img_container skeleton">
-        <img src="../../static/img/golf_icon.png" alt="좋아요한 리뷰 사진" class="like_review_img hidden">
+        <img src="/img/golf_icon.png" alt="좋아요한 리뷰 사진" class="like_review_img hidden">
     </div>
     <div class="like_review_preview_title skeleton"><span class="skeleton">나이키 테니스치마</span></div>
     `;
