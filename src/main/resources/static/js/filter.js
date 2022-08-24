@@ -1,5 +1,5 @@
 'use strict';
-import { header_onload, header_onscroll, alarm_reset } from "./header.js";
+import { header_onload, header_onscroll, alarm_reset } from "/js/header.js";
 
 // api 
 const API = "" ; // api url 적기 !!
@@ -366,7 +366,7 @@ function review_Template(data) {
                     <div class="heart_container" data-reviewIdx="${data.reviewIdx}">
                         
                             <span class="iconify heart-icon" data-icon="akar-icons:heart"></span>
-                            <span class="colored like-hidden"><img src="../../static/img/colored_heart_icon.png" alt=""></span>
+                            <span class="colored like-hidden"><img src="/img/colored_heart_icon.png" alt=""></span>
                         
                         <span class="heart_cnt">${data.likes}</span>
                     </div>
@@ -427,22 +427,22 @@ function showLevel(level) {
 function reviewDefualtImg (cate) {
     switch (cate) {
         case 'tennis':
-            return '../../static/img/tennis_icon.png' ;
+            return '/img/tennis_icon.png' ;
             break;
         case 'hike':
-            return '../../static/img/hiking_icon.png' ;
+            return '/img/hiking_icon.png' ;
             break;
         case 'swim':
-            return '../../static/img/swim_icon.png' ;
+            return '/img/swim_icon.png' ;
             break;
         case 'gym':
-            return '../../static/img/gym_icon.png' ;
+            return '/img/gym_icon.png' ;
             break;
         case 'golf':
-            return '../../static/img/golf_icon.png' ;
+            return '/img/golf_icon.png' ;
             break;
         case 'balls':
-            return '../../static/img/balls_icon.png' ;
+            return '/img/balls_icon.png' ;
             break;
         default:
             break;
