@@ -1,11 +1,11 @@
-@import "./variable.css";
-@import "./reset.css";
-@import "./myPage_component/header_before.css";
-@import "./reviewContainer.css";
-@import "./myPage_component/page_up_btn.css";
-@import "./myPage_component/reviewContainer_plus.css";
-@import "./myPage_component/review_skeleton.css";
-@import "./main_header.css";
+@import "/css/variable.css";
+@import "/css/reset.css";
+@import "/css/myPage_component/header_before.css";
+@import "/css/reviewContainer.css";
+@import "/css/myPage_component/page_up_btn.css";
+@import "/css/myPage_component/reviewContainer_plus.css";
+@import "/css/myPage_component/review_skeleton.css";
+@import "/css/main_header.css";
 
 body{
     position: relative;

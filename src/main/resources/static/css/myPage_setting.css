@@ -1,8 +1,8 @@
-@import "./variable.css";
-@import "./reset.css";
-@import "./myPage_component/header_before.css";
-@import "./myPage_component/review_skeleton.css";
-@import "./main_header.css";
+@import "/css/variable.css";
+@import "/css/reset.css";
+@import "/css/myPage_component/header_before.css";
+@import "/css/myPage_component/review_skeleton.css";
+@import "/css/main_header.css";
 
 body{
     width: 1260px;

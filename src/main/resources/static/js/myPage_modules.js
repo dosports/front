@@ -1,5 +1,5 @@
 export {getUserInfo, getReviewDetail, getMyReviewIdx, getLikeReviewIdx, createMiniReviewItem, createFullReviewItem, pageUpEventHandler, beforePageBtnHandler, sports_img, sports_level};
-import {check_clickedLike} from "./myPage_likeBtn_modules.js";
+import {check_clickedLike} from "/js/myPage_likeBtn_modules.js";
 const full_heart_imgName = 'colored_heart_icon';
 axios.defaults.baseURL = '';// TODO: axios 기본 url
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
@@ -103,7 +103,7 @@ function createFullReviewItem(reviewInfo, like_clicked, login){
                     <img src=${pre_my_img} alt="내가 쓴 리뷰 사진" class="review_img">
                 </div>
                 <div class="heart_container">
-                    <img class="full_heart ${like_clicked ? '' : 'hidden'} ${login ? '' : 'heart_limit'}" src="../../static/img/${full_heart_imgName}.png" alt="채워진 하트">
+                    <img class="full_heart ${like_clicked ? '' : 'hidden'} ${login ? '' : 'heart_limit'}" src="/img/${full_heart_imgName}.png" alt="채워진 하트">
                     <span class="iconify heart-icon ${like_clicked ? 'hidden' : ''}" data-icon="akar-icons:heart"></span>
                     <span class="heart_cnt">${reviewInfo.likes}개</span>
                 </div>
@@ -126,12 +126,12 @@ function createFullReviewItem(reviewInfo, like_clicked, login){
 
 
 const sports_img = {
-    "tennis" : "../../static/img/tennis_icon.png",
-    "hike" : "../../static/img/hiking_icon.png",
-    "swim": "../../static/img/swim_icon.png",
-    "gym": "../../static/img/gym.png",
-    "golf": "../../static/img/golf_icon.png",
-    "balls": "../../static/img/balls_icon.png",
+    "tennis" : "/img/tennis_icon.png",
+    "hike" : "/img/hiking_icon.png",
+    "swim": "/img/swim_icon.png",
+    "gym": "/img/gym.png",
+    "golf": "/img/golf_icon.png",
+    "balls": "/img/balls_icon.png",
 };
 const sports_level = {
     1 : "저",
