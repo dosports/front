@@ -1,4 +1,18 @@
+/* 알림창 오류
+import { header_onload, header_onscroll, alarm_reset } from "/js/header.js";
 
+fetch("../../templates/main/main_header.html")
+	.then((res) => res.text())
+	.then((text) => {
+		document.querySelector("header").innerHTML = text;
+	})
+header_onload();
+window.onscroll = header_onscroll;
+window.addEventListener("resize", () => {
+	// scrollX_reset();
+	alarm_reset();
+}) 
+*/
 
 /*프리뷰
 function setThumbnail(event) {
