@@ -12,11 +12,11 @@ beforePageBtnHandler();
 const $otherUserPage_main_header = document.querySelector('.otherUserPage_main_header');
 const $section_header = document.querySelector('.section_header');
 async function showOtherUserInfo(){
-    const userInfo = getOtherUserInfo();
+    const userInfo = await getOtherUserInfo();
     // getOtherUserIdx();// FIXME: 
     // const userInfo = userInfo_noPostman;
-    let pre_img_src = userInfo.profileImg;
-        pre_img_src = userInfo.profileImg == "" ? `/img/${logo_white_imgName}.png` : userInfo.profileImg;
+    let pre_img_src = userInfo.profileImgPath;
+        pre_img_src = userInfo.profileImgPath == null ? `/img/${logo_white_imgName}.png` : userInfo.profileImgPath;
     $otherUserPage_main_header.innerHTML = `
         <div class="profile_img_container skeleton">
             <img src="" alt="사용자 프로필 사진" class="profile_img hidden">
@@ -54,6 +54,7 @@ $main.addEventListener('click', (event) => {
     reviewClickedEventHandler(event);
 });
 
+// localStorage에는 key = otherUser, value = {userIdx : 1} 이런식으로 저장되어있음
 window.addEventListener('unload', () => {
     localStorage.removeItem('otherUser');
 })
