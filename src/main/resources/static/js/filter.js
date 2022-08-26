@@ -1,4 +1,5 @@
 'use strict';
+// import { header_onload, header_onscroll, alarm_reset } from "./header.js";
 import { header_onload, header_onscroll, alarm_reset } from "/js/header.js";
 
 // api 
@@ -340,7 +341,7 @@ let checking ;
 const checkLiked  = async(url) => {
     try {
         const response = await axios.get(url) 
-        .then(result => isLiked(result.data.checking)) ;
+        .then(result => isLiked(result.data.data.isliked)) ;
         return response ;
     } catch (error) {
         console.log(error) ;
