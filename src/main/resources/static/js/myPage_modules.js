@@ -51,7 +51,7 @@ function getLikeReviewIdx(pageNum){
 // 다른 사람 리뷰 reviewIdx 가져오기
 export function getOtherUserReviewIdx(userIdx, pageNum){
     return axios.get(`/review/user/${userIdx}?page_num=${pageNum}`)
-    .then(response => response.data.reviewIdx); // FIXME: check 0827
+    .then(response => response.data.reviewIdx);
 }
 
 function createMiniReviewItem(reviewInfo){
