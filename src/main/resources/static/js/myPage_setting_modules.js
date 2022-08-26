@@ -24,8 +24,8 @@ function show_all_userData() {
 		$profile_img_container.classList.remove("skeleton");
 		$profile_img.classList.remove("hidden");
 	}, 2000);
-	$profile_img.src = userInfo.profileImg;
-	$profile_img.src = userInfo.profileImg == "" ? `/img/${logo_white_imgName}.png` : userInfo.profileImg;
+	$profile_img.src = userInfo.profileImgPath;
+	$profile_img.src = userInfo.profileImgPath == "" ? `/img/${logo_white_imgName}.png` : userInfo.profileImgPath;
 	$user_name.placeholder = userInfo.name;
 	$user_height.placeholder = parseInt(userInfo.height);
 	$user_weight.placeholder = userInfo.weight;
