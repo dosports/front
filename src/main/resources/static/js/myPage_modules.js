@@ -5,21 +5,6 @@ axios.defaults.baseURL = '';// TODO: axios 기본 url
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 const userIdx = getUserIdx();
 
-// function setToken(){
-//     axios.defaults.headers.common['Authorization'] = `Bearer localStorage.getItem('accessToken')`;
-
-//     let expiredTime = localStorage.getItem('expiredTime');
-//     let diffTime = '' ;
-//     if(diffTime < 10000){
-//         axios.defaults.headers.common['x-refresh-token'] = localStorage.getItem('refreshToken');
-//         axios.get('${url}/user/updateAccessToken')
-//         .then(response => {
-//             localStorage.setItem('accessToken', res.data.data.accessToken);
-//             localStorage.setItem('expiredTime', res.data.data.cur_time);
-//             axios.defaults.headers.common['x-access-token'] = localStorage.getItem('accessToken');
-//         })
-//     }
-// }
 // 마이페이지 - 메인
 // 사용자 사진, 이름 정보 가져오기
 //TODO:
@@ -29,7 +14,7 @@ export function getUserIdx(){
 }
 function getUserInfo(){
     return axios.get(`/user/mypage`)
-    .then(response => response.data.data)
+    .then(response => response.data)
 }
 
 
@@ -39,8 +24,10 @@ export function getOtherUserIdx(){
 }
 
 export function getOtherUserInfo(){
-    const otherUserInfo = JSON.parse(localStorage.getItem('otherUser'));
-    return otherUserInfo;
+    const otherUserIdx = getOtherUserIdx();
+    console.log('getOtherUserInfo', otherUserIdx);
+    return axios.get(`/user/${otherUserIdx}`)
+    .then(response => response.data);
 }
 
 // 자세한 리뷰 정보 가져오기
@@ -58,18 +45,18 @@ function getMyReviewIdx(pageNum){
 // 내가 좋아요한 리뷰 reviewIdx 배열 가져오기
 function getLikeReviewIdx(pageNum){
     return axios.get(`/like?page_num=${pageNum}`)
-    .then(response => response.data.data); // 여기 repsonse.data.data로 변경
+    .then(response => response.data);
 }
 
 // 다른 사람 리뷰 reviewIdx 가져오기
 export function getOtherUserReviewIdx(userIdx, pageNum){
     return axios.get(`/review/user/${userIdx}?page_num=${pageNum}`)
-    .then(response => response.data.reviewIdx);
+    .then(response => response.data.reviewIdx); // FIXME: check 0827
 }
 
 function createMiniReviewItem(reviewInfo){
     let pre_like_img = reviewInfo.img_path;
-    if(pre_like_img == ''){
+    if(pre_like_img == null){
         pre_like_img = sports_img[reviewInfo.sports]; // 각 종목 이미지로
     }
     const new_like_review_preview_item = document.createElement('div');
@@ -88,7 +75,7 @@ function createMiniReviewItem(reviewInfo){
 
 function createFullReviewItem(reviewInfo, like_clicked, login){
     let pre_my_img =  reviewInfo.img_path;
-    if(pre_my_img == ''){
+    if(pre_my_img == null){
         pre_my_img = sports_img[reviewInfo.sports]; // 각 종목 이미지로
     }
 

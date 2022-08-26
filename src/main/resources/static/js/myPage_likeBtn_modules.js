@@ -38,7 +38,7 @@ export function deleteLikeToServer(event, reviewIdxs){
 
 export function check_clickedLike(reviewIdx){
     return axios.get(`/like/check/${reviewIdx}`)
-    .then(response => response.data.success);
+    .then(response => response.data.isliked);
 }
 
 
