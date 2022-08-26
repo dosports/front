@@ -341,7 +341,7 @@ let checking ;
 const checkLiked  = async(url) => {
     try {
         const response = await axios.get(url) 
-        .then(result => isLiked(result.data.data.isliked)) ;
+        .then(result => isLiked(result.data.isliked)) ;
         return response ;
     } catch (error) {
         console.log(error) ;
