@@ -58,7 +58,7 @@ function getMyReviewIdx(pageNum){
 // 내가 좋아요한 리뷰 reviewIdx 배열 가져오기
 function getLikeReviewIdx(pageNum){
     return axios.get(`/like?page_num=${pageNum}`)
-    .then(response => response.data.reviewIdx);
+    .then(response => response.data.data); // 여기 repsonse.data.data로 변경
 }
 
 // 다른 사람 리뷰 reviewIdx 가져오기

@@ -1,7 +1,7 @@
-import {getReviewDetail, getLikeReviewIdx, pageUpEventHandler, beforePageBtnHandler, sports_img, sports_level, createFullReviewItem}  from "./myPage_modules.js";
-import {ioCallback_like, addNewLikeContent, loadFirstItems, reviewClickedEventHandler} from "./myPage_load10Review.js";
-import {like_toggle} from "./myPage_likeBtn_modules.js";
-import {header_onload, header_onscroll, alarm_reset} from "./header.js";
+import {getReviewDetail, getLikeReviewIdx, pageUpEventHandler, beforePageBtnHandler, sports_img, sports_level, createFullReviewItem}  from "/js/myPage_modules.js";
+import {ioCallback_like, addNewLikeContent, loadFirstItems, reviewClickedEventHandler} from "/js/myPage_load10Review.js";
+import {like_toggle} from "/js/myPage_likeBtn_modules.js";
+import {header_onload, header_onscroll, alarm_reset} from "/js/header.js";
 
 // 이전페이지로, 맨위로 버튼
 
