@@ -127,9 +127,9 @@ export async function addNewSearchReviewContent(){
     const urlParams = url.searchParams;
     const searchWord = urlParams.get('search'); 
 
-    const reviewIdx = await axios.get(`/search?keyword=${searchWord}&page_num=${pageNum}`) // 근데 그럼 모든 페이지에서 검색 결과를 url에 담아서 이 페이지로 전달해야겠네 FIXME:
+    const reviewIdx = await axios.get(`/search?keyword=${searchWord}&page_num=${pageNum}`)
                             .then(response => response.data)
-                            .catch(err => console.log(err))
+                            .catch(err => console.log(err));
     
     if(reviewIdx == []){
         return null;
@@ -141,6 +141,14 @@ export async function addNewSearchReviewContent(){
             const like_clicked =  await check_clickedLike(reviewIdx[i]);
             const login = localStorage.getItem('token') == null ? false : true;
             const new_search_review_preview_item = createFullReviewItem(reviewInfo, like_clicked, login); // 생성
+            // 검색 단어 - 하이라이트
+            const $review_title = new_search_review_preview_item.querySelector('.review_title');
+            const spans = $review_title.querySelectorAll('span');
+            for(let i = 0; i < spans.length; i++){
+                if(spans[i].innerText == searchWord){
+                    spans[i].setAttribute('class', 'match_word');
+                }
+            }
             $review_container.appendChild(new_search_review_preview_item);
         }
     return true;
