@@ -1,11 +1,17 @@
+import {desktop_click_search_btn, mobile_click_search_btn, searchEnterEventHandler} from "/js/search_module.js";
+
 export function header_onload() {
 	document.querySelector("#alarm-button").addEventListener("click", alarm_button_click);
 	document.querySelector("#mobile-alarm-button").addEventListener("click", mobile_alarm_button_click);
 	document.querySelector("#trigger").addEventListener("change", hamberger_bar_change);
 	document.querySelectorAll(".nav-mobile-item > button")[0].addEventListener("click", mobile_inner_nav);
 	document.querySelectorAll(".nav-mobile-item > button")[1].addEventListener("click", mobile_inner_nav);
-	document.querySelector("#search-button").addEventListener("click", desktop_click_search_btn);
+	// document.querySelector("#search-button").addEventListener("click", desktop_click_search_btn);
+	// document.querySelector("#mobile-search-button").addEventListener("click", mobile_click_search_btn);
+	// 검색 기능 추가 - 9/9
+	document.querySelector("#search-button").addEventListener("click",desktop_click_search_btn);
 	document.querySelector("#mobile-search-button").addEventListener("click", mobile_click_search_btn);
+	document.querySelector('#search-input').addEventListener('keyup', searchEnterEventHandler);
 }
 /** 스크롤할때 알람창 제거*/
 export function header_onscroll() {
@@ -105,16 +111,16 @@ function remove_hamberger(e) {
 /**
  * 검색버튼
  */
-function desktop_click_search_btn() {
-	const input = document.querySelector("#search-input");
-	search(input.value);
-	input.value = "";
-}
-function mobile_click_search_btn() {
-	const input = document.querySelector("#mobile-search-input");
-	search(input.value);
-	input.value = "";
-}
+// function desktop_click_search_btn() {
+// 	const input = document.querySelector("#search-input");
+// 	search(input.value);
+// 	input.value = "";
+// }
+// function mobile_click_search_btn() {
+// 	const input = document.querySelector("#mobile-search-input");
+// 	search(input.value);
+// 	input.value = "";
+// }
 /**
  * API
  */
@@ -162,13 +168,13 @@ function alarm_container_comment(alarm_info) {
 			`;
 }
 /*검색*/
-function search(keyword) {
-	var requestOptions = {
-		method: "POST",
-		redirect: "follow",
-	};
+// function search(keyword) {
+// 	var requestOptions = {
+// 		method: "POST",
+// 		redirect: "follow",
+// 	};
 
-	fetch(`/search?keyword=${keyword}`, requestOptions)
-		.then((response) => console.log(response))
-		.catch((error) => console.log("error", error));
-}
+// 	fetch(`/search?keyword=${keyword}`, requestOptions)
+// 		.then((response) => console.log(response))
+// 		.catch((error) => console.log("error", error));
+// }
