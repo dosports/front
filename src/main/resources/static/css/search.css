@@ -1,0 +1,11 @@
+@import '/css/likeReview_detailPage.css';
+
+.section_header{
+    margin: 0;
+    padding: 0;
+}
+.section_header_title{
+    padding: 20px 1.73vw;
+    margin: 20px 1.94vw;
+    margin-bottom: 45px;
+}
