@@ -121,6 +121,32 @@ export async function addNewOtherReviewContent(){
     }
 }
 
+// 검색 결과 가져와서 보여주기 
+export async function addNewSearchReviewContent(){
+    const url = new URL(window.location.href);
+    const urlParams = url.searchParams;
+    const searchWord = urlParams.get('search'); 
+
+    const reviewIdx = await axios.get(`/search?keyword=${searchWord}&page_num=${pageNum}`) // 근데 그럼 모든 페이지에서 검색 결과를 url에 담아서 이 페이지로 전달해야겠네 FIXME:
+                            .then(response => response.data)
+                            .catch(err => console.log(err))
+    
+    if(reviewIdx == []){
+        return null;
+    }else{
+        reviewIdxs.concat(reviewIdx);
+
+        for(let i = 0; i < reviewIdx.length; i++){
+            const reviewInfo = await getReviewDetail(reviewIdx[i]);
+            const like_clicked =  await check_clickedLike(reviewIdx[i]);
+            const login = localStorage.getItem('token') == null ? false : true;
+            const new_search_review_preview_item = createFullReviewItem(reviewInfo, like_clicked, login); // 생성
+            $review_container.appendChild(new_search_review_preview_item);
+        }
+    return true;
+    }
+}
+
 export function observeLastItem(io, items){
     const lastItem = items[items.length -1];
     io.observe(lastItem);
@@ -167,6 +193,23 @@ export function ioCallback_otherUser(entries, io){
             addSkeleton();
             setTimeout(async() => {
                 const moreReviewExist = await addNewOtherReviewContent();
+                if(moreReviewExist != null){
+                    pageNum+=1;
+                    observeLastItem(io, document.querySelectorAll('.review_item'));
+                }
+                removeSkeleton();
+            }, 2000);
+        }
+    })
+}
+
+export function ioCallback_search(entries, io){
+    entries.forEach((entry) => {
+        if(entry.isIntersecting){
+            io.unobserve(entry.target);
+            addSkeleton();
+            setTimeout(async() => {
+                const moreReviewExist = await addNewSearchReviewContent();
                 if(moreReviewExist != null){
                     pageNum+=1;
                     observeLastItem(io, document.querySelectorAll('.review_item'));
