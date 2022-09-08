@@ -13,6 +13,7 @@ main{
 /* 알람 */
 #alarm-modal1{
     top: 99px;
+    z-index: 100;
 }
 #alarm-modal2{
     top: 70px;
