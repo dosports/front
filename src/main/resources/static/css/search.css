@@ -9,3 +9,7 @@
     margin: 20px 1.94vw;
     margin-bottom: 45px;
 }
+
+.match_word{
+    background-color: hsla(172, 99%, 32%, 0.3); /*색상 아직 미정*/
+}

@@ -83,6 +83,16 @@ function createFullReviewItem(reviewInfo, like_clicked, login){
     new_review_item.classList.add('review_item');
     
     const time = reviewInfo.regDate.split(' ')[1].split(':');
+    const brandWordList = reviewInfo.brand.split(' ');
+    const titleWordList = reviewInfo.title.split(' ');
+    let brandSpans = '';
+    let titleSpans = '';
+    for(let i = 0; i < brandWordList.length; i++){
+        brandSpans += `<span>${brandWordList[i]}</span>`;
+    }
+    for(let i = 0; i < titleWordList.length; i++){
+        titleSpans += `<span>${titleWordList[i]}</span> `;
+    }
 
     new_review_item.innerHTML = `
             <div class="review_leftContainer">
@@ -97,7 +107,7 @@ function createFullReviewItem(reviewInfo, like_clicked, login){
             </div>
             <div class="review_rightContainer">
                 <div class="my_review_titleAndWriter">
-                    <div class="review_title">${reviewInfo.brand} ${reviewInfo.title}</div>
+                    <div class="review_title">${brandSpans} ${titleSpans}</div>
                     <div class="review_writerAndTime">${reviewInfo.userName} / ${time[0]}:${time[1]}</div>
                 </div>
                 <div class="my_review_star">${'★'.repeat(reviewInfo.rate) + '☆'.repeat(5-reviewInfo.rate)}</div>
