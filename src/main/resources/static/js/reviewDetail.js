@@ -1,9 +1,11 @@
 'use strict';
 import { header_onload, header_onscroll, alarm_reset } from "./header.js"; // 이거 주석처리하고 밑에 주석 해제하기 !!
 import { reviewDetail_template , rearrange_comments , parentComment_template, 
-    childComment_template, getUserIdx } from "./reviewDetail_module.js";
+    childComment_template, resetComments , clickCommentMoreBtn ,
+    viewLimit , writingComLimit } from "./reviewDetail_module.js";
 // import { header_onload, header_onscroll, alarm_reset } from "/js/header.js";
 
+// ********************    나중에 이부분 지우기 !!!
 localStorage.setItem("token" , "ex") ;
 // localStorage.clear()
 
@@ -51,45 +53,19 @@ function control_scroll(){
     }, 200)
 }
 
-
-/** 리뷰 상세 이미지 (점 클릭시 해당 이미지로 이동) */
-// let slideIndex = 0 ;
-
-function reviewImg(n) {
-	const $review_images = document.querySelectorAll(".review-img_files img") ;
-	const $dots = document.querySelectorAll(".dot") ;
-
-	for (let index = 0; index < $review_images.length; index++) {
-		$review_images[index].classList.remove("review-img_action")	;
-		$dots[index].classList.remove("img_focus") ;
-	}
-
-	// if (slideIndex>$review_images.length-1) {slideIndex=0}
-
-	$review_images[n].classList.add("review-img_action");
-	$dots[n].classList.add("img_focus") ;
-}
-
-function clickImgDot() {
-	const $review_img_cnt = document.querySelector(".review-img_cnt") ;
-	$review_img_cnt.addEventListener("click" , (e) => {
-		if(e.target.classList.contains("dot")) {
-			let clickNum = Number(e.target.dataset.num);
-			reviewImg(clickNum);
-		}
-	})
-}
-clickImgDot();
-reviewImg(0) ;
-
+/** 비로그인 시에는 아예 댓글 못 달도록 */ 
+writingComLimit()
 
 /** 리뷰 상세 Fetch */
 async function fetchReview (url) {
     try {
         const response = await axios.get(url)
-        .then(result => reviewDetail_template(result.data)) // reverse 없애면 .data
+        .then(result => reviewDetail_template(result.data)) // reverse 없애면 .data        
         // .then(result => result.data.map(data => reviewDetail_template(data))) // reverse 없애면 .data
         .catch(error => console.log(error)) ;
+        setTimeout(() => {
+            viewLimit() ;
+        });        
     } catch (error) {
         console.log(error)
     }
@@ -100,15 +76,21 @@ async function fetchReview (url) {
 /** 댓글 Fetch */
 async function fetchComments (url) {
 	try {
-        const response = await axios.get(url)      
+        const response = await axios.get(url)  
+        .then(resetComments())    
         .then(result => rearrange_comments(result.data))
         .then(result => result.map(data => parentComment_template(data)))
         .then(result => result.map(data => childComment_template(data)))
+        // .then(clickCommentMoreBtn())
         .then(result => {
             document.querySelector(".comments-cnt_num").innerText = `${result.length}` ;
             return result
         })
         .catch(error => console.log(error)) ;
+
+        setTimeout(() => {
+            clickCommentMoreBtn();
+        })
         
         console.dir(response)
     } catch (error) {
@@ -119,10 +101,10 @@ async function fetchComments (url) {
 // fetchComments("https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/comment/%7BreviewIdx%7D");
 
 
-/** (부모) 댓글 작성 */
-document.querySelector(".comment-write_writingArea").addEventListener("submit", (e) => {
+/** (부모) 댓글 작성 */  //  ####### 여기 axios.post 비동기 수정해야할듯? ###
+document.querySelector(".write-parent .comment-write_writingArea").addEventListener("submit", (e) => {
     e.preventDefault() ;
-    check()
+    // fetchComments("https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/comment/%7BreviewIdx%7D");
     const content = e.target[0].value ;
     if (!content) {
         alert("댓글 내용을 작성해주세요");
@@ -130,25 +112,20 @@ document.querySelector(".comment-write_writingArea").addEventListener("submit", 
     }
     const reviewIdx = document.querySelector(".review_title").dataset.index ;
 
+    console.log('reviewIdx : ' , reviewIdx) ;
+
+    e.target[0].value = '' ; // 등록 후 작성했던 댓글 내용 사라지게
+
     axios.post("/comment", {
+    // axios.post("https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/comment", {
         reviewIdx : reviewIdx,
         content : `${content}` 
     })
     .then(fetchComments(`/comment/${reviewIdx}`))
+    // .then(fetchComments(`https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/comment/%7BreviewIdx%7D`))
     .catch((error) => {
         console.log(error)
     })
 } );
 
-// async function checkLogin() {
-//     const isLoggedin = await getUserIdx() ;
-//     if (!isLoggedin) {
-//         console.log("no!!")
-//     } else {
-//         console.log("login")
-//     }
-// }
-// checkLogin()
-
-
-
+// https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/comment

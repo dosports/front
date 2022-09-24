@@ -1,10 +1,12 @@
 'use strict';
-// import { header_onload, header_onscroll, alarm_reset } from "./header.js";
-import { header_onload, header_onscroll, alarm_reset } from "/js/header.js";
+import { header_onload, header_onscroll, alarm_reset } from "./header.js";
+// import { header_onload, header_onscroll, alarm_reset } from "/js/header.js";
 
 // api 
-const API = "" ; // api url 적기 !!
-const CUR_URL = API + window.location.pathname   ;  
+// const API = "" ; // api url 적기 !!
+// const CUR_URL = API + window.location.pathname   ;  
+
+console.log("page")
 
 await fetch("../../templates/main/main_header.html")
 	.then((res) => res.text())
@@ -18,8 +20,6 @@ window.addEventListener("resize", () => {
 	// scrollX_reset();
 	alarm_reset();
 });
-
-// const CUR_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" ;// api 테스트 용입니다    
 
 
 function frontUrl(cate, height, weight, level, minPrice, maxPrice) { // 필터링 값 반영 
@@ -47,7 +47,6 @@ const pageUp_btn = document.querySelector(".pageUp-btn") ;
 
 pageUp_btn.addEventListener("click" , ()=> {
     window.scrollTo({top : 0 , behavior : 'smooth'});
-    console.log("click") ;
 })
 
 document.addEventListener("scroll", () => {
@@ -97,9 +96,9 @@ if (hasToken) { // 로그인할 때만 리뷰 작성하기 버튼 보여주기
 }
 
 // 리뷰 작성하기 버튼 클릭 시 리뷰 작성 페이지로 이동
-function moveWritePage() {
-    location.href = `${API}/review/post` ;
-}
+write_review_btn.addEventListener("click" , () => {
+    location.href = `./reviewForm/reviewForm.html` ;
+})
 
 // 이전 페이지 버튼 
 previous_page.addEventListener("click" , () => {
@@ -238,6 +237,8 @@ function likeBtn (reviewItem) {
                 like_icon.classList.remove("like-hidden");
                 colored_like_icon.classList.add("like-hidden");
     
+                $likes_cnt_num.innerText = String(Number($likes_cnt_num.innerText)-1) ;
+
                 axios.delete(`${API}}/like`, {                
                     reviewIdx : liked_reviewIdx
                 })
@@ -246,6 +247,8 @@ function likeBtn (reviewItem) {
                 like_icon.classList.add("like-hidden");
                 colored_like_icon.classList.remove("like-hidden");
     
+                $likes_cnt_num.innerText = String(Number($likes_cnt_num.innerText)+1) ;
+
                 axios.post(`${API}/like`, {
                     reviewIdx : liked_reviewIdx
                 })
@@ -312,6 +315,7 @@ let has_data ; // 다음  10개 게시물 있는지 확인
 const products_lists = document.querySelector(".products-lists") ;
 
 const fetchAllReview = async(url) => {
+    console.log("start")
     try {
         const response = await axios.get(url)
         .then(result => result.data.map(data => review_Template(data))) // reverse 없애면 .data
@@ -355,6 +359,8 @@ function isLiked(data) {
 
 // <a href = "/review/${data.reviewIdx}">
 function review_Template(data) {
+
+    // <a href = "${API}/review/${data.reviewIdx}">
     
     // 링크 수정해야함!                 ************************************
     const reviewItem = `
@@ -484,3 +490,4 @@ function regDateForm(date) {
 // 처음 접속했을때 모든 리뷰 다 보여주기
 current_frontUrl = frontUrl("", "", "", "", "", "") ;
 fetchAllReview(current_frontUrl+backUrl(is_photo,sort_num, page_num)) ;
+

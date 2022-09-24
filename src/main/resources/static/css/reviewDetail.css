@@ -74,6 +74,7 @@ button, label {
     display: none;
 }
 
+
 /* 이전 페이지 버튼 */
 #previous-page {
     margin: 40px 0 50px;
@@ -203,6 +204,38 @@ img {
     font-family: 'GmarketSans';
     font-weight: 900;
 }
+.comment-item_more {
+    position: relative;
+    flex-direction: column;
+}
+.comment-more_container {
+    position: absolute;
+    top: 25px;
+    right: -45px;
+    width: max-content;
+}
+.comment-more_container div {
+    text-align: center;
+    padding: 12px 6px;
+    font-family: 'GmarketSans';
+    font-weight: 500;
+    background-color: var(--white);
+}
+.more-container_writeChildCom {
+    border: 2px solid var(--deep-yellow);
+    border-bottom: 0;
+    border-radius: 10px 10px 0 0 ;
+    cursor: pointer;
+}
+.more-container_deleteComment {
+    border: 2px solid var(--deep-yellow);
+    border-radius: 0 0 10px 10px ;
+    cursor: pointer;
+}
+.click-limit {
+    pointer-events: none;
+    color: var(--light-gray);
+}
 
 /* 대댓글 */
 .comment-child_division {
@@ -214,6 +247,7 @@ img {
     min-width: 23.1px;
     min-height: 21.69px;
 }
+
 
 
 /* 페이지 끌올 버튼 */
@@ -270,9 +304,6 @@ img {
     color: var(--orange);
     padding: 7px 0;
     width: 80%;
-}
-.review-hidden {
-    display: none;
 }
 
 /* 본인이 쓴 글이 아닐 때 */

@@ -43,18 +43,18 @@
                     <div class="review_leftContainer">
                         <div class="review_img_container">
                             <div class="review-img_files flex">
-                                <img src="../../static/img/hiking_icon.png" alt="내가 쓴 리뷰 사진" class="review_img">
+                                <!-- <img src="../../static/img/hiking_icon.png" alt="내가 쓴 리뷰 사진" class="review_img">
                                 <img src="../../static/img/balls_icon.png" alt="내가 쓴 리뷰 사진" class="review_img">
                                 <img src="../../static/img/gym_icon.png" alt="내가 쓴 리뷰 사진" class="review_img">
                                 <img src="../../static/img/swim_icon.png" alt="내가 쓴 리뷰 사진" class="review_img">
-                                <img src="../../static/img/tennis_icon.png" alt="내가 쓴 리뷰 사진" class="review_img">
+                                <img src="../../static/img/tennis_icon.png" alt="내가 쓴 리뷰 사진" class="review_img"> -->
                             </div>
                             <div class="review-img_cnt flex">
-                                <div data-num="0" class="dot img_focus"></div>
+                                <!-- <div data-num="0" class="dot img_focus"></div>
                                 <div data-num="1" class="dot"></div>
                                 <div data-num="2" class="dot"></div>
                                 <div data-num="3" class="dot"></div>
-                                <div data-num="4" class="dot"></div>
+                                <div data-num="4" class="dot"></div> -->
                             </div>
                         </div>
                         <div class="heart_container" data-reviewIdx="1">
@@ -74,14 +74,14 @@
                         <div class="my_review_likeAndComment"> comment </div>
                         <div class="my_review_writerDetail">gender / height weight / level </div>
                         <div class="my_review_buyInfo ">source / price</div>
-                        <div class="review-view_limit review-hidden">리뷰 작성하면 구매출처와 구매가격을 볼 수 있어요!</div>
+                        <div class="review-view_limit hidden">리뷰 작성하면 구매출처와 구매가격을 볼 수 있어요!</div>
                         
                         <div class="my_review_content">
                             review content
                         </div>                
                     </div>
-                    <div class="review-btn_container "> <!--reviewBtn-hidden-->
-                        <div class="review-modify">수정</div>
+                    <div class="review-btn_container hidden"> <!--reviewBtn-hidden-->
+                        <div class="review-modify" onclick="location.href = `../reviewForm/reviewForm.html`">수정</div>     <!--FIX LINK !!!-->
                         <div class="review-delete">삭제</div>
                     </div>  
                 </div>            
@@ -95,61 +95,85 @@
 
                 <div class="comments_container">
 
-                    <div class="comment-write flex">
+                    <div class="write-parent comment-write flex">
                         <div class="comment-item_profile comment-write_profile">
                             <img src="../../static/img/logo.png" alt="profileImg">
                         </div>
                         <div class="comment-item_container comment-write_container">
                             <div class="comment-item_upper comment-write_myName"><h4>사용자 이름</h4></div>
                             <form class="comment-write_writingArea">
-                                <input type="text" name="writeComment" id="writeComment" placeholder="댓글 추가">
+                                <input autocomplete="off" type="text" name="writeComment" id="writeComment" placeholder="댓글 추가">
                                 <button type="submit">등록</button>
                             </form>
                         </div>                    
                     </div>
 
                     <div class="comments-list">
-                        <!-- <div class="comment-parent flex" >
-                            <div class="comment-item_profile">
-                                <img src="../../static/img/logo.png" alt="profileImg">
-                            </div>
-                            <div class="comment-item_container">
-                                <div class="comment-item_upper flex">
-                                    <div class="comment-item_nameAndTime flex">
-                                        <h4 class="comment-item_name">댓글 작성자 이름</h4>
-                                        <div class="comment-item_time">댓글 작성 시간</div>
-                                    </div>                                    
-                                    <div class="comment-item_more">
-                                        <span class="more_icon">:</span>
+                        <div class="comment-item">
+                            <div class="comment-parent flex" >
+                                <div class="comment-item_profile">
+                                    <img src="../../static/img/logo.png" alt="profileImg">
+                                </div>
+                                <div class="comment-item_container">
+                                    <div class="comment-item_upper flex">
+                                        <div class="comment-item_nameAndTime flex">
+                                            <h4 class="comment-item_name">댓글 작성자 이름</h4>
+                                            <div class="comment-item_time">댓글 작성 시간</div>
+                                        </div>                                    
+                                        <div class="comment-item_more flex">
+                                            <span class="more_icon">:</span>
+                                            <div class="comment-more_container hidden">
+                                                <div class="more-container_writeChildCom">대댓글 달기</div>
+                                                <div class="more-container_deleteComment click-limit">댓글삭제</div>  <!--click-limit-->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="comment-content">
+                                        comment content
                                     </div>
                                 </div>
-                                <div class="comment-content">
-                                    comment content
+                            </div>
+                            
+                            <div class="comment-write write-child hidden flex">
+                                <div class="comment-child_division">
+                                    <img src="../../static/img/child_comment_arrow.png" alt="">
                                 </div>
+                                <div class="comment-item_profile comment-write_profile">
+                                    <img src="../../static/img/logo.png" alt="profileImg">
+                                </div>
+                                <div class="comment-item_container comment-write_container">
+                                    <div class="comment-item_upper comment-write_myName"><h4>사용자 이름</h4></div>
+                                    <form class="comment-write_writingArea">
+                                        <input type="text" name="writeComment" id="writeComment" placeholder="댓글 추가">
+                                        <button type="submit">등록</button>
+                                    </form>
+                                </div>                    
                             </div>
-                        </div> -->
-                        <!-- <div class="comment-child flex">
-                            <div class="comment-child_division">
-                                <img src="../../static/img/child_comment_arrow.png" alt="">
-                            </div>
-                            <div class="comment-item_profile">
-                                <img src="../../static/img/logo.png" alt="profileImg">
-                            </div>
-                            <div class="comment-item_container">
-                                <div class="comment-item_upper flex">
-                                    <div class="comment-item_nameAndTime flex">
-                                        <h4 class="comment-item_name">댓글 작성자 이름</h4>
-                                        <div class="comment-item_time">댓글 작성 시간</div>
-                                    </div>  
-                                    <div class="comment-item_more">
-                                        <span class="more_icon">:</span>
+
+                            <div class="comment-child flex">
+                                
+                                <div class="comment-child_division">
+                                    <img src="../../static/img/child_comment_arrow.png" alt="">
+                                </div>
+                                <div class="comment-item_profile">
+                                    <img src="../../static/img/logo.png" alt="profileImg">
+                                </div>
+                                <div class="comment-item_container">
+                                    <div class="comment-item_upper flex">
+                                        <div class="comment-item_nameAndTime flex">
+                                            <h4 class="comment-item_name">댓글 작성자 이름</h4>
+                                            <div class="comment-item_time">댓글 작성 시간</div>
+                                        </div>  
+                                        <div class="comment-item_more">
+                                            <span class="more_icon">:</span>
+                                        </div>
+                                    </div>
+                                    <div class="comment-content">
+                                        child comment content
                                     </div>
                                 </div>
-                                <div class="comment-content">
-                                    child comment content
-                                </div>
-                            </div>
-                        </div>  -->
+                            </div> 
+                        </div>
                     </div>
                     
                 </div>            
