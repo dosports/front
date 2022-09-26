@@ -54,7 +54,7 @@ export function reviewDetail_template(data) {
     likeBtn() ;
 
     /** 로그인 유저와 게시물 작성자 같으면 게시물 수정&삭제 버튼 생기기 / 없으면 없애기 */     
-    if((isUserWriter_same(data.reviewIdx , getUserIdx()) ) == 200) {
+    if((isUserWriter_same(data.reviewIdx) ) == 200) {
         $review_btn_container.classList.remove("hidden") ;
     } else {
         $review_btn_container.classList.add("hidden");
@@ -185,9 +185,9 @@ export function rearrange_comments(data) {  //  [ {댓글}, {댓글}, ... ]
 
 
 /** 로그인 유저와 게시물 작성자 같은지 여부 체크 */
-async function isUserWriter_same (reviewIdx , userIdx) { // ######## 밑에 reviewIdx userIdx 수정하기 !!! #######
+async function isUserWriter_same (reviewIdx) { // ######## 밑에 reviewIdx userIdx 수정하기 !!! #######
     // const response = axios.get(`/review/${reviewIdx}/user/${userIdx}`)
-    const response = axios.get(`/review/${reviewIdx}/user/${userIdx}`)    
+    const response = axios.get(`/review/${reviewIdx}/user`)    
     .then(res => res.status)  // ********* status 수정할수도 !!
     .catch((error) => {
         console.log(error)
@@ -223,7 +223,7 @@ function click_reviewBtn(i) { // reviewIdx 넘기기
 /** 리뷰 수정 */
 function reviseReview() {
     // 리뷰 수정 구현하기 ~!!
-    location.href = `./reviewForm/reviewForm.html`      // 수정해야함 !!!!
+    location.href = `/src/main/resources/templates/reviewForm/reviewForm.html`      // 수정해야함 !!!!
 }
 /** 리뷰 삭제 */
 async function deleteReview(i) {
