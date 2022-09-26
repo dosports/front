@@ -4,7 +4,7 @@ import { header_onload, header_onscroll, alarm_reset } from "/js/header.js";
 
 // api 
 const API = "" ; // api url 적기 !!
-const CUR_URL = API + window.location.pathname   ;  
+// const CUR_URL = API + window.location.pathname   ;  
 
 await fetch("../../templates/main/main_header.html")
 	.then((res) => res.text())
@@ -19,11 +19,9 @@ window.addEventListener("resize", () => {
 	alarm_reset();
 });
 
-// const CUR_URL = "https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io" ;// api 테스트 용입니다    
-
 
 function frontUrl(cate, height, weight, level, minPrice, maxPrice) { // 필터링 값 반영 
-    return `${CUR_URL}?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}`;
+    return `${API}?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}`;
 }
 function backUrl(photo, sort, page) {
     return `&isPhoto=${photo}&sort_param=${sort}&page_num=${page}` ;
@@ -35,6 +33,7 @@ let page_num = 1 ; //
 
 // 토큰 저장 여부
 const hasToken = localStorage.getItem("token") ? true :  false ;
+// localStorage.setItem("token" , "ex");  // this is an example
 
 // 위에 운동 종목 이름 
 const location_pth = window.location.pathname ;
@@ -47,7 +46,6 @@ const pageUp_btn = document.querySelector(".pageUp-btn") ;
 
 pageUp_btn.addEventListener("click" , ()=> {
     window.scrollTo({top : 0 , behavior : 'smooth'});
-    console.log("click") ;
 })
 
 document.addEventListener("scroll", () => {
@@ -97,9 +95,9 @@ if (hasToken) { // 로그인할 때만 리뷰 작성하기 버튼 보여주기
 }
 
 // 리뷰 작성하기 버튼 클릭 시 리뷰 작성 페이지로 이동
-function moveWritePage() {
-    location.href = `${API}/review/post` ;
-}
+write_review_btn.addEventListener("click" , () => {
+    location.href = `/src/main/resources/templates/reviewForm/reviewForm.html` ;
+})
 
 // 이전 페이지 버튼 
 previous_page.addEventListener("click" , () => {
@@ -212,6 +210,28 @@ onlyImg_btn.addEventListener("change" , (e) => {
     fetchAllReview(current_frontUrl+backUrl(is_photo,sort_num, page_num)) ; 
 });
 
+// https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/review/user/info
+/** 로그인 유저의 키 몸무게 값 가져오기  */
+async function fetchBodyInfo() {  // axios url 바꾸기 !! (API_KEY 넣기)
+    if (!hasToken) {return ;}    
+    try {
+        // const res = await axios.get('https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/review/user/info')
+        const res = await axios.get(`${API}/review/user/info`)
+        .then(result => putBodyValue(result.data)) 
+        .catch(error => console.log(error))
+
+        return res ;
+    } catch (error) {
+        console.log(error) ;
+    }
+}
+
+function putBodyValue(info) {
+    document.querySelector("#height").value = info.height ;
+    document.querySelector("#weight").value = info.weight ;
+}
+
+
 
 function likeBtn (reviewItem) {
     const like_container = reviewItem.querySelector(".heart_container") ;
@@ -238,6 +258,8 @@ function likeBtn (reviewItem) {
                 like_icon.classList.remove("like-hidden");
                 colored_like_icon.classList.add("like-hidden");
     
+                $likes_cnt_num.innerText = String(Number($likes_cnt_num.innerText)-1) ;
+
                 axios.delete(`${API}}/like`, {                
                     reviewIdx : liked_reviewIdx
                 })
@@ -246,6 +268,8 @@ function likeBtn (reviewItem) {
                 like_icon.classList.add("like-hidden");
                 colored_like_icon.classList.remove("like-hidden");
     
+                $likes_cnt_num.innerText = String(Number($likes_cnt_num.innerText)+1) ;
+
                 axios.post(`${API}/like`, {
                     reviewIdx : liked_reviewIdx
                 })
@@ -312,6 +336,7 @@ let has_data ; // 다음  10개 게시물 있는지 확인
 const products_lists = document.querySelector(".products-lists") ;
 
 const fetchAllReview = async(url) => {
+    console.log("start")
     try {
         const response = await axios.get(url)
         .then(result => result.data.map(data => review_Template(data))) // reverse 없애면 .data
@@ -355,10 +380,12 @@ function isLiked(data) {
 
 // <a href = "/review/${data.reviewIdx}">
 function review_Template(data) {
+
+    // <a href = "${API}/review/${data.reviewIdx}">
     
     // 링크 수정해야함!                 ************************************
     const reviewItem = `
-        <a href = "${API}/review/${data.reviewIdx}">
+        <a href = "/review/${data.reviewIdx}">
             <div class="review_item">
                 <div class="review_leftContainer">
                     <div class="review_img_container">
@@ -482,5 +509,6 @@ function regDateForm(date) {
 }
 
 // 처음 접속했을때 모든 리뷰 다 보여주기
+fetchBodyInfo() ;
 current_frontUrl = frontUrl("", "", "", "", "", "") ;
 fetchAllReview(current_frontUrl+backUrl(is_photo,sort_num, page_num)) ;

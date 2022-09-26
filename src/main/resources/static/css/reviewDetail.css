@@ -1,0 +1,343 @@
+/* @import url("../css/variable.css");
+@import url("../css/reset.css");
+@import url("../css/reviewContainerInReviewDetail.css");
+@import url("../css/headerInFilterPage.css"); */
+
+@import url("/css/variable.css");
+@import url("/css/reset.css");
+@import url("/css/reviewContainerInReviewDetail.css");
+@import url("/css/headerInFilterPage.css");
+
+html , body {
+    width: 100%;
+    height: 100%;
+}
+
+/* variables setting */
+:root {
+    --dark-gray : #797979 ;
+    --white : #ffffff ;
+    --light-gray : #D9D9D9 ;
+}
+/* settings */
+
+.styled-border {
+    position: relative;
+}
+.styled-border::before {
+    content: "▶︎";
+    position: absolute;
+    top: calc(100% - 4px);
+    left: -2px;
+    color: var(--yellow);
+    font-size: 8px;
+}
+.styled-border::after {
+    content: "▶︎";
+    position: absolute;
+    top: calc(100% - 4px);
+    right: -2px;
+    transform: scaleX(-1);
+    color: var(--yellow);
+    font-size: 8px;
+}
+body * {
+    font-family: 'NanumSquare';
+    font-size: 16px;
+}
+
+#root {
+    margin : 0 auto 80px ;  /* 여기 확인 필요. 일단 전체 너비 1904로 계산함 */
+    /* margin : 45px 16vw ;  /*변경*/
+    width: 1264px; /*변경*/
+    font-size: 16px;
+    color: var(--black);
+    height: 100%;
+    position: relative;
+}
+
+h2,h3,h4 {
+    font-family: 'GmarketSans';
+}
+
+button {
+    border: 0;
+    background-color: transparent;
+}
+button, label {
+    cursor: pointer;
+}
+
+.flex {
+    display: flex;
+}
+.hidden {
+    display: none;
+}
+
+
+/* 이전 페이지 버튼 */
+#previous-page {
+    margin: 40px 0 50px;
+    /* margin: 2.3vw 0; */
+    width: 100%;
+    cursor: pointer;
+}
+.previous-pageBtn {
+    align-items: center;
+    padding: 0;
+}
+.previous-pageBtn img {
+    transform: rotate(180deg);
+    width: 45px;
+    height: 28px;
+}
+.filter-icon {
+    width: 48px;
+    height: 35px;
+    display: none;
+}
+.review-btn_container {
+    position: absolute;
+    top: 70px;
+    right: 25px;
+}
+.review-modify , .review-delete {
+    font-family: 'GmarketSans';
+    width: 4.49vw;
+    /* height: 2.5vw; */
+    min-width: 56.8px;
+    height: 40px;
+    border-radius: 15px;
+    text-align: center;
+    line-height: 40px;
+
+    margin-bottom: 5.1px;
+    cursor: pointer;
+}
+.review-modify {
+    background-color: var(--white);
+    border: 1.5px solid #01A48F;
+}
+.review-delete {
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+/* 댓글  */
+img {
+    width: 50px;
+}
+
+#comments {
+    padding: 0 1.73vw 33px 1.73vw;
+    width: 100%;
+}
+.comments-top {
+    margin-bottom: 31px;
+}
+.comment-write, .comment-parent, .comment-child {
+    margin-bottom: 47px;
+    position: relative;
+}
+.comment-write {
+    justify-content: space-between;
+}
+.comment-item_profile {
+    width: 4.5vw;
+    height: 4.5vw;
+    min-width: 50px;
+    min-height: 50px;
+    border-radius: 50%;
+    margin-right: 2vw;
+    background-color: #797979;
+}
+.comment-item_profile img {
+    width: 100%;
+    height: 100%;
+}
+.comment-item_container {
+    flex: 1;
+    width: 100%;
+}
+.comment-item_upper {
+    margin-bottom: 20px;
+}
+
+/* 댓글 작성 칸 */
+.comment-write_writingArea {
+    width: 100%;
+    border-bottom: 1px solid var(--deep-yellow);
+}
+#writeComment {
+    margin: 10px 0;
+    width: calc(100% - 80px);
+}
+.comment-write_writingArea button {
+    color: var(--white);
+    position: absolute;
+    top: 25px;
+    right: 0;
+    width: 4.49vw;
+    /* height: 2.5vw; */
+    height: 40px;
+    min-width: 56.8px;
+    /* min-height: 31.63px; */
+    background-color: var(--green);
+    border-radius: 15px;
+}
+
+
+/* 댓글  */
+.comment-item_upper {
+    justify-content: space-between;
+    align-items: center;
+}
+.comment-item_name {
+    margin-right: 4.36vw;
+}
+.comment-item_time {
+    color: #6f6f6f;
+    font-size: 13px;
+}
+.more_icon {
+    cursor: pointer;
+    font-family: 'GmarketSans';
+    font-weight: 900;
+}
+.comment-item_more {
+    position: relative;
+    flex-direction: column;
+}
+.comment-more_container {
+    position: absolute;
+    top: 25px;
+    right: -45px;
+    width: max-content;
+}
+.comment-more_container div {
+    text-align: center;
+    padding: 12px 6px;
+    font-family: 'GmarketSans';
+    font-weight: 500;
+    background-color: var(--white);
+}
+.more-container_writeChildCom {
+    border: 2px solid var(--deep-yellow);
+    border-bottom: 0;
+    border-radius: 10px 10px 0 0 ;
+    cursor: pointer;
+}
+.more-container_deleteComment {
+    border: 2px solid var(--deep-yellow);
+    border-radius: 0 0 10px 10px ;
+    cursor: pointer;
+}
+.click-limit {
+    pointer-events: none;
+    color: var(--light-gray);
+}
+
+/* 대댓글 */
+.comment-child_division {
+    margin: 0 2vw;
+}
+.comment-child_division img {
+    width: 2.17vw;
+    height: 2.02vw;
+    min-width: 23.1px;
+    min-height: 21.69px;
+}
+
+
+
+/* 페이지 끌올 버튼 */
+.pageUp-btn img{
+    width: 65px;
+    height: 65px;
+
+    border-radius: 50%;
+}
+.pageUp-btn {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 250ms ease-in-out;
+
+    position: absolute;
+    z-index: 1000;
+    /* top: 700px; */
+    /* left: 90vw; */
+    /* bottom: 60px; */
+    right: 50px;
+    
+    top: 50%;
+    transform: translate(0, -50%);
+}
+.pageUp-action {
+    opacity: 1;
+    pointer-events: auto;
+    transition: all 250ms ease-in-out;
+}
+.pageUp-btn img:hover {
+    box-shadow: 2px 4px 12px rgb(0 0 0 / 10%);
+    transition: all 250ms ease-out;
+}
+
+/* review_item 관련 css */ 
+.heart_container {
+    /* z-index: 500; */
+    cursor: pointer;
+}
+.heart_limit {
+    cursor: default;
+}
+.colored img {
+    width: 19px;
+    height: 17px;
+    padding-top: 2px;
+}
+.review_item .like-hidden  {
+    display: none;
+}
+
+.review-view_limit {
+    background-color: #F4F4F4;
+    color: var(--orange);
+    padding: 7px 0;
+    width: 80%;
+}
+
+/* 본인이 쓴 글이 아닐 때 */
+.reviewBtn-hidden { 
+    display: none;
+}
+
+
+@media (max-width:1264px) {
+    #root {
+        width: 100%;
+    }
+}
+@media (max-width:495px) {
+
+    .review-btn_container {
+        top: 50px;
+        right: 10px;
+    }
+    .review-modify , .review-delete {
+        font-family: 'GmarketSans';
+        min-width: 40px;
+        height: 25px;
+        border-radius: 15px;
+        text-align: center;
+        line-height: 25px;
+        font-size: 12px;
+    
+        margin-bottom: 3px;
+        cursor: pointer;
+    }
+}
+
+@media (max-width:360px) {
+    
+}
