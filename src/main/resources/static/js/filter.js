@@ -1,6 +1,6 @@
 'use strict';
-import { header_onload, header_onscroll, alarm_reset } from "./header.js";
-// import { header_onload, header_onscroll, alarm_reset } from "/js/header.js";
+// import { header_onload, header_onscroll, alarm_reset } from "./header.js";
+import { header_onload, header_onscroll, alarm_reset } from "/js/header.js";
 
 // api 
 const API = "" ; // api url 적기 !!

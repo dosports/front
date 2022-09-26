@@ -1,9 +1,13 @@
 'use strict';
-import { header_onload, header_onscroll, alarm_reset } from "./header.js"; // 이거 주석처리하고 밑에 주석 해제하기 !!
+// import { header_onload, header_onscroll, alarm_reset } from "./header.js"; // 이거 주석처리하고 밑에 주석 해제하기 !!
+// import { reviewDetail_template , rearrange_comments , parentComment_template, 
+//     childComment_template, resetComments , clickCommentMoreBtn ,
+//     viewLimit , writingComLimit } from "./reviewDetail_module.js";
+
+import { header_onload, header_onscroll, alarm_reset } from "/js/header.js";
 import { reviewDetail_template , rearrange_comments , parentComment_template, 
     childComment_template, resetComments , clickCommentMoreBtn ,
-    viewLimit , writingComLimit } from "./reviewDetail_module.js";
-// import { header_onload, header_onscroll, alarm_reset } from "/js/header.js";
+    viewLimit , writingComLimit } from "/js/reviewDetail_module.js";
 
 // ********************    나중에 이부분 지우기 !!!
 localStorage.setItem("token" , "ex") ;
