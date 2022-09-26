@@ -1,6 +1,6 @@
 // import {reviewIdx_noPostman, reviewInfoArr_noPostman} from "./myPage_data.js";
-import {createFullReviewItem, getLikeReviewIdx, getMyReviewIdx, getReviewDetail, getOtherUserIdx, getUserIdx, getOtherUserReviewIdx} from "./myPage_modules.js";
-import {check_clickedLike, getElementIndex} from "./myPage_likeBtn_modules.js";
+import {createFullReviewItem, getLikeReviewIdx, getMyReviewIdx, getReviewDetail, getOtherUserIdx, getUserIdx, getOtherUserReviewIdx} from "/js/myPage_modules.js";
+import {check_clickedLike, getElementIndex} from "/js/myPage_likeBtn_modules.js";
 
 const $review_container = document.querySelector('.review_container');
 let pageNum = 1;
@@ -13,7 +13,7 @@ export function makeFullReviewSkeleton(){
     newSkeletonItem.innerHTML = `
                     <div class="review_leftContainer">
                         <div class="review_img_container skeleton">
-                            <img src="../../static/img/balls_icon.png" alt="내가 쓴 리뷰 사진" class="review_img hidden">
+                            <img src="/img/balls_icon.png" alt="내가 쓴 리뷰 사진" class="review_img hidden">
                         </div>
                         <div class="heart_container">
                             <span class="iconify heart-icon skeleton" data-icon="akar-icons:heart"></span>
@@ -48,8 +48,8 @@ function removeSkeleton(){
 export async function addNewLikeContent(){
     const reviewData = await getLikeReviewIdx(pageNum)
                             .catch(err => console.log(err));// FIXME:
-    const reviewIdx = reviewData['reviewIdx'];
-    const endPage = reviewData['endPage'];
+    const reviewIdx = reviewData.reviewIdx;
+    const endPage = reviewData.endPage;
     // const reviewIdx = reviewIdx_noPostman;
     // const endPage = 4;
     if(pageNum == endPage){
@@ -121,6 +121,40 @@ export async function addNewOtherReviewContent(){
     }
 }
 
+// 검색 결과 가져와서 보여주기 
+export async function addNewSearchReviewContent(){
+    const url = new URL(window.location.href);
+    const urlParams = url.searchParams;
+    const searchWord = urlParams.get('search'); 
+
+    const reviewIdx = await axios.get(`/search?keyword=${searchWord}&page_num=${pageNum}`)
+                            .then(response => response.data)
+                            .catch(err => console.log(err));
+    
+    if(reviewIdx == []){
+        return null;
+    }else{
+        reviewIdxs.concat(reviewIdx);
+
+        for(let i = 0; i < reviewIdx.length; i++){
+            const reviewInfo = await getReviewDetail(reviewIdx[i]);
+            const like_clicked =  await check_clickedLike(reviewIdx[i]);
+            const login = localStorage.getItem('token') == null ? false : true;
+            const new_search_review_preview_item = createFullReviewItem(reviewInfo, like_clicked, login); // 생성
+            // 검색 단어 - 하이라이트
+            const $review_title = new_search_review_preview_item.querySelector('.review_title');
+            const spans = $review_title.querySelectorAll('span');
+            for(let i = 0; i < spans.length; i++){
+                if(spans[i].innerText == searchWord){
+                    spans[i].setAttribute('class', 'match_word');
+                }
+            }
+            $review_container.appendChild(new_search_review_preview_item);
+        }
+    return true;
+    }
+}
+
 export function observeLastItem(io, items){
     const lastItem = items[items.length -1];
     io.observe(lastItem);
@@ -177,13 +211,32 @@ export function ioCallback_otherUser(entries, io){
     })
 }
 
+export function ioCallback_search(entries, io){
+    entries.forEach((entry) => {
+        if(entry.isIntersecting){
+            io.unobserve(entry.target);
+            addSkeleton();
+            setTimeout(async() => {
+                const moreReviewExist = await addNewSearchReviewContent();
+                if(moreReviewExist != null){
+                    pageNum+=1;
+                    observeLastItem(io, document.querySelectorAll('.review_item'));
+                }
+                removeSkeleton();
+            }, 2000);
+        }
+    })
+}
+
 export function loadFirstItems(io, addNewContent){
     addSkeleton();
     setTimeout(async() => {
-        await addNewContent();
-        pageNum+=1;
+        const moreReviewExist = await addNewContent();
+        if(moreReviewExist != null){
+            pageNum+=1;
+            observeLastItem(io, document.querySelectorAll('.review_item'));
+        }
         removeSkeleton();
-        observeLastItem(io, document.querySelectorAll('.review_item'));
     }, 2000);
 }
 
@@ -194,7 +247,7 @@ export function makeMiniReviewSkeleton(){
     newSkeletonItem.classList.add('like_review_preview_item');
     newSkeletonItem.innerHTML = `
     <div class="like_review_img_container skeleton">
-        <img src="../../static/img/golf_icon.png" alt="좋아요한 리뷰 사진" class="like_review_img hidden">
+        <img src="/img/golf_icon.png" alt="좋아요한 리뷰 사진" class="like_review_img hidden">
     </div>
     <div class="like_review_preview_title skeleton"><span class="skeleton">나이키 테니스치마</span></div>
     `;

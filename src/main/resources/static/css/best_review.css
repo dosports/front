@@ -1,0 +1,43 @@
+#review_container {
+	width: 100%;
+	margin-top: 20px;
+}
+#title_box {
+	width: 100%;
+}
+#title {
+	padding: 20px 1.73vw;
+	margin: 25px 1.94vw;
+	border-bottom: 1.5px solid var(--yellow);
+	font-family: "GmarketSans";
+	font-size: 17px;
+	color: var(black);
+}
+.styled-border {
+	position: relative;
+}
+.styled-border::before {
+	content: "▶︎";
+	position: absolute;
+	top: calc(100% - 4px);
+	left: -2px;
+	color: var(--yellow);
+	font-size: 8px;
+}
+.styled-border::after {
+	content: "▶︎";
+	position: absolute;
+	top: calc(100% - 4px);
+	right: -2px;
+	transform: scaleX(-1);
+	color: var(--yellow);
+	font-size: 8px;
+}
+.my_review_titleAndWriter,
+.my_review_star,
+.my_review_writerDetail,
+.my_review_buyInfo,
+.my_review_content {
+	max-width: 50%;
+	min-height: 15px;
+}

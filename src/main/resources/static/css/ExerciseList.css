@@ -160,11 +160,13 @@ height: 131px;
 }
 
 /*nav, footer*/
+/*
+**공통*/
 #content {
 	position: relative;
-	width: 66.38vw;
+	width: 1264px;
 	margin: 0 auto 80px;
-	/* margin: 0 max(17.08vw); */
+	padding: 0.1px 0 0 0;
 }
 .flex_row {
 	display: flex;
@@ -181,6 +183,33 @@ height: 131px;
 .divider {
 	border-right: 1px solid black;
 }
+
+.styled-border {
+	position: relative;
+}
+
+.loading {
+	animation: loading_animation 3s linear infinite alternate;
+}
+@keyframes loading_animation {
+	0% {
+		background-color: rgb(184, 182, 182);
+	}
+	100% {
+		background-color: rgb(228, 226, 226);
+	}
+}
+@media (max-width: 1080px) {
+	section {
+		margin: 0;
+	}
+}
+@media (max-width: 1264px) {
+	#content {
+		width: 100%;
+	}
+}
+
 
 .styled-border2 {
 	position: relative;
@@ -234,25 +263,6 @@ height: 131px;
 	width: 41px;
 }
 
-
-@media (max-width: 1264px) {
-	#content {
-		width: 100%;
-	}
-	section {
-		margin: 0 20px;
-	}
-	.article-item {
-		padding: 1.6vw;
-	}
-	.article-item-img {
-		width: 19.9vw;
-		height: 20.5vw;
-	}
-	#footer-content {
-		width: 100%;
-	}
-}
 /*footer고정*/
 html, body {
     margin: 0;

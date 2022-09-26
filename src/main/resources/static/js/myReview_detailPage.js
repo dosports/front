@@ -1,8 +1,8 @@
-import {getReviewDetail, getMyReviewIdx, pageUpEventHandler, beforePageBtnHandler, sports_img, sports_level, createFullReviewItem}  from "./myPage_modules.js";
+import {getReviewDetail, getMyReviewIdx, pageUpEventHandler, beforePageBtnHandler, sports_img, sports_level, createFullReviewItem}  from "/js/myPage_modules.js";
 // import {reviewIdx_noPostman, reviewInfoArr_noPostman, userInfo_noPostman} from "./myPage_data.js"; // FIXME: postman 대신
-import {ioCallback_my, addNewMyContent, loadFirstItems, reviewClickedEventHandler} from "./myPage_load10Review.js";
-import {like_toggle} from "./myPage_likeBtn_modules.js";
-import {header_onload, header_onscroll, alarm_reset} from "./header.js";
+import {ioCallback_my, addNewMyContent, loadFirstItems, reviewClickedEventHandler} from "/js/myPage_load10Review.js";
+import {like_toggle} from "/js/myPage_likeBtn_modules.js";
+import {header_onload, header_onscroll, alarm_reset} from "/js/header.js";
 
 
 const $review_container = document.querySelector('.review_container');
@@ -18,7 +18,6 @@ $main.addEventListener('click', like_toggle);
 
 
 window.addEventListener('load', () => {
-    console.log('hi');
     $review_container.innerHTML = ""; // 처음에 모두 삭제
     loadFirstItems(io, addNewMyContent);
 })
@@ -33,7 +32,6 @@ await fetch("../../templates/main/main_header.html")
 	.then((res) => res.text())
 	.then((text) => {
 		document.querySelector(".default_header").innerHTML = text;
-    console.log('유나님 header');
 });
 header_onload();
 window.onscroll = header_onscroll;

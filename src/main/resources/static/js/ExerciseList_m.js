@@ -6,7 +6,6 @@ const $tennis = document.getElementById("tennis-count");
 const $gym = document.getElementById("gym-count");
 
 
-
 /*공 */
 function ballsFetch() {
 	fetch('https://review/m/balls', {

@@ -1,20 +1,27 @@
-@import "../css/variable.css";
-@import "../css/myPage_component/header_before.css";
-@import "../css/reviewContainer.css";
-@import "../css/myPage_component/page_up_btn.css";
-@import "./myPage_component/reviewContainer_plus.css";
-@import "./myPage_component/review_skeleton.css";
-@import "./main_header.css";
+@import "/css/variable.css";
+@import "/css/myPage_component/header_before.css";
+@import "/css/reviewContainer.css";
+@import "/css/myPage_component/page_up_btn.css";
+@import "/css/myPage_component/reviewContainer_plus.css";
+@import "/css/myPage_component/review_skeleton.css";
+@import "/css/main_header.css";
 
-body {
-	width: 1264px;
-	margin: 0 auto;
-	position: relative;
+body{
+    width: 1264px;
+    margin: 0 auto;
+    position: relative;
 }
-
-.section_header {
-	margin: 0 37px 42px 37px;
-	padding: 45.55px 0 18px 31px;
+/* 알람 */
+#alarm-modal1{
+    top: 99px;
+	z-index: 100;
+}
+#alarm-modal2{
+    top: 70px;
+}
+.section_header{
+    margin: 0 37px 42px 37px;
+    padding: 45.55px 0 18px 31px;
 }
 
 .section_header_title {

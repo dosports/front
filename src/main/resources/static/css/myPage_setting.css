@@ -1,19 +1,27 @@
-@import "./variable.css";
-@import "./reset.css";
-@import "./myPage_component/header_before.css";
-@import "./myPage_component/review_skeleton.css";
-@import "./main_header.css";
+@import "/css/variable.css";
+@import "/css/reset.css";
+@import "/css/myPage_component/header_before.css";
+@import "/css/myPage_component/review_skeleton.css";
+@import "/css/main_header.css";
 
 body{
     width: 1260px;
     margin: 0 auto;
+    position: relative;
 }
 
 label{
     width: auto;
     height: auto;
 }
-
+/* 알람 */
+#alarm-modal1{
+    top: 99px;
+    z-index: 100;
+}
+#alarm-modal2{
+    top: 70px;
+}
 /* user setting */
 .user_setting_container, .filter_setting_container{
     position: relative;

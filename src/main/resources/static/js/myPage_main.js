@@ -1,8 +1,8 @@
-import {getUserInfo, getReviewDetail, getMyReviewIdx, getLikeReviewIdx, createMiniReviewItem, createFullReviewItem, sports_img} from "./myPage_modules.js";
+import {getUserInfo, getReviewDetail, getMyReviewIdx, getLikeReviewIdx, createMiniReviewItem, createFullReviewItem, sports_img} from "/js/myPage_modules.js";
 // import {reviewIdx_noPostman, reviewInfoArr_noPostman, userInfo_noPostman} from "./myPage_data.js"; // FIXME: postman 대신
-import {makeMiniReviewSkeleton, makeFullReviewSkeleton, reviewClickedEventHandler} from "./myPage_load10Review.js";
-import {like_toggle, getElementIndex, check_clickedLike} from "./myPage_likeBtn_modules.js";
-import {header_onload, header_onscroll, alarm_reset} from "./header.js";
+import {makeMiniReviewSkeleton, makeFullReviewSkeleton, reviewClickedEventHandler} from "/js/myPage_load10Review.js";
+import {like_toggle, getElementIndex, check_clickedLike} from "/js/myPage_likeBtn_modules.js";
+import {header_onload, header_onscroll, alarm_reset} from "/js/header.js";
 
 
 const logo_white_imgName = 'logo_white';    
@@ -19,11 +19,11 @@ async function showUserInfo(){
                 <span class="iconify setting_icon" data-icon="uiw:setting-o"></span>
             </a>
     `;
-    setTimeout(() => {
+    setTimeout(async() => {
         const userInfo = await getUserInfo();
         // const userInfo = userInfo_noPostman;
-        let pre_img_src = userInfo.profileImg;
-        pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;
+        let pre_img_src = userInfo.profileImgPath;
+        pre_img_src = userInfo.profileImgPath == "" ? `/img/${logo_white_imgName}.png` : userInfo.profileImgPath;
         $myPage_main_header.innerHTML = `
         <div class="profile_img_container">
             <img src="${pre_img_src}" alt="사용자 프로필 사진" class="profile_img">

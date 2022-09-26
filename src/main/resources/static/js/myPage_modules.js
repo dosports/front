@@ -1,25 +1,10 @@
 export {getUserInfo, getReviewDetail, getMyReviewIdx, getLikeReviewIdx, createMiniReviewItem, createFullReviewItem, pageUpEventHandler, beforePageBtnHandler, sports_img, sports_level};
-import {check_clickedLike} from "./myPage_likeBtn_modules.js";
+import {check_clickedLike} from "/js/myPage_likeBtn_modules.js";
 const full_heart_imgName = 'colored_heart_icon';
 axios.defaults.baseURL = '';// TODO: axios 기본 url
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 const userIdx = getUserIdx();
 
-// function setToken(){
-//     axios.defaults.headers.common['Authorization'] = `Bearer localStorage.getItem('accessToken')`;
-
-//     let expiredTime = localStorage.getItem('expiredTime');
-//     let diffTime = '' ;
-//     if(diffTime < 10000){
-//         axios.defaults.headers.common['x-refresh-token'] = localStorage.getItem('refreshToken');
-//         axios.get('${url}/user/updateAccessToken')
-//         .then(response => {
-//             localStorage.setItem('accessToken', res.data.data.accessToken);
-//             localStorage.setItem('expiredTime', res.data.data.cur_time);
-//             axios.defaults.headers.common['x-access-token'] = localStorage.getItem('accessToken');
-//         })
-//     }
-// }
 // 마이페이지 - 메인
 // 사용자 사진, 이름 정보 가져오기
 //TODO:
@@ -29,7 +14,7 @@ export function getUserIdx(){
 }
 function getUserInfo(){
     return axios.get(`/user/mypage`)
-    .then(response => response.data.data)
+    .then(response => response.data)
 }
 
 
@@ -39,8 +24,10 @@ export function getOtherUserIdx(){
 }
 
 export function getOtherUserInfo(){
-    const otherUserInfo = JSON.parse(localStorage.getItem('otherUser'));
-    return otherUserInfo;
+    const otherUserIdx = getOtherUserIdx();
+    console.log('getOtherUserInfo', otherUserIdx);
+    return axios.get(`/user/${otherUserIdx}`)
+    .then(response => response.data);
 }
 
 // 자세한 리뷰 정보 가져오기
@@ -58,7 +45,7 @@ function getMyReviewIdx(pageNum){
 // 내가 좋아요한 리뷰 reviewIdx 배열 가져오기
 function getLikeReviewIdx(pageNum){
     return axios.get(`/like?page_num=${pageNum}`)
-    .then(response => response.data.reviewIdx);
+    .then(response => response.data);
 }
 
 // 다른 사람 리뷰 reviewIdx 가져오기
@@ -69,7 +56,7 @@ export function getOtherUserReviewIdx(userIdx, pageNum){
 
 function createMiniReviewItem(reviewInfo){
     let pre_like_img = reviewInfo.img_path;
-    if(pre_like_img == ''){
+    if(pre_like_img == null){
         pre_like_img = sports_img[reviewInfo.sports]; // 각 종목 이미지로
     }
     const new_like_review_preview_item = document.createElement('div');
@@ -88,7 +75,7 @@ function createMiniReviewItem(reviewInfo){
 
 function createFullReviewItem(reviewInfo, like_clicked, login){
     let pre_my_img =  reviewInfo.img_path;
-    if(pre_my_img == ''){
+    if(pre_my_img == null){
         pre_my_img = sports_img[reviewInfo.sports]; // 각 종목 이미지로
     }
 
@@ -96,6 +83,16 @@ function createFullReviewItem(reviewInfo, like_clicked, login){
     new_review_item.classList.add('review_item');
     
     const time = reviewInfo.regDate.split(' ')[1].split(':');
+    const brandWordList = reviewInfo.brand.split(' ');
+    const titleWordList = reviewInfo.title.split(' ');
+    let brandSpans = '';
+    let titleSpans = '';
+    for(let i = 0; i < brandWordList.length; i++){
+        brandSpans += `<span>${brandWordList[i]}</span>`;
+    }
+    for(let i = 0; i < titleWordList.length; i++){
+        titleSpans += `<span>${titleWordList[i]}</span> `;
+    }
 
     new_review_item.innerHTML = `
             <div class="review_leftContainer">
@@ -103,14 +100,14 @@ function createFullReviewItem(reviewInfo, like_clicked, login){
                     <img src=${pre_my_img} alt="내가 쓴 리뷰 사진" class="review_img">
                 </div>
                 <div class="heart_container">
-                    <img class="full_heart ${like_clicked ? '' : 'hidden'} ${login ? '' : 'heart_limit'}" src="../../static/img/${full_heart_imgName}.png" alt="채워진 하트">
+                    <img class="full_heart ${like_clicked ? '' : 'hidden'} ${login ? '' : 'heart_limit'}" src="/img/${full_heart_imgName}.png" alt="채워진 하트">
                     <span class="iconify heart-icon ${like_clicked ? 'hidden' : ''}" data-icon="akar-icons:heart"></span>
                     <span class="heart_cnt">${reviewInfo.likes}개</span>
                 </div>
             </div>
             <div class="review_rightContainer">
                 <div class="my_review_titleAndWriter">
-                    <div class="review_title">${reviewInfo.brand} ${reviewInfo.title}</div>
+                    <div class="review_title">${brandSpans} ${titleSpans}</div>
                     <div class="review_writerAndTime">${reviewInfo.userName} / ${time[0]}:${time[1]}</div>
                 </div>
                 <div class="my_review_star">${'★'.repeat(reviewInfo.rate) + '☆'.repeat(5-reviewInfo.rate)}</div>
@@ -126,12 +123,12 @@ function createFullReviewItem(reviewInfo, like_clicked, login){
 
 
 const sports_img = {
-    "tennis" : "../../static/img/tennis_icon.png",
-    "hike" : "../../static/img/hiking_icon.png",
-    "swim": "../../static/img/swim_icon.png",
-    "gym": "../../static/img/gym.png",
-    "golf": "../../static/img/golf_icon.png",
-    "balls": "../../static/img/balls_icon.png",
+    "tennis" : "/img/tennis_icon.png",
+    "hike" : "/img/hiking_icon.png",
+    "swim": "/img/swim_icon.png",
+    "gym": "/img/gym.png",
+    "golf": "/img/golf_icon.png",
+    "balls": "/img/balls_icon.png",
 };
 const sports_level = {
     1 : "저",

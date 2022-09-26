@@ -1,7 +1,7 @@
-import {beforePageBtnHandler}  from "./myPage_modules.js";
-import {check_newPW, change_user_setting, header_windowSize, change_filter_setting, check_weight_height, show_all_userData, check_profileImg } from "./myPage_setting_modules.js";
+import {beforePageBtnHandler}  from "/js/myPage_modules.js";
+import {check_newPW, change_user_setting, header_windowSize, change_filter_setting, check_weight_height, show_all_userData, check_profileImg } from "/js/myPage_setting_modules.js";
 // import {userInfo_noPostman} from "./myPage_data.js";
-import {header_onload, header_onscroll, alarm_reset} from "./header.js";
+import {header_onload, header_onscroll, alarm_reset} from "/js/header.js";
 
 
 window.addEventListener('load', () => {
@@ -51,7 +51,6 @@ await fetch("../../templates/main/main_header.html")
 	.then((res) => res.text())
 	.then((text) => {
 		document.querySelector(".default_header").innerHTML = text;
-    console.log('유나님 header');
 });
 header_onload();
 window.onscroll = header_onscroll;

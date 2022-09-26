@@ -1,5 +1,5 @@
-import {getUserIdx} from "./myPage_modules.js";
-import {reviewIdxs} from "./myPage_load10Review.js";
+import {getUserIdx} from "/js/myPage_modules.js";
+import {reviewIdxs} from "/js/myPage_load10Review.js";
 axios.defaults.baseURL = '';// TODO: axios 기본 url
 axios.defaults.headers.common['Authorization'] = localStorage.getItem('token');
 const userIdx = getUserIdx();
@@ -38,7 +38,7 @@ export function deleteLikeToServer(event, reviewIdxs){
 
 export function check_clickedLike(reviewIdx){
     return axios.get(`/like/check/${reviewIdx}`)
-    .then(response => response.data.success);
+    .then(response => response.data.isliked);
 }
 
 

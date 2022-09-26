@@ -1,6 +1,3 @@
-@import "./variable.css";
-@import "./reset.css";
-
 .review_item{
     margin: 0 1.94vw 46px 1.94vw;
     display: flex;

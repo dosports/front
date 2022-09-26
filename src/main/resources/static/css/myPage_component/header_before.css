@@ -23,6 +23,7 @@
 .styled-border {
     position: relative;
     border-bottom: 1px solid var(--deep-yellow);
+    z-index: -1;
 }
 .styled-border::before {
     content: "▶︎";

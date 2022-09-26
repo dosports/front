@@ -5,10 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>loginPage</title>
-    <link rel="stylesheet" href="/src/main/resources/static/css/login.css">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="/css/footer.css">
 </head>
 <body>
-<img id="logo" src="/src/main/resources/static/img/logo_2.png">
+<img id="logo" src="/img/logo_2.png">
 <form >
          <p>
              <input id="id" type ="text"name="id" v-model="userID" placeholder= "아이디"required>
@@ -23,13 +24,21 @@
         <p id="border">|</p>
         <button id="register" value="회원가입" onclick="location.href='../register/register.html'">회원가입</button>
         <button id="ad">광고</button>
-        <div>
-            <button id="rules_btn" value="이용약관">이용약관</button>
-            <button id="persoalinfo_btn" value="개인정보처리방침">개인정보처리방침</button>
-            <button id="communityrules_btn" value="커뮤니티이용규칙">커뮤니티이용규칙</button>
-            <button id="notice_btn" value="공지사항">공지사항</button>
-            <button id="ask_btn" value="문의사항">문의사항</button>
+    
+    <div id="footer">
+        <div id="footer-content">
+            <ul id="footer-nav" class="flex_row">
+                <li class="footer-nav-item"><a href="#">이용약관</a></li>
+                <li class="footer-nav-item"><a href="#">개인정보처리방침</a></li>
+                <li class="footer-nav-item"><a href="#">커뮤니티이용규칙</a></li>
+                <li class="footer-nav-item"><a href="#">공지사항</a></li>
+                <li class="footer-nav-item"><a href="#">문의하기</a></li>
+            </ul>
+            <div id="logo">
+                <img src="/img/logo_black.png" />
+            </div>
         </div>
-        <img id="black_logo" src="/src/main/resources/static/img/logo_black.png"width=41.91vw height=41.91vh>
+    </div>
+        <img id="black_logo" src="/img/logo_black.png"width=41.91vw height=41.91vh>
 </body>
 </html>

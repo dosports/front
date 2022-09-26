@@ -1,6 +1,7 @@
-export { check_newPW, change_user_setting, header_windowSize, change_filter_setting, show_all_userData };
-import { getUserInfo } from "./myPage_modules";
+export {check_newPW, change_user_setting, header_windowSize, change_filter_setting, show_all_userData };
+import {getUserInfo} from "/js/myPage_modules.js";
 // import {userInfo_noPostman} from "./myPage_data.js";
+
 const logo_white_imgName = "logo_white";
 const userIdx = getUserInfo();
 axios.defaults.baseURL = ""; // TODO: axios 기본 url
@@ -23,8 +24,8 @@ function show_all_userData() {
 		$profile_img_container.classList.remove("skeleton");
 		$profile_img.classList.remove("hidden");
 	}, 2000);
-	$profile_img.src = userInfo.profileImg;
-	$profile_img.src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;
+	$profile_img.src = userInfo.profileImgPath;
+	$profile_img.src = userInfo.profileImgPath == "" ? `/img/${logo_white_imgName}.png` : userInfo.profileImgPath;
 	$user_name.placeholder = userInfo.name;
 	$user_height.placeholder = parseInt(userInfo.height);
 	$user_weight.placeholder = userInfo.weight;
@@ -287,25 +288,24 @@ async function change_filter_setting(event) {
 // -------------------  화면 크기별, main 내부 header 변경
 
 // 화면 작은 사이즈 일때 title 나오고 커지면 안나오게 설정 필요함
-function header_windowSize() {
-	console.log("hi");
-	const $before_btn_container = document.querySelector(".before_btn_container");
-	const $myPage_setting_header_title = document.querySelector(".myPage_setting_header_title");
-
-	if (window.innerWidth > 800) {
-		/* TODO: 여기 px은 모바일 버전 크기로 변경 필요 */
-		if ($before_btn_container.classList.contains("hidden")) {
-			$before_btn_container.classList.remove("hidden");
-		}
-		if (!$myPage_setting_header_title.classList.contains("hidden")) {
-			$myPage_setting_header_title.classList.add("hidden");
-		}
-	} else {
-		if ($myPage_setting_header_title.classList.contains("hidden")) {
-			$myPage_setting_header_title.classList.remove("hidden");
-		}
-		if (!$before_btn_container.classList.contains("hidden")) {
-			$before_btn_container.classList.add("hidden");
-		}
-	}
+function header_windowSize(){
+    const $before_btn_container = document.querySelector('.before_btn_container');
+    const $myPage_setting_header_title = document.querySelector('.myPage_setting_header_title');
+    
+    if(window.innerWidth > 800){ /* TODO: 여기 px은 모바일 버전 크기로 변경 필요 */ 
+        if($before_btn_container.classList.contains('hidden')){
+            $before_btn_container.classList.remove('hidden');
+        }
+        if(!$myPage_setting_header_title.classList.contains('hidden')){
+            $myPage_setting_header_title.classList.add('hidden');
+        }
+    }else{
+        if($myPage_setting_header_title.classList.contains('hidden')){
+            $myPage_setting_header_title.classList.remove('hidden');
+        }
+        if(!$before_btn_container.classList.contains('hidden')){
+            $before_btn_container.classList.add('hidden');
+        }
+    }
 }
+

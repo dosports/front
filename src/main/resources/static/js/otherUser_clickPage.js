@@ -1,8 +1,8 @@
-import {getUserInfo, getReviewDetail, createFullReviewItem, beforePageBtnHandler, getOtherUserInfo, getOtherUserIdx} from "./myPage_modules.js";
+import {getUserInfo, getReviewDetail, createFullReviewItem, beforePageBtnHandler, getOtherUserInfo, getOtherUserIdx} from "/js/myPage_modules.js";
 // import {reviewIdx_noPostman, reviewInfoArr_noPostman, userInfo_noPostman} from "./myPage_data.js"; // FIXME: postman 대신
-import {ioCallback_otherUser, addNewOtherReviewContent, loadFirstItems, reviewClickedEventHandler} from "./myPage_load10Review.js";
-import {like_toggle} from "./myPage_likeBtn_modules.js";
-import {header_onload, header_onscroll, alarm_reset} from "./header.js";
+import {ioCallback_otherUser, addNewOtherReviewContent, loadFirstItems, reviewClickedEventHandler} from "/js/myPage_load10Review.js";
+import {like_toggle} from "/js/myPage_likeBtn_modules.js";
+import {header_onload, header_onscroll, alarm_reset} from "/js/header.js";
 const logo_white_imgName = 'logo_white';
 
 // 이전 페이지로
@@ -12,11 +12,11 @@ beforePageBtnHandler();
 const $otherUserPage_main_header = document.querySelector('.otherUserPage_main_header');
 const $section_header = document.querySelector('.section_header');
 async function showOtherUserInfo(){
-    const userInfo = getOtherUserInfo();
+    const userInfo = await getOtherUserInfo();
     // getOtherUserIdx();// FIXME: 
     // const userInfo = userInfo_noPostman;
-    let pre_img_src = userInfo.profileImg;
-        pre_img_src = userInfo.profileImg == "" ? `../../static/img/${logo_white_imgName}.png` : userInfo.profileImg;
+    let pre_img_src = userInfo.profileImgPath;
+        pre_img_src = userInfo.profileImgPath == null ? `/img/${logo_white_imgName}.png` : userInfo.profileImgPath;
     $otherUserPage_main_header.innerHTML = `
         <div class="profile_img_container skeleton">
             <img src="" alt="사용자 프로필 사진" class="profile_img hidden">
@@ -54,6 +54,7 @@ $main.addEventListener('click', (event) => {
     reviewClickedEventHandler(event);
 });
 
+// localStorage에는 key = otherUser, value = {userIdx : 1} 이런식으로 저장되어있음
 window.addEventListener('unload', () => {
     localStorage.removeItem('otherUser');
 })
@@ -62,7 +63,6 @@ await fetch("../../templates/main/main_header.html")
 	.then((res) => res.text())
 	.then((text) => {
 		document.querySelector(".default_header").innerHTML = text;
-    console.log('유나님 header');
 });
 header_onload();
 window.onscroll = header_onscroll;
