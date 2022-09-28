@@ -1,17 +1,25 @@
 'use strict';
 // import { header_onload, header_onscroll, alarm_reset } from "./header.js"; // 이거 주석처리하고 밑에 주석 해제하기 !!
-// import { reviewDetail_template , rearrange_comments , parentComment_template, 
-//     childComment_template, resetComments , clickCommentMoreBtn ,
+// import { reviewDetail_template , fetchComments, 
 //     viewLimit , writingComLimit } from "./reviewDetail_module.js";
 
+axios.defaults.baseURL = "" ; // url base url 쓰기 !!
+
+/** 현재 위치하고 있는 리뷰 Idx 받아오기 */
+const urlArr = window.location.pathname.split('/') ;
+const curReveiwIdx = urlArr[urlArr.length-1] ;
+
+/** 화면 접속하자마자 리뷰 와 댓글 보여주기 */
+fetchReview(`/review/${curReveiwIdx}`) ;
+fetchComments(`/comment/${curReveiwIdx}`) ;
+
 import { header_onload, header_onscroll, alarm_reset } from "/js/header.js";
-import { reviewDetail_template , rearrange_comments , parentComment_template, 
-    childComment_template, resetComments , clickCommentMoreBtn ,
+import { reviewDetail_template , fetchComments, 
     viewLimit , writingComLimit } from "/js/reviewDetail_module.js";
 
-// ********************    나중에 이부분 지우기 !!!
-localStorage.setItem("token" , "ex") ;
-// localStorage.clear()
+// import { reviewDetail_template , rearrange_comments , parentComment_template, 
+//     childComment_template, resetComments , clickCommentMoreBtn ,
+//     viewLimit , writingComLimit } from "/js/reviewDetail_module.js";
 
 // api 
 const API = "" ; // api url 적기 !!
@@ -74,38 +82,12 @@ async function fetchReview (url) {
         console.log(error)
     }
 }
-
 // fetchReview("https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/review/%7BreviewIdx%7D");
-
-/** 댓글 Fetch */
-async function fetchComments (url) {
-	try {
-        const response = await axios.get(url)  
-        .then(resetComments())    
-        .then(result => rearrange_comments(result.data))
-        .then(result => result.map(data => parentComment_template(data)))
-        .then(result => result.map(data => childComment_template(data)))
-        // .then(clickCommentMoreBtn())
-        .then(result => {
-            document.querySelector(".comments-cnt_num").innerText = `${result.length}` ;
-            return result
-        })
-        .catch(error => console.log(error)) ;
-
-        setTimeout(() => {
-            clickCommentMoreBtn();
-        })
-        
-        console.dir(response)
-    } catch (error) {
-        console.log(error)
-    }
-}
 
 // fetchComments("https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/comment/%7BreviewIdx%7D");
 
 
-/** (부모) 댓글 작성 */  //  ####### 여기 axios.post 비동기 수정해야할듯? ###
+/** (부모) 댓글 작성 */  //  
 document.querySelector(".write-parent .comment-write_writingArea").addEventListener("submit", (e) => {
     e.preventDefault() ;
     // fetchComments("https://8ca18059-b3ee-458c-b8c5-501cd3ff4c15.mock.pstmn.io/comment/%7BreviewIdx%7D");
@@ -114,7 +96,9 @@ document.querySelector(".write-parent .comment-write_writingArea").addEventListe
         alert("댓글 내용을 작성해주세요");
         return ;
     }
-    const reviewIdx = document.querySelector(".review_title").dataset.index ;
+
+    const reviewIdx = curReveiwIdx ;
+    // const reviewIdx = document.querySelector(".review_title").dataset.index ;
 
     console.log('reviewIdx : ' , reviewIdx) ;
 
