@@ -1,3 +1,5 @@
+axios.defaults.baseURL = "" ; // url base url 쓰기 !!
+
 /** 로그인 토큰 저장 여부 */
 const hasToken = localStorage.getItem("token") ? localStorage.getItem("token") :  false ;
 
@@ -75,6 +77,31 @@ function reviewDetail_img(arr, imgDom, cntDom) {
     })
 }
 
+/** 댓글 Fetch */
+export async function fetchComments (url) {
+	try {
+        const response = await axios.get(url)  
+        .then(resetComments())    
+        .then(result => rearrange_comments(result.data))
+        .then(result => result.map(data => parentComment_template(data)))
+        .then(result => result.map(data => childComment_template(data)))
+        // .then(clickCommentMoreBtn())
+        .then(result => {
+            document.querySelector(".comments-cnt_num").innerText = `${result.length}` ;
+            return result
+        })
+        .catch(error => console.log(error)) ;
+
+        setTimeout(() => {
+            clickCommentMoreBtn();
+        })
+        
+        console.dir(response)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 
 /** 댓글 초기화 */
@@ -84,6 +111,7 @@ export function resetComments () {
         $comments_list.removeChild($comments_list.firstChild) ;
     }
 }
+
 export function parentComment_template (data) {     // FIX LINK
     const parentComment =  `
     <div class="comment-item commentIdx${data.commentIdx}">

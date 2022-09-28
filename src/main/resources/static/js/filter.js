@@ -4,7 +4,7 @@ import { header_onload, header_onscroll, alarm_reset } from "/js/header.js";
 
 // api 
 const API = "" ; // api url 적기 !!
-// const CUR_URL = API + window.location.pathname   ;  
+const CUR_URL = API + window.location.pathname   ;  
 
 await fetch("../../templates/main/main_header.html")
 	.then((res) => res.text())
@@ -21,7 +21,7 @@ window.addEventListener("resize", () => {
 
 
 function frontUrl(cate, height, weight, level, minPrice, maxPrice) { // 필터링 값 반영 
-    return `${API}?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}`;
+    return `${CUR_URL}?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}`;
 }
 function backUrl(photo, sort, page) {
     return `&isPhoto=${photo}&sort_param=${sort}&page_num=${page}` ;
@@ -35,7 +35,7 @@ let page_num = 1 ; //
 const hasToken = localStorage.getItem("token") ? true :  false ;
 // localStorage.setItem("token" , "ex");  // this is an example
 
-// 위에 운동 종목 이름 
+// 위에 운동 종목 이름 나타나도록 
 const location_pth = window.location.pathname ;
 const cur_sport = location_pth.split("/")[3];
 const filter_page_title = document.querySelector(".filter-container_title h2") ;
