@@ -8,7 +8,7 @@ const $gym = document.getElementById("gym-count");
 
 /*공 */
 function ballsFetch() {
-    fetch('https://review/f/balls', {
+    fetch('/review/f/balls', {
         method: 'GET',
     })
         .then((response) => response.json())
@@ -30,7 +30,7 @@ function ballsTemplate(data) {
 
 /*골프 */
 function golfFetch() {
-    fetch('https://review/f/golf', {
+    fetch('/review/f/golf', {
         method: 'GET',
     })
         .then((response) => response.json())
@@ -52,7 +52,7 @@ function golfTemplate(data) {
 
 /*등산 */
 function hikeFetch() {
-    fetch('https://review/f/hike', {
+    fetch('/review/f/hike', {
         method: 'GET',
     })
         .then((response) => response.json())
@@ -75,7 +75,7 @@ function hikeTemplate(data) {
 
 /*수영 */
 function swimFetch() {
-    fetch('https://review/f/swim', {
+    fetch('/review/f/swim', {
         method: 'GET',
     })
         .then((response) => response.json())
@@ -97,7 +97,7 @@ function swimTemplate(data) {
 
 /*테니스 */
 function tennisFetch() {
-    fetch('https://review/f/tennis', {
+    fetch('/review/f/tennis', {
         method: 'GET',
     })
         .then((response) => response.json())
@@ -121,7 +121,7 @@ function tennisTemplate(data) {
 
 /*헬스,필테,요가 */
 function gymFetch() {
-    fetch('https://review/f/gym', {
+    fetch('/review/f/gym', {
         method: 'GET',
     })
         .then((response) => response.json())
