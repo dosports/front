@@ -1,5 +1,5 @@
-@import url("../../static/css/variable.css");
-@import url("../../static/css/reset.css");
+@import url("/css/variable.css");
+@import url("/css/reset.css");
 
 * {
     margin: 0;
@@ -338,7 +338,7 @@ height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url("../../static/img/picture_icon.png");
+  background-image: url("/img/picture_icon.png");
   background-repeat: no-repeat;
     background-size: 50%;
     background-position: center center;
