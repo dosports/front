@@ -1,0 +1,299 @@
+@import url("/css/variable.css");
+@import url("/css/reset.css");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#add-banner {
+    width: 100%;
+    height: 131px;
+    background: url('/img/advertisement.jpeg') no-repeat center;
+    background-size: cover;
+    margin: 32.16px auto 0px auto;
+    cursor: pointer;
+}
+
+.gender-container {
+    width: 90%;
+     margin: 2.62vw auto 1.57vw auto;
+ }
+
+.genderText {
+    font-family: 'GmarketSans';
+    font-size: 1vw;
+    font-weight: 700;
+    padding-left: 2.31vw;
+}
+
+/*hr*/
+.styled-border {
+    position: relative;
+  }
+  
+  .styled-border::before {
+    content: "▶︎";
+    position: absolute;
+    top: calc(100% - 5.5px);
+    left: 5.3%;
+    color: #F4A416;
+    font-size: 8px;
+  }
+  
+  .styled-border::after {
+    content: "▶︎";
+    position: absolute;
+    top: calc(100% - 5.5px);
+    right: 5.3%;
+    transform: scaleX(-1);
+    color: #F4A416;
+    font-size: 8px;
+  }
+  
+  .first-hr {
+    border: 1px solid #F4A416;
+    width: 89%;
+	margin: auto;
+  }
+
+  .center-box {
+    display: flex;
+    justify-content: center;
+  }
+
+/*circle*/
+/*
+#container1 {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+}*/
+
+
+
+.circle {
+    width: 15.23vw;
+    height: 15.23vw;
+    border-radius: 50%;
+    background-color: #D9D9D9;
+    float: left;
+}
+
+.baseball {
+    background-image: url('/img/balls_icon.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+   margin-right: 8vw;
+}
+
+.golf {
+    background-image: url('/img/golf_icon.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+    margin-right: 8vw;
+}
+
+.hike {
+    background-image: url('/img/hiking_icon.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+}
+
+.swim {
+    background-image: url('/img/swim_icon.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+	margin-right: 8vw;
+}
+
+.tennis {
+    background-image: url('/img/tennis_icon.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+	margin-right: 8vw;
+}
+
+.gym {
+    background-image: url('/img/gym.png');
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center center;
+}
+
+.circleText {
+    font-family: 'GmarketSans';
+    font-size: 1.65vw;
+    font-weight: 700;
+    text-align: center;
+	padding-top: 40%;
+    color: white;
+}
+
+.circleText2 {
+	font-family: 'GmarketSans';
+    font-size: 1.65vw;
+    font-weight: 700;
+    text-align: center;
+    color: white;
+}
+
+.Text-container {
+	margin: auto;
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    cursor: pointer;
+    background: #01A48F; 
+    opacity: 0;
+}
+
+
+.circle:hover .Text-container {
+    opacity: 70%;
+    text-align: center;
+}
+
+/*nav, footer*/
+/*
+**공통*/
+#content {
+	width: 1264px;
+	margin: 0 auto 80px;
+	padding: 0.1px 0 0 0;
+}
+
+.flex_row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	overflow: hidden;
+}
+.flex_col {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	overflow: hidden;
+}
+.divider {
+	border-right: 1px solid black;
+}
+
+.styled-border {
+	position: relative;
+}
+
+.loading {
+	animation: loading_animation 3s linear infinite alternate;
+}
+@keyframes loading_animation {
+	0% {
+		background-color: rgb(184, 182, 182);
+	}
+	100% {
+		background-color: rgb(228, 226, 226);
+	}
+}
+@media (max-width: 1080px) {
+	section {
+		margin: 0;
+	}
+    
+}
+@media (max-width: 1264px) {
+	#content {
+		width: 100%;
+	}
+
+}
+
+@media (min-width: 1264px) {
+    .circle {
+        width: 290px;
+        height: 290px;
+
+    }
+}
+
+
+.styled-border2 {
+	position: relative;
+    width: 1264px;
+}
+
+.styled-border2::before {
+	content: "▶︎";
+	position: absolute;
+	top: -5.5px;
+	left: -2px;
+	color: white;
+	font-size: 9px;
+}
+
+.styled-border2::after {
+	content: "▶︎";
+	position: absolute;
+	top: -5.5px;
+	right: -2px;
+	transform: scaleX(-1);
+	color: white;
+	font-size: 9px;
+}
+
+
+
+/**footer**/
+#footer {
+	width: 100%;
+	height: 193px;
+	background: var(--yellow);
+	padding: 1px;
+}
+#footer-content {
+	width: 1264px;
+	margin: 60px auto 18px;
+	border-top: 1.5px solid white;
+}
+#footer-nav {
+	justify-content: center;
+	padding: 20px;
+}
+.footer-nav-item {
+	padding: 5px;
+}
+#logo {
+	width: fit-content;
+	margin: 0 auto;
+}
+#logo > img {
+	width: 41px;
+}
+@media (max-width: 1264px) {
+	#footer-content {
+		width: 100%;
+	}
+}
+
+
+/*footer고정*/
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#body-wrapper {
+    min-height: 85%;
+    position: relative;
+}
+
+#body-content {
+    /* footer의 높이 */
+}
