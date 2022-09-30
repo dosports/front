@@ -95,7 +95,7 @@ Form.addEventListener('submit', function (e) {
 
 	const payload = new URLSearchParams(formData);
 
-	fetch('https://example.com/posts', {
+	fetch('/review/post', {
 		method: 'POST',
 		body: payload,
 	})
