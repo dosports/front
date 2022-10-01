@@ -1,7 +1,7 @@
 'use strict';
 // import { header_onload, header_onscroll, alarm_reset } from "./header.js";
 import { header_onload, header_onscroll, alarm_reset } from "/js/header.js";
-
+console.log("start")
 // api 
 const API = "" ; // api url 적기 !!
 const CUR_URL = API + window.location.pathname   ;  
@@ -385,7 +385,7 @@ function review_Template(data) {
     
     // 링크 수정해야함!                 ************************************
     const reviewItem = `
-        <a href = "/review/${data.reviewIdx}">
+        <a href = "../reviewDetail/reviewDetail.html?reviewIdx=${data.reviewIdx}">
             <div class="review_item">
                 <div class="review_leftContainer">
                     <div class="review_img_container">

@@ -3,11 +3,11 @@
 // import { reviewDetail_template , fetchComments, 
 //     viewLimit , writingComLimit } from "./reviewDetail_module.js";
 
-axios.defaults.baseURL = "" ; // url base url 쓰기 !!
+axios.defaults.baseURL = "" ; // url base url 쓰기 !!    reviewDetail_module 에도 써야함 !!!
 
 /** 현재 위치하고 있는 리뷰 Idx 받아오기 */
-const urlArr = window.location.pathname.split('/') ;
-const curReveiwIdx = urlArr[urlArr.length-1] ;
+const urlArr = window.location.pathname.split('?') ;
+const curReveiwIdx = Number(urlArr[urlArr.length-1].split("=")[1]) ;
 
 /** 화면 접속하자마자 리뷰 와 댓글 보여주기 */
 fetchReview(`/review/${curReveiwIdx}`) ;
@@ -15,11 +15,7 @@ fetchComments(`/comment/${curReveiwIdx}`) ;
 
 import { header_onload, header_onscroll, alarm_reset } from "/js/header.js";
 import { reviewDetail_template , fetchComments, 
-    viewLimit , writingComLimit, clickModifyForm } from "/js/reviewDetail_module.js";
-
-// import { reviewDetail_template , rearrange_comments , parentComment_template, 
-//     childComment_template, resetComments , clickCommentMoreBtn ,
-//     viewLimit , writingComLimit } from "/js/reviewDetail_module.js";
+    viewLimit , writingComLimit } from "/js/reviewDetail_module.js";
 
 // api 
 const API = "" ; // api url 적기 !!
@@ -38,7 +34,6 @@ window.addEventListener("resize", () => {
 	alarm_reset();
 });
 
-clickModifyForm() // 수정 버튼 클릭 시 리뷰인덱스 번호 (파라미터) 넘어가게끔 
 
 // 페이지 끌올 버튼 
 const header_height = document.querySelector("header").getBoundingClientRect().height;
