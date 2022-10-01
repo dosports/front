@@ -247,19 +247,14 @@ function click_reviewBtn(i) { // reviewIdx 넘기기
     document.querySelector(".review-btn_container").addEventListener("click",(e)=> {
         e.preventDefault() ;
 
-        if(e.target.className=="review-delete") { // 삭제 클릭
-            deleteReview(i);
-        } else { // 수정 클릭
-            reviseReview() ;
-        }
+        if(e.target.className=="review-delete") { // 삭제 클릭            
+            deleteReview(i);            
+        } else {
+            window.location.href = `../reviewForm/modify_form.html?reviewIdx=${i}` ;
+        }// 수정 클릭시 ... 
     })
 }
 
-/** 리뷰 수정 */
-function reviseReview() {
-    // 리뷰 수정 구현하기 ~!!
-    location.href = `/src/main/resources/templates/reviewForm/reviewForm.html`      // 수정해야함 !!!!
-}
 /** 리뷰 삭제 */
 async function deleteReview(i) {
     if (!confirm("정말 삭제하시겠습니까??")){  // 취소
