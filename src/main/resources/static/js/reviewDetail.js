@@ -15,7 +15,7 @@ fetchComments(`/comment/${curReveiwIdx}`) ;
 
 import { header_onload, header_onscroll, alarm_reset } from "/js/header.js";
 import { reviewDetail_template , fetchComments, 
-    viewLimit , writingComLimit } from "/js/reviewDetail_module.js";
+    viewLimit , writingComLimit, clickModifyForm } from "/js/reviewDetail_module.js";
 
 // import { reviewDetail_template , rearrange_comments , parentComment_template, 
 //     childComment_template, resetComments , clickCommentMoreBtn ,
@@ -37,6 +37,8 @@ window.addEventListener("resize", () => {
 	// scrollX_reset();
 	alarm_reset();
 });
+
+clickModifyForm() // 수정 버튼 클릭 시 리뷰인덱스 번호 (파라미터) 넘어가게끔 
 
 // 페이지 끌올 버튼 
 const header_height = document.querySelector("header").getBoundingClientRect().height;
