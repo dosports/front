@@ -127,7 +127,8 @@ export async function addNewSearchReviewContent(){
     const urlParams = url.searchParams;
     const searchWord = urlParams.get('search'); 
 
-    const reviewIdx = await axios.get(`/search?keyword=${searchWord}&page_num=${pageNum}`)
+    // TODO: post
+    const reviewIdx = await axios.post(`/search?keyword=${searchWord}&page_num=${pageNum}`, {})
                             .then(response => response.data)
                             .catch(err => console.log(err));
     
