@@ -4,7 +4,9 @@ import { header_onload, header_onscroll, alarm_reset } from "/js/header.js";
 console.log("start")
 // api 
 const API = "" ; // api url 적기 !!
-const CUR_URL = API + window.location.pathname   ;  
+const CUR_URL = window.location.href.split("?")[1].split("&")   ;  // [gender=f, sports=tennis]
+const curGender = CUR_URL[0].split("=")[1] ; // f
+const curSports = CUR_URL[1].split("=")[1] ; // tennis
 
 await fetch("../../templates/main/main_header.html")
 	.then((res) => res.text())
@@ -21,7 +23,7 @@ window.addEventListener("resize", () => {
 
 
 function frontUrl(cate, height, weight, level, minPrice, maxPrice) { // 필터링 값 반영 
-    return `${CUR_URL}?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}`;
+    return `review/${curGender}/${curSports}?category=${cate}&height=${height}&weight=${weight}&level=${level}&min_price=${minPrice}&max_price=${maxPrice}`;
 }
 function backUrl(photo, sort, page) {
     return `&isPhoto=${photo}&sort_param=${sort}&page_num=${page}` ;
