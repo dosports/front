@@ -63,6 +63,13 @@ export function reviewDetail_template(data) {
     }
 }
 
+/** 리뷰 수정 페이지 이동 시 리뷰인덱스 값 넘어가기  */
+export function clickModifyForm() {
+    document.querySelector(".review-modify").addEventListener("click" , () => {
+        window.location.href = "/modifyForm?reviewIdx=" + getUserIdx() ;
+    })
+}
+
 function reviewDetail_img(arr, imgDom, cntDom) {
 
     arr.map((x) => { // [img_path , img_path1 , ..]
