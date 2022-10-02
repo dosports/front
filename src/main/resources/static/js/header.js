@@ -1,4 +1,4 @@
-import {desktop_click_search_btn, mobile_click_search_btn, searchEnterEventHandler} from "/js/search_module.js";
+// import { desktop_click_search_btn, mobile_click_search_btn, searchEnterEventHandler } from "./js/search_module.js";
 
 export function header_onload() {
 	document.querySelector("#alarm-button").addEventListener("click", alarm_button_click);
@@ -9,9 +9,9 @@ export function header_onload() {
 	// document.querySelector("#search-button").addEventListener("click", desktop_click_search_btn);
 	// document.querySelector("#mobile-search-button").addEventListener("click", mobile_click_search_btn);
 	// 검색 기능 추가 - 9/9
-	document.querySelector("#search-button").addEventListener("click",desktop_click_search_btn);
+	document.querySelector("#search-button").addEventListener("click", desktop_click_search_btn);
 	document.querySelector("#mobile-search-button").addEventListener("click", mobile_click_search_btn);
-	document.querySelector('#search-input').addEventListener('keyup', searchEnterEventHandler);
+	document.querySelector("#search-input").addEventListener("keyup", searchEnterEventHandler);
 }
 /** 스크롤할때 알람창 제거*/
 export function header_onscroll() {

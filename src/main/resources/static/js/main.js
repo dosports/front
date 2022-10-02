@@ -1,3 +1,4 @@
+console.log("111");
 /**
  * 페이지 로드
  */
@@ -23,7 +24,7 @@ if (checkToken() != null) {
 		redirect: "follow",
 	};
 
-	const user_name = await fetch("/user/name", requestOptions)
+	const user_name = await fetch("http://13.125.187.165/user/name", requestOptions)
 		.then((response) => response.json())
 		.catch((error) => console.log("error", error));
 
@@ -109,7 +110,7 @@ async function get_recommend_reviews() {
 	} else if (gender == "f") {
 	} else if (gender == "m") {
 	}
-	const recommend_reviews = await fetch("/review/?sort_param=4&page_num=1&review_num=8", requestOptions)
+	const recommend_reviews = await fetch("http://13.125.187.165/review/?sort_param=4&page_num=1&review_num=8", requestOptions)
 		.then((response) => response.json())
 		.catch((error) => console.log("error", error));
 	for (let i = 0; i < 4; i++) {
@@ -130,15 +131,18 @@ async function get_recommend_reviews() {
 }
 /* 베스트리뷰 fetch */
 get_best_reviews();
+console.log("get review호출");
 async function get_best_reviews() {
 	let requestOptions = {
 		method: "GET",
 		redirect: "follow",
 	};
 	const best_reviews_container = document.querySelectorAll("#best-container>a");
-	const best_reviews = await fetch("/review/?sort_param=2&page_num=1&review_num=8", requestOptions)
+	const best_reviews = await fetch("http://13.125.187.165/review/?sort_param=2&page_num=1&review_num=8", requestOptions)
 		.then((response) => response.json())
 		.catch((error) => console.log("error", error));
+	console.log("++++++++\n");
+	console.log(best_reviews);
 	for (let i = 0; i < 8; i++) {
 		best_reviews_container[i].setAttribute("href", `review/${best_reviews[i].reviewIdx}`); //TODO : review/:reviewIdx
 		best_reviews_container[i].querySelector(".article-item-img").setAttribute("src", `review/${best_reviews[i].img_path}`);

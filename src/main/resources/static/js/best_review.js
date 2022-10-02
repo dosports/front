@@ -17,12 +17,12 @@ function review_container(review) {
 			</div>
 			<div class="review_rightContainer">
 				<div class="my_review_titleAndWriter">
-					<div class="review_title">${reivew.brand} ${review.title}</div>
+					<div class="review_title">${review.brand} ${review.title}</div>
 					<div class="review_writerAndTime">${review.reviewIdx} / ${review.regDate}</div>
 				</div>
 				<div class="my_review_star">${review.rate}</div>
-				<div class="my_review_likeAndComment">${review.likes} / ${review.comment}</div>
-				<div class="my_review_writerDetail">${review.gender} / ${review.height} / ${review.lever}</div>
+				<div class="my_review_likeAndComment">${review.likes} / ${review.comments}</div>
+				<div class="my_review_writerDetail">${review.gender} / ${review.height} / ${review.level}</div>
 				<div class="my_review_buyInfo">${review.source} / ${review.price}</div>
 				<div class="my_review_content">${review.content}</div>
 			</div>
@@ -35,13 +35,13 @@ async function get_review() {
 		method: "GET",
 		redirect: "follow",
 	};
-
-	let best_reviews = await fetch("/review?sort_param=2&page_num=1", requestOptions)
+	let best_reviews = await fetch("http://13.125.187.165/review?sort_param=2&page_num=1", requestOptions)
 		.then((response) => response.json())
 		.catch((error) => console.log("error", error));
 	const container = document.querySelector("#review_container");
 	for (let i = 0; i < best_reviews.length; i++) {
-		const addElement = document.createElement("a").setAttribute("href", `reviews/${reivew}`); //TODO
+		const addElement = document.createElement("a");
+		addElement.setAttribute("href", `reviews/${best_reviews[i]}`); //TODO
 		addElement.innerHTML = review_container(best_reviews[i]);
 		container.appendChild(addElement);
 	}
