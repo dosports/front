@@ -1,4 +1,4 @@
-const $ = document.getElementById("baseball-count");
+const $balls = document.getElementById("baseball-count");
 const $golf = document.getElementById("golf-count");
 const $hike = document.getElementById("hiking-count");
 const $swim = document.getElementById("swim-count");
@@ -7,25 +7,25 @@ const $gym = document.getElementById("gym-count");
 
 
 /*공 */
-function Fetch() {
-	fetch('/review/m/', {
+function ballsFetch() {
+	fetch('/review/m/balls', {
 		method: 'GET',
 	})
 		.then((response) => response.json())
 		.then((ball) => {
 			const result = Object.keys(ball).length;
-			Template(result);
+			ballsTemplate(result);
 		})
-		.catch(error => console.log(' fetch에 문제가 있습니다: ', error))
+		.catch(error => console.log('balls fetch에 문제가 있습니다: ', error))
 }
 
-Fetch();
+ballsFetch();
 
-function Template(data) {
+function ballsTemplate(data) {
 	const dataResult = `
 	<p class="circleText2">(${data})</p>
 `;
-	$.insertAdjacentHTML('beforeend', dataResult);
+	$balls.insertAdjacentHTML('beforeend', dataResult);
 }
 
 /*골프 */
