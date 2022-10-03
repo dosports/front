@@ -147,40 +147,40 @@ const sports_1 = 'balls'
 
 const balls = document.getElementsByClassName('baseball circle')
 balls.addEventListener('click', () => {
-    window.location.href = `../filter/filter.html?${gender}/${sports_1}`;
+    window.location.href = `../filter/filter.html?gender=${gender}&sports=${sports_1}`;
 });
 
 const sports_2 = 'golf'
 
 const golf = document.getElementsByClassName('golf circle')
 golf.addEventListener('click', () => {
-    window.location.href = `../filter/filter.html?${gender}/${sports_2}`;
+    window.location.href = `../filter/filter.html?gender=${gender}&sports=${sports_2}`;
 });
 
 const sports_3 = 'hike'
 
 const hike = document.getElementsByClassName('hike circle')
 hike.addEventListener('click', () => {
-    window.location.href = `../filter/filter.html?${gender}/${sports_3}`;
+    window.location.href = `../filter/filter.html?gender=${gender}&sports=${sports_3}`;
 });
 
 const sports_4 = 'swim'
 
 const swim = document.getElementsByClassName('swim circle')
 swim.addEventListener('click', () => {
-    window.location.href = `../filter/filter.html?${gender}/${sports_4}`;
+    window.location.href = `../filter/filter.html?gender=${gender}&sports=${sports_4}`;
 });
 
 const sports_5 = 'tennis'
 
 const tennis = document.getElementsByClassName('tennis circle')
 tennis.addEventListener('click', () => {
-    window.location.href = `../filter/filter.html?${gender}/${sports_5}`;
+    window.location.href = `../filter/filter.html?gender=${gender}&sports=${sports_5}`;
 });
 
 const sports_6 = 'gym'
 
 const gym = document.getElementsByClassName('gym circle')
 gym.addEventListener('click', () => {
-    window.location.href = `../filter/filter.html?${gender}/${sports_6}`;
+    window.location.href = `../filter/filter.html?gender=${gender}&sports=${sports_6}`;
 });
