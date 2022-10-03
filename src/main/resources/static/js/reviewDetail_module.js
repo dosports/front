@@ -63,13 +63,6 @@ export function reviewDetail_template(data) {
     }
 }
 
-/** 리뷰 수정 페이지 이동 시 리뷰인덱스 값 넘어가기  */
-export function clickModifyForm() {
-    document.querySelector(".review-modify").addEventListener("click" , () => {
-        window.location.href = "/review/update/" + getUserIdx() ;
-    })
-}
-
 function reviewDetail_img(arr, imgDom, cntDom) {
 
     arr.map((x) => { // [img_path , img_path1 , ..]
@@ -249,9 +242,9 @@ function click_reviewBtn(i) { // reviewIdx 넘기기
 
         if(e.target.className=="review-delete") { // 삭제 클릭            
             deleteReview(i);            
-        } else {
+        } else if (e.target.className=="review-modify") { // 수정 클릭시 ...
             window.location.href = `../reviewForm/modify_form.html?reviewIdx=${i}` ;
-        }// 수정 클릭시 ... 
+        } else {return ;}
     })
 }
 
