@@ -4,14 +4,16 @@ axios.defaults.headers.common["Authorization"] = localStorage.getItem("token");
 */
 const $contentBox = document.querySelector('#contentBox');
 
+const reviewIdx = location.href.split('?')[1];
+/*console.log(receivedData); // data test */
+
+fetchReview(reviewIdx);
 
 function fetchReview(reviewIdx) {
     fetch(`/review/${reviewIdx}`)
         .then((response) => response.json())
         .then((result) => content(result))
 }
-
-fetchReview();
 
 function content(data) {
     const resultItem = `<form id="writeForm" method="post" enctype="multipart/form-data">
